@@ -14,6 +14,10 @@
 		CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7B604E1B1F5469007FF820 /* Images.xcassets */; };
 		CD7B60521B1F5469007FF820 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7B60501B1F5469007FF820 /* LaunchScreen.xib */; };
 		CD7B605E1B1F5469007FF820 /* ThreadGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B605D1B1F5469007FF820 /* ThreadGroupTests.m */; };
+		CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68191B272A290091B548 /* Gotham-Bold.otf */; };
+		CD8C681E1B272A290091B548 /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681A1B272A290091B548 /* Gotham-Book.otf */; };
+		CD8C681F1B272A290091B548 /* Gotham-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681B1B272A290091B548 /* Gotham-Light.otf */; };
+		CD8C68201B272A290091B548 /* Gotham-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681C1B272A290091B548 /* Gotham-Medium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,10 @@
 		CD7B60571B1F5469007FF820 /* ThreadGroupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadGroupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7B605C1B1F5469007FF820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD7B605D1B1F5469007FF820 /* ThreadGroupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadGroupTests.m; sourceTree = "<group>"; };
+		CD8C68191B272A290091B548 /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
+		CD8C681A1B272A290091B548 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
+		CD8C681B1B272A290091B548 /* Gotham-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Light.otf"; sourceTree = "<group>"; };
+		CD8C681C1B272A290091B548 /* Gotham-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Medium.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +104,7 @@
 		CD7B60411B1F5469007FF820 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CD8C68181B2724E00091B548 /* Fonts */,
 				CD7B60421B1F5469007FF820 /* Info.plist */,
 				CD7B60431B1F5469007FF820 /* main.m */,
 			);
@@ -117,6 +126,18 @@
 				CD7B605C1B1F5469007FF820 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD8C68181B2724E00091B548 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CD8C68191B272A290091B548 /* Gotham-Bold.otf */,
+				CD8C681A1B272A290091B548 /* Gotham-Book.otf */,
+				CD8C681B1B272A290091B548 /* Gotham-Light.otf */,
+				CD8C681C1B272A290091B548 /* Gotham-Medium.otf */,
+			);
+			name = Fonts;
+			path = "Supporting Files/Fonts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,7 +220,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
 				CD7B604D1B1F5469007FF820 /* Main.storyboard in Resources */,
+				CD8C681F1B272A290091B548 /* Gotham-Light.otf in Resources */,
+				CD8C68201B272A290091B548 /* Gotham-Medium.otf in Resources */,
+				CD8C681E1B272A290091B548 /* Gotham-Book.otf in Resources */,
 				CD7B60521B1F5469007FF820 /* LaunchScreen.xib in Resources */,
 				CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */,
 			);
