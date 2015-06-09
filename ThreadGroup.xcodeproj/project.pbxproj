@@ -20,6 +20,7 @@
 		CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68261B273A8B0091B548 /* UIColor+ThreadGroup.m */; };
 		CD8C682C1B273D7F0091B548 /* TGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C682A1B273D7F0091B548 /* TGHomeViewController.m */; };
 		CD8C682D1B273D7F0091B548 /* TGHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C682B1B273D7F0091B548 /* TGHomeViewController.xib */; };
+		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		003FB1823A20615E43F8CCC8 /* Pods-ThreadGroup.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroup.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup.debug.xcconfig"; sourceTree = "<group>"; };
+		4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroup.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup.release.xcconfig"; sourceTree = "<group>"; };
 		CD7B603E1B1F5469007FF820 /* ThreadGroup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreadGroup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7B60421B1F5469007FF820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD7B60431B1F5469007FF820 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 		CD8C68291B273D7F0091B548 /* TGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHomeViewController.h; sourceTree = "<group>"; };
 		CD8C682A1B273D7F0091B548 /* TGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHomeViewController.m; sourceTree = "<group>"; };
 		CD8C682B1B273D7F0091B548 /* TGHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeViewController.xib; sourceTree = "<group>"; };
+		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,12 +79,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2104FEA234D389D850092AA6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C7B8024208FC7E95F14A8CF3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				003FB1823A20615E43F8CCC8 /* Pods-ThreadGroup.debug.xcconfig */,
+				4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CD7B60351B1F5469007FF820 = {
 			isa = PBXGroup;
 			children = (
 				CD7B60401B1F5469007FF820 /* ThreadGroup */,
 				CD7B605A1B1F5469007FF820 /* ThreadGroupTests */,
 				CD7B603F1B1F5469007FF820 /* Products */,
+				C7B8024208FC7E95F14A8CF3 /* Pods */,
+				2104FEA234D389D850092AA6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,9 +197,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD7B60611B1F546A007FF820 /* Build configuration list for PBXNativeTarget "ThreadGroup" */;
 			buildPhases = (
+				F5C16084EDA501BC22CFA8B0 /* Check Pods Manifest.lock */,
 				CD7B603A1B1F5469007FF820 /* Sources */,
 				CD7B603B1B1F5469007FF820 /* Frameworks */,
 				CD7B603C1B1F5469007FF820 /* Resources */,
+				EEF870396A2E8C9E1578BA9D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -264,6 +290,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EEF870396A2E8C9E1578BA9D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F5C16084EDA501BC22CFA8B0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CD7B603A1B1F5469007FF820 /* Sources */ = {
@@ -390,6 +449,7 @@
 		};
 		CD7B60621B1F546A007FF820 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 003FB1823A20615E43F8CCC8 /* Pods-ThreadGroup.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ThreadGroup/Info.plist;
@@ -405,6 +465,7 @@
 		};
 		CD7B60631B1F546A007FF820 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ThreadGroup/Info.plist;
