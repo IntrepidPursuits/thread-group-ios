@@ -20,6 +20,8 @@
 		CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68261B273A8B0091B548 /* UIColor+ThreadGroup.m */; };
 		CD8C682C1B273D7F0091B548 /* TGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C682A1B273D7F0091B548 /* TGHomeViewController.m */; };
 		CD8C682D1B273D7F0091B548 /* TGHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C682B1B273D7F0091B548 /* TGHomeViewController.xib */; };
+		CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C682F1B27451A0091B548 /* TGSettingsViewController.m */; };
+		CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68301B27451A0091B548 /* TGSettingsViewController.xib */; };
 		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,9 @@
 		CD8C68291B273D7F0091B548 /* TGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHomeViewController.h; sourceTree = "<group>"; };
 		CD8C682A1B273D7F0091B548 /* TGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHomeViewController.m; sourceTree = "<group>"; };
 		CD8C682B1B273D7F0091B548 /* TGHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeViewController.xib; sourceTree = "<group>"; };
+		CD8C682E1B27451A0091B548 /* TGSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSettingsViewController.h; sourceTree = "<group>"; };
+		CD8C682F1B27451A0091B548 /* TGSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSettingsViewController.m; sourceTree = "<group>"; };
+		CD8C68301B27451A0091B548 /* TGSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSettingsViewController.xib; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -186,6 +191,9 @@
 				CD8C68291B273D7F0091B548 /* TGHomeViewController.h */,
 				CD8C682A1B273D7F0091B548 /* TGHomeViewController.m */,
 				CD8C682B1B273D7F0091B548 /* TGHomeViewController.xib */,
+				CD8C682E1B27451A0091B548 /* TGSettingsViewController.h */,
+				CD8C682F1B27451A0091B548 /* TGSettingsViewController.m */,
+				CD8C68301B27451A0091B548 /* TGSettingsViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -272,6 +280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */,
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
 				CD8C681F1B272A290091B548 /* Gotham-Light.otf in Resources */,
 				CD8C68201B272A290091B548 /* Gotham-Medium.otf in Resources */,
@@ -333,6 +342,7 @@
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				CD7B60441B1F5469007FF820 /* main.m in Sources */,
 				CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */,
+				CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */,
 				CD8C682C1B273D7F0091B548 /* TGHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
