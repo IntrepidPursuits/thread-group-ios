@@ -3,10 +3,20 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Gotham-Book.otf">
+            <string>Gotham-Book</string>
+        </mutableArray>
+        <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGHomeViewController">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wifiErrorView" destination="bKQ-i6-e4X" id="og9-7B-KXk"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -14,14 +24,77 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXj-45-gYC">
-                    <rect key="frame" x="279" y="82" width="46" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHP-de-KBk" userLabel="Wifi View">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKQ-i6-e4X" userLabel="No Wifi View">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Wifi Connection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcs-jT-ieT">
+                            <rect key="frame" x="181" y="288" width="237" height="24"/>
+                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="24"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use Thread, you need to be connected to a wifi network" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cie-Fw-JH8">
+                            <rect key="frame" x="181" y="316" width="220" height="28.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="220" id="4jD-9C-FzE"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UDa-3b-sSb">
+                            <rect key="frame" x="0.0" y="552" width="600" height="48"/>
+                            <color key="backgroundColor" red="0.99215686270000003" green="0.47058823529999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="fZs-DX-XWH"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                            <state key="normal" title="FIND WIFI NETWORK">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="findWifiNetworkButtonTapped:" destination="-1" eventType="touchUpInside" id="L68-HM-8hH"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fbb-8F-hhf">
+                            <rect key="frame" x="222" y="100" width="156" height="156"/>
+                            <color key="backgroundColor" red="0.28736489459999998" green="1" blue="0.16864322030000001" alpha="0.85999999999999999" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="156" id="OMh-Mb-C1Y"/>
+                                <constraint firstAttribute="width" constant="156" id="iPe-9W-jtF"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="UDa-3b-sSb" secondAttribute="trailing" id="64U-3R-EMb"/>
+                        <constraint firstItem="Cie-Fw-JH8" firstAttribute="top" secondItem="vcs-jT-ieT" secondAttribute="bottom" constant="4" id="AEa-rV-eOV"/>
+                        <constraint firstItem="vcs-jT-ieT" firstAttribute="top" secondItem="Fbb-8F-hhf" secondAttribute="bottom" constant="32" id="CXa-af-duk"/>
+                        <constraint firstItem="vcs-jT-ieT" firstAttribute="centerX" secondItem="Fbb-8F-hhf" secondAttribute="centerX" id="GHR-Oi-Let"/>
+                        <constraint firstItem="Cie-Fw-JH8" firstAttribute="leading" secondItem="vcs-jT-ieT" secondAttribute="leading" id="Oz0-4s-nGn"/>
+                        <constraint firstAttribute="bottom" secondItem="UDa-3b-sSb" secondAttribute="bottom" id="SIN-b3-rcg"/>
+                        <constraint firstItem="Fbb-8F-hhf" firstAttribute="top" secondItem="bKQ-i6-e4X" secondAttribute="top" constant="100" id="umH-7A-jnq"/>
+                        <constraint firstAttribute="centerX" secondItem="Fbb-8F-hhf" secondAttribute="centerX" id="v2h-CO-iRE"/>
+                        <constraint firstItem="UDa-3b-sSb" firstAttribute="leading" secondItem="bKQ-i6-e4X" secondAttribute="leading" id="zj0-2H-j0r"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="nHP-de-KBk" secondAttribute="trailing" id="DUH-Hh-1Q9"/>
+                <constraint firstItem="nHP-de-KBk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FKa-e9-sbO"/>
+                <constraint firstItem="bKQ-i6-e4X" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NMs-X5-Dss"/>
+                <constraint firstItem="nHP-de-KBk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Xmd-A5-gZD"/>
+                <constraint firstAttribute="bottom" secondItem="bKQ-i6-e4X" secondAttribute="bottom" id="aYk-RG-fgS"/>
+                <constraint firstAttribute="trailing" secondItem="bKQ-i6-e4X" secondAttribute="trailing" id="adv-EH-jm5"/>
+                <constraint firstAttribute="bottom" secondItem="nHP-de-KBk" secondAttribute="bottom" id="c5e-cC-bfA"/>
+                <constraint firstItem="bKQ-i6-e4X" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cpd-qK-Jo0"/>
+            </constraints>
         </view>
     </objects>
 </document>
