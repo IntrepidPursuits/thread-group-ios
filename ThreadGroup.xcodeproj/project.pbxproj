@@ -22,6 +22,10 @@
 		CD8C682D1B273D7F0091B548 /* TGHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C682B1B273D7F0091B548 /* TGHomeViewController.xib */; };
 		CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C682F1B27451A0091B548 /* TGSettingsViewController.m */; };
 		CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68301B27451A0091B548 /* TGSettingsViewController.xib */; };
+		CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68351B2870730091B548 /* TGSpinnerView.m */; };
+		CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68371B2870800091B548 /* TGSpinnerView.xib */; };
+		CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C683A1B28804D0091B548 /* TGDeviceStepView.m */; };
+		CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */; };
 		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +66,12 @@
 		CD8C682E1B27451A0091B548 /* TGSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSettingsViewController.h; sourceTree = "<group>"; };
 		CD8C682F1B27451A0091B548 /* TGSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSettingsViewController.m; sourceTree = "<group>"; };
 		CD8C68301B27451A0091B548 /* TGSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSettingsViewController.xib; sourceTree = "<group>"; };
+		CD8C68341B2870730091B548 /* TGSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSpinnerView.h; sourceTree = "<group>"; };
+		CD8C68351B2870730091B548 /* TGSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSpinnerView.m; sourceTree = "<group>"; };
+		CD8C68371B2870800091B548 /* TGSpinnerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSpinnerView.xib; sourceTree = "<group>"; };
+		CD8C68391B28804D0091B548 /* TGDeviceStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGDeviceStepView.h; sourceTree = "<group>"; };
+		CD8C683A1B28804D0091B548 /* TGDeviceStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGDeviceStepView.m; sourceTree = "<group>"; };
+		CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGDeviceStepView.xib; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -124,6 +134,7 @@
 		CD7B60401B1F5469007FF820 /* ThreadGroup */ = {
 			isa = PBXGroup;
 			children = (
+				CD8C68331B28703F0091B548 /* Views */,
 				CD8C68211B272FE30091B548 /* Categories */,
 				CD8C68281B273D020091B548 /* Controllers */,
 				CD7B60451B1F5469007FF820 /* AppDelegate.h */,
@@ -196,6 +207,19 @@
 				CD8C68301B27451A0091B548 /* TGSettingsViewController.xib */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CD8C68331B28703F0091B548 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CD8C68341B2870730091B548 /* TGSpinnerView.h */,
+				CD8C68351B2870730091B548 /* TGSpinnerView.m */,
+				CD8C68371B2870800091B548 /* TGSpinnerView.xib */,
+				CD8C68391B28804D0091B548 /* TGDeviceStepView.h */,
+				CD8C683A1B28804D0091B548 /* TGDeviceStepView.m */,
+				CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +304,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */,
+				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
 				CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */,
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
 				CD8C681F1B272A290091B548 /* Gotham-Light.otf in Resources */,
@@ -344,6 +370,8 @@
 				CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */,
 				CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */,
 				CD8C682C1B273D7F0091B548 /* TGHomeViewController.m in Sources */,
+				CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */,
+				CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

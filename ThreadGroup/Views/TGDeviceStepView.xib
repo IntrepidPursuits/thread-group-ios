@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Gotham-Book.otf">
+            <string>Gotham-Book</string>
+        </mutableArray>
+        <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGDeviceStepView">
+            <connections>
+                <outlet property="bottomBarView" destination="WlN-nY-N3E" id="Xaf-o0-qb7"/>
+                <outlet property="iconImageView" destination="5E1-rV-mgT" id="JHr-tx-x0Z"/>
+                <outlet property="subTitleLabel" destination="q4i-9g-eJJ" id="Hss-bo-Z9z"/>
+                <outlet property="titleLabel" destination="afr-k4-fow" id="BjR-9M-AAb"/>
+                <outlet property="topBarView" destination="Eh8-fe-dCS" id="vHL-9P-pXw"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="386" height="132"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eh8-fe-dCS" userLabel="Top Bar">
+                    <rect key="frame" x="35" y="0.0" width="1" height="14"/>
+                    <color key="backgroundColor" red="0.53333333333333333" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="IwM-G4-z4a"/>
+                        <constraint firstAttribute="height" constant="14" id="i2L-Xc-ejD"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WlN-nY-N3E" userLabel="Bottom bar">
+                    <rect key="frame" x="35" y="50" width="1" height="82"/>
+                    <color key="backgroundColor" red="0.53333333333333333" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="8lv-6c-kbe"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5E1-rV-mgT" userLabel="Icon ImageView">
+                    <rect key="frame" x="18" y="14" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="Auk-wL-tBP"/>
+                        <constraint firstAttribute="height" constant="36" id="f06-Kr-8I4"/>
+                    </constraints>
+                </imageView>
+                <view alpha="0.19999999999999968" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FeY-pR-sWQ" userLabel="Bottom Separator Bar">
+                    <rect key="frame" x="71" y="131" width="298.5" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="8TF-Es-ROM"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected to Wifi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afr-k4-fow">
+                    <rect key="frame" x="72" y="14" width="306" height="14.5"/>
+                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThreadNetwork" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4i-9g-eJJ">
+                    <rect key="frame" x="72" y="29" width="306" height="12"/>
+                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="0.70000000000000007" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="afr-k4-fow" firstAttribute="leading" secondItem="5E1-rV-mgT" secondAttribute="trailing" constant="18" id="4Ut-FL-19s"/>
+                <constraint firstItem="WlN-nY-N3E" firstAttribute="centerX" secondItem="5E1-rV-mgT" secondAttribute="centerX" id="5TQ-Un-RpV"/>
+                <constraint firstAttribute="trailing" secondItem="FeY-pR-sWQ" secondAttribute="trailing" constant="16" id="8i2-6w-Xsa"/>
+                <constraint firstAttribute="trailing" secondItem="q4i-9g-eJJ" secondAttribute="trailing" constant="8" id="BSB-5l-idv"/>
+                <constraint firstItem="WlN-nY-N3E" firstAttribute="top" secondItem="5E1-rV-mgT" secondAttribute="bottom" id="D2o-B0-HHe"/>
+                <constraint firstItem="5E1-rV-mgT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="Ix4-SM-yv4"/>
+                <constraint firstItem="q4i-9g-eJJ" firstAttribute="top" secondItem="afr-k4-fow" secondAttribute="bottom" id="LAg-jx-OCj"/>
+                <constraint firstItem="5E1-rV-mgT" firstAttribute="centerX" secondItem="Eh8-fe-dCS" secondAttribute="centerX" id="P90-qo-GVh"/>
+                <constraint firstItem="5E1-rV-mgT" firstAttribute="top" secondItem="Eh8-fe-dCS" secondAttribute="bottom" id="WeZ-nS-yz0"/>
+                <constraint firstItem="Eh8-fe-dCS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hdg-Ai-RBM"/>
+                <constraint firstAttribute="trailing" secondItem="afr-k4-fow" secondAttribute="trailing" constant="8" id="mQV-Q8-JhA"/>
+                <constraint firstAttribute="bottom" secondItem="WlN-nY-N3E" secondAttribute="bottom" id="pa5-yc-Fkp"/>
+                <constraint firstItem="FeY-pR-sWQ" firstAttribute="leading" secondItem="WlN-nY-N3E" secondAttribute="trailing" constant="35" id="suj-Xz-j9L"/>
+                <constraint firstItem="q4i-9g-eJJ" firstAttribute="leading" secondItem="afr-k4-fow" secondAttribute="leading" id="u3z-8v-zB1"/>
+                <constraint firstItem="afr-k4-fow" firstAttribute="top" secondItem="5E1-rV-mgT" secondAttribute="top" id="ufB-cS-IxU"/>
+                <constraint firstAttribute="bottom" secondItem="FeY-pR-sWQ" secondAttribute="bottom" id="uwV-5R-bj4"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="521" y="47"/>
+        </view>
+    </objects>
+</document>

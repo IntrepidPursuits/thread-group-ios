@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGSpinnerView">
+            <connections>
+                <outlet property="spinnerLargeClockwiseImageView" destination="xUB-bO-f5E" id="K0y-O4-vSX"/>
+                <outlet property="spinnerLargeCounterClockwiseImageView" destination="gwg-Sp-deo" id="aYn-Xk-YxW"/>
+                <outlet property="spinnerSmallClockwiseImageView" destination="D20-U7-B2h" id="62e-ms-oIb"/>
+                <outlet property="spinnerSmallCounterClockwiseImageView" destination="c6i-gl-Ghn" id="SD0-Kl-Wls"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="230" height="197"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner_large_counter_clockwise" translatesAutoresizingMaskIntoConstraints="NO" id="gwg-Sp-deo">
+                    <rect key="frame" x="0.0" y="0.0" width="230" height="197"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner_large_clockwise" translatesAutoresizingMaskIntoConstraints="NO" id="xUB-bO-f5E">
+                    <rect key="frame" x="0.0" y="0.0" width="230" height="197"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner_small_counter_clockwise" translatesAutoresizingMaskIntoConstraints="NO" id="c6i-gl-Ghn">
+                    <rect key="frame" x="0.0" y="0.0" width="230" height="197"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner_small_clockwise" translatesAutoresizingMaskIntoConstraints="NO" id="D20-U7-B2h">
+                    <rect key="frame" x="0.0" y="0.0" width="230" height="197"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="D20-U7-B2h" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0w6-36-w0m"/>
+                <constraint firstAttribute="trailing" secondItem="c6i-gl-Ghn" secondAttribute="trailing" id="7lm-9W-NOD"/>
+                <constraint firstAttribute="trailing" secondItem="xUB-bO-f5E" secondAttribute="trailing" id="82y-iG-B0i"/>
+                <constraint firstItem="c6i-gl-Ghn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9iW-pI-8nx"/>
+                <constraint firstAttribute="trailing" secondItem="D20-U7-B2h" secondAttribute="trailing" id="9qB-N8-Maz"/>
+                <constraint firstAttribute="bottom" secondItem="gwg-Sp-deo" secondAttribute="bottom" id="AVK-PD-JOa"/>
+                <constraint firstAttribute="trailing" secondItem="gwg-Sp-deo" secondAttribute="trailing" id="Cym-eJ-902"/>
+                <constraint firstAttribute="bottom" secondItem="c6i-gl-Ghn" secondAttribute="bottom" id="D57-gu-5eE"/>
+                <constraint firstItem="D20-U7-B2h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Fi3-f8-Gon"/>
+                <constraint firstItem="c6i-gl-Ghn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IDT-LA-hfK"/>
+                <constraint firstItem="gwg-Sp-deo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ndz-sp-ghf"/>
+                <constraint firstItem="xUB-bO-f5E" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Rxf-zB-UVz"/>
+                <constraint firstAttribute="bottom" secondItem="xUB-bO-f5E" secondAttribute="bottom" id="Zdj-jO-fWN"/>
+                <constraint firstItem="xUB-bO-f5E" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gMs-fz-wst"/>
+                <constraint firstAttribute="bottom" secondItem="D20-U7-B2h" secondAttribute="bottom" id="h0a-io-ogL"/>
+                <constraint firstItem="gwg-Sp-deo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hdN-lX-f8U"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-217" y="-35.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="spinner_large_clockwise" width="144" height="144"/>
+        <image name="spinner_large_counter_clockwise" width="144" height="144"/>
+        <image name="spinner_small_clockwise" width="24" height="24"/>
+        <image name="spinner_small_counter_clockwise" width="24" height="24"/>
+    </resources>
+</document>
