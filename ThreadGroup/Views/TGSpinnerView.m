@@ -7,17 +7,13 @@
 //
 
 #import "TGSpinnerView.h"
-
-static CGFloat kAnimationSpinDuration = 2.0f;
-static CGFloat kAnimationSpinSpeed = 1.0f;
+#import "CABasicAnimation+TGSpinner.h"
 
 @interface TGSpinnerView()
 
 @property (nonatomic, strong) UIView *nibView;
 @property (weak, nonatomic) IBOutlet UIImageView *spinnerLargeCounterClockwiseImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *spinnerLargeClockwiseImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *spinnerSmallCounterClockwiseImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *spinnerSmallClockwiseImageView;
 @end
 
 @implementation TGSpinnerView
@@ -38,41 +34,13 @@ static CGFloat kAnimationSpinSpeed = 1.0f;
 #pragma mark - Public
 
 - (void)startAnimating {
-    [self.spinnerLargeCounterClockwiseImageView.layer addAnimation:[self counterClockwiseRotationAnimation] forKey:@"spin"];
-    [self.spinnerLargeClockwiseImageView.layer addAnimation:[self clockwiseRotationAnimation] forKey:@"spin"];
-    [self.spinnerSmallCounterClockwiseImageView.layer addAnimation:[self counterClockwiseRotationAnimation] forKey:@"spin"];
-    [self.spinnerSmallClockwiseImageView.layer addAnimation:[self clockwiseRotationAnimation] forKey:@"spin"];
+    [self.spinnerLargeCounterClockwiseImageView.layer addAnimation:[CABasicAnimation counterClockwiseRotationAnimation] forKey:@"spin"];
+    [self.spinnerLargeClockwiseImageView.layer addAnimation:[CABasicAnimation clockwiseRotationAnimation] forKey:@"spin"];
 }
 
 - (void)stopAnimating {
     [self.spinnerLargeClockwiseImageView.layer removeAllAnimations];
     [self.spinnerLargeCounterClockwiseImageView.layer removeAllAnimations];
-    [self.spinnerSmallClockwiseImageView.layer removeAllAnimations];
-    [self.spinnerSmallCounterClockwiseImageView.layer removeAllAnimations];
-}
-
-#pragma mark - Animations
-
-- (CABasicAnimation *)clockwiseRotationAnimation {
-    CABasicAnimation *animation;
-    animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-    animation.fromValue = @(0);
-    animation.duration = kAnimationSpinDuration;
-    animation.repeatCount = MAXFLOAT;
-    animation.speed = kAnimationSpinSpeed;
-    animation.toValue = @(-(2 * M_PI));
-    return animation;
-}
-
-- (CABasicAnimation *)counterClockwiseRotationAnimation {
-    CABasicAnimation *animation;
-    animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-    animation.duration = kAnimationSpinDuration;
-    animation.fromValue = @(0);
-    animation.repeatCount = MAXFLOAT;
-    animation.speed = kAnimationSpinSpeed;
-    animation.toValue = @((2 * M_PI));
-    return animation;
 }
 
 @end

@@ -34,7 +34,7 @@
 
 - (void)startAnimating {
     [self.clockwiseSpinnerImageView.layer addAnimation:[CABasicAnimation clockwiseRotationAnimation] forKey:@"spin"];
-    [self.clockwiseSpinnerImageView.layer addAnimation:[CABasicAnimation counterClockwiseRotationAnimation] forKey:@"spin"];
+    [self.counterClockwiseSpinnerImageView.layer addAnimation:[CABasicAnimation counterClockwiseRotationAnimation] forKey:@"spin"];
 }
 
 - (void)stopAnimating {
