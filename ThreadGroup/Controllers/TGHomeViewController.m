@@ -8,11 +8,38 @@
 
 #import "TGHomeViewController.h"
 #import "TGSettingsViewController.h"
+#import "TGSpinnerView.h"
+#import "TGDeviceStepView.h"
+#import "TGSelectDeviceStepView.h"
+#import "TGNetworkSearchingPopup.h"
+#import "UIColor+ThreadGroup.h"
 #import <Reachability/Reachability.h>
 
-@interface TGHomeViewController ()
+static CGFloat TGHomeViewAnimationDefaultDuration = 0.4f;
+static CGFloat TGHomeViewAnimationNetworkSearchPopupDuration = 0.7f;
+
+@interface TGHomeViewController () <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate>
+
 @property (weak, nonatomic) Reachability *reachability;
 @property (weak, nonatomic) IBOutlet UIView *wifiErrorView;
+@property (weak, nonatomic) IBOutlet UIView *mainView;
+@property (weak, nonatomic) IBOutlet TGDeviceStepView *wifiConnectionCellView;
+@property (weak, nonatomic) IBOutlet TGDeviceStepView *selectRouterCellView;
+@property (weak, nonatomic) IBOutlet TGSelectDeviceStepView *scanDeviceCellView;
+@property (weak, nonatomic) IBOutlet UIView *searchingForNetworksView;
+@property (weak, nonatomic) IBOutlet TGSpinnerView *searchingForNetworksSpinnerView;
+@property (weak, nonatomic) IBOutlet UITableView *threadNetworksTableView;
+@property (weak, nonatomic) IBOutlet TGNetworkSearchingPopup *threadNetworkSearchingPopupView;
+
+@property (weak, nonatomic) IBOutlet UIView *cameraView;
+@property (weak, nonatomic) IBOutlet UIView *successView;
+@property (weak, nonatomic) IBOutlet UILabel *successDeviceNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *successMessageLabel;
+
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *networkSearchPopupBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scanDeviceRowHeightConstraint;
+
 @end
 
 @implementation TGHomeViewController
