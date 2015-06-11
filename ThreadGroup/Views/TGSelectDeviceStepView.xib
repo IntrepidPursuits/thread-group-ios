@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Gotham-Book.otf">
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+        </mutableArray>
+        <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGSelectDeviceStepView">
+            <connections>
+                <outlet property="bottomBar" destination="dcx-kd-Ied" id="Wjl-Ll-YZQ"/>
+                <outlet property="confirmButton" destination="pOa-Qd-Nm0" id="n5M-dH-dkD"/>
+                <outlet property="iconImageView" destination="kph-Nx-iQc" id="hID-BA-NFv"/>
+                <outlet property="passPhraseView" destination="JA1-Xd-IQR" id="E1E-7z-gQu"/>
+                <outlet property="passPhraseViewHeightConstraint" destination="chB-kM-6aL" id="uBB-zH-mr8"/>
+                <outlet property="passphraseInputField" destination="Kt5-r3-GIC" id="oLM-Zg-0aN"/>
+                <outlet property="scanCodeButton" destination="mV5-HE-a5i" id="nhQ-a0-2aj"/>
+                <outlet property="subTitleLabel" destination="LWP-he-gYW" id="HHu-ft-e4f"/>
+                <outlet property="textboxLine" destination="05K-wq-6fE" id="HeJ-97-0TS"/>
+                <outlet property="titleLabel" destination="vnB-ks-Mhm" id="CNv-y2-sxm"/>
+                <outlet property="topBar" destination="Una-tt-WWH" id="cFl-qn-oJy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="163"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="steps_code_active" translatesAutoresizingMaskIntoConstraints="NO" id="kph-Nx-iQc" userLabel="Icon ImageView">
+                    <rect key="frame" x="18" y="14" width="36" height="36"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="UlE-CJ-dER"/>
+                        <constraint firstAttribute="width" constant="36" id="hcG-Ab-XnM"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcx-kd-Ied" userLabel="Bottom bar">
+                    <rect key="frame" x="35" y="50" width="1" height="113"/>
+                    <color key="backgroundColor" red="0.53333333329999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="aWk-hg-Wr6"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can also enter a passphrase manually" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWP-he-gYW">
+                    <rect key="frame" x="72" y="29" width="247.5" height="12"/>
+                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Una-tt-WWH" userLabel="Top Bar">
+                    <rect key="frame" x="35" y="0.0" width="1" height="14"/>
+                    <color key="backgroundColor" red="0.53333333329999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="5AL-ZV-xsO"/>
+                        <constraint firstAttribute="height" constant="14" id="JUt-u6-3oA"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan Device QR Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnB-ks-Mhm">
+                    <rect key="frame" x="72" y="14" width="153.5" height="14.5"/>
+                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JA1-Xd-IQR" userLabel="Passphrase View">
+                    <rect key="frame" x="72" y="57" width="288" height="84"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05K-wq-6fE" userLabel="Textbox Bottom Line">
+                            <rect key="frame" x="0.0" y="27" width="272" height="1"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="vP4-Hi-Ihu"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mV5-HE-a5i">
+                            <rect key="frame" x="0.0" y="50" width="100" height="24"/>
+                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                            <state key="normal" title="Scan Code" image="action_scan_code">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="scanCodeButtonTapped:" destination="-1" eventType="touchUpInside" id="btP-gu-4QD"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOa-Qd-Nm0">
+                            <rect key="frame" x="182" y="48.5" width="90" height="27"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="kHM-T6-DaS"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                            <state key="normal" title="Confirm">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="confirmButtonTapped:" destination="-1" eventType="touchUpInside" id="D4L-sK-761"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Passphrase" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kt5-r3-GIC">
+                            <rect key="frame" x="0.0" y="0.0" width="272" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="WIv-Y0-156"/>
+                            </constraints>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Kt5-r3-GIC" firstAttribute="top" secondItem="JA1-Xd-IQR" secondAttribute="top" id="2G4-ls-X8H"/>
+                        <constraint firstItem="05K-wq-6fE" firstAttribute="leading" secondItem="mV5-HE-a5i" secondAttribute="leading" id="FcP-Mm-ftX"/>
+                        <constraint firstItem="05K-wq-6fE" firstAttribute="leading" secondItem="Kt5-r3-GIC" secondAttribute="leading" id="ZDG-gC-em6"/>
+                        <constraint firstAttribute="trailing" secondItem="Kt5-r3-GIC" secondAttribute="trailing" constant="16" id="adL-yp-Qgk"/>
+                        <constraint firstItem="05K-wq-6fE" firstAttribute="bottom" secondItem="Kt5-r3-GIC" secondAttribute="bottom" constant="6" id="cTq-Da-JdB"/>
+                        <constraint firstAttribute="height" priority="250" id="chB-kM-6aL"/>
+                        <constraint firstItem="05K-wq-6fE" firstAttribute="trailing" secondItem="Kt5-r3-GIC" secondAttribute="trailing" id="fFM-7C-wJb"/>
+                        <constraint firstAttribute="bottom" secondItem="mV5-HE-a5i" secondAttribute="bottom" constant="10" id="hse-r1-hOv"/>
+                        <constraint firstItem="05K-wq-6fE" firstAttribute="trailing" secondItem="pOa-Qd-Nm0" secondAttribute="trailing" id="lUI-r9-Vng"/>
+                        <constraint firstItem="mV5-HE-a5i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="05K-wq-6fE" secondAttribute="bottom" constant="22" id="mGw-AW-vW2"/>
+                        <constraint firstItem="pOa-Qd-Nm0" firstAttribute="centerY" secondItem="mV5-HE-a5i" secondAttribute="centerY" id="rDZ-EM-Tva"/>
+                        <constraint firstItem="Kt5-r3-GIC" firstAttribute="leading" secondItem="JA1-Xd-IQR" secondAttribute="leading" id="roV-Zt-Y2D"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.27843135600000002" green="0.28235286469999998" blue="0.25490197539999998" alpha="1" colorSpace="deviceRGB"/>
+            <constraints>
+                <constraint firstItem="vnB-ks-Mhm" firstAttribute="top" secondItem="kph-Nx-iQc" secondAttribute="top" id="4Uu-kA-uLz"/>
+                <constraint firstItem="LWP-he-gYW" firstAttribute="top" secondItem="vnB-ks-Mhm" secondAttribute="bottom" id="Cj8-Hq-s5u"/>
+                <constraint firstItem="kph-Nx-iQc" firstAttribute="top" secondItem="Una-tt-WWH" secondAttribute="bottom" id="IQk-oJ-UKe"/>
+                <constraint firstItem="kph-Nx-iQc" firstAttribute="centerX" secondItem="Una-tt-WWH" secondAttribute="centerX" id="KWB-XU-JsE"/>
+                <constraint firstItem="LWP-he-gYW" firstAttribute="leading" secondItem="vnB-ks-Mhm" secondAttribute="leading" id="QNV-y5-N8v"/>
+                <constraint firstAttribute="bottom" secondItem="dcx-kd-Ied" secondAttribute="bottom" id="SW3-7X-8NB"/>
+                <constraint firstAttribute="trailing" secondItem="JA1-Xd-IQR" secondAttribute="trailing" id="VH1-QN-6cG"/>
+                <constraint firstItem="vnB-ks-Mhm" firstAttribute="leading" secondItem="JA1-Xd-IQR" secondAttribute="leading" id="YOz-m2-wyT"/>
+                <constraint firstAttribute="bottom" secondItem="JA1-Xd-IQR" secondAttribute="bottom" id="bMX-sz-whA"/>
+                <constraint firstItem="JA1-Xd-IQR" firstAttribute="top" secondItem="LWP-he-gYW" secondAttribute="bottom" constant="16" id="bOW-0j-0EZ"/>
+                <constraint firstItem="dcx-kd-Ied" firstAttribute="top" secondItem="kph-Nx-iQc" secondAttribute="bottom" id="cmY-FQ-cgP"/>
+                <constraint firstItem="kph-Nx-iQc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="dHT-dG-2d9"/>
+                <constraint firstItem="Una-tt-WWH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e50-AB-ial"/>
+                <constraint firstItem="dcx-kd-Ied" firstAttribute="centerX" secondItem="kph-Nx-iQc" secondAttribute="centerX" id="m1K-re-tnj"/>
+                <constraint firstItem="vnB-ks-Mhm" firstAttribute="leading" secondItem="kph-Nx-iQc" secondAttribute="trailing" constant="18" id="rDK-nh-gdE"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="bMX-sz-whA"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="-8" y="-139.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="action_scan_code" width="24" height="24"/>
+        <image name="steps_code_active" width="36" height="36"/>
+    </resources>
+</document>

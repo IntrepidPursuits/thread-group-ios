@@ -8,11 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TGDeviceStepViewDelegate;
+
 @interface TGDeviceStepView : UIView
 
-- (void)setTitle:(NSString *)title subTitle:(NSString *)subTitle;
-- (void)setIcon:(UIImage *)icon;
-- (void)setTopBarHidden:(BOOL)hidden;
+@property (nonatomic, weak) id<TGDeviceStepViewDelegate> delegate;
+@property (nonatomic, assign) BOOL spinnerActive;
+
 - (void)setBottomBarHidden:(BOOL)hidden;
+- (void)setIcon:(UIImage *)icon;
+- (void)setTitle:(NSString *)title subTitle:(NSString *)subTitle;
+- (void)setTopBarHidden:(BOOL)hidden;
+
+@end
+
+@protocol TGDeviceStepViewDelegate <NSObject>
+
+- (void)TGDeviceStepView:(TGDeviceStepView *)stepView didTapIcon:(id)sender;
 
 @end
