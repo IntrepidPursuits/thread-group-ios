@@ -20,7 +20,7 @@ static CGFloat kAnimationSpinSpeed = 1.0f;
     animation.duration = kAnimationSpinDuration;
     animation.repeatCount = MAXFLOAT;
     animation.speed = kAnimationSpinSpeed;
-    animation.toValue = @(-(2 * M_PI));
+    animation.toValue = @((2 * M_PI));
     return animation;
 }
 
@@ -31,7 +31,7 @@ static CGFloat kAnimationSpinSpeed = 1.0f;
     animation.fromValue = @(0);
     animation.repeatCount = MAXFLOAT;
     animation.speed = kAnimationSpinSpeed;
-    animation.toValue = @((2 * M_PI));
+    animation.toValue = @(-(2 * M_PI));
     return animation;
 }
 
