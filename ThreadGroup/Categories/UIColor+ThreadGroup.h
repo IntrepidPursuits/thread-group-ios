@@ -12,5 +12,6 @@
 
 + (UIColor *)threadGroup_grey;
 + (UIColor *)threadGroup_orange;
++ (UIColor *)threadGroup_red;
 
 @end
