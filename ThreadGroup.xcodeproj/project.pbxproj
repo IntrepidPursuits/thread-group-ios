@@ -31,6 +31,9 @@
 		CD8C68451B28A46A0091B548 /* CABasicAnimation+TGSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68441B28A46A0091B548 /* CABasicAnimation+TGSpinner.m */; };
 		CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */; };
 		CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */; };
+		CDDB18F01B2B27B9008A84FD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDB18EF1B2B27B9008A84FD /* SystemConfiguration.framework */; };
+		CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18F31B2B2B24008A84FD /* TGSettingsManager.m */; };
+		CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */; };
 		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +88,11 @@
 		CDDB18E81B29ED9F008A84FD /* TGSelectDeviceStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSelectDeviceStepView.h; sourceTree = "<group>"; };
 		CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSelectDeviceStepView.m; sourceTree = "<group>"; };
 		CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSelectDeviceStepView.xib; sourceTree = "<group>"; };
+		CDDB18EF1B2B27B9008A84FD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CDDB18F21B2B2B24008A84FD /* TGSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSettingsManager.h; sourceTree = "<group>"; };
+		CDDB18F31B2B2B24008A84FD /* TGSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSettingsManager.m; sourceTree = "<group>"; };
+		CDDB18F51B2B2C1B008A84FD /* TGNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkManager.h; sourceTree = "<group>"; };
+		CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkManager.m; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -93,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDDB18F01B2B27B9008A84FD /* SystemConfiguration.framework in Frameworks */,
 				E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +119,7 @@
 		2104FEA234D389D850092AA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDDB18EF1B2B27B9008A84FD /* SystemConfiguration.framework */,
 				FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */,
 			);
 			name = Frameworks;
@@ -147,6 +157,7 @@
 		CD7B60401B1F5469007FF820 /* ThreadGroup */ = {
 			isa = PBXGroup;
 			children = (
+				CDDB18F11B2B2AF8008A84FD /* Managers */,
 				CD8C68331B28703F0091B548 /* Views */,
 				CD8C68211B272FE30091B548 /* Categories */,
 				CD8C68281B273D020091B548 /* Controllers */,
@@ -241,6 +252,17 @@
 				CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CDDB18F11B2B2AF8008A84FD /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CDDB18F21B2B2B24008A84FD /* TGSettingsManager.h */,
+				CDDB18F31B2B2B24008A84FD /* TGSettingsManager.m */,
+				CDDB18F51B2B2C1B008A84FD /* TGNetworkManager.h */,
+				CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				CD8C68451B28A46A0091B548 /* CABasicAnimation+TGSpinner.m in Sources */,
@@ -396,6 +419,7 @@
 				CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */,
 				CD8C682C1B273D7F0091B548 /* TGHomeViewController.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
+				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */,
 				CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */,
 			);
