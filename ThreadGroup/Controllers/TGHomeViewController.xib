@@ -21,6 +21,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGHomeViewController">
             <connections>
+                <outlet property="addAnotherDeviceButton" destination="nC3-M6-Dja" id="7Fi-ce-gwi"/>
+                <outlet property="addAnotherDeviceButtonBottomConstraint" destination="tvB-vs-nhA" id="2b2-61-VnN"/>
                 <outlet property="cameraView" destination="hr2-0y-K1J" id="Vtd-uO-QCR"/>
                 <outlet property="mainView" destination="nHP-de-KBk" id="S4f-aX-3yK"/>
                 <outlet property="networkSearchPopupBottomConstraint" destination="yKM-jk-cX3" id="OCs-Bg-Rbf"/>
