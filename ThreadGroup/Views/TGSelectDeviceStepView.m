@@ -118,12 +118,16 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 #pragma mark - Button Events
 
 - (IBAction)scanCodeButtonTapped:(id)sender {
+    [self.passphraseInputField resignFirstResponder];
+    
     if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapScanCodeButton:)]) {
         [self.delegate TGSelectDeviceStepViewDidTapScanCodeButton:self];
     }
 }
 
 - (IBAction)confirmButtonTapped:(id)sender {
+    [self.passphraseInputField resignFirstResponder];
+    
     if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapConfirmButton:)]) {
         [self.delegate TGSelectDeviceStepViewDidTapConfirmButton:self];
     }
