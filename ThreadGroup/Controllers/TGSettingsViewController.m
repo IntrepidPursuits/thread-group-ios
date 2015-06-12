@@ -7,8 +7,11 @@
 //
 
 #import "TGSettingsViewController.h"
+#import "TGSettingsManager.h"
 
 @interface TGSettingsViewController ()
+
+@property (weak, nonatomic) IBOutlet UISwitch *debugModeSwitch;
 
 @end
 
@@ -16,6 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.debugModeSwitch setOn:[[TGSettingsManager sharedManager] debugModeEnabled]];
+}
+
+- (IBAction)debugModeValueChanged:(id)sender {
+    BOOL switchOn = [(UISwitch *)sender isOn];
+    [[TGSettingsManager sharedManager] setDebugModeEnabled:switchOn];
 }
 
 @end
