@@ -11,6 +11,7 @@
 @interface TGNetworkManager : NSObject
 
 + (instancetype)sharedManager;
+- (void)findLocalThreadNetworksCompletion:(void (^)(NSArray *networks, NSError **error))completion;
 - (void)connectToNetwork:(id)network completion:(void (^)(NSError **error))completion;
 - (void)connectDevice:(id)device completion:(void (^)(NSError **error))completion;
 

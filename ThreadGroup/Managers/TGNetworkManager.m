@@ -19,6 +19,13 @@
     return _sharedInstance;
 }
 
+- (void)findLocalThreadNetworksCompletion:(void (^)(NSArray *networks, NSError **error))completion {
+    NSLog(@"Finding Thread Networks");
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        completion(nil, nil);
+    });
+}
+
 - (void)connectToNetwork:(id)network completion:(void (^)(NSError **error))completion {
     NSLog(@"Connecting to mock network ... waiting 3 seconds");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -27,7 +34,7 @@
 }
 
 - (void)connectDevice:(id)device completion:(void (^)(NSError **error))completion {
-    NSLog(@"Connecting to mock network ... waiting 2 seconds");
+    NSLog(@"Connecting to mock network ... waiting 3 seconds");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         completion(nil);
     });
