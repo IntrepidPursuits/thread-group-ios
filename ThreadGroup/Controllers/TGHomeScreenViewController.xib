@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGHomeScreenViewController">
             <connections>
+                <outlet property="noWifiView" destination="Mor-43-yw1" id="jJK-Zb-tWM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
