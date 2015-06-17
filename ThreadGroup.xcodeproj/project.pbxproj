@@ -38,6 +38,7 @@
 		D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */; };
 		D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65BFD1B3090B800A184AB /* TGMainView.m */; };
 		D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65BFF1B3090D000A184AB /* TGMainView.xib */; };
+		D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */; };
 		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,8 @@
 		D9E65BFC1B3090B800A184AB /* TGMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainView.h; sourceTree = "<group>"; };
 		D9E65BFD1B3090B800A184AB /* TGMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainView.m; sourceTree = "<group>"; };
 		D9E65BFF1B3090D000A184AB /* TGMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainView.xib; sourceTree = "<group>"; };
+		D9E65C011B31AED800A184AB /* UIImage+ThreadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ThreadGroup.h"; sourceTree = "<group>"; };
+		D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ThreadGroup.m"; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -228,6 +231,8 @@
 				CD8C68261B273A8B0091B548 /* UIColor+ThreadGroup.m */,
 				CD8C68431B28A46A0091B548 /* CABasicAnimation+TGSpinner.h */,
 				CD8C68441B28A46A0091B548 /* CABasicAnimation+TGSpinner.m */,
+				D9E65C011B31AED800A184AB /* UIImage+ThreadGroup.h */,
+				D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -428,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */,
+				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
 				D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,

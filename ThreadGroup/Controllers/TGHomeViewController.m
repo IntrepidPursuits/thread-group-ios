@@ -17,6 +17,7 @@
 #import "TGNetworkManager.h"
 #import "UIColor+ThreadGroup.h"
 #import <Reachability/Reachability.h>
+#import "UIImage+ThreadGroup.h"
 
 static CGFloat TGHomeViewAnimationDefaultDuration = 0.4f;
 static CGFloat TGHomeViewAnimationNetworkSearchPopupDuration = 0.7f;
@@ -79,15 +80,15 @@ static CGFloat TGHomeViewAnimationNetworkSearchPopupDuration = 0.7f;
 }
 
 - (void)configureNavigationBar {
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_thread_logo"]];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage tg_navThreadLogo]];
     
     NSMutableArray *barButtons = [NSMutableArray new];
-    UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_more_menu"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateToSettings)];
+    UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage tg_navMoreMenu] style:UIBarButtonItemStylePlain target:self action:@selector(navigateToSettings)];
     [barButtons addObject:settingsBarButton];
     
     BOOL debugModeEnabled = [[TGSettingsManager sharedManager] debugModeEnabled];
     if (debugModeEnabled) {
-        UIBarButtonItem *logBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_log_info"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateToLog)];
+        UIBarButtonItem *logBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage tg_navLogInfo] style:UIBarButtonItemStylePlain target:self action:@selector(navigateToLog)];
         [barButtons addObject:logBarButton];
     }
     self.navigationItem.rightBarButtonItems = barButtons;
@@ -119,7 +120,7 @@ static CGFloat TGHomeViewAnimationNetworkSearchPopupDuration = 0.7f;
 - (void)resetWifiConnectionCellView {
     [self.wifiConnectionCellView setBottomBarHidden:NO];
     [self.wifiConnectionCellView setDelegate:self];
-    [self.wifiConnectionCellView setIcon:[UIImage imageNamed:@"steps_wifi_completed"]];
+    [self.wifiConnectionCellView setIcon:[UIImage tg_wifiCompleted]];
     [self.wifiConnectionCellView setSpinnerActive:NO];
     [self.wifiConnectionCellView setTitle:@"Connected to Wifi" subTitle:[self currentWifiSSID]];
     [self.wifiConnectionCellView setTopBarHidden:YES];
@@ -130,7 +131,7 @@ static CGFloat TGHomeViewAnimationNetworkSearchPopupDuration = 0.7f;
     [self.selectRouterCellView setBackgroundColor:[UIColor threadGroup_orange]];
     [self.selectRouterCellView setBottomBarHidden:YES];
     [self.selectRouterCellView setDelegate:self];
-    [self.selectRouterCellView setIcon:[UIImage imageNamed:@"steps_router_active"]];
+    [self.selectRouterCellView setIcon:[UIImage tg_routerActive]];
     [self.selectRouterCellView setSpinnerActive:NO];
     [self.selectRouterCellView setTitle:@"Select a Border Router" subTitle:@"Thread Networks on your connection"];
     [self.selectRouterCellView setTopBarHidden:NO];
@@ -345,7 +346,7 @@ static CGFloat TGHomeViewAnimationNetworkSearchPopupDuration = 0.7f;
 
 - (void)connectToThreadNetwork:(id)network {
     [self.selectRouterCellView setSpinnerActive:YES];
-    [self.selectRouterCellView setIcon:[UIImage imageNamed:@"steps_cancel_button"]];
+    [self.selectRouterCellView setIcon:[UIImage tg_cancelButton]];
     [self.selectRouterCellView setTitle:@"Connecting..." subTitle:@"Test Network on Intrepid's Thread Network"];
     
     [[TGNetworkManager sharedManager] connectToNetwork:network
@@ -353,7 +354,7 @@ static CGFloat TGHomeViewAnimationNetworkSearchPopupDuration = 0.7f;
                                                 [self.selectRouterCellView setSpinnerActive:NO];
                                                 [self.selectRouterCellView setBackgroundColor:[UIColor threadGroup_grey]];
                                                 [self.selectRouterCellView setTitle:@"Test Router 1" subTitle:@"Intrepid's Thread Network"];
-                                                [self.selectRouterCellView setIcon:[UIImage imageNamed:@"steps_router_completed"]];
+                                                [self.selectRouterCellView setIcon:[UIImage tg_routerCompleted]];
                                                 [self.selectRouterCellView setBottomBarHidden:NO];
                                                 
                                                 if ([self isShowingSearchingForNetworksPopup]) {
