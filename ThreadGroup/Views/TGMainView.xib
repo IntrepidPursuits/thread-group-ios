@@ -2,14 +2,225 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Gotham-Book.otf">
+            <string>Gotham-Book</string>
+        </mutableArray>
+        <mutableArray key="Gotham-Light.otf">
+            <string>Gotham-Light</string>
+        </mutableArray>
+        <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
+        </mutableArray>
+    </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGMainView"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGMainView">
+            <connections>
+                <outlet property="addDeviceButtonBottomLayoutConstraint" destination="62N-2M-AO7" id="Yud-NT-XA8"/>
+                <outlet property="cameraView" destination="KzV-Dx-YPV" id="I42-6J-5hP"/>
+                <outlet property="findingNetworksPopupBottomLayoutConstraint" destination="UWk-wZ-bEr" id="Ndj-fO-rcu"/>
+                <outlet property="findingNetworksPopupView" destination="pNG-UM-3Rz" id="xZ5-Kx-io1"/>
+                <outlet property="findingNetworksSpinnerView" destination="l3u-Xg-fdW" id="Qsz-82-LQG"/>
+                <outlet property="findingNetworksView" destination="Tlm-wX-PEf" id="6Ba-88-SEG"/>
+                <outlet property="passphraseButtonBottomLayoutConstraint" destination="dcP-wh-1dz" id="SRk-mQ-tdp"/>
+                <outlet property="routerSearchView" destination="5lN-Qt-CPc" id="43n-4n-OX4"/>
+                <outlet property="selectDeviceView" destination="tg2-Pu-Pyq" id="fwz-78-QBG"/>
+                <outlet property="selectDeviceViewHeightLayoutConstraint" destination="QBT-uX-fns" id="xcI-oi-oRA"/>
+                <outlet property="successDeviceLabel" destination="2PO-Je-wva" id="UcJ-dD-k4e"/>
+                <outlet property="successNetworkLabel" destination="TVh-1g-ar0" id="ynC-bn-Nex"/>
+                <outlet property="successView" destination="Kmq-1i-QMp" id="EJZ-1E-Dej"/>
+                <outlet property="wifiSearchView" destination="5bh-tR-LN6" id="d2b-pM-jFk"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bh-tR-LN6" userLabel="DeviceStepView(wifi)" customClass="TGDeviceStepView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="Fm6-UL-uBR"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5lN-Qt-CPc" userLabel="DeviceStepView(Router)" customClass="TGDeviceStepView">
+                    <rect key="frame" x="0.0" y="64" width="600" height="64"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="AGF-Z6-WFP"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zWQ-k9-goJ">
+                    <rect key="frame" x="0.0" y="128" width="600" height="424"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlm-wX-PEf" userLabel="FindingNetworks">
+                    <rect key="frame" x="0.0" y="128" width="600" height="472"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3u-Xg-fdW" customClass="TGSpinnerView">
+                            <rect key="frame" x="228" y="67" width="144" height="143"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="144" id="FQF-Ue-ouU"/>
+                                <constraint firstAttribute="width" secondItem="l3u-Xg-fdW" secondAttribute="height" multiplier="1:1" constant="1" id="RaG-4K-SFj"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking For Thread Networks..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwm-MU-uo2">
+                            <rect key="frame" x="190" y="234" width="220" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="220" id="BUF-Rq-xyD"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Light" family="Gotham" pointSize="24"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="gwm-MU-uo2" firstAttribute="top" secondItem="l3u-Xg-fdW" secondAttribute="bottom" constant="24" id="7f2-nC-l03"/>
+                        <constraint firstItem="gwm-MU-uo2" firstAttribute="centerX" secondItem="l3u-Xg-fdW" secondAttribute="centerX" id="NX3-Bz-gsa"/>
+                        <constraint firstItem="l3u-Xg-fdW" firstAttribute="top" secondItem="Tlm-wX-PEf" secondAttribute="top" constant="67" id="ZQo-kl-1Ha"/>
+                        <constraint firstAttribute="centerX" secondItem="l3u-Xg-fdW" secondAttribute="centerX" id="cmo-xY-XEr"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNG-UM-3Rz" userLabel="FindingNetworksPopUp" customClass="TGNetworkSearchingPopup">
+                    <rect key="frame" x="0.0" y="552" width="600" height="48"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="co1-oT-1SR"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tg2-Pu-Pyq" userLabel="SelectDeviceView" customClass="TGSelectDeviceStepView">
+                    <rect key="frame" x="0.0" y="128" width="600" height="64"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="QBT-uX-fns"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KzV-Dx-YPV" userLabel="CameraView">
+                    <rect key="frame" x="0.0" y="192" width="600" height="360"/>
+                    <subviews>
+                        <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWS-5U-5Ep">
+                            <rect key="frame" x="0.0" y="304" width="600" height="56"/>
+                            <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="zK2-BQ-lB0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                            <state key="normal" title="USE PASSPHRASE INSTEAD" image="action_type_code">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="usePassphraseButtonPressed:" destination="-1" eventType="touchUpInside" id="3Wg-US-uNC"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="oWS-5U-5Ep" secondAttribute="bottom" id="dcP-wh-1dz"/>
+                        <constraint firstAttribute="trailing" secondItem="oWS-5U-5Ep" secondAttribute="trailing" id="p3F-cS-KXA"/>
+                        <constraint firstItem="oWS-5U-5Ep" firstAttribute="leading" secondItem="KzV-Dx-YPV" secondAttribute="leading" id="zHG-nV-ODx"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmq-1i-QMp" userLabel="SuccessView">
+                    <rect key="frame" x="0.0" y="192" width="600" height="360"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="device_success" translatesAutoresizingMaskIntoConstraints="NO" id="kQf-4e-14C">
+                            <rect key="frame" x="252" y="42" width="96" height="96"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="kQf-4e-14C" secondAttribute="height" multiplier="1:1" id="JfT-g2-sOO"/>
+                                <constraint firstAttribute="width" constant="96" id="SmE-Ra-sRd"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Device&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2PO-Je-wva">
+                            <rect key="frame" x="175" y="162" width="250" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="250" id="ol6-Sx-UzV"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="24"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="joined &quot;Network&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TVh-1g-ar0">
+                            <rect key="frame" x="150" y="190" width="300" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="300" id="mKb-Mo-9Cz"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-4u-pMO">
+                            <rect key="frame" x="0.0" y="304" width="600" height="56"/>
+                            <color key="backgroundColor" red="0.90588235289999997" green="0.48627450979999998" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="b93-qL-KFe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                            <state key="normal" title="ADD ANOTHER DEVICE" image="action_add_device">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="addAnotherDeviceButtonPressed:" destination="-1" eventType="touchUpInside" id="GU5-KB-DgH"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="cqy-4u-pMO" secondAttribute="bottom" id="62N-2M-AO7"/>
+                        <constraint firstItem="kQf-4e-14C" firstAttribute="centerX" secondItem="2PO-Je-wva" secondAttribute="centerX" id="6C5-mb-Jm0"/>
+                        <constraint firstItem="TVh-1g-ar0" firstAttribute="top" secondItem="2PO-Je-wva" secondAttribute="bottom" constant="4" id="Big-D0-oh6"/>
+                        <constraint firstItem="2PO-Je-wva" firstAttribute="top" secondItem="kQf-4e-14C" secondAttribute="bottom" constant="24" id="Mja-cq-uhi"/>
+                        <constraint firstAttribute="trailing" secondItem="cqy-4u-pMO" secondAttribute="trailing" id="TPA-g4-e9v"/>
+                        <constraint firstItem="cqy-4u-pMO" firstAttribute="leading" secondItem="Kmq-1i-QMp" secondAttribute="leading" id="UOu-OL-MzV"/>
+                        <constraint firstItem="TVh-1g-ar0" firstAttribute="centerX" secondItem="2PO-Je-wva" secondAttribute="centerX" id="jqO-vP-SVg"/>
+                        <constraint firstItem="kQf-4e-14C" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="top" constant="42" id="qJX-o0-9Aj"/>
+                        <constraint firstAttribute="centerX" secondItem="kQf-4e-14C" secondAttribute="centerX" id="taY-FY-Oha"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Kmq-1i-QMp" firstAttribute="top" secondItem="tg2-Pu-Pyq" secondAttribute="bottom" id="1Vp-Rs-sMF"/>
+                <constraint firstAttribute="trailing" secondItem="tg2-Pu-Pyq" secondAttribute="trailing" id="2rB-2p-lp9"/>
+                <constraint firstItem="pNG-UM-3Rz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3CL-LD-W0O"/>
+                <constraint firstItem="KzV-Dx-YPV" firstAttribute="top" secondItem="tg2-Pu-Pyq" secondAttribute="bottom" id="3Gx-zS-ZJy"/>
+                <constraint firstAttribute="trailing" secondItem="zWQ-k9-goJ" secondAttribute="trailing" id="46i-YJ-wwT"/>
+                <constraint firstItem="tg2-Pu-Pyq" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="6ik-TJ-hvW"/>
+                <constraint firstAttribute="trailing" secondItem="Kmq-1i-QMp" secondAttribute="trailing" id="DDD-Pc-5Ux"/>
+                <constraint firstItem="Kmq-1i-QMp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KLT-aH-hxF"/>
+                <constraint firstAttribute="trailing" secondItem="5lN-Qt-CPc" secondAttribute="trailing" id="Ovi-zQ-GAf"/>
+                <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="bottom" id="OyE-yt-GCa"/>
+                <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="KzV-Dx-YPV" secondAttribute="bottom" id="PSl-CZ-aHx"/>
+                <constraint firstItem="5bh-tR-LN6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Sx0-xs-dY6"/>
+                <constraint firstItem="5bh-tR-LN6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Tlh-rL-bfK"/>
+                <constraint firstAttribute="bottom" secondItem="pNG-UM-3Rz" secondAttribute="bottom" id="UWk-wZ-bEr"/>
+                <constraint firstItem="5lN-Qt-CPc" firstAttribute="top" secondItem="5bh-tR-LN6" secondAttribute="bottom" id="UmD-i7-kZ3"/>
+                <constraint firstItem="zWQ-k9-goJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="alV-Fx-4qe"/>
+                <constraint firstAttribute="trailing" secondItem="5bh-tR-LN6" secondAttribute="trailing" id="chO-rc-mqm"/>
+                <constraint firstItem="zWQ-k9-goJ" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="esO-aB-ZAQ"/>
+                <constraint firstItem="5lN-Qt-CPc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="f4j-ce-MzI"/>
+                <constraint firstAttribute="trailing" secondItem="pNG-UM-3Rz" secondAttribute="trailing" id="gwd-tA-JRF"/>
+                <constraint firstItem="Tlm-wX-PEf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hH3-q5-yDg"/>
+                <constraint firstItem="KzV-Dx-YPV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="neF-ub-TVY"/>
+                <constraint firstItem="tg2-Pu-Pyq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ob7-es-XJR"/>
+                <constraint firstItem="Tlm-wX-PEf" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="q32-wq-32w"/>
+                <constraint firstAttribute="bottom" secondItem="Tlm-wX-PEf" secondAttribute="bottom" id="qGD-w9-NGv"/>
+                <constraint firstAttribute="trailing" secondItem="Tlm-wX-PEf" secondAttribute="trailing" id="ugC-Lm-kok"/>
+                <constraint firstAttribute="trailing" secondItem="KzV-Dx-YPV" secondAttribute="trailing" id="uqd-CU-t70"/>
+                <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="zWQ-k9-goJ" secondAttribute="bottom" id="wkc-Sx-crG"/>
+            </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="action_add_device" width="24" height="24"/>
+        <image name="action_type_code" width="24" height="24"/>
+        <image name="device_success" width="96" height="96"/>
+    </resources>
 </document>

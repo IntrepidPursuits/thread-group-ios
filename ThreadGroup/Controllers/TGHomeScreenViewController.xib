@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGHomeScreenViewController">
             <connections>
+                <outlet property="mainView" destination="j22-Fb-dwf" id="hl7-Lw-Wr0"/>
                 <outlet property="noWifiView" destination="Mor-43-yw1" id="jJK-Zb-tWM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -51,7 +52,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="9fg-KZ-hPG" firstAttribute="leading" secondItem="xD9-eO-70W" secondAttribute="leading" constant="18" id="0db-ZF-BOB"/>
                         <constraint firstAttribute="trailing" secondItem="qvw-6O-xLG" secondAttribute="trailing" constant="18" id="2nI-O6-Shk"/>
@@ -68,6 +69,9 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="Swd-Oe-KQy"/>
                     </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j22-Fb-dwf" userLabel="Wifi View" customClass="TGMainView">
+                    <rect key="frame" x="0.0" y="71" width="600" height="529"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mor-43-yw1" userLabel="No Wifi View">
                     <rect key="frame" x="0.0" y="71" width="600" height="529"/>
@@ -123,16 +127,20 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="PRx-AA-E3O" secondAttribute="trailing" constant="18" id="2Yi-PA-QGk"/>
                 <constraint firstItem="PRx-AA-E3O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="3Xp-TP-um7"/>
                 <constraint firstItem="xD9-eO-70W" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="4im-Gl-05g"/>
+                <constraint firstAttribute="trailing" secondItem="j22-Fb-dwf" secondAttribute="trailing" id="6Ah-54-tbL"/>
                 <constraint firstItem="Mor-43-yw1" firstAttribute="top" secondItem="PRx-AA-E3O" secondAttribute="bottom" id="8vR-YX-1pR"/>
                 <constraint firstItem="PRx-AA-E3O" firstAttribute="top" secondItem="xD9-eO-70W" secondAttribute="bottom" id="EWe-EM-Mrt"/>
                 <constraint firstAttribute="trailing" secondItem="Mor-43-yw1" secondAttribute="trailing" id="Fb8-A1-Lx0"/>
                 <constraint firstItem="Mor-43-yw1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Oor-rQ-N3V"/>
+                <constraint firstItem="j22-Fb-dwf" firstAttribute="top" secondItem="PRx-AA-E3O" secondAttribute="bottom" id="R9p-BT-S5V"/>
                 <constraint firstItem="xD9-eO-70W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SCe-L8-P34"/>
+                <constraint firstAttribute="bottom" secondItem="j22-Fb-dwf" secondAttribute="bottom" id="ixj-Lm-jdA"/>
+                <constraint firstItem="j22-Fb-dwf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kPf-Gw-dL2"/>
                 <constraint firstAttribute="bottom" secondItem="Mor-43-yw1" secondAttribute="bottom" id="tGu-sK-DHH"/>
                 <constraint firstAttribute="trailing" secondItem="xD9-eO-70W" secondAttribute="trailing" id="xGJ-xG-Kkd"/>
             </constraints>

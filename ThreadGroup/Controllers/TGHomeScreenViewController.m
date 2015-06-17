@@ -9,13 +9,17 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <Reachability/Reachability.h>
 #import "TGHomeScreenViewController.h"
+#import "TGMainView.h"
 
-@interface TGHomeScreenViewController ()
+@interface TGHomeScreenViewController () <TGMainViewProtocol>
 
 @property (nonatomic, strong) Reachability *reachability;
 
 //No Wifi View
 @property (weak, nonatomic) IBOutlet UIView *noWifiView;
+
+//Main View
+@property (weak, nonatomic) IBOutlet TGMainView *mainView;
 
 @end
 
@@ -31,6 +35,7 @@
     [super viewDidLoad];
     [self configureReachability];
     [self registerForReturnFromBackgroundNotification];
+    self.mainView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -46,6 +51,7 @@
 
 - (void)configureReachability {
     self.reachability = [Reachability reachabilityForLocalWiFi];
+    self.reachability.reachableOnWWAN = NO;
     __weak __typeof(self)weakSelf = self;
     self.reachability.reachableBlock = ^(Reachability *reach) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -73,15 +79,15 @@
 
 - (void)hideAllViews {
     self.noWifiView.hidden = YES;
-    //self.wifiView.hidden = YES; // May need to all hide its subviews instead because we need to customize when the different parts of the wifiView would come in and out with animation
-
+    self.mainView.hidden = YES; // May need to all hide its subviews instead because we need to customize when the different parts of the wifiView would come in and out with animation
 }
 
 - (void)configureUIForReachableState {
     // If wifiView is already not hidden, I do not want to reset the state
-//    if (self.wifiView.hidden) {
-//        //Perform updates
-//    }
+    if (self.mainView.hidden) {
+        self.mainView.hidden = NO;
+        self.mainView.viewState = TGMainViewStateLookingForRouters;
+    }
 }
 
 - (void)configureUIForUnreachableState {
@@ -91,7 +97,7 @@
 #pragma mark - App States
 
 //We should list out the different states that the app can exist in
-/*
+/* 
  *  1) No wifi connection
        Only thing to interact with there is the "Find Wifi Connection" button, which i am assuming would bring the user to the iPhone setting screen
  *  2) Connected to Wifi, looking for border routers
@@ -110,10 +116,22 @@
 
 #pragma mark - Wifi View
 
+
 #pragma mark - No Wifi View
 
 - (IBAction)findWifiButtonPressed:(UIButton *)sender {
     [self navigateToPhoneSettingsScreen];
+}
+
+#pragma mark - TGMainViewDelegate
+
+- (void)mainViewWifiButtonDidTap:(TGMainView *)mainView {
+    NSLog(@"mainView wifi button tapped");
+    [self navigateToPhoneSettingsScreen];
+}
+
+- (void)mainViewRouterButtonDidTap:(TGMainView *)mainView {
+    NSLog(@"mainView router button tapped");
 }
 
 #pragma mark - Notifications

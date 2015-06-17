@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Book.otf">
@@ -15,6 +15,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGDeviceStepView">
             <connections>
                 <outlet property="bottomBarView" destination="WlN-nY-N3E" id="Xaf-o0-qb7"/>
+                <outlet property="bottomSeperator" destination="FeY-pR-sWQ" id="01V-SX-1ji"/>
                 <outlet property="iconImageView" destination="5E1-rV-mgT" id="JHr-tx-x0Z"/>
                 <outlet property="spinnerImageView" destination="SU5-DX-395" id="EGW-ns-iiD"/>
                 <outlet property="subTitleLabel" destination="q4i-9g-eJJ" id="Hss-bo-Z9z"/>
@@ -55,14 +56,14 @@
                     </constraints>
                 </imageView>
                 <view alpha="0.19999999999999968" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FeY-pR-sWQ" userLabel="Bottom Separator Bar">
-                    <rect key="frame" x="71" y="63" width="298.5" height="1"/>
+                    <rect key="frame" x="71" y="63" width="299" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="8TF-Es-ROM"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected to Wifi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afr-k4-fow">
-                    <rect key="frame" x="72" y="14" width="306" height="14.5"/>
+                    <rect key="frame" x="72" y="14" width="306" height="15"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
