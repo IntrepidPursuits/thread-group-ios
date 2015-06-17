@@ -7,6 +7,7 @@
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Light.otf">
             <string>Gotham-Light</string>
@@ -53,39 +54,6 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="64" id="AGF-Z6-WFP"/>
-                    </constraints>
-                </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zWQ-k9-goJ">
-                    <rect key="frame" x="0.0" y="128" width="600" height="424"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlm-wX-PEf" userLabel="FindingNetworks">
-                    <rect key="frame" x="0.0" y="128" width="600" height="472"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3u-Xg-fdW" customClass="TGSpinnerView">
-                            <rect key="frame" x="228" y="67" width="144" height="143"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="144" id="FQF-Ue-ouU"/>
-                                <constraint firstAttribute="width" secondItem="l3u-Xg-fdW" secondAttribute="height" multiplier="1:1" constant="1" id="RaG-4K-SFj"/>
-                            </constraints>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking For Thread Networks..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwm-MU-uo2">
-                            <rect key="frame" x="190" y="234" width="220" height="48"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="220" id="BUF-Rq-xyD"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Gotham-Light" family="Gotham" pointSize="24"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="gwm-MU-uo2" firstAttribute="top" secondItem="l3u-Xg-fdW" secondAttribute="bottom" constant="24" id="7f2-nC-l03"/>
-                        <constraint firstItem="gwm-MU-uo2" firstAttribute="centerX" secondItem="l3u-Xg-fdW" secondAttribute="centerX" id="NX3-Bz-gsa"/>
-                        <constraint firstItem="l3u-Xg-fdW" firstAttribute="top" secondItem="Tlm-wX-PEf" secondAttribute="top" constant="67" id="ZQo-kl-1Ha"/>
-                        <constraint firstAttribute="centerX" secondItem="l3u-Xg-fdW" secondAttribute="centerX" id="cmo-xY-XEr"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNG-UM-3Rz" userLabel="FindingNetworksPopUp" customClass="TGNetworkSearchingPopup">
@@ -184,6 +152,68 @@
                         <constraint firstAttribute="centerX" secondItem="kQf-4e-14C" secondAttribute="centerX" id="taY-FY-Oha"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqJ-mI-Yuc" userLabel="AvailableRoutersView">
+                    <rect key="frame" x="0.0" y="128" width="600" height="424"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE BORDER ROUTERS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bcr-rv-Vbl">
+                            <rect key="frame" x="16" y="16" width="192" height="12"/>
+                            <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
+                            <color key="textColor" red="0.53333333329999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hC-Mz-nIf">
+                            <rect key="frame" x="16" y="32" width="568" height="1"/>
+                            <color key="backgroundColor" red="0.83137254900000002" green="0.82745098039999998" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="JEv-lV-a2r"/>
+                            </constraints>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zWQ-k9-goJ">
+                            <rect key="frame" x="0.0" y="33" width="600" height="391"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="zWQ-k9-goJ" firstAttribute="leading" secondItem="zqJ-mI-Yuc" secondAttribute="leading" id="HZ9-2k-yYm"/>
+                        <constraint firstAttribute="trailing" secondItem="9hC-Mz-nIf" secondAttribute="trailing" constant="16" id="O5M-rX-HDQ"/>
+                        <constraint firstItem="9hC-Mz-nIf" firstAttribute="leading" secondItem="zqJ-mI-Yuc" secondAttribute="leading" constant="16" id="auq-AN-49r"/>
+                        <constraint firstAttribute="trailing" secondItem="zWQ-k9-goJ" secondAttribute="trailing" id="p7q-we-f98"/>
+                        <constraint firstItem="Bcr-rv-Vbl" firstAttribute="leading" secondItem="zqJ-mI-Yuc" secondAttribute="leading" constant="16" id="qF5-zs-Ggo"/>
+                        <constraint firstItem="9hC-Mz-nIf" firstAttribute="top" secondItem="Bcr-rv-Vbl" secondAttribute="bottom" constant="4" id="r1P-S8-Cbv"/>
+                        <constraint firstItem="Bcr-rv-Vbl" firstAttribute="top" secondItem="zqJ-mI-Yuc" secondAttribute="top" constant="16" id="vMk-Gw-kGJ"/>
+                        <constraint firstItem="zWQ-k9-goJ" firstAttribute="top" secondItem="9hC-Mz-nIf" secondAttribute="bottom" id="wuT-hY-DyU"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlm-wX-PEf" userLabel="FindingNetworks">
+                    <rect key="frame" x="0.0" y="128" width="600" height="472"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3u-Xg-fdW" customClass="TGSpinnerView">
+                            <rect key="frame" x="228" y="67" width="144" height="143"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="144" id="FQF-Ue-ouU"/>
+                                <constraint firstAttribute="width" secondItem="l3u-Xg-fdW" secondAttribute="height" multiplier="1:1" constant="1" id="RaG-4K-SFj"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking For Thread Networks..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwm-MU-uo2">
+                            <rect key="frame" x="190" y="234" width="220" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="220" id="BUF-Rq-xyD"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Light" family="Gotham" pointSize="24"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="gwm-MU-uo2" firstAttribute="top" secondItem="l3u-Xg-fdW" secondAttribute="bottom" constant="24" id="7f2-nC-l03"/>
+                        <constraint firstItem="gwm-MU-uo2" firstAttribute="centerX" secondItem="l3u-Xg-fdW" secondAttribute="centerX" id="NX3-Bz-gsa"/>
+                        <constraint firstItem="l3u-Xg-fdW" firstAttribute="top" secondItem="Tlm-wX-PEf" secondAttribute="top" constant="67" id="ZQo-kl-1Ha"/>
+                        <constraint firstAttribute="centerX" secondItem="l3u-Xg-fdW" secondAttribute="centerX" id="cmo-xY-XEr"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -191,9 +221,10 @@
                 <constraint firstAttribute="trailing" secondItem="tg2-Pu-Pyq" secondAttribute="trailing" id="2rB-2p-lp9"/>
                 <constraint firstItem="pNG-UM-3Rz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3CL-LD-W0O"/>
                 <constraint firstItem="KzV-Dx-YPV" firstAttribute="top" secondItem="tg2-Pu-Pyq" secondAttribute="bottom" id="3Gx-zS-ZJy"/>
-                <constraint firstAttribute="trailing" secondItem="zWQ-k9-goJ" secondAttribute="trailing" id="46i-YJ-wwT"/>
                 <constraint firstItem="tg2-Pu-Pyq" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="6ik-TJ-hvW"/>
+                <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="zWQ-k9-goJ" secondAttribute="bottom" id="A0c-rS-hKb"/>
                 <constraint firstAttribute="trailing" secondItem="Kmq-1i-QMp" secondAttribute="trailing" id="DDD-Pc-5Ux"/>
+                <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="zqJ-mI-Yuc" secondAttribute="bottom" id="K5d-rv-BGL"/>
                 <constraint firstItem="Kmq-1i-QMp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KLT-aH-hxF"/>
                 <constraint firstAttribute="trailing" secondItem="5lN-Qt-CPc" secondAttribute="trailing" id="Ovi-zQ-GAf"/>
                 <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="bottom" id="OyE-yt-GCa"/>
@@ -202,9 +233,8 @@
                 <constraint firstItem="5bh-tR-LN6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Tlh-rL-bfK"/>
                 <constraint firstAttribute="bottom" secondItem="pNG-UM-3Rz" secondAttribute="bottom" id="UWk-wZ-bEr"/>
                 <constraint firstItem="5lN-Qt-CPc" firstAttribute="top" secondItem="5bh-tR-LN6" secondAttribute="bottom" id="UmD-i7-kZ3"/>
-                <constraint firstItem="zWQ-k9-goJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="alV-Fx-4qe"/>
                 <constraint firstAttribute="trailing" secondItem="5bh-tR-LN6" secondAttribute="trailing" id="chO-rc-mqm"/>
-                <constraint firstItem="zWQ-k9-goJ" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="esO-aB-ZAQ"/>
+                <constraint firstItem="zqJ-mI-Yuc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eS8-oB-XhV"/>
                 <constraint firstItem="5lN-Qt-CPc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="f4j-ce-MzI"/>
                 <constraint firstAttribute="trailing" secondItem="pNG-UM-3Rz" secondAttribute="trailing" id="gwd-tA-JRF"/>
                 <constraint firstItem="Tlm-wX-PEf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hH3-q5-yDg"/>
@@ -212,9 +242,10 @@
                 <constraint firstItem="tg2-Pu-Pyq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ob7-es-XJR"/>
                 <constraint firstItem="Tlm-wX-PEf" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="q32-wq-32w"/>
                 <constraint firstAttribute="bottom" secondItem="Tlm-wX-PEf" secondAttribute="bottom" id="qGD-w9-NGv"/>
+                <constraint firstItem="zqJ-mI-Yuc" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="qSK-EA-HF0"/>
                 <constraint firstAttribute="trailing" secondItem="Tlm-wX-PEf" secondAttribute="trailing" id="ugC-Lm-kok"/>
                 <constraint firstAttribute="trailing" secondItem="KzV-Dx-YPV" secondAttribute="trailing" id="uqd-CU-t70"/>
-                <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="zWQ-k9-goJ" secondAttribute="bottom" id="wkc-Sx-crG"/>
+                <constraint firstAttribute="trailing" secondItem="zqJ-mI-Yuc" secondAttribute="trailing" id="yTI-ye-Dj6"/>
             </constraints>
         </view>
     </objects>
