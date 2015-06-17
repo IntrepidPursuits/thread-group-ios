@@ -14,6 +14,7 @@
 #import "TGSelectDeviceStepView.h"
 #import "UIImage+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
+#import "TGTableView.h"
 
 @interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate>
 
@@ -24,6 +25,9 @@
 
 //Border Router
 @property (weak, nonatomic) IBOutlet TGDeviceStepView *routerSearchView;
+
+//Table View
+@property (weak, nonatomic) IBOutlet TGTableView *tableView;
 
 //Finding Networks
 @property (weak, nonatomic) IBOutlet UIView *findingNetworksView;
@@ -47,9 +51,6 @@
 
 @implementation TGMainView
 
-//TODO:
-//i have yet to implement the tableView.
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     if (self) {
@@ -61,6 +62,16 @@
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
         self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
     }
+    [self setupTableViewSource];
+}
+
+#pragma mark - Table View
+
+- (void)setupTableViewSource {
+    self.tableViewSource = [[TGTableView alloc] initWithFrame:self.tableView.frame style:UITableViewStylePlain];
+//    self.tableView = self.tableViewSource;
+    self.tableView.dataSource = self.tableViewSource;
+    self.tableView.delegate = self.tableViewSource;
 }
 
 #pragma mark - View States

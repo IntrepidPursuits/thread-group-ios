@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class TGMainView;
+@class TGTableView;
 
 @protocol TGMainViewProtocol <NSObject>
 - (void)mainViewWifiButtonDidTap:(TGMainView *)mainView;
@@ -25,6 +26,7 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
 
 @property (nonatomic) TGMainViewState viewState;
 @property (nonatomic, weak) id<TGMainViewProtocol> delegate;
+@property (strong, nonatomic) TGTableView *tableViewSource;
 
 //Wifi
 

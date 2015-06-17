@@ -41,6 +41,7 @@
 		D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */; };
 		D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C0A1B31FD8800A184AB /* TGTableViewCell.m */; };
 		D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */; };
+		D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C1D1B33364600A184AB /* TGTableView.m */; };
 		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,8 @@
 		D9E65C091B31FD8800A184AB /* TGTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGTableViewCell.h; path = TableViewCell/TGTableViewCell.h; sourceTree = "<group>"; };
 		D9E65C0A1B31FD8800A184AB /* TGTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGTableViewCell.m; path = TableViewCell/TGTableViewCell.m; sourceTree = "<group>"; };
 		D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGTableViewCell.xib; path = TableViewCell/TGTableViewCell.xib; sourceTree = "<group>"; };
+		D9E65C1C1B33364600A184AB /* TGTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGTableView.h; path = TableView/TGTableView.h; sourceTree = "<group>"; };
+		D9E65C1D1B33364600A184AB /* TGTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGTableView.m; path = TableView/TGTableView.m; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -276,6 +279,7 @@
 				D9E65BFC1B3090B800A184AB /* TGMainView.h */,
 				D9E65BFD1B3090B800A184AB /* TGMainView.m */,
 				D9E65BFF1B3090D000A184AB /* TGMainView.xib */,
+				D9E65C1B1B33362100A184AB /* TableView */,
 				D9E65C081B31FD6100A184AB /* TableViewCell */,
 			);
 			path = Views;
@@ -300,6 +304,15 @@
 				D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */,
 			);
 			name = TableViewCell;
+			sourceTree = "<group>";
+		};
+		D9E65C1B1B33362100A184AB /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				D9E65C1C1B33364600A184AB /* TGTableView.h */,
+				D9E65C1D1B33364600A184AB /* TGTableView.m */,
+			);
+			name = TableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,6 +475,7 @@
 				CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */,
 				CD8C682C1B273D7F0091B548 /* TGHomeViewController.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
+				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */,

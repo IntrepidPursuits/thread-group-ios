@@ -35,7 +35,7 @@
     [super viewDidLoad];
     [self configureReachability];
     [self registerForReturnFromBackgroundNotification];
-    self.mainView.delegate = self;
+    [self setupMainView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -114,8 +114,11 @@
     NSLog(@"Show App Log");
 }
 
-#pragma mark - Wifi View
+#pragma mark - Main View
 
+- (void)setupMainView {
+    self.mainView.delegate = self;
+}
 
 #pragma mark - No Wifi View
 
