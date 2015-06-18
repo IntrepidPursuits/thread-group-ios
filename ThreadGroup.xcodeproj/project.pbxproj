@@ -36,6 +36,7 @@
 		CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */; };
 		D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */; };
 		D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */; };
+		D9446A831B335B14007C8D61 /* TGRouterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D9446A821B335B14007C8D61 /* TGRouterItem.m */; };
 		D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65BFD1B3090B800A184AB /* TGMainView.m */; };
 		D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65BFF1B3090D000A184AB /* TGMainView.xib */; };
 		D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */; };
@@ -104,6 +105,8 @@
 		D93C81691B2F663000A86EE1 /* TGHomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHomeScreenViewController.h; sourceTree = "<group>"; };
 		D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHomeScreenViewController.m; sourceTree = "<group>"; };
 		D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeScreenViewController.xib; sourceTree = "<group>"; };
+		D9446A811B335B14007C8D61 /* TGRouterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGRouterItem.h; path = Models/Test/TGRouterItem.h; sourceTree = "<group>"; };
+		D9446A821B335B14007C8D61 /* TGRouterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGRouterItem.m; path = Models/Test/TGRouterItem.m; sourceTree = "<group>"; };
 		D9E65BFC1B3090B800A184AB /* TGMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainView.h; sourceTree = "<group>"; };
 		D9E65BFD1B3090B800A184AB /* TGMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainView.m; sourceTree = "<group>"; };
 		D9E65BFF1B3090D000A184AB /* TGMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainView.xib; sourceTree = "<group>"; };
@@ -178,6 +181,7 @@
 		CD7B60401B1F5469007FF820 /* ThreadGroup */ = {
 			isa = PBXGroup;
 			children = (
+				D9446A7F1B335ADD007C8D61 /* Models */,
 				CDDB18F11B2B2AF8008A84FD /* Managers */,
 				CD8C68331B28703F0091B548 /* Views */,
 				CD8C68211B272FE30091B548 /* Categories */,
@@ -294,6 +298,23 @@
 				CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		D9446A7F1B335ADD007C8D61 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D9446A801B335AE3007C8D61 /* Test */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		D9446A801B335AE3007C8D61 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				D9446A811B335B14007C8D61 /* TGRouterItem.h */,
+				D9446A821B335B14007C8D61 /* TGRouterItem.m */,
+			);
+			name = Test;
 			sourceTree = "<group>";
 		};
 		D9E65C081B31FD6100A184AB /* TableViewCell */ = {
@@ -478,6 +499,7 @@
 				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
+				D9446A831B335B14007C8D61 /* TGRouterItem.m in Sources */,
 				CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */,
 				CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */,
 			);

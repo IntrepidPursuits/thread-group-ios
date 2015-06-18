@@ -15,6 +15,7 @@
 #import "UIImage+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 #import "TGTableView.h"
+#import "TGRouterItem.h"
 
 @interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate>
 
@@ -65,11 +66,21 @@
     [self setupTableViewSource];
 }
 
+#pragma mark - Test
+
+- (NSArray *)createTestObjects {
+    TGRouterItem *item1 = [[TGRouterItem alloc] initWithName:@"Router 1" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
+    TGRouterItem *item2 = [[TGRouterItem alloc] initWithName:@"Rotuer 2" networkName:@"Network 2" networkAddress:@"2001:db8::ff00:42:8329"];
+    TGRouterItem *item3 = [[TGRouterItem alloc] initWithName:@"Rotuer 3" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
+    TGRouterItem *item4 = [[TGRouterItem alloc] initWithName:@"Router 4" networkName:@"Network 3" networkAddress:@"2001:db8::ff00:42:8329"];
+    return @[item1, item2, item3, item4];
+}
+
 #pragma mark - Table View
 
 - (void)setupTableViewSource {
     self.tableViewSource = [[TGTableView alloc] initWithFrame:self.tableView.frame style:UITableViewStylePlain];
-//    self.tableView = self.tableViewSource;
+    self.tableViewSource.networkItems = [self createTestObjects];
     self.tableView.dataSource = self.tableViewSource;
     self.tableView.delegate = self.tableViewSource;
 }

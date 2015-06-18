@@ -8,6 +8,7 @@
 
 #import "TGTableView.h"
 #import "TGTableViewCell.h"
+#import "TGRouterItem.h"
 
 static NSString * const kTGTableViewCellName = @"TGTableViewCell";
 static NSString * const kTGTableViewCellReuseIdentifier = @"TGTableViewCell";
@@ -27,14 +28,15 @@ static NSString * const kTGTableViewCellReuseIdentifier = @"TGTableViewCell";
 #pragma mark - DataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.networkItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TGTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTGTableViewCellReuseIdentifier forIndexPath:indexPath];
-    cell.routerNameLabel.text = @"Test";
-    cell.networkNameLabel.text = @"Network test";
-    cell.networkAddressLabel.text = @"3434234234";
+    TGRouterItem *item = self.networkItems[indexPath.item];
+    cell.routerNameLabel.text = item.name;
+    cell.networkNameLabel.text = item.networkName;
+    cell.networkAddressLabel.text = item.networkAddress;
     return cell;
 }
 
