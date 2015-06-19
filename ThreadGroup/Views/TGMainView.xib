@@ -22,6 +22,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGMainView">
             <connections>
                 <outlet property="addDeviceButtonBottomLayoutConstraint" destination="62N-2M-AO7" id="Yud-NT-XA8"/>
+                <outlet property="availableRoutersView" destination="zqJ-mI-Yuc" id="Pop-Fb-cjB"/>
                 <outlet property="cameraView" destination="KzV-Dx-YPV" id="I42-6J-5hP"/>
                 <outlet property="findingNetworksPopupBottomLayoutConstraint" destination="UWk-wZ-bEr" id="Ndj-fO-rcu"/>
                 <outlet property="findingNetworksPopupView" destination="pNG-UM-3Rz" id="xZ5-Kx-io1"/>

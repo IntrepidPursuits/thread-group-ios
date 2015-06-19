@@ -34,6 +34,8 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
 
 //Border Router
 
+- (void)resetRouterSearchView;
+
 //Select Devices
 
 //Camera View

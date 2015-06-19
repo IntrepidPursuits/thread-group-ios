@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class TGTableView;
+@class TGRouterItem;
+
+@protocol TGTableViewProtocol <NSObject>
+- (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouterItem *)item;
+@end
+
 @interface TGTableView : UITableView <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSArray *networkItems;
+@property (nonatomic, weak) id<TGTableViewProtocol> tableViewDelegate;
 
 @end

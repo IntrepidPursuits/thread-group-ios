@@ -16,8 +16,9 @@
 #import "UIColor+ThreadGroup.h"
 #import "TGTableView.h"
 #import "TGRouterItem.h"
+#import "TGNetworkManager.h"
 
-@interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate>
+@interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol>
 
 @property (nonatomic, strong) UIView *nibView;
 
@@ -27,7 +28,8 @@
 //Border Router
 @property (weak, nonatomic) IBOutlet TGDeviceStepView *routerSearchView;
 
-//Table View
+//Available Routers View
+@property (weak, nonatomic) IBOutlet UIView *availableRoutersView;
 @property (weak, nonatomic) IBOutlet TGTableView *tableView;
 
 //Finding Networks
@@ -81,6 +83,7 @@
 - (void)setupTableViewSource {
     self.tableViewSource = [[TGTableView alloc] initWithFrame:self.tableView.frame style:UITableViewStylePlain];
     self.tableViewSource.networkItems = [self createTestObjects];
+    self.tableViewSource.tableViewDelegate = self;
     self.tableView.dataSource = self.tableViewSource;
     self.tableView.delegate = self.tableViewSource;
 }
@@ -98,23 +101,24 @@
             //Wifi search view
             [self resetWifiSearchView];
             [self.findingNetworksSpinnerView startAnimating];
-            self.wifiSearchView.bottomSeperator.hidden = YES;
+            self.wifiSearchView.topSeperatorView.hidden = YES;
 
             //Router search view
             [self resetRouterSearchView];
 
             //Finding networks popup
-            self.findingNetworksPopupBottomLayoutConstraint.constant = - CGRectGetHeight(self.findingNetworksPopupView.frame);
-            [self.findingNetworksPopupView startAnimating];
-
+            [self hideFindingNetworkPopup];
             //Views to hide
-            [self hideViewsForState:viewState];
+            [self hideAndShowViewsForState:viewState];
 
             //Things to animate
             [self animateViewsForState:viewState];
             break;
         case TGMainViewStateScanDevice:
-            //do something
+            //Select device view
+            [self resetSelectDeviceView];
+            [self hideAndShowViewsForState:viewState];
+            [self animateViewsForState:viewState];
             break;
         case TGMainViewStateAddAnotherDevice:
             //do something
@@ -125,15 +129,25 @@
     }
 }
 
-- (void)hideViewsForState:(TGMainViewState)viewState {
+- (void)hideAndShowViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
+            self.findingNetworksView.hidden = NO;
+            self.findingNetworksPopupView.hidden = NO;
+            self.availableRoutersView.hidden = NO;
+
             self.selectDeviceView.hidden = YES;
             self.successView.hidden = YES;
             self.cameraView.hidden = YES;
             break;
         case TGMainViewStateScanDevice:
-            //do something
+            self.selectDeviceView.hidden = NO;
+            self.cameraView.hidden = NO;
+
+            self.availableRoutersView.hidden = YES;
+            self.findingNetworksPopupView.hidden = YES;
+            self.findingNetworksView.hidden = YES;
+            self.successView.hidden = YES;
             break;
         case TGMainViewStateAddAnotherDevice:
             //do something
@@ -152,15 +166,24 @@
             } completion:^(BOOL finished) {
                 if (finished) {
                     [UIView animateWithDuration:0.7 animations:^{
-                        self.findingNetworksPopupBottomLayoutConstraint.constant = 0;
+                        [self showFindingNetworkPopup];
                         [self layoutIfNeeded];
                     }];
                 }
             }];
         }
             break;
-        case TGMainViewStateScanDevice:
-            //do something
+        case TGMainViewStateScanDevice: {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.selectDeviceView.alpha = 1;
+                self.cameraView.alpha = 1;
+                [self bringSubviewToFront:self.cameraView];
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    NSLog(@"Done");
+                }
+            }];
+        }
             break;
         case TGMainViewStateAddAnotherDevice:
             //do something
@@ -186,8 +209,6 @@
     [self.wifiSearchView setTitle:@"Connected to Wifi" subTitle:[self currentWifiSSID]];
 }
 
-//I would switch the bottom seperator bar to be a top seperator bar
-
 #pragma mark - Border Router
 
 - (void)updateRouterSearchView {
@@ -205,8 +226,44 @@
     [self.routerSearchView setIcon:[UIImage tg_routerActive]];
     [self.routerSearchView setSpinnerActive:NO];
     [self.routerSearchView setTitle:@"Select a Border Router" subTitle:@"Thread Networks on your connection"];
+    self.routerSearchView.topSeperatorView.hidden = YES;
 }
 
+- (void)connectRouterForItem:(TGRouterItem *)item {
+    //TODO: Will have to actually connect a real router
+    [self animateConnectingToRouterWithItem:item];
+    [self connectToRouterWithItem:item];
+}
+
+- (void)animateConnectingToRouterWithItem:(TGRouterItem *)item {
+    [self.routerSearchView setSpinnerActive:YES];
+    [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
+    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@ on %@", item.name, item.networkName]];
+}
+
+- (void)animateConnectedToRouterWithItem:(TGRouterItem *)item {
+    [self.routerSearchView setSpinnerActive:NO];
+    [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
+    [self.routerSearchView setTitle:item.name subTitle:item.networkName];
+    [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
+    [self.routerSearchView setBottomBarHidden:NO];
+    self.routerSearchView.topSeperatorView.hidden = NO;
+}
+
+- (void)connectToRouterWithItem:(TGRouterItem *)item {
+    [[TGNetworkManager sharedManager] connectToNetwork:item
+                                            completion:^(NSError *__autoreleasing *error) {
+                                                if (!error) {
+                                                    [UIView animateWithDuration:0.4 animations:^{
+                                                        [self animateConnectedToRouterWithItem:item];
+                                                        [self hideFindingNetworkPopup];
+                                                        self.viewState = TGMainViewStateScanDevice;
+                                                    }];
+                                                } else {
+                                                    NSLog(@"Error connecting to network!");
+                                                }
+                                            }];
+}
 
 #pragma mark - Select/Add Devices
 
@@ -223,12 +280,18 @@
     TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
     self.selectDeviceView.contentMode = contentMode;
     self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
-
-    //Is this needed?
     [self layoutIfNeeded];
 }
 
 - (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
+    [UIView animateWithDuration:0.4f animations:^{
+        TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
+        [self.selectDeviceView setContentMode:newMode];
+        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [self.selectDeviceView becomeFirstResponder];
+    }];
 }
 
 #pragma mark - Finding Networks
@@ -239,6 +302,18 @@
 
 - (void)resetFindingNetwork {
     
+}
+
+#pragma mark - Finding Network Popup
+
+- (void)showFindingNetworkPopup {
+    self.findingNetworksPopupBottomLayoutConstraint.constant = 0;
+    [self.findingNetworksPopupView startAnimating];
+}
+
+- (void)hideFindingNetworkPopup {
+    self.findingNetworksPopupBottomLayoutConstraint.constant = - CGRectGetHeight(self.findingNetworksPopupView.frame);
+    [self.findingNetworksPopupView stopAnimating];
 }
 
 #pragma mark - Success View
@@ -260,11 +335,22 @@
 #pragma mark - TGSelectDeviceStepViewDelegate
 
 - (void)TGSelectDeviceStepViewDidTapScanCodeButton:(TGSelectDeviceStepView *)stepView {
-
+    [UIView animateWithDuration:0.4 animations:^{
+        TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
+        self.selectDeviceView.contentMode = contentMode;
+        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
+        [self layoutIfNeeded];
+    }];
 }
 
 - (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView {
 
+}
+
+#pragma mark - TGTableViewProtocol
+
+- (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouterItem *)item {
+    [self connectRouterForItem:item];
 }
 
 #pragma mark - Helper Methods

@@ -36,6 +36,7 @@
     [self configureReachability];
     [self registerForReturnFromBackgroundNotification];
     [self setupMainView];
+    [self hideAllViews];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,8 +69,12 @@
 
 #pragma mark - Configuring Views
 
+- (void)hideAllViews {
+    self.mainView.hidden = YES;
+    self.noWifiView.hidden = YES;
+}
+
 - (void)resetMainView {
-    [self hideAllViews];
     if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi) {
         [self configureUIForReachableState];
     } else {
@@ -77,20 +82,17 @@
     }
 }
 
-- (void)hideAllViews {
-    self.noWifiView.hidden = YES;
-    self.mainView.hidden = YES; // May need to all hide its subviews instead because we need to customize when the different parts of the wifiView would come in and out with animation
-}
-
 - (void)configureUIForReachableState {
     // If wifiView is already not hidden, I do not want to reset the state
-    if (self.mainView.hidden) {
+    self.noWifiView.hidden = YES;
+    if (self.mainView.hidden == YES) {
         self.mainView.hidden = NO;
         self.mainView.viewState = TGMainViewStateLookingForRouters;
     }
 }
 
 - (void)configureUIForUnreachableState {
+    self.mainView.hidden = YES;
     self.noWifiView.hidden = NO;
 }
 
@@ -129,12 +131,13 @@
 #pragma mark - TGMainViewDelegate
 
 - (void)mainViewWifiButtonDidTap:(TGMainView *)mainView {
-    NSLog(@"mainView wifi button tapped");
+     NSLog(@"mainView wifi button tapped");
     [self navigateToPhoneSettingsScreen];
 }
 
 - (void)mainViewRouterButtonDidTap:(TGMainView *)mainView {
     NSLog(@"mainView router button tapped");
+    self.mainView.viewState = TGMainViewStateLookingForRouters;
 }
 
 #pragma mark - Notifications

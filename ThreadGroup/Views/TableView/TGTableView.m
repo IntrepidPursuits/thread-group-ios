@@ -48,6 +48,8 @@ static NSString * const kTGTableViewCellReuseIdentifier = @"TGTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    TGRouterItem *itemSelected = self.networkItems[indexPath.item];
+    [self.tableViewDelegate tableView:self didSelectItem:itemSelected];
 }
 
 @end
