@@ -43,6 +43,8 @@
 		D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C0A1B31FD8800A184AB /* TGTableViewCell.m */; };
 		D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */; };
 		D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C1D1B33364600A184AB /* TGTableView.m */; };
+		D9FB301E1B385FB8002B6ED4 /* TGAddingDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9FB301D1B385FB8002B6ED4 /* TGAddingDeviceView.m */; };
+		D9FB30201B385FD2002B6ED4 /* TGAddingDeviceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9FB301F1B385FD2002B6ED4 /* TGAddingDeviceView.xib */; };
 		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +119,9 @@
 		D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGTableViewCell.xib; path = TableViewCell/TGTableViewCell.xib; sourceTree = "<group>"; };
 		D9E65C1C1B33364600A184AB /* TGTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGTableView.h; path = TableView/TGTableView.h; sourceTree = "<group>"; };
 		D9E65C1D1B33364600A184AB /* TGTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGTableView.m; path = TableView/TGTableView.m; sourceTree = "<group>"; };
+		D9FB301C1B385FB8002B6ED4 /* TGAddingDeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGAddingDeviceView.h; sourceTree = "<group>"; };
+		D9FB301D1B385FB8002B6ED4 /* TGAddingDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGAddingDeviceView.m; sourceTree = "<group>"; };
+		D9FB301F1B385FD2002B6ED4 /* TGAddingDeviceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGAddingDeviceView.xib; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -285,6 +290,9 @@
 				D9E65BFF1B3090D000A184AB /* TGMainView.xib */,
 				D9E65C1B1B33362100A184AB /* TableView */,
 				D9E65C081B31FD6100A184AB /* TableViewCell */,
+				D9FB301C1B385FB8002B6ED4 /* TGAddingDeviceView.h */,
+				D9FB301D1B385FB8002B6ED4 /* TGAddingDeviceView.m */,
+				D9FB301F1B385FD2002B6ED4 /* TGAddingDeviceView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -422,6 +430,7 @@
 				CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
 				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
+				D9FB30201B385FD2002B6ED4 /* TGAddingDeviceView.xib in Resources */,
 				D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */,
 				CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */,
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
@@ -487,6 +496,7 @@
 				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
 				D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */,
+				D9FB301E1B385FB8002B6ED4 /* TGAddingDeviceView.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				CD8C68451B28A46A0091B548 /* CABasicAnimation+TGSpinner.m in Sources */,
 				CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */,
