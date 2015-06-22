@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Gotham-Book.otf">
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+        </mutableArray>
+        <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TGTableViewCell" rowHeight="57" id="KGk-i7-Jjw" customClass="TGTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Router Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ue-zy-A7c">
+                        <rect key="frame" x="24" y="8" width="107" height="21"/>
+                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="16"/>
+                        <color key="textColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Network Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="k2P-tV-CJZ">
+                        <rect key="frame" x="24" y="33" width="186" height="15"/>
+                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                        <color key="textColor" red="0.83137254900000002" green="0.82745098039999998" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IPV6 ADDRESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YJV-K9-R0J">
+                        <rect key="frame" x="210" y="35" width="180" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="180" id="hcJ-Yi-QRc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.26000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MM8-IP-YwU" userLabel="Seperator View">
+                        <rect key="frame" x="16" y="55" width="382" height="1"/>
+                        <color key="backgroundColor" red="0.83137254900000002" green="0.82745098039999998" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Lgw-9e-3Fg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="k2P-tV-CJZ" firstAttribute="top" secondItem="3Ue-zy-A7c" secondAttribute="bottom" constant="4" id="04x-Aw-WtL"/>
+                    <constraint firstAttribute="bottom" secondItem="MM8-IP-YwU" secondAttribute="bottom" id="I5v-F6-B1e"/>
+                    <constraint firstItem="YJV-K9-R0J" firstAttribute="leading" secondItem="k2P-tV-CJZ" secondAttribute="trailing" id="IiD-oF-YW0"/>
+                    <constraint firstItem="3Ue-zy-A7c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="RGp-Yw-IZ7"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="YJV-K9-R0J" secondAttribute="trailing" constant="16" id="aGH-ve-Srd"/>
+                    <constraint firstAttribute="trailing" secondItem="MM8-IP-YwU" secondAttribute="trailing" constant="16" id="bQg-Fk-tDB"/>
+                    <constraint firstItem="3Ue-zy-A7c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="crS-EG-tpr"/>
+                    <constraint firstItem="k2P-tV-CJZ" firstAttribute="leading" secondItem="3Ue-zy-A7c" secondAttribute="leading" id="l2J-Br-ykZ"/>
+                    <constraint firstItem="YJV-K9-R0J" firstAttribute="centerY" secondItem="k2P-tV-CJZ" secondAttribute="centerY" id="ncR-8q-P78"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="k2P-tV-CJZ" secondAttribute="bottom" id="w9M-xi-D1j"/>
+                    <constraint firstItem="MM8-IP-YwU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="zj1-25-Q5G"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="networkAddressLabel" destination="YJV-K9-R0J" id="Evo-I7-hED"/>
+                <outlet property="networkNameLabel" destination="k2P-tV-CJZ" id="5VE-Nx-524"/>
+                <outlet property="routerNameLabel" destination="3Ue-zy-A7c" id="veP-Tu-gcX"/>
+            </connections>
+            <point key="canvasLocation" x="930" y="669.5"/>
+        </tableViewCell>
+    </objects>
+</document>
