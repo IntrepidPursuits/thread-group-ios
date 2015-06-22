@@ -294,16 +294,6 @@
     }];
 }
 
-#pragma mark - Finding Networks
-
-- (void)updateFindingNetwork {
-
-}
-
-- (void)resetFindingNetwork {
-    
-}
-
 #pragma mark - Finding Network Popup
 
 - (void)showFindingNetworkPopup {

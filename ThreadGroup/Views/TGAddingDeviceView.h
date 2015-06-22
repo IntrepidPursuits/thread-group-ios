@@ -10,4 +10,14 @@
 
 @interface TGAddingDeviceView : UIView
 
+- (void)setDeviceName:(NSString *)name withNetworkName:(NSString *)networkName;
+- (void)startAnimating;
+- (void)stopAnimating;
+
+@end
+
+@protocol TGAddingDeviceViewProtocol <NSObject>
+
+- (void)addingDeviceViewDidCancelAddingRequest:(TGAddingDeviceView *)addingDeviceView;
+
 @end
