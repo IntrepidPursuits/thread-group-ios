@@ -14,7 +14,7 @@
 static CGFloat TGSelectDeviceStepViewMinimumHeight = 64.0f;
 static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
-@interface TGSelectDeviceStepView()
+@interface TGSelectDeviceStepView() <UITextFieldDelegate>
 
 @property (strong, nonatomic) UIView *nibView;
 
@@ -55,6 +55,8 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     self.contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
     self.bottomBar.hidden = YES;
     self.topBar.hidden = NO;
+    self.confirmButton.hidden = YES;
+    self.connectCodeInputField.delegate = self;
 }
 
 #pragma mark - Public
@@ -127,7 +129,6 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 - (void)setPassphraseInputViewHidden:(BOOL)hidden {
     self.connectCodeInputField.hidden = hidden;
     self.scanCodeButton.hidden = hidden;
-    self.confirmButton.hidden = hidden;
     self.textboxLine.hidden = hidden;
 }
 
@@ -135,7 +136,8 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 - (IBAction)scanCodeButtonTapped:(id)sender {
     [self.connectCodeInputField resignFirstResponder];
-    
+    [self resetConnectCodeTextField];
+
     if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapScanCodeButton:)]) {
         [self.delegate TGSelectDeviceStepViewDidTapScanCodeButton:self];
     }
@@ -143,6 +145,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 - (IBAction)confirmButtonTapped:(id)sender {
     [self.connectCodeInputField resignFirstResponder];
+    [self resetConnectCodeTextField];
 
     //TODO: would need to perform this same process with connect code obtained from QR code
     TGDevice *device = [self createDeviceWithConnectCode:self.connectCodeInputField.text];
@@ -150,6 +153,27 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapConfirmButton:validateWithDevice:)]) {
         [self.delegate TGSelectDeviceStepViewDidTapConfirmButton:self validateWithDevice:device];
     }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *checkString = [self.connectCodeInputField.text stringByReplacingCharactersInRange:range withString:string];
+    [self validateTextField:checkString];
+    return YES;
+}
+
+- (void)validateTextField:(NSString *)checkString {
+    if ([checkString length]) {
+        self.confirmButton.hidden = NO;
+    } else {
+        self.confirmButton.hidden = YES;
+    }
+}
+
+- (void)resetConnectCodeTextField {
+    self.confirmButton.hidden = YES;
+    self.connectCodeInputField.text = @"";
 }
 
 #pragma mark - TGDevice
