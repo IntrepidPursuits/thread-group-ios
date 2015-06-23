@@ -70,8 +70,8 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     
     switch (contentMode) {
         case TGSelectDeviceStepViewContentModePassphrase: {
-            self.titleLabel.text = @"Enter Device Passphrase";
-            self.subTitleLabel.text = @"Check the device instructions for more info";
+            self.titleLabel.text = @"Enter Connect Code";
+            self.subTitleLabel.text = @"Read this off the product you're connecting";
             self.nibView.backgroundColor = [UIColor threadGroup_orange];
             self.iconImageView.image = [UIImage tg_selectPassphraseActive];
             [self setPassphraseInputViewHidden:NO];
@@ -87,14 +87,14 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             break;
         case TGSelectDeviceStepViewContentModeScanQRCode: {
             self.titleLabel.text = @"Scan Device QR Code";
-            self.subTitleLabel.text = @"You can also enter a passphrase manually";
+            self.subTitleLabel.text = @"You can also enter the Connect Code manually";
             self.nibView.backgroundColor = [UIColor threadGroup_orange];
             self.iconImageView.image = [UIImage tg_selectQRCodeActive];
         }
             break;
         case TGSelectDeviceStepViewContentModeScanQRCodeInvalid: {
-            self.titleLabel.text = @"Invalid QR Code";
-            self.subTitleLabel.text = @"Please check your device compatibility";
+            self.titleLabel.text = @"Wrong Connect QR Code";
+            self.subTitleLabel.text = @"Please check your product compatibility";
             self.nibView.backgroundColor = [UIColor threadGroup_red];
             self.iconImageView.image = [UIImage tg_selectDeviceError];
         }
@@ -108,7 +108,6 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
         }
             break;
     }
-
     [self setPassphraseInputViewHidden:(contentMode != TGSelectDeviceStepViewContentModePassphrase && contentMode != TGSelectDeviceStepViewContentModePassphraseInvalid)];
 }
 
