@@ -83,7 +83,7 @@
                                 <constraint firstAttribute="height" constant="50" id="oAt-6W-bZI"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                            <state key="normal" title="FIND WIFI NETWORK">
+                            <state key="normal" title="FIND WI-FI NETWORK">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -97,14 +97,14 @@
                                 <constraint firstAttribute="width" secondItem="999-g6-Nf9" secondAttribute="height" multiplier="1:1" id="JFl-XD-ZgZ"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="NO WIFI CONNECTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1Gk-Qm-0te">
-                            <rect key="frame" x="158" y="288" width="284" height="24"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="No Wi-Fi Connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1Gk-Qm-0te">
+                            <rect key="frame" x="173" y="288" width="254" height="24"/>
                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="24"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use Thread, you need to be connected to a wifi network." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AJu-jZ-1sk">
-                            <rect key="frame" x="158" y="320" width="284" height="29"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use Thread, you need to be connected to a Wi-FI network." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AJu-jZ-1sk">
+                            <rect key="frame" x="173" y="320" width="254" height="29"/>
                             <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
