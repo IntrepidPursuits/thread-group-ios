@@ -11,6 +11,7 @@
 typedef NS_ENUM(NSUInteger, TGSelectDeviceStepViewContentMode) {
     TGSelectDeviceStepViewContentModeScanQRCodeInvalid,
     TGSelectDeviceStepViewContentModeScanQRCode,
+    TGSelectDeviceStepViewContentModePassphraseInvalid,
     TGSelectDeviceStepViewContentModePassphrase,
     TGSelectDeviceStepViewContentModeComplete
 };

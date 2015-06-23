@@ -334,6 +334,12 @@
 }
 
 - (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView {
+    [UIView animateWithDuration:0.4 animations:^{
+        TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModePassphraseInvalid;
+        self.selectDeviceView.contentMode = contentMode;
+        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
+        [self layoutIfNeeded];
+    }];
 
 }
 
