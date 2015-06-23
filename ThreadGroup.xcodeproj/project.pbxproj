@@ -18,8 +18,6 @@
 		CD8C68201B272A290091B548 /* Gotham-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681C1B272A290091B548 /* Gotham-Medium.otf */; };
 		CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68231B2730050091B548 /* UIFont+ThreadGroup.m */; };
 		CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68261B273A8B0091B548 /* UIColor+ThreadGroup.m */; };
-		CD8C682C1B273D7F0091B548 /* TGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C682A1B273D7F0091B548 /* TGHomeViewController.m */; };
-		CD8C682D1B273D7F0091B548 /* TGHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C682B1B273D7F0091B548 /* TGHomeViewController.xib */; };
 		CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C682F1B27451A0091B548 /* TGSettingsViewController.m */; };
 		CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68301B27451A0091B548 /* TGSettingsViewController.xib */; };
 		CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68351B2870730091B548 /* TGSpinnerView.m */; };
@@ -81,9 +79,6 @@
 		CD8C68231B2730050091B548 /* UIFont+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+ThreadGroup.m"; sourceTree = "<group>"; };
 		CD8C68251B273A8B0091B548 /* UIColor+ThreadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ThreadGroup.h"; sourceTree = "<group>"; };
 		CD8C68261B273A8B0091B548 /* UIColor+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ThreadGroup.m"; sourceTree = "<group>"; };
-		CD8C68291B273D7F0091B548 /* TGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHomeViewController.h; sourceTree = "<group>"; };
-		CD8C682A1B273D7F0091B548 /* TGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHomeViewController.m; sourceTree = "<group>"; };
-		CD8C682B1B273D7F0091B548 /* TGHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeViewController.xib; sourceTree = "<group>"; };
 		CD8C682E1B27451A0091B548 /* TGSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSettingsViewController.h; sourceTree = "<group>"; };
 		CD8C682F1B27451A0091B548 /* TGSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSettingsViewController.m; sourceTree = "<group>"; };
 		CD8C68301B27451A0091B548 /* TGSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSettingsViewController.xib; sourceTree = "<group>"; };
@@ -263,9 +258,6 @@
 		CD8C68281B273D020091B548 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CD8C68291B273D7F0091B548 /* TGHomeViewController.h */,
-				CD8C682A1B273D7F0091B548 /* TGHomeViewController.m */,
-				CD8C682B1B273D7F0091B548 /* TGHomeViewController.xib */,
 				CD8C682E1B27451A0091B548 /* TGSettingsViewController.h */,
 				CD8C682F1B27451A0091B548 /* TGSettingsViewController.m */,
 				CD8C68301B27451A0091B548 /* TGSettingsViewController.xib */,
@@ -450,7 +442,6 @@
 				CD8C681E1B272A290091B548 /* Gotham-Book.otf in Resources */,
 				CD7B60521B1F5469007FF820 /* LaunchScreen.xib in Resources */,
 				D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */,
-				CD8C682D1B273D7F0091B548 /* TGHomeViewController.xib in Resources */,
 				CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,7 +507,6 @@
 				D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */,
 				D9FB30261B39950F002B6ED4 /* TGMaskedView.m in Sources */,
 				CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */,
-				CD8C682C1B273D7F0091B548 /* TGHomeViewController.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
 				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
