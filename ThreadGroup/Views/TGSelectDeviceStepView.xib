@@ -19,10 +19,10 @@
             <connections>
                 <outlet property="bottomBar" destination="dcx-kd-Ied" id="Wjl-Ll-YZQ"/>
                 <outlet property="confirmButton" destination="pOa-Qd-Nm0" id="n5M-dH-dkD"/>
+                <outlet property="connectCodeInputField" destination="Kt5-r3-GIC" id="Rwg-bL-6Cw"/>
                 <outlet property="iconImageView" destination="kph-Nx-iQc" id="hID-BA-NFv"/>
                 <outlet property="passPhraseView" destination="JA1-Xd-IQR" id="E1E-7z-gQu"/>
                 <outlet property="passPhraseViewHeightConstraint" destination="chB-kM-6aL" id="uBB-zH-mr8"/>
-                <outlet property="passphraseInputField" destination="Kt5-r3-GIC" id="oLM-Zg-0aN"/>
                 <outlet property="scanCodeButton" destination="mV5-HE-a5i" id="nhQ-a0-2aj"/>
                 <outlet property="subTitleLabel" destination="LWP-he-gYW" id="HHu-ft-e4f"/>
                 <outlet property="textboxLine" destination="05K-wq-6fE" id="HeJ-97-0TS"/>
@@ -51,8 +51,8 @@
                         <constraint firstAttribute="width" constant="1" id="aWk-hg-Wr6"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can also enter a passphrase manually" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWP-he-gYW">
-                    <rect key="frame" x="72" y="29" width="248" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can also enter the Connect Code manually" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWP-he-gYW">
+                    <rect key="frame" x="72" y="29" width="279" height="12"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                     <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>

@@ -28,7 +28,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passPhraseViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 @property (weak, nonatomic) IBOutlet UIButton *scanCodeButton;
-@property (weak, nonatomic) IBOutlet UITextField *passphraseInputField;
+@property (weak, nonatomic) IBOutlet UITextField *connectCodeInputField;
 @property (weak, nonatomic) IBOutlet UIView *textboxLine;
 @property (weak, nonatomic) IBOutlet UIView *topSeperatorBar;
 
@@ -60,7 +60,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 #pragma mark - Public
 
 - (void)setContentMode:(TGSelectDeviceStepViewContentMode)contentMode {
-    if (_contentMode == TGSelectDeviceStepViewContentModePassphrase) {
+    if (_contentMode == TGSelectDeviceStepViewContentModeConnectCode) {
         [self setPassphraseInputViewHidden:YES];
     }
 
@@ -69,7 +69,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     }
     
     switch (contentMode) {
-        case TGSelectDeviceStepViewContentModePassphrase: {
+        case TGSelectDeviceStepViewContentModeConnectCode: {
             self.titleLabel.text = @"Enter Connect Code";
             self.subTitleLabel.text = @"Read this off the product you're connecting";
             self.nibView.backgroundColor = [UIColor threadGroup_orange];
@@ -77,7 +77,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             [self setPassphraseInputViewHidden:NO];
         }
             break;
-        case TGSelectDeviceStepViewContentModePassphraseInvalid: {
+        case TGSelectDeviceStepViewContentModeConnectCodeInvalid: {
             self.titleLabel.text = @"Wrong Connect Code";
             self.subTitleLabel.text = @"Please check Connect Code and try again";
             self.nibView.backgroundColor = [UIColor threadGroup_red];
@@ -108,16 +108,16 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
         }
             break;
     }
-    [self setPassphraseInputViewHidden:(contentMode != TGSelectDeviceStepViewContentModePassphrase && contentMode != TGSelectDeviceStepViewContentModePassphraseInvalid)];
+    [self setPassphraseInputViewHidden:(contentMode != TGSelectDeviceStepViewContentModeConnectCode && contentMode != TGSelectDeviceStepViewContentModeConnectCodeInvalid)];
 }
 
 + (CGFloat)heightForContentMode:(TGSelectDeviceStepViewContentMode)contentMode {
     switch (contentMode) {
         case TGSelectDeviceStepViewContentModeComplete:             return TGSelectDeviceStepViewMinimumHeight;
-        case TGSelectDeviceStepViewContentModePassphrase:           return TGSelectDeviceStepViewMaximumHeight;
+        case TGSelectDeviceStepViewContentModeConnectCode:           return TGSelectDeviceStepViewMaximumHeight;
         case TGSelectDeviceStepViewContentModeScanQRCode:           return TGSelectDeviceStepViewMinimumHeight;
         case TGSelectDeviceStepViewContentModeScanQRCodeInvalid:    return TGSelectDeviceStepViewMinimumHeight;
-        case TGSelectDeviceStepViewContentModePassphraseInvalid:    return TGSelectDeviceStepViewMaximumHeight;
+        case TGSelectDeviceStepViewContentModeConnectCodeInvalid:    return TGSelectDeviceStepViewMaximumHeight;
         default:                                                    return TGSelectDeviceStepViewMinimumHeight;
     }
 }
@@ -125,7 +125,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 #pragma mark - Animations
 
 - (void)setPassphraseInputViewHidden:(BOOL)hidden {
-    self.passphraseInputField.hidden = hidden;
+    self.connectCodeInputField.hidden = hidden;
     self.scanCodeButton.hidden = hidden;
     self.confirmButton.hidden = hidden;
     self.textboxLine.hidden = hidden;
@@ -134,7 +134,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 #pragma mark - Button Events
 
 - (IBAction)scanCodeButtonTapped:(id)sender {
-    [self.passphraseInputField resignFirstResponder];
+    [self.connectCodeInputField resignFirstResponder];
     
     if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapScanCodeButton:)]) {
         [self.delegate TGSelectDeviceStepViewDidTapScanCodeButton:self];
@@ -142,10 +142,10 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 }
 
 - (IBAction)confirmButtonTapped:(id)sender {
-    [self.passphraseInputField resignFirstResponder];
+    [self.connectCodeInputField resignFirstResponder];
 
-    //TODO: would need to perform this same process with passphrase obtained from QR code
-    TGDevice *device = [self createDeviceWithPassphrase:self.passphraseInputField.text];
+    //TODO: would need to perform this same process with connect code obtained from QR code
+    TGDevice *device = [self createDeviceWithConnectCode:self.connectCodeInputField.text];
 
     if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapConfirmButton:validateWithDevice:)]) {
         [self.delegate TGSelectDeviceStepViewDidTapConfirmButton:self validateWithDevice:device];
@@ -154,14 +154,14 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 #pragma mark - TGDevice
 
-- (TGDevice *)createDeviceWithPassphrase:(NSString *)passphrase {
-    return [[TGDevice alloc] initWithPassphrase:passphrase];
+- (TGDevice *)createDeviceWithConnectCode:(NSString *)connectCode {
+    return [[TGDevice alloc] initWithConnectCode:connectCode];
 }
 
 #pragma mark - 
 
 - (BOOL)becomeFirstResponder {
-    return [self.passphraseInputField becomeFirstResponder];
+    return [self.connectCodeInputField becomeFirstResponder];
 }
 
 @end

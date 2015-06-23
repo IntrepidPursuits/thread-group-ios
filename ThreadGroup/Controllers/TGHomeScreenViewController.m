@@ -99,7 +99,7 @@
  *  1) No wifi connection
        Only thing to interact with there is the "Find Wifi Connection" button, which i am assuming would bring the user to the iPhone setting screen
  *  2) Connected to Wifi, looking for border routers
- *  3) Connected to Wifi, scan device or enter in passphrase
+ *  3) Connected to Wifi, scan device or enter in connect code
  *  4) Connected to Wifi, device added, have the option to add a new device into the network.
  */
 #pragma mark - Header View

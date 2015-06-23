@@ -11,22 +11,22 @@
 
 @interface TGDevice()
 
-@property (nonatomic, strong) NSString *passphrase;
+@property (nonatomic, strong) NSString *connectCode;
 
 @end
 
 @implementation TGDevice
 
-- (instancetype)initWithPassphrase:(NSString *)passphrase {
+- (instancetype)initWithConnectCode:(NSString *)connectCode {
     self = [super init];
     if (self) {
-        _passphrase = passphrase;
+        _connectCode = connectCode;
     }
     return self;
 }
 
-- (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion {
-    [[TGNetworkManager sharedManager] connectDevice:self.passphrase completion:^(NSError *__autoreleasing *error) {
+- (void)isConnectCodeValidWithCompletion:(void(^)(BOOL success))completion {
+    [[TGNetworkManager sharedManager] connectDevice:self.connectCode completion:^(NSError *__autoreleasing *error) {
         if (!error) {
             completion(YES);
         } else

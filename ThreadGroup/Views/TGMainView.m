@@ -46,7 +46,7 @@
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
 @property (weak, nonatomic) IBOutlet TGAddingDeviceView *addingDeviceView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectDeviceViewHeightLayoutConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passphraseButtonBottomLayoutConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *connectCodeButtonBottomLayoutConstraint;
 
 //Success View
 @property (weak, nonatomic) IBOutlet UIView *successView;
@@ -276,9 +276,9 @@
     [self layoutIfNeeded];
 }
 
-- (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
+- (IBAction)useConnectCodeButtonPressed:(UIButton *)sender {
     [UIView animateWithDuration:0.4f animations:^{
-        TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
+        TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModeConnectCode;
         [self.selectDeviceView setContentMode:newMode];
         self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
         [self layoutIfNeeded];
@@ -345,7 +345,7 @@
 
 - (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device{
     [self showAddingDeviceView];
-    [device isPassphraseValidWithCompletion:^(BOOL success) {
+    [device isConnectCodeValidWithCompletion:^(BOOL success) {
         if (success) {
             [self hideAddingDeviceView];
             self.viewState = TGMainViewStateAddAnotherDevice;
