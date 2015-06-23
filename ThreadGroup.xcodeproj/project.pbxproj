@@ -27,6 +27,12 @@
 		CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */; };
 		CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */; };
 		CD8C68451B28A46A0091B548 /* CABasicAnimation+TGSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68441B28A46A0091B548 /* CABasicAnimation+TGSpinner.m */; };
+		CD8FFD741B39DCEA00481DE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */; };
+		CD8FFD771B39DCF300481DE7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD751B39DCF300481DE7 /* CoreMedia.framework */; };
+		CD8FFD781B39DCF300481DE7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */; };
+		CD8FFD7A1B39DCFC00481DE7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD791B39DCFC00481DE7 /* QuartzCore.framework */; };
+		CD8FFD7C1B39DD0B00481DE7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD7B1B39DD0B00481DE7 /* libiconv.dylib */; };
+		CDC447621B39F5790037BAF5 /* TGScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC447611B39F5790037BAF5 /* TGScannerView.m */; };
 		CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */; };
 		CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */; };
 		CDDB18F01B2B27B9008A84FD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDB18EF1B2B27B9008A84FD /* SystemConfiguration.framework */; };
@@ -93,6 +99,14 @@
 		CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkSearchingPopup.xib; sourceTree = "<group>"; };
 		CD8C68431B28A46A0091B548 /* CABasicAnimation+TGSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CABasicAnimation+TGSpinner.h"; sourceTree = "<group>"; };
 		CD8C68441B28A46A0091B548 /* CABasicAnimation+TGSpinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CABasicAnimation+TGSpinner.m"; sourceTree = "<group>"; };
+		CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CD8FFD751B39DCF300481DE7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		CD8FFD791B39DCFC00481DE7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CD8FFD7B1B39DD0B00481DE7 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		CD8FFD7D1B39DD3E00481DE7 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzbar.a; path = ThreadGroup/ZBarSDK/libzbar.a; sourceTree = "<group>"; };
+		CDC447601B39F5790037BAF5 /* TGScannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGScannerView.h; sourceTree = "<group>"; };
+		CDC447611B39F5790037BAF5 /* TGScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGScannerView.m; sourceTree = "<group>"; };
 		CDDB18E81B29ED9F008A84FD /* TGSelectDeviceStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSelectDeviceStepView.h; sourceTree = "<group>"; };
 		CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSelectDeviceStepView.m; sourceTree = "<group>"; };
 		CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSelectDeviceStepView.xib; sourceTree = "<group>"; };
@@ -131,6 +145,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8FFD741B39DCEA00481DE7 /* AVFoundation.framework in Frameworks */,
+				CD8FFD771B39DCF300481DE7 /* CoreMedia.framework in Frameworks */,
+				CD8FFD781B39DCF300481DE7 /* CoreVideo.framework in Frameworks */,
+				CD8FFD7A1B39DCFC00481DE7 /* QuartzCore.framework in Frameworks */,
+				CD8FFD7C1B39DD0B00481DE7 /* libiconv.dylib in Frameworks */,
 				CDDB18F01B2B27B9008A84FD /* SystemConfiguration.framework in Frameworks */,
 				E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */,
 			);
@@ -149,6 +168,12 @@
 		2104FEA234D389D850092AA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD8FFD7D1B39DD3E00481DE7 /* libzbar.a */,
+				CD8FFD7B1B39DD0B00481DE7 /* libiconv.dylib */,
+				CD8FFD791B39DCFC00481DE7 /* QuartzCore.framework */,
+				CD8FFD751B39DCF300481DE7 /* CoreMedia.framework */,
+				CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */,
+				CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */,
 				CDDB18EF1B2B27B9008A84FD /* SystemConfiguration.framework */,
 				FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */,
 			);
@@ -293,6 +318,8 @@
 				D9FB301F1B385FD2002B6ED4 /* TGAddingDeviceView.xib */,
 				D9FB30241B39950F002B6ED4 /* TGMaskedView.h */,
 				D9FB30251B39950F002B6ED4 /* TGMaskedView.m */,
+				CDC447601B39F5790037BAF5 /* TGScannerView.h */,
+				CDC447611B39F5790037BAF5 /* TGScannerView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -493,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDC447621B39F5790037BAF5 /* TGScannerView.m in Sources */,
 				CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */,
 				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
@@ -638,6 +666,9 @@
 					"$(inherited)",
 					/Users/Patrick/Developer/iotivity/out/ios/i386/release,
 					/Users/Patrick/Developer/iotivity/out/ios/armv7/release,
+					"$(PROJECT_DIR)/ThreadGroup/ZBarSDK",
+					"$(PROJECT_DIR)/ThreadGroup/Contrib/ZBarSDK",
+					"$(PROJECT_DIR)/ThreadGroup/Contrib/LibzBar",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -654,6 +685,9 @@
 					"$(inherited)",
 					/Users/Patrick/Developer/iotivity/out/ios/i386/release,
 					/Users/Patrick/Developer/iotivity/out/ios/armv7/release,
+					"$(PROJECT_DIR)/ThreadGroup/ZBarSDK",
+					"$(PROJECT_DIR)/ThreadGroup/Contrib/ZBarSDK",
+					"$(PROJECT_DIR)/ThreadGroup/Contrib/LibzBar",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
