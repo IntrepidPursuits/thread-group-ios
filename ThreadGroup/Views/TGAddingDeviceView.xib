@@ -32,12 +32,6 @@
                         <constraint firstAttribute="width" secondItem="m2f-Jd-ftz" secondAttribute="height" multiplier="1:1" id="IdZ-5R-4L3"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLB-eL-5aT">
-                    <rect key="frame" x="278" y="352" width="44" height="16"/>
-                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="16"/>
-                    <color key="textColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5s-SK-MQT">
                     <rect key="frame" x="509" y="553" width="61" height="27"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
@@ -49,6 +43,12 @@
                         <action selector="cancelButtonPressed:" destination="-1" eventType="touchUpInside" id="xFV-6L-sfA"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sLB-eL-5aT">
+                    <rect key="frame" x="278" y="352" width="44" height="16"/>
+                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="16"/>
+                    <color key="textColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -56,6 +56,7 @@
                 <constraint firstItem="m2f-Jd-ftz" firstAttribute="centerX" secondItem="sLB-eL-5aT" secondAttribute="centerX" id="FV5-hG-HT0"/>
                 <constraint firstAttribute="centerY" secondItem="m2f-Jd-ftz" secondAttribute="centerY" constant="60" id="GY5-Gs-YiM"/>
                 <constraint firstAttribute="trailing" secondItem="B5s-SK-MQT" secondAttribute="trailing" constant="30" id="JTN-bp-Hn4"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sLB-eL-5aT" secondAttribute="trailing" constant="35" id="Lpc-TF-5YL"/>
                 <constraint firstAttribute="bottom" secondItem="B5s-SK-MQT" secondAttribute="bottom" constant="20" id="XXe-qL-lNy"/>
                 <constraint firstItem="sLB-eL-5aT" firstAttribute="top" secondItem="m2f-Jd-ftz" secondAttribute="bottom" constant="40" id="jjk-fq-6zX"/>
             </constraints>

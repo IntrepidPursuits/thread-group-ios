@@ -8,16 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class TGAddingDeviceView;
+
+@protocol TGAddingDeviceViewProtocol <NSObject>
+- (void)addingDeviceViewDidCancelAddingRequest:(TGAddingDeviceView *)addingDeviceView;
+@end
+
 @interface TGAddingDeviceView : UIView
 
+@property (nonatomic, weak) id<TGAddingDeviceViewProtocol> delegate;
 - (void)setDeviceName:(NSString *)name withNetworkName:(NSString *)networkName;
 - (void)startAnimating;
 - (void)stopAnimating;
 
 @end
 
-@protocol TGAddingDeviceViewProtocol <NSObject>
-
-- (void)addingDeviceViewDidCancelAddingRequest:(TGAddingDeviceView *)addingDeviceView;
-
-@end
