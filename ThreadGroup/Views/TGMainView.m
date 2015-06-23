@@ -106,30 +106,21 @@
 - (void)configureMainViewForViewState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
-            //Wifi search view
             [self resetWifiSearchView];
+            [self resetRouterSearchView];
             [self.findingNetworksSpinnerView startAnimating];
             self.wifiSearchView.topSeperatorView.hidden = YES;
 
-            //Router search view
-            [self resetRouterSearchView];
-
-            //Finding networks popup
             [self hideFindingNetworkPopup];
-            //Views to hide
             [self hideAndShowViewsForState:viewState];
-
-            //Things to animate
             [self animateViewsForState:viewState];
             break;
         case TGMainViewStateScanDevice:
-            //Select device view
             [self resetSelectDeviceView];
             [self hideAndShowViewsForState:viewState];
             [self animateViewsForState:viewState];
             break;
         case TGMainViewStateAddAnotherDevice: {
-            //set the content mode of SelectDeviceView to complete
             TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
             self.selectDeviceView.contentMode = completedMode;
             self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:completedMode];
@@ -196,10 +187,6 @@
                 self.selectDeviceView.alpha = 1;
                 self.cameraView.alpha = 1;
                 [self bringSubviewToFront:self.cameraView];
-            } completion:^(BOOL finished) {
-                if (finished) {
-                    NSLog(@"Done");
-                }
             }];
         }
             break;
@@ -217,10 +204,6 @@
 
 #pragma mark - Wifi
 
-- (void)updateWifiSearchView {
-
-}
-
 - (void)resetWifiSearchView {
     self.wifiSearchView.delegate = self;
     [self.wifiSearchView setTopBarHidden:YES];
@@ -231,13 +214,6 @@
 }
 
 #pragma mark - Border Router
-
-- (void)updateRouterSearchView {
-    //update the background color here.
-    //update the state of the spinner here.
-    //update the bottom bar
-    //update the bottom seperator bar/top seperator bar
-}
 
 - (void)resetRouterSearchView {
     self.routerSearchView.delegate = self;
@@ -287,10 +263,6 @@
 }
 
 #pragma mark - Select/Add Devices
-
-- (void)updateSelectDeviceView {
-
-}
 
 - (void)resetSelectDeviceView {
     self.selectDeviceView.delegate = self;
