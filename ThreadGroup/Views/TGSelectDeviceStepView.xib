@@ -81,12 +81,15 @@
                                 <constraint firstAttribute="height" constant="1" id="vP4-Hi-Ihu"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mV5-HE-a5i">
-                            <rect key="frame" x="0.0" y="50" width="100" height="24"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="mV5-HE-a5i">
+                            <rect key="frame" x="0.0" y="50" width="130" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="130" id="CTw-VQ-1Ic"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                            <state key="normal" title="Scan Code" image="action_scan_code">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="1" maxY="0.0"/>
+                            <state key="normal" title="Scan Code" image="action_scan_code"/>
                             <connections>
                                 <action selector="scanCodeButtonTapped:" destination="-1" eventType="touchUpInside" id="btP-gu-4QD"/>
                             </connections>
