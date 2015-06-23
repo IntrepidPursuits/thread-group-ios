@@ -9,6 +9,7 @@
 #import "TGSelectDeviceStepView.h"
 #import "UIColor+ThreadGroup.h"
 #import "UIImage+ThreadGroup.h"
+#import "TGDevice.h"
 
 static CGFloat TGSelectDeviceStepViewMinimumHeight = 64.0f;
 static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
@@ -29,6 +30,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 @property (weak, nonatomic) IBOutlet UIButton *scanCodeButton;
 @property (weak, nonatomic) IBOutlet UITextField *passphraseInputField;
 @property (weak, nonatomic) IBOutlet UIView *textboxLine;
+@property (weak, nonatomic) IBOutlet UIView *topSeperatorBar;
 
 @end
 
@@ -60,6 +62,10 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 - (void)setContentMode:(TGSelectDeviceStepViewContentMode)contentMode {
     if (_contentMode == TGSelectDeviceStepViewContentModePassphrase) {
         [self setPassphraseInputViewHidden:YES];
+    }
+
+    if (_contentMode != TGSelectDeviceStepViewContentModeComplete) {
+        self.topSeperatorBar.hidden = YES;
     }
     
     switch (contentMode) {
@@ -97,7 +103,8 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             self.titleLabel.text = @"Smart Thermostat";
             self.subTitleLabel.text = @"Intrepid's Thread Network";
             self.nibView.backgroundColor = [UIColor threadGroup_grey];
-            self.iconImageView.image = [UIImage tg_selectDeviceCompleted ];
+            self.iconImageView.image = [UIImage tg_selectDeviceCompleted];
+            self.topSeperatorBar.hidden = NO;
         }
             break;
     }
@@ -137,10 +144,19 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 - (IBAction)confirmButtonTapped:(id)sender {
     [self.passphraseInputField resignFirstResponder];
-    
-    if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapConfirmButton:)]) {
-        [self.delegate TGSelectDeviceStepViewDidTapConfirmButton:self];
+
+    //TODO: would need to perform this same process with passphrase obtained from QR code
+    TGDevice *device = [self createDeviceWithPassphrase:self.passphraseInputField.text];
+
+    if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapConfirmButton:validateWithDevice:)]) {
+        [self.delegate TGSelectDeviceStepViewDidTapConfirmButton:self validateWithDevice:device];
     }
+}
+
+#pragma mark - TGDevice
+
+- (TGDevice *)createDeviceWithPassphrase:(NSString *)passphrase {
+    return [[TGDevice alloc] initWithPassphrase:passphrase];
 }
 
 #pragma mark - 
