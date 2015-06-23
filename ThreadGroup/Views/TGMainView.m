@@ -210,7 +210,7 @@
     [self.wifiSearchView setBottomBarHidden:NO];
     [self.wifiSearchView setIcon:[UIImage tg_wifiCompleted]];
     [self.wifiSearchView setSpinnerActive:NO];
-    [self.wifiSearchView setTitle:@"Connected to Wifi" subTitle:[self currentWifiSSID]];
+    [self.wifiSearchView setTitle:@"Connected to Wi-Fi" subTitle:[self currentWifiSSID]];
 }
 
 #pragma mark - Border Router
@@ -222,7 +222,7 @@
     [self.routerSearchView setBottomBarHidden:YES];
     [self.routerSearchView setIcon:[UIImage tg_routerActive]];
     [self.routerSearchView setSpinnerActive:NO];
-    [self.routerSearchView setTitle:@"Select a Border Router" subTitle:@"Thread Networks on your connection"];
+    [self.routerSearchView setTitle:@"Select a Border Router" subTitle:@"Thread networks in your home"];
     self.routerSearchView.topSeperatorView.hidden = YES;
 }
 

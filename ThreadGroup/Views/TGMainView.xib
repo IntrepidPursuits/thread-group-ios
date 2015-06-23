@@ -76,16 +76,19 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KzV-Dx-YPV" userLabel="CameraView">
                     <rect key="frame" x="0.0" y="192" width="600" height="360"/>
                     <subviews>
-                        <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWS-5U-5Ep">
+                        <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="oWS-5U-5Ep">
                             <rect key="frame" x="0.0" y="304" width="600" height="56"/>
                             <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="56" id="zK2-BQ-lB0"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                            <state key="normal" title="USE PASSPHRASE INSTEAD" image="action_type_code">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                            <inset key="titleEdgeInsets" minX="19" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                            <state key="normal" title="ENTER CONNECT CODE MANUALLY" image="action_type_code">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="usePassphraseButtonPressed:" destination="-1" eventType="touchUpInside" id="3Wg-US-uNC"/>
@@ -141,7 +144,8 @@
                                 <constraint firstAttribute="height" constant="56" id="b93-qL-KFe"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                            <state key="normal" title="ADD ANOTHER DEVICE" image="action_add_device">
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                            <state key="normal" title="ADD ANOTHER PRODUCT" image="action_add_device">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
