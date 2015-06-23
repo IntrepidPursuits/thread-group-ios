@@ -38,4 +38,20 @@
     return [UIImage imageNamed:@"steps_cancel_button"];
 }
 
++ (UIImage *)tg_selectDeviceCompleted {
+    return [UIImage imageNamed:@"steps_device_completed"];
+}
+
++ (UIImage *)tg_selectDeviceError {
+    return [UIImage imageNamed:@"steps_error"];
+}
+
++ (UIImage *)tg_selectPassphraseActive {
+    return [UIImage imageNamed:@"steps_code_active"];
+}
+
++ (UIImage *)tg_selectQRCodeActive {
+    return [UIImage imageNamed:@"steps_device_active"];
+}
+
 @end

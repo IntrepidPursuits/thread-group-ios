@@ -44,10 +44,6 @@
     [self resetMainView];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 #pragma mark - Reachability
 
 - (void)configureReachability {

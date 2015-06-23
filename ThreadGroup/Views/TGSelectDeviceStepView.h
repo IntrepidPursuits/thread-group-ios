@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class TGDevice;
+
 typedef NS_ENUM(NSUInteger, TGSelectDeviceStepViewContentMode) {
     TGSelectDeviceStepViewContentModeScanQRCodeInvalid,
     TGSelectDeviceStepViewContentModeScanQRCode,
+    TGSelectDeviceStepViewContentModePassphraseInvalid,
     TGSelectDeviceStepViewContentModePassphrase,
     TGSelectDeviceStepViewContentModeComplete
 };
@@ -28,7 +31,7 @@ typedef NS_ENUM(NSUInteger, TGSelectDeviceStepViewContentMode) {
 
 @protocol TGSelectDeviceStepViewDelegate <NSObject>
 
-- (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView;
+- (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device;
 - (void)TGSelectDeviceStepViewDidTapScanCodeButton:(TGSelectDeviceStepView *)stepView;
 
 @end
