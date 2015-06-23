@@ -13,7 +13,7 @@
  */
 @interface TGDevice : NSObject
 
-- (instancetype)initWithPassphrase:(NSString *)passphrase;
-- (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion;
+- (instancetype)initWithConnectCode:(NSString *)connectCode;
+- (void)isConnectCodeValidWithCompletion:(void(^)(BOOL success))completion;
 
 @end
