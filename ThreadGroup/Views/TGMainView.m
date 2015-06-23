@@ -17,8 +17,11 @@
 #import "TGTableView.h"
 #import "TGRouterItem.h"
 #import "TGNetworkManager.h"
+#import "TGDevice.h"
+#import "TGAddingDeviceView.h"
+#import "TGMaskedView.h"
 
-@interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol>
+@interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGAddingDeviceViewProtocol>
 
 @property (nonatomic, strong) UIView *nibView;
 
@@ -41,6 +44,7 @@
 //Select/Add Devices
 @property (weak, nonatomic) IBOutlet TGSelectDeviceStepView *selectDeviceView;
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
+@property (weak, nonatomic) IBOutlet TGAddingDeviceView *addingDeviceView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectDeviceViewHeightLayoutConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passphraseButtonBottomLayoutConstraint;
 
@@ -49,6 +53,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *successDeviceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *successNetworkLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addDeviceButtonBottomLayoutConstraint;
+
+//Mask View
+@property (strong, nonatomic) TGMaskedView *maskedView;
 
 @end
 
@@ -66,6 +73,7 @@
         self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     [self setupTableViewSource];
+    self.addingDeviceView.delegate = self;
 }
 
 #pragma mark - Test
@@ -120,8 +128,15 @@
             [self hideAndShowViewsForState:viewState];
             [self animateViewsForState:viewState];
             break;
-        case TGMainViewStateAddAnotherDevice:
-            //do something
+        case TGMainViewStateAddAnotherDevice: {
+            //set the content mode of SelectDeviceView to complete
+            TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
+            self.selectDeviceView.contentMode = completedMode;
+            self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:completedMode];
+
+            [self hideAndShowViewsForState:viewState];
+            [self animateViewsForState:viewState];
+        }
             break;
         default:
             NSAssert(YES, @"viewState should not be undefined");
@@ -139,6 +154,7 @@
             self.selectDeviceView.hidden = YES;
             self.successView.hidden = YES;
             self.cameraView.hidden = YES;
+            self.addingDeviceView.hidden = YES;
             break;
         case TGMainViewStateScanDevice:
             self.selectDeviceView.hidden = NO;
@@ -148,9 +164,11 @@
             self.findingNetworksPopupView.hidden = YES;
             self.findingNetworksView.hidden = YES;
             self.successView.hidden = YES;
+            self.addingDeviceView.hidden = YES;
             break;
         case TGMainViewStateAddAnotherDevice:
-            //do something
+            self.successView.hidden = NO;
+            self.cameraView.hidden = YES;
             break;
         default:
             NSAssert(YES, @"viewState should not be undefined");
@@ -185,8 +203,11 @@
             }];
         }
             break;
-        case TGMainViewStateAddAnotherDevice:
-            //do something
+        case TGMainViewStateAddAnotherDevice: {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.successView.alpha = 1;
+            }];
+        }
             break;
         default:
             NSAssert(YES, @"viewState should not be undefined");
@@ -309,6 +330,23 @@
 #pragma mark - Success View
 
 - (IBAction)addAnotherDeviceButtonPressed:(UIButton *)sender {
+    self.viewState = TGMainViewStateScanDevice;
+}
+
+#pragma mark - TGAddingDeviceView
+
+- (void)showAddingDeviceView {
+    self.maskedView.maskFrame = CGRectMake(CGRectGetMinX(self.addingDeviceView.frame), CGRectGetMinY(self.addingDeviceView.frame) + 70, CGRectGetWidth(self.addingDeviceView.frame), CGRectGetHeight(self.addingDeviceView.frame));
+    [self addSubview:self.maskedView];
+    [self.addingDeviceView startAnimating];
+    [self.addingDeviceView setDeviceName:@"Name" withNetworkName:@"Network name"];
+    self.addingDeviceView.hidden = NO;
+}
+
+- (void)hideAddingDeviceView {
+    [self.maskedView removeFromSuperview];
+    self.addingDeviceView.hidden = YES;
+    [self.addingDeviceView stopAnimating];
 }
 
 #pragma mark - TGDeviceStepViewDelegate
@@ -333,14 +371,23 @@
     }];
 }
 
-- (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView {
-    [UIView animateWithDuration:0.4 animations:^{
-        TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModePassphraseInvalid;
-        self.selectDeviceView.contentMode = contentMode;
-        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
-        [self layoutIfNeeded];
+- (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device{
+    [self showAddingDeviceView];
+    [device isPassphraseValidWithCompletion:^(BOOL success) {
+        if (success) {
+            [self hideAddingDeviceView];
+            self.viewState = TGMainViewStateAddAnotherDevice;
+        } else {
+            NSLog(@"Adding device failed!");
+            [self hideAddingDeviceView];
+        }
     }];
+}
 
+#pragma mark - TGAddingDeviceViewProtocol
+
+- (void)addingDeviceViewDidCancelAddingRequest:(TGAddingDeviceView *)addingDeviceView {
+    [self hideAddingDeviceView];
 }
 
 #pragma mark - TGTableViewProtocol
@@ -363,6 +410,15 @@
         }
     }
     return ssid;
+}
+
+#pragma mark - Lazy
+
+- (TGMaskedView *)maskedView {
+    if (!_maskedView) {
+        _maskedView = [[TGMaskedView alloc] initWithFrame:CGRectMake(0, -70, 1000, 1000)];
+    }
+    return _maskedView;
 }
 
 @end
