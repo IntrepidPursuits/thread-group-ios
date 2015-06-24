@@ -48,6 +48,7 @@
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
 @property (weak, nonatomic) IBOutlet TGAddingDeviceView *addingDeviceView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectDeviceViewHeightLayoutConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *connectCodeButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *connectCodeButtonBottomLayoutConstraint;
 
 //Success View
@@ -75,8 +76,17 @@
         self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     [self setupTableViewSource];
+    [self setupDelegates];
+    [self configureButton];
+}
+
+- (void)setupDelegates {
     self.addingDeviceView.delegate = self;
     self.routerAuthenticationView.delegate = self;
+}
+
+- (void)configureButton {
+    self.connectCodeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 #pragma mark - Test
@@ -254,9 +264,10 @@
 #pragma mark - TGRouterAuthenticationView
 
 - (void)showRouterAuthenticationViewForItem:(TGRouterItem *)item {
+    self.routerAuthenticationView.item = item;
+    [self layoutIfNeeded];
     self.maskedView.maskFrame = CGRectMake(CGRectGetMinX(self.routerAuthenticationView.frame), CGRectGetMinY(self.routerAuthenticationView.frame) + 70, CGRectGetWidth(self.routerAuthenticationView.frame), CGRectGetHeight(self.routerAuthenticationView.frame));
     [self addSubview:self.maskedView];
-    self.routerAuthenticationView.item = item;
     self.routerAuthenticationView.hidden = NO;
     self.maskedView.alpha = 0;
     self.routerAuthenticationView.alpha = 0;
@@ -332,10 +343,11 @@
 #pragma mark - TGAddingDeviceView
 
 - (void)showAddingDeviceView {
+    [self.addingDeviceView setDeviceName:@"Name" withNetworkName:@"Network name"];
+    [self layoutIfNeeded];
     self.maskedView.maskFrame = CGRectMake(CGRectGetMinX(self.addingDeviceView.frame), CGRectGetMinY(self.addingDeviceView.frame) + 70, CGRectGetWidth(self.addingDeviceView.frame), CGRectGetHeight(self.addingDeviceView.frame));
     [self addSubview:self.maskedView];
     [self.addingDeviceView startAnimating];
-    [self.addingDeviceView setDeviceName:@"Name" withNetworkName:@"Network name"];
     self.addingDeviceView.hidden = NO;
 }
 
