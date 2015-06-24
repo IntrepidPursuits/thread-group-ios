@@ -30,6 +30,7 @@
                 <outlet property="findingNetworksPopupView" destination="pNG-UM-3Rz" id="xZ5-Kx-io1"/>
                 <outlet property="findingNetworksSpinnerView" destination="l3u-Xg-fdW" id="Qsz-82-LQG"/>
                 <outlet property="findingNetworksView" destination="Tlm-wX-PEf" id="6Ba-88-SEG"/>
+                <outlet property="routerAuthenticationView" destination="biO-kh-pJS" id="5m9-Mt-zv6"/>
                 <outlet property="routerSearchView" destination="5lN-Qt-CPc" id="43n-4n-OX4"/>
                 <outlet property="selectDeviceView" destination="tg2-Pu-Pyq" id="fwz-78-QBG"/>
                 <outlet property="selectDeviceViewHeightLayoutConstraint" destination="QBT-uX-fns" id="xcI-oi-oRA"/>
@@ -238,6 +239,13 @@
                         <constraint firstAttribute="width" secondItem="Tyo-GY-htB" secondAttribute="height" multiplier="1:1.1" id="iYW-r5-cZv"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biO-kh-pJS" userLabel="Router Authentication View" customClass="TGRouterAuthenticationView">
+                    <rect key="frame" x="50" y="25" width="500" height="550"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="biO-kh-pJS" secondAttribute="height" multiplier="1:1.1" id="ieg-78-t1o"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -260,9 +268,11 @@
                 <constraint firstItem="5bh-tR-LN6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Tlh-rL-bfK"/>
                 <constraint firstAttribute="bottom" secondItem="pNG-UM-3Rz" secondAttribute="bottom" id="UWk-wZ-bEr"/>
                 <constraint firstItem="5lN-Qt-CPc" firstAttribute="top" secondItem="5bh-tR-LN6" secondAttribute="bottom" id="UmD-i7-kZ3"/>
+                <constraint firstAttribute="centerY" secondItem="biO-kh-pJS" secondAttribute="centerY" id="ZZq-HA-Wyf"/>
                 <constraint firstAttribute="trailing" secondItem="5bh-tR-LN6" secondAttribute="trailing" id="chO-rc-mqm"/>
                 <constraint firstItem="zqJ-mI-Yuc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eS8-oB-XhV"/>
                 <constraint firstItem="5lN-Qt-CPc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="f4j-ce-MzI"/>
+                <constraint firstItem="biO-kh-pJS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="frS-tk-HIb"/>
                 <constraint firstAttribute="trailing" secondItem="pNG-UM-3Rz" secondAttribute="trailing" id="gwd-tA-JRF"/>
                 <constraint firstItem="Tlm-wX-PEf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hH3-q5-yDg"/>
                 <constraint firstItem="KzV-Dx-YPV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="neF-ub-TVY"/>
@@ -270,6 +280,7 @@
                 <constraint firstItem="Tlm-wX-PEf" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="q32-wq-32w"/>
                 <constraint firstAttribute="bottom" secondItem="Tlm-wX-PEf" secondAttribute="bottom" id="qGD-w9-NGv"/>
                 <constraint firstItem="zqJ-mI-Yuc" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="qSK-EA-HF0"/>
+                <constraint firstAttribute="centerX" secondItem="biO-kh-pJS" secondAttribute="centerX" id="uAe-rv-6xY"/>
                 <constraint firstAttribute="trailing" secondItem="Tlm-wX-PEf" secondAttribute="trailing" id="ugC-Lm-kok"/>
                 <constraint firstAttribute="trailing" secondItem="KzV-Dx-YPV" secondAttribute="trailing" id="uqd-CU-t70"/>
                 <constraint firstAttribute="trailing" secondItem="zqJ-mI-Yuc" secondAttribute="trailing" id="yTI-ye-Dj6"/>

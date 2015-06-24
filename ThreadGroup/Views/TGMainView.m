@@ -20,8 +20,9 @@
 #import "TGDevice.h"
 #import "TGAddingDeviceView.h"
 #import "TGMaskedView.h"
+#import "TGRouterAuthenticationView.h"
 
-@interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGAddingDeviceViewProtocol>
+@interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGAddingDeviceViewProtocol, TGRouterAuthenticationViewProtocol>
 
 @property (nonatomic, strong) UIView *nibView;
 
@@ -34,6 +35,7 @@
 //Available Routers View
 @property (weak, nonatomic) IBOutlet UIView *availableRoutersView;
 @property (weak, nonatomic) IBOutlet TGTableView *tableView;
+@property (weak, nonatomic) IBOutlet TGRouterAuthenticationView *routerAuthenticationView;
 
 //Finding Networks
 @property (weak, nonatomic) IBOutlet UIView *findingNetworksView;
@@ -74,6 +76,7 @@
     }
     [self setupTableViewSource];
     self.addingDeviceView.delegate = self;
+    self.routerAuthenticationView.delegate = self;
 }
 
 #pragma mark - Test
@@ -224,12 +227,13 @@
     [self.routerSearchView setSpinnerActive:NO];
     [self.routerSearchView setTitle:@"Select a Border Router" subTitle:@"Thread networks in your home"];
     self.routerSearchView.topSeperatorView.hidden = YES;
+    [self hideRouterAuthenticationView];
 }
 
 - (void)connectRouterForItem:(TGRouterItem *)item {
     //TODO: Will have to actually connect a real router
     [self animateConnectingToRouterWithItem:item];
-    [self connectToRouterWithItem:item];
+    [self showRouterAuthenticationViewForItem:item];
 }
 
 - (void)animateConnectingToRouterWithItem:(TGRouterItem *)item {
@@ -247,19 +251,39 @@
     self.routerSearchView.topSeperatorView.hidden = NO;
 }
 
-- (void)connectToRouterWithItem:(TGRouterItem *)item {
-    [[TGNetworkManager sharedManager] connectToNetwork:item
-                                            completion:^(NSError *__autoreleasing *error) {
-                                                if (!error) {
-                                                    [UIView animateWithDuration:0.4 animations:^{
-                                                        [self animateConnectedToRouterWithItem:item];
-                                                        [self hideFindingNetworkPopup];
-                                                        self.viewState = TGMainViewStateScanDevice;
-                                                    }];
-                                                } else {
-                                                    NSLog(@"Error connecting to network!");
-                                                }
-                                            }];
+#pragma mark - TGRouterAuthenticationView
+
+- (void)showRouterAuthenticationViewForItem:(TGRouterItem *)item {
+    self.maskedView.maskFrame = CGRectMake(CGRectGetMinX(self.routerAuthenticationView.frame), CGRectGetMinY(self.routerAuthenticationView.frame) + 70, CGRectGetWidth(self.routerAuthenticationView.frame), CGRectGetHeight(self.routerAuthenticationView.frame));
+    [self addSubview:self.maskedView];
+    self.routerAuthenticationView.item = item;
+    self.routerAuthenticationView.hidden = NO;
+    self.maskedView.alpha = 0;
+    self.routerAuthenticationView.alpha = 0;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.routerAuthenticationView.alpha = 1;
+        self.maskedView.alpha = 1;
+    }];
+}
+
+- (void)hideRouterAuthenticationView {
+    [self.maskedView removeFromSuperview];
+    self.routerAuthenticationView.hidden = YES;
+}
+
+#pragma mark - TGRouterAuthenticationViewProtocol
+
+- (void)routerAuthenticationSuccessful:(TGRouterAuthenticationView *)routerAuthenticationView {
+    [self hideRouterAuthenticationView];
+    [UIView animateWithDuration:0.4 animations:^{
+        [self animateConnectedToRouterWithItem:routerAuthenticationView.item];
+        [self hideFindingNetworkPopup];
+        self.viewState = TGMainViewStateScanDevice;
+    }];
+}
+
+- (void)routerAuthenticationCanceled:(TGRouterAuthenticationView *)routerAuthenticationView {
+    [self resetRouterSearchView];
 }
 
 #pragma mark - Select/Add Devices
