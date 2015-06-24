@@ -9,6 +9,7 @@
 #import "TGSelectDeviceStepView.h"
 #import "UIColor+ThreadGroup.h"
 #import "UIImage+ThreadGroup.h"
+#import "UIImageView+Animations.h"
 #import "TGDevice.h"
 
 static CGFloat TGSelectDeviceStepViewMinimumHeight = 64.0f;
@@ -108,6 +109,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
         }
             break;
     }
+    [self.iconImageView threadGroup_animatePopup];
     [self setPassphraseInputViewHidden:(contentMode != TGSelectDeviceStepViewContentModePassphrase && contentMode != TGSelectDeviceStepViewContentModePassphraseInvalid)];
 }
 

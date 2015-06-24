@@ -9,6 +9,7 @@
 #import "TGDeviceStepView.h"
 #import "CABasicAnimation+TGSpinner.h"
 #import "UIColor+ThreadGroup.h"
+#import "UIImageView+Animations.h"
 
 @interface TGDeviceStepView()
 
@@ -61,6 +62,7 @@
 
 - (void)setIcon:(UIImage *)icon {
     self.iconImageView.image = icon;
+    [self.iconImageView threadGroup_animatePopup];
 }
 
 - (void)setSpinnerActive:(BOOL)spinnerActive {
