@@ -23,6 +23,6 @@
 @protocol TGScannerViewDelegate <NSObject>
 
 - (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device;
-- (void)TGScannerViewDidCancelScanning:(UIView *)scannerView;
+- (void)TGScannerViewDidFailParsingDevice:(UIView *)scannerView;
 
 @end
