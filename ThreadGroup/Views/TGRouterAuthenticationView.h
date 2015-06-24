@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TGRouterAuthenticationView : UIView
+@class TGRouterAuthenticationView;
+@class TGRouterItem;
 
+@protocol TGRouterAuthenticationViewProtocol <NSObject>
+- (void)routerAuthenticationSuccessful:(TGRouterAuthenticationView *)routerAuthenticationView;
+- (void)routerAuthenticationCanceled:(TGRouterAuthenticationView *)routerAuthenticationView;
+@end
+
+@interface TGRouterAuthenticationView : UIView
+@property (nonatomic, weak) id<TGRouterAuthenticationViewProtocol> delegate;
+@property (nonatomic, strong) TGRouterItem *item;
+- (void)resetView;
 @end
