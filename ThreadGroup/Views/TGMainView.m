@@ -20,8 +20,9 @@
 #import "TGDevice.h"
 #import "TGAddingDeviceView.h"
 #import "TGMaskedView.h"
+#import "TGScannerView.h"
 
-@interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGAddingDeviceViewProtocol>
+@interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGAddingDeviceViewProtocol, TGScannerViewDelegate>
 
 @property (nonatomic, strong) UIView *nibView;
 
@@ -43,7 +44,6 @@
 
 //Select/Add Devices
 @property (weak, nonatomic) IBOutlet TGSelectDeviceStepView *selectDeviceView;
-@property (weak, nonatomic) IBOutlet UIView *cameraView;
 @property (weak, nonatomic) IBOutlet TGAddingDeviceView *addingDeviceView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectDeviceViewHeightLayoutConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passphraseButtonBottomLayoutConstraint;
@@ -56,6 +56,7 @@
 
 //Mask View
 @property (strong, nonatomic) TGMaskedView *maskedView;
+@property (strong, nonatomic) IBOutlet TGScannerView *scannerView;
 
 @end
 
@@ -72,8 +73,13 @@
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
         self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
     }
+    [self configure];
+}
+
+- (void)configure {
     [self setupTableViewSource];
     self.addingDeviceView.delegate = self;
+    self.scannerView.delegate = self;
 }
 
 #pragma mark - Test
@@ -119,6 +125,7 @@
             [self resetSelectDeviceView];
             [self hideAndShowViewsForState:viewState];
             [self animateViewsForState:viewState];
+            [self.scannerView startScanning];
             break;
         case TGMainViewStateAddAnotherDevice: {
             TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
@@ -144,12 +151,12 @@
 
             self.selectDeviceView.hidden = YES;
             self.successView.hidden = YES;
-            self.cameraView.hidden = YES;
+            self.scannerView.hidden = YES;
             self.addingDeviceView.hidden = YES;
             break;
         case TGMainViewStateScanDevice:
             self.selectDeviceView.hidden = NO;
-            self.cameraView.hidden = NO;
+            self.scannerView.hidden = NO;
 
             self.availableRoutersView.hidden = YES;
             self.findingNetworksPopupView.hidden = YES;
@@ -159,7 +166,7 @@
             break;
         case TGMainViewStateAddAnotherDevice:
             self.successView.hidden = NO;
-            self.cameraView.hidden = YES;
+            self.scannerView.hidden = YES;
             break;
         default:
             NSAssert(YES, @"viewState should not be undefined");
@@ -187,6 +194,8 @@
                 self.selectDeviceView.alpha = 1;
                 self.cameraView.alpha = 1;
                 [self bringSubviewToFront:self.cameraView];
+                self.scannerView.alpha = 1;
+                [self bringSubviewToFront:self.scannerView];
             }];
         }
             break;
@@ -267,7 +276,7 @@
 - (void)resetSelectDeviceView {
     self.selectDeviceView.delegate = self;
     self.selectDeviceView.alpha = 0;
-    self.cameraView.alpha = 0;
+    self.scannerView.alpha = 0;
     self.successView.alpha = 0;
 
     TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
@@ -277,6 +286,8 @@
 }
 
 - (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
+    [self.scannerView stopScanning];
+    
     [UIView animateWithDuration:0.4f animations:^{
         TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
         [self.selectDeviceView setContentMode:newMode];
@@ -366,6 +377,27 @@
 
 - (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouterItem *)item {
     [self connectRouterForItem:item];
+}
+
+#pragma mark - TGScannerView Delegate
+
+- (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device {
+    [self.scannerView stopScanning];
+    [self showAddingDeviceView];
+    [device isPassphraseValidWithCompletion:^(BOOL success) {
+        if (success) {
+            [self hideAddingDeviceView];
+            self.viewState = TGMainViewStateAddAnotherDevice;
+        } else {
+            NSLog(@"Adding device failed!");
+            [self hideAddingDeviceView];
+        }
+    }];
+    
+}
+
+- (void)TGScannerViewDidCancelScanning:(UIView *)scannerView {
+    NSLog(@"Cancelled");
 }
 
 #pragma mark - Helper Methods

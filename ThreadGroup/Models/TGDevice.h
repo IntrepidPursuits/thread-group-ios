@@ -13,6 +13,8 @@
  */
 @interface TGDevice : NSObject
 
+@property (nonatomic, strong) NSString *name;
+
 - (instancetype)initWithPassphrase:(NSString *)passphrase;
 - (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion;
 
