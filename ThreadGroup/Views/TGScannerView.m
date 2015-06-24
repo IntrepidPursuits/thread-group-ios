@@ -10,10 +10,16 @@
 #import "TGDevice.h"
 #import <AVFoundation/AVFoundation.h>
 
+static CGFloat const TGScannerViewOverlaySize = 199.0f;
+static CGFloat const TGScannerYOffset = 32.0f;
+
 @interface TGScannerView() <AVCaptureMetadataOutputObjectsDelegate>
 
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
+
+@property (nonatomic, strong) UIImageView *cameraOverlay;
+@property (nonatomic, strong) UIView *maskView;
 
 @end
 
@@ -25,8 +31,11 @@
 #if !TARGET_IPHONE_SIMULATOR
     [self configureScanner];
 #else
-    self.backgroundColor = [UIColor yellowColor];
+    self.backgroundColor = [UIColor whiteColor];
 #endif
+    
+    [self configureOverlay];
+    [self configureMask];
 }
 
 - (void)configureScanner {
@@ -54,14 +63,45 @@
     [self.layer addSublayer:self.videoPreviewLayer];
 }
 
+- (void)configureOverlay {
+    self.cameraOverlay = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_overlay"]];
+    [self addSubview:self.cameraOverlay];
+    [self.cameraOverlay setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-topOffset-[overlayView(overlaySize)]" options:0 metrics:@{@"topOffset" : @(TGScannerYOffset), @"overlaySize" : @(TGScannerViewOverlaySize)} views:@{@"overlayView" : self.cameraOverlay}]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
+    [self.cameraOverlay addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.cameraOverlay attribute:NSLayoutAttributeWidth multiplier:1.0 constant:TGScannerViewOverlaySize]];
+    [self.cameraOverlay addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.cameraOverlay attribute:NSLayoutAttributeHeight multiplier:1.0 constant:TGScannerViewOverlaySize]];
+
+}
+
+- (void)configureMask {
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    self.maskView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    [self addSubview:self.maskView];
+    [self.maskView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[maskView]-0-|" options:0 metrics:nil views:@{@"maskView" : self.maskView}]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[maskView]-0-|" options:0 metrics:nil views:@{@"maskView" : self.maskView}]];
+}
+
 #pragma mark - Public
 
 - (void)startScanning {
     [self.captureSession startRunning];
+    [self setCameraEnabled:YES];
 }
 
 - (void)stopScanning {
     [self.captureSession stopRunning];
+    [self setCameraEnabled:NO];
+}
+
+- (void)setCameraEnabled:(BOOL)enabled {
+    CGFloat maskAlpha = (enabled) ? 0 : 1.0f;
+    [UIView animateWithDuration:0.5f animations:^{
+        self.maskView.alpha = maskAlpha;
+    } completion:^(BOOL finished) {
+        NSLog(@"Finished %@ Camera", (enabled) ? @"Enabling" : @"Disabling");
+    }];
 }
 
 #pragma mark - AVCaptureDelegate
@@ -74,8 +114,15 @@
             device.name = [metadataObj stringValue];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                if ([self.delegate respondsToSelector:@selector(TGScannerView:didParseDeviceFromCode:)]) {
-                    [self.delegate TGScannerView:self didParseDeviceFromCode:device];
+                BOOL debugSuccess = (arc4random() % 2);
+                if (debugSuccess) {
+                    if ([self.delegate respondsToSelector:@selector(TGScannerView:didParseDeviceFromCode:)]) {
+                        [self.delegate TGScannerView:self didParseDeviceFromCode:device];
+                    }
+                } else {
+                    if ([self.delegate respondsToSelector:@selector(TGScannerViewDidFailParsingDevice:)]) {
+                        [self.delegate TGScannerViewDidFailParsingDevice:self];
+                    }
                 }
             });
         }

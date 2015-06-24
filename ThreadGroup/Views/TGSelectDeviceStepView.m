@@ -112,11 +112,6 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             self.topSeperatorBar.hidden = NO;
         }
             break;
-        case TGSelectDeviceStepViewContentModeProcessing: {
-            self.titleLabel.text = @"Processing";
-            self.subTitleLabel.text = @"";
-            self.iconImageView.image = [UIImage tg_spinner];
-        }
     }
     [self.iconImageView threadGroup_animatePopup];
     [self setPassphraseInputViewHidden:(contentMode != TGSelectDeviceStepViewContentModePassphrase && contentMode != TGSelectDeviceStepViewContentModePassphraseInvalid)];

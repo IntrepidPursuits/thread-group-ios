@@ -18,7 +18,8 @@
 
 typedef NS_ENUM(NSInteger, TGMainViewState) {
     TGMainViewStateLookingForRouters,
-    TGMainViewStateScanDevice,
+    TGMainViewStateConnectDeviceScanning,
+    TGMainViewStateConnectDevicePassphrase,
     TGMainViewStateAddAnotherDevice
 };
 

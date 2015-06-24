@@ -134,7 +134,11 @@
             [self resetSelectDeviceView];
             [self hideAndShowViewsForState:viewState];
             [self animateViewsForState:viewState];
-            [self.scannerView startScanning];
+            if (viewState == TGMainViewStateConnectDevicePassphrase) {
+                [self.scannerView stopScanning];
+            } else {
+                [self.scannerView startScanning];
+            }
             break;
         case TGMainViewStateAddAnotherDevice: {
             TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
@@ -318,7 +322,6 @@
 }
 
 - (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
-    [self.scannerView stopScanning];
     self.viewState = TGMainViewStateConnectDevicePassphrase;
     
     [UIView animateWithDuration:0.4f animations:^{
@@ -367,6 +370,7 @@
 #pragma mark - TGSelectDeviceStepViewDelegate
 
 - (void)TGSelectDeviceStepViewDidTapScanCodeButton:(TGSelectDeviceStepView *)stepView {
+    [self setViewState:TGMainViewStateConnectDeviceScanning];
     [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:YES];
     
     [UIView animateWithDuration:0.4 animations:^{
@@ -385,6 +389,8 @@
             self.viewState = TGMainViewStateAddAnotherDevice;
         } else {
             NSLog(@"Adding device failed!");
+            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModePassphraseInvalid];
+            [self.selectDeviceView becomeFirstResponder];
             [self hideAddingDeviceView];
         }
     }];
@@ -412,7 +418,10 @@
             [self hideAddingDeviceView];
             self.viewState = TGMainViewStateAddAnotherDevice;
         } else {
+            // TODO: Show passphrase
             NSLog(@"Adding device failed!");
+            self.viewState = TGMainViewStateConnectDeviceScanning;
+            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
             [self hideAddingDeviceView];
         }
     }];
