@@ -38,7 +38,6 @@
                 <outlet property="scannerView" destination="KzV-Dx-YPV" id="i3X-eX-hQq"/>
                 <outlet property="selectDeviceView" destination="tg2-Pu-Pyq" id="fwz-78-QBG"/>
                 <outlet property="selectDeviceViewHeightLayoutConstraint" destination="QBT-uX-fns" id="xcI-oi-oRA"/>
-                <outlet property="successCheckmarkView" destination="vHa-Gz-yKc" id="sot-qt-D3c"/>
                 <outlet property="successDeviceLabel" destination="2PO-Je-wva" id="UcJ-dD-k4e"/>
                 <outlet property="successNetworkLabel" destination="TVh-1g-ar0" id="ynC-bn-Nex"/>
                 <outlet property="successView" destination="Kmq-1i-QMp" id="EJZ-1E-Dej"/>
@@ -79,14 +78,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmq-1i-QMp" userLabel="SuccessView">
                     <rect key="frame" x="0.0" y="192" width="600" height="352"/>
                     <subviews>
-                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHa-Gz-yKc" customClass="TGCheckmarkView">
-                            <rect key="frame" x="252" y="42" width="96" height="96"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="96" id="IvE-of-kfa"/>
-                                <constraint firstAttribute="width" constant="96" id="p1Q-i6-wGP"/>
-                            </constraints>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M5G-Hg-VUy" userLabel="Top Seperator">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
                             <color key="backgroundColor" red="0.53333333329999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -123,13 +114,10 @@
                     <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="kQf-4e-14C" firstAttribute="centerX" secondItem="2PO-Je-wva" secondAttribute="centerX" id="6C5-mb-Jm0"/>
-                        <constraint firstItem="vHa-Gz-yKc" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="top" constant="42" id="Aec-QQ-dhM"/>
                         <constraint firstItem="TVh-1g-ar0" firstAttribute="top" secondItem="2PO-Je-wva" secondAttribute="bottom" constant="4" id="Big-D0-oh6"/>
                         <constraint firstAttribute="trailing" secondItem="M5G-Hg-VUy" secondAttribute="trailing" id="DNu-8a-voe"/>
                         <constraint firstItem="2PO-Je-wva" firstAttribute="top" secondItem="kQf-4e-14C" secondAttribute="bottom" constant="24" id="Mja-cq-uhi"/>
-                        <constraint firstItem="vHa-Gz-yKc" firstAttribute="centerX" secondItem="2PO-Je-wva" secondAttribute="centerX" id="Nt2-yF-PYn"/>
                         <constraint firstItem="M5G-Hg-VUy" firstAttribute="leading" secondItem="Kmq-1i-QMp" secondAttribute="leading" id="QqB-qE-qgc"/>
-                        <constraint firstAttribute="centerX" secondItem="vHa-Gz-yKc" secondAttribute="centerX" id="ZV0-gq-TMu"/>
                         <constraint firstItem="M5G-Hg-VUy" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="top" id="dEF-V6-6t3"/>
                         <constraint firstItem="TVh-1g-ar0" firstAttribute="centerX" secondItem="2PO-Je-wva" secondAttribute="centerX" id="jqO-vP-SVg"/>
                         <constraint firstItem="kQf-4e-14C" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="top" constant="42" id="qJX-o0-9Aj"/>

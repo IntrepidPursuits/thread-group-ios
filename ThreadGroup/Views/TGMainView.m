@@ -118,7 +118,6 @@
 
 - (void)configureMainViewForViewState:(TGMainViewState)viewState {
     [self setPopupNotificationForState:viewState animated:YES];
-    [self.successCheckmarkView setChecked:(viewState == TGMainViewStateAddAnotherDevice)];
     
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
