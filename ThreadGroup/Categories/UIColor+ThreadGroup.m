@@ -22,4 +22,8 @@
     return [UIColor colorWithRed:(211.0f / 255.0f) green:(47.0f / 255.0f) blue:(47.0f / 255.0f) alpha:1.0f];
 }
 
++ (UIColor *)threadGroup_darkGrey {
+    return [[UIColor blackColor] colorWithAlphaComponent:0.26f];
+}
+
 @end
