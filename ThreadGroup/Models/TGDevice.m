@@ -26,12 +26,11 @@
 }
 
 - (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion {
-    [[TGNetworkManager sharedManager] connectDevice:self.passphrase completion:^(NSError *__autoreleasing *error) {
-        if (!error) {
-            completion(YES);
-        } else
-            completion(NO);
-    }];
+    [[TGNetworkManager sharedManager] connectDevice:self.passphrase
+                                         completion:^(NSError *__autoreleasing *error) {
+                                             BOOL successful = (BOOL)(arc4random() % 2);
+                                             completion(successful);
+                                         }];
 }
 
 @end
