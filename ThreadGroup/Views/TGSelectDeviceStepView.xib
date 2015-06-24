@@ -51,7 +51,7 @@
                         <constraint firstAttribute="width" constant="1" id="aWk-hg-Wr6"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can also enter the Connect Code manually" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWP-he-gYW">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can also enter the Connect Code manually" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LWP-he-gYW">
                     <rect key="frame" x="72" y="29" width="279" height="12"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                     <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
@@ -116,7 +116,7 @@
                             </constraints>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -154,6 +154,7 @@
                 <constraint firstAttribute="bottom" secondItem="dcx-kd-Ied" secondAttribute="bottom" id="SW3-7X-8NB"/>
                 <constraint firstAttribute="trailing" secondItem="JA1-Xd-IQR" secondAttribute="trailing" id="VH1-QN-6cG"/>
                 <constraint firstItem="vnB-ks-Mhm" firstAttribute="leading" secondItem="JA1-Xd-IQR" secondAttribute="leading" id="YOz-m2-wyT"/>
+                <constraint firstAttribute="trailing" secondItem="LWP-he-gYW" secondAttribute="trailing" constant="9" id="alw-a8-lbP"/>
                 <constraint firstAttribute="bottom" secondItem="JA1-Xd-IQR" secondAttribute="bottom" id="bMX-sz-whA"/>
                 <constraint firstItem="JA1-Xd-IQR" firstAttribute="top" secondItem="LWP-he-gYW" secondAttribute="bottom" constant="16" id="bOW-0j-0EZ"/>
                 <constraint firstItem="dcx-kd-Ied" firstAttribute="top" secondItem="kph-Nx-iQc" secondAttribute="bottom" id="cmY-FQ-cgP"/>

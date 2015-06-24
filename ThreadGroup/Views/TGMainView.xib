@@ -25,6 +25,7 @@
                 <outlet property="addingDeviceView" destination="Tyo-GY-htB" id="W15-ST-NVA"/>
                 <outlet property="availableRoutersView" destination="zqJ-mI-Yuc" id="Pop-Fb-cjB"/>
                 <outlet property="cameraView" destination="KzV-Dx-YPV" id="I42-6J-5hP"/>
+                <outlet property="connectCodeButton" destination="oWS-5U-5Ep" id="8Dq-nN-w6K"/>
                 <outlet property="connectCodeButtonBottomLayoutConstraint" destination="dcP-wh-1dz" id="3R6-VW-Y0h"/>
                 <outlet property="findingNetworksPopupBottomLayoutConstraint" destination="UWk-wZ-bEr" id="Ndj-fO-rcu"/>
                 <outlet property="findingNetworksPopupView" destination="pNG-UM-3Rz" id="xZ5-Kx-io1"/>

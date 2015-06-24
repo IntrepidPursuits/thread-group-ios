@@ -48,6 +48,7 @@
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
 @property (weak, nonatomic) IBOutlet TGAddingDeviceView *addingDeviceView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectDeviceViewHeightLayoutConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *connectCodeButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *connectCodeButtonBottomLayoutConstraint;
 
 //Success View
@@ -75,8 +76,17 @@
         self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     [self setupTableViewSource];
+    [self setupDelegates];
+    [self configureButton];
+}
+
+- (void)setupDelegates {
     self.addingDeviceView.delegate = self;
     self.routerAuthenticationView.delegate = self;
+}
+
+- (void)configureButton {
+    self.connectCodeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 #pragma mark - Test
