@@ -234,10 +234,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tyo-GY-htB" customClass="TGAddingDeviceView">
-                    <rect key="frame" x="50" y="25" width="500" height="550"/>
+                    <rect key="frame" x="40" y="150" width="520" height="300"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="Tyo-GY-htB" secondAttribute="height" multiplier="1:1.1" id="iYW-r5-cZv"/>
+                        <constraint firstAttribute="height" constant="300" placeholder="YES" id="VpV-aX-gxF"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biO-kh-pJS" userLabel="Router Authentication View" customClass="TGRouterAuthenticationView">
@@ -254,21 +254,22 @@
                 <constraint firstAttribute="trailing" secondItem="tg2-Pu-Pyq" secondAttribute="trailing" id="2rB-2p-lp9"/>
                 <constraint firstItem="pNG-UM-3Rz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3CL-LD-W0O"/>
                 <constraint firstItem="KzV-Dx-YPV" firstAttribute="top" secondItem="tg2-Pu-Pyq" secondAttribute="bottom" id="3Gx-zS-ZJy"/>
+                <constraint firstAttribute="trailing" secondItem="Tyo-GY-htB" secondAttribute="trailing" constant="40" id="5sF-AE-RIR"/>
                 <constraint firstItem="tg2-Pu-Pyq" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="6ik-TJ-hvW"/>
                 <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="zWQ-k9-goJ" secondAttribute="bottom" id="A0c-rS-hKb"/>
                 <constraint firstAttribute="trailing" secondItem="Kmq-1i-QMp" secondAttribute="trailing" id="DDD-Pc-5Ux"/>
                 <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="zqJ-mI-Yuc" secondAttribute="bottom" id="K5d-rv-BGL"/>
                 <constraint firstItem="Kmq-1i-QMp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KLT-aH-hxF"/>
-                <constraint firstItem="Tyo-GY-htB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="L3L-Sx-ij8"/>
+                <constraint firstItem="Tyo-GY-htB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="L3L-Sx-ij8"/>
                 <constraint firstAttribute="trailing" secondItem="5lN-Qt-CPc" secondAttribute="trailing" id="Ovi-zQ-GAf"/>
                 <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="bottom" id="OyE-yt-GCa"/>
                 <constraint firstAttribute="centerX" secondItem="Tyo-GY-htB" secondAttribute="centerX" id="PSU-Pf-zn1"/>
                 <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="KzV-Dx-YPV" secondAttribute="bottom" id="PSl-CZ-aHx"/>
-                <constraint firstAttribute="centerY" secondItem="Tyo-GY-htB" secondAttribute="centerY" id="RyO-Sy-vZG"/>
                 <constraint firstItem="5bh-tR-LN6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Sx0-xs-dY6"/>
                 <constraint firstItem="5bh-tR-LN6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Tlh-rL-bfK"/>
                 <constraint firstAttribute="bottom" secondItem="pNG-UM-3Rz" secondAttribute="bottom" id="UWk-wZ-bEr"/>
                 <constraint firstItem="5lN-Qt-CPc" firstAttribute="top" secondItem="5bh-tR-LN6" secondAttribute="bottom" id="UmD-i7-kZ3"/>
+                <constraint firstAttribute="centerY" secondItem="Tyo-GY-htB" secondAttribute="centerY" id="YIG-au-Fqb"/>
                 <constraint firstAttribute="centerY" secondItem="biO-kh-pJS" secondAttribute="centerY" id="ZZq-HA-Wyf"/>
                 <constraint firstAttribute="trailing" secondItem="5bh-tR-LN6" secondAttribute="trailing" id="chO-rc-mqm"/>
                 <constraint firstItem="zqJ-mI-Yuc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eS8-oB-XhV"/>

@@ -342,10 +342,11 @@
 #pragma mark - TGAddingDeviceView
 
 - (void)showAddingDeviceView {
+    [self.addingDeviceView setDeviceName:@"Name" withNetworkName:@"Network name"];
+    [self layoutIfNeeded];
     self.maskedView.maskFrame = CGRectMake(CGRectGetMinX(self.addingDeviceView.frame), CGRectGetMinY(self.addingDeviceView.frame) + 70, CGRectGetWidth(self.addingDeviceView.frame), CGRectGetHeight(self.addingDeviceView.frame));
     [self addSubview:self.maskedView];
     [self.addingDeviceView startAnimating];
-    [self.addingDeviceView setDeviceName:@"Name" withNetworkName:@"Network name"];
     self.addingDeviceView.hidden = NO;
 }
 
