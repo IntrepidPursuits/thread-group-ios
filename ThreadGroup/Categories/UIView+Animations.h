@@ -1,5 +1,5 @@
 //
-//  UIImageView+Animations.h
+//  UIView+Animations.h
 //  ThreadGroup
 //
 //  Created by Patrick Butkiewicz on 6/23/15.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImageView (Animations)
+@interface UIView (Animations)
 
 - (void)threadGroup_animatePopup;
+- (void)threadGroup_animateClockwise;
+- (void)threadGroup_animateCounterClockwise;
 
 @end

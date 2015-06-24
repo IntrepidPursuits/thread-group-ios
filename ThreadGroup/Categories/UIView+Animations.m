@@ -1,14 +1,17 @@
 //
-//  UIImageView+Animations.m
+//  UIView+Animations.m
 //  ThreadGroup
 //
 //  Created by Patrick Butkiewicz on 6/23/15.
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "UIImageView+Animations.h"
+#import "UIView+Animations.h"
 
-@implementation UIImageView (Animations)
+static CGFloat TGAnimationSpinDuration = 2.0f;
+static CGFloat TGAnimationSpinSpeed = 1.0f;
+
+@implementation UIView (Animations)
 
 - (void)threadGroup_animatePopup {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation
@@ -40,6 +43,28 @@
     animation.duration = .5;
     
     [self.layer addAnimation:animation forKey:@"popup"];
+}
+
+- (void)threadGroup_animateClockwise {
+    CABasicAnimation *animation;
+    animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    animation.fromValue = @(0);
+    animation.duration = TGAnimationSpinDuration;
+    animation.repeatCount = MAXFLOAT;
+    animation.speed = TGAnimationSpinSpeed;
+    animation.toValue = @((2 * M_PI));
+    [self.layer addAnimation:animation forKey:@"spin"];
+}
+
+- (void)threadGroup_animateCounterClockwise {
+    CABasicAnimation *animation;
+    animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    animation.duration = TGAnimationSpinDuration;
+    animation.fromValue = @(0);
+    animation.repeatCount = MAXFLOAT;
+    animation.speed = TGAnimationSpinSpeed;
+    animation.toValue = @(-(2 * M_PI));
+    [self.layer addAnimation:animation forKey:@"spin"];
 }
 
 @end

@@ -54,4 +54,8 @@
     return [UIImage imageNamed:@"steps_device_active"];
 }
 
++ (UIImage *)tg_spinner {
+    return [UIImage imageNamed:@"steps_cancel_spinner"];
+}
+
 @end

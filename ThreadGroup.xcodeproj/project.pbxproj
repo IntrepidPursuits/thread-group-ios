@@ -26,14 +26,13 @@
 		CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */; };
 		CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */; };
 		CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */; };
-		CD8C68451B28A46A0091B548 /* CABasicAnimation+TGSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68441B28A46A0091B548 /* CABasicAnimation+TGSpinner.m */; };
 		CD8FFD741B39DCEA00481DE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */; };
 		CD8FFD771B39DCF300481DE7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD751B39DCF300481DE7 /* CoreMedia.framework */; };
 		CD8FFD781B39DCF300481DE7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */; };
 		CD8FFD7A1B39DCFC00481DE7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD791B39DCFC00481DE7 /* QuartzCore.framework */; };
 		CD8FFD7C1B39DD0B00481DE7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD7B1B39DD0B00481DE7 /* libiconv.dylib */; };
 		CDC447621B39F5790037BAF5 /* TGScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC447611B39F5790037BAF5 /* TGScannerView.m */; };
-		CDC447651B3A4C240037BAF5 /* UIImageView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC447641B3A4C240037BAF5 /* UIImageView+Animations.m */; };
+		CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC447671B3A53290037BAF5 /* UIView+Animations.m */; };
 		CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */; };
 		CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */; };
 		CDDB18F01B2B27B9008A84FD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDB18EF1B2B27B9008A84FD /* SystemConfiguration.framework */; };
@@ -98,8 +97,6 @@
 		CD8C683E1B289EDC0091B548 /* TGNetworkSearchingPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkSearchingPopup.h; sourceTree = "<group>"; };
 		CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkSearchingPopup.m; sourceTree = "<group>"; };
 		CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkSearchingPopup.xib; sourceTree = "<group>"; };
-		CD8C68431B28A46A0091B548 /* CABasicAnimation+TGSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CABasicAnimation+TGSpinner.h"; sourceTree = "<group>"; };
-		CD8C68441B28A46A0091B548 /* CABasicAnimation+TGSpinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CABasicAnimation+TGSpinner.m"; sourceTree = "<group>"; };
 		CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		CD8FFD751B39DCF300481DE7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -108,8 +105,8 @@
 		CD8FFD7D1B39DD3E00481DE7 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzbar.a; path = ThreadGroup/ZBarSDK/libzbar.a; sourceTree = "<group>"; };
 		CDC447601B39F5790037BAF5 /* TGScannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGScannerView.h; sourceTree = "<group>"; };
 		CDC447611B39F5790037BAF5 /* TGScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGScannerView.m; sourceTree = "<group>"; };
-		CDC447631B3A4C240037BAF5 /* UIImageView+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Animations.h"; sourceTree = "<group>"; };
-		CDC447641B3A4C240037BAF5 /* UIImageView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Animations.m"; sourceTree = "<group>"; };
+		CDC447661B3A53290037BAF5 /* UIView+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Animations.h"; sourceTree = "<group>"; };
+		CDC447671B3A53290037BAF5 /* UIView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animations.m"; sourceTree = "<group>"; };
 		CDDB18E81B29ED9F008A84FD /* TGSelectDeviceStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSelectDeviceStepView.h; sourceTree = "<group>"; };
 		CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSelectDeviceStepView.m; sourceTree = "<group>"; };
 		CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSelectDeviceStepView.xib; sourceTree = "<group>"; };
@@ -275,12 +272,10 @@
 				CD8C68231B2730050091B548 /* UIFont+ThreadGroup.m */,
 				CD8C68251B273A8B0091B548 /* UIColor+ThreadGroup.h */,
 				CD8C68261B273A8B0091B548 /* UIColor+ThreadGroup.m */,
-				CD8C68431B28A46A0091B548 /* CABasicAnimation+TGSpinner.h */,
-				CD8C68441B28A46A0091B548 /* CABasicAnimation+TGSpinner.m */,
 				D9E65C011B31AED800A184AB /* UIImage+ThreadGroup.h */,
 				D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */,
-				CDC447631B3A4C240037BAF5 /* UIImageView+Animations.h */,
-				CDC447641B3A4C240037BAF5 /* UIImageView+Animations.m */,
+				CDC447661B3A53290037BAF5 /* UIView+Animations.h */,
+				CDC447671B3A53290037BAF5 /* UIView+Animations.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -533,11 +528,10 @@
 				D9FB301E1B385FB8002B6ED4 /* TGAddingDeviceView.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,
-				CD8C68451B28A46A0091B548 /* CABasicAnimation+TGSpinner.m in Sources */,
 				CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */,
 				CD7B60441B1F5469007FF820 /* main.m in Sources */,
 				CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */,
-				CDC447651B3A4C240037BAF5 /* UIImageView+Animations.m in Sources */,
+				CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */,
 				D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */,
 				D9FB30261B39950F002B6ED4 /* TGMaskedView.m in Sources */,
 				CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */,

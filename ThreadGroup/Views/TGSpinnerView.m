@@ -7,7 +7,7 @@
 //
 
 #import "TGSpinnerView.h"
-#import "CABasicAnimation+TGSpinner.h"
+#import "UIView+Animations.h"
 
 @interface TGSpinnerView()
 
@@ -34,8 +34,8 @@
 #pragma mark - Public
 
 - (void)startAnimating {
-    [self.spinnerLargeCounterClockwiseImageView.layer addAnimation:[CABasicAnimation counterClockwiseRotationAnimation] forKey:@"spin"];
-    [self.spinnerLargeClockwiseImageView.layer addAnimation:[CABasicAnimation clockwiseRotationAnimation] forKey:@"spin"];
+    [self.spinnerLargeClockwiseImageView threadGroup_animateClockwise];
+    [self.spinnerLargeCounterClockwiseImageView threadGroup_animateCounterClockwise];
 }
 
 - (void)stopAnimating {
