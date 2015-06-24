@@ -264,9 +264,10 @@
 #pragma mark - TGRouterAuthenticationView
 
 - (void)showRouterAuthenticationViewForItem:(TGRouterItem *)item {
+    self.routerAuthenticationView.item = item;
+    [self layoutIfNeeded];
     self.maskedView.maskFrame = CGRectMake(CGRectGetMinX(self.routerAuthenticationView.frame), CGRectGetMinY(self.routerAuthenticationView.frame) + 70, CGRectGetWidth(self.routerAuthenticationView.frame), CGRectGetHeight(self.routerAuthenticationView.frame));
     [self addSubview:self.maskedView];
-    self.routerAuthenticationView.item = item;
     self.routerAuthenticationView.hidden = NO;
     self.maskedView.alpha = 0;
     self.routerAuthenticationView.alpha = 0;

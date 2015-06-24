@@ -241,10 +241,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biO-kh-pJS" userLabel="Router Authentication View" customClass="TGRouterAuthenticationView">
-                    <rect key="frame" x="50" y="25" width="500" height="550"/>
+                    <rect key="frame" x="40" y="150" width="520" height="300"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="biO-kh-pJS" secondAttribute="height" multiplier="1:1.1" id="ieg-78-t1o"/>
+                        <constraint firstAttribute="height" constant="300" placeholder="YES" id="kv1-5v-j9A"/>
                     </constraints>
                 </view>
             </subviews>
@@ -271,10 +271,11 @@
                 <constraint firstItem="5lN-Qt-CPc" firstAttribute="top" secondItem="5bh-tR-LN6" secondAttribute="bottom" id="UmD-i7-kZ3"/>
                 <constraint firstAttribute="centerY" secondItem="Tyo-GY-htB" secondAttribute="centerY" id="YIG-au-Fqb"/>
                 <constraint firstAttribute="centerY" secondItem="biO-kh-pJS" secondAttribute="centerY" id="ZZq-HA-Wyf"/>
+                <constraint firstAttribute="trailing" secondItem="biO-kh-pJS" secondAttribute="trailing" constant="40" id="cgd-ns-NkY"/>
                 <constraint firstAttribute="trailing" secondItem="5bh-tR-LN6" secondAttribute="trailing" id="chO-rc-mqm"/>
                 <constraint firstItem="zqJ-mI-Yuc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eS8-oB-XhV"/>
                 <constraint firstItem="5lN-Qt-CPc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="f4j-ce-MzI"/>
-                <constraint firstItem="biO-kh-pJS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="frS-tk-HIb"/>
+                <constraint firstItem="biO-kh-pJS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="frS-tk-HIb"/>
                 <constraint firstAttribute="trailing" secondItem="pNG-UM-3Rz" secondAttribute="trailing" id="gwd-tA-JRF"/>
                 <constraint firstItem="Tlm-wX-PEf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hH3-q5-yDg"/>
                 <constraint firstItem="KzV-Dx-YPV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="neF-ub-TVY"/>
