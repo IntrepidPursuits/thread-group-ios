@@ -7,7 +7,7 @@
 //
 
 #import "TGNetworkSearchingPopup.h"
-#import "CABasicAnimation+TGSpinner.h"
+#import "UIView+Animations.h"
 
 @interface TGNetworkSearchingPopup()
 
@@ -33,8 +33,9 @@
 }
 
 - (void)startAnimating {
-    [self.clockwiseSpinnerImageView.layer addAnimation:[CABasicAnimation clockwiseRotationAnimation] forKey:@"spin"];
-    [self.counterClockwiseSpinnerImageView.layer addAnimation:[CABasicAnimation counterClockwiseRotationAnimation] forKey:@"spin"];
+    
+    [self.clockwiseSpinnerImageView threadGroup_animateClockwise];
+    [self.counterClockwiseSpinnerImageView threadGroup_animateCounterClockwise];
 }
 
 - (void)stopAnimating {

@@ -7,8 +7,8 @@
 //
 
 #import "TGDeviceStepView.h"
-#import "CABasicAnimation+TGSpinner.h"
 #import "UIColor+ThreadGroup.h"
+#import "UIView+Animations.h"
 
 @interface TGDeviceStepView()
 
@@ -61,23 +61,15 @@
 
 - (void)setIcon:(UIImage *)icon {
     self.iconImageView.image = icon;
+    [self.iconImageView threadGroup_animatePopup];
 }
 
 - (void)setSpinnerActive:(BOOL)spinnerActive {
-
-    if (spinnerActive == _spinnerActive) {
+    if (_spinnerActive == spinnerActive) {
         return;
-    } else {
-        _spinnerActive = spinnerActive;
     }
-    
-    if (spinnerActive) {
-        [self setSpinnerHidden:NO animated:YES];
-        [self.spinnerImageView.layer addAnimation:[CABasicAnimation clockwiseRotationAnimation] forKey:@"spin"];
-    } else {
-        [self.spinnerImageView.layer removeAllAnimations];
-        [self setSpinnerHidden:YES animated:YES];
-    }
+    _spinnerActive = spinnerActive;
+    [self setSpinnerHidden:!spinnerActive animated:YES];
 }
 
 - (void)setTitle:(NSString *)title subTitle:(NSString *)subTitle {
@@ -92,9 +84,15 @@
 #pragma mark - Animations
 
 - (void)setSpinnerHidden:(BOOL)hidden animated:(BOOL)animated{
-    [UIView animateWithDuration:(animated) ? 0.3 : 0
+    [UIView animateWithDuration:(animated) ? 0.3f : 0
                      animations:^{
                          self.spinnerImageView.alpha = (hidden) ? 0 : 1.0f;
+                         if (hidden) {
+                             [self.spinnerImageView.layer removeAllAnimations];
+                         } else {
+                             [self.spinnerImageView threadGroup_animateClockwise];
+                         }
+                         [self layoutIfNeeded];
                      }];
 }
 

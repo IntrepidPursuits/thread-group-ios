@@ -9,6 +9,7 @@
 #import "TGSelectDeviceStepView.h"
 #import "UIColor+ThreadGroup.h"
 #import "UIImage+ThreadGroup.h"
+#import "UIView+Animations.h"
 #import "TGDevice.h"
 
 static CGFloat TGSelectDeviceStepViewMinimumHeight = 64.0f;
@@ -74,6 +75,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             self.subTitleLabel.text = @"Read this off the product you're connecting";
             self.nibView.backgroundColor = [UIColor threadGroup_orange];
             self.iconImageView.image = [UIImage tg_selectPassphraseActive];
+            self.topSeperatorBar.hidden = YES;
             [self setPassphraseInputViewHidden:NO];
         }
             break;
@@ -83,6 +85,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             self.nibView.backgroundColor = [UIColor threadGroup_red];
             self.iconImageView.image = [UIImage tg_selectDeviceError];
             [self setPassphraseInputViewHidden:NO];
+            self.topSeperatorBar.hidden = YES;
         }
             break;
         case TGSelectDeviceStepViewContentModeScanQRCode: {
@@ -90,6 +93,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             self.subTitleLabel.text = @"You can also enter the Connect Code manually";
             self.nibView.backgroundColor = [UIColor threadGroup_orange];
             self.iconImageView.image = [UIImage tg_selectQRCodeActive];
+            self.topSeperatorBar.hidden = YES;
         }
             break;
         case TGSelectDeviceStepViewContentModeScanQRCodeInvalid: {
@@ -97,6 +101,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             self.subTitleLabel.text = @"Please check your product compatibility";
             self.nibView.backgroundColor = [UIColor threadGroup_red];
             self.iconImageView.image = [UIImage tg_selectDeviceError];
+            self.topSeperatorBar.hidden = YES;
         }
             break;
         case TGSelectDeviceStepViewContentModeComplete: {
@@ -108,6 +113,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
         }
             break;
     }
+    [self.iconImageView threadGroup_animatePopup];
     [self setPassphraseInputViewHidden:(contentMode != TGSelectDeviceStepViewContentModePassphrase && contentMode != TGSelectDeviceStepViewContentModePassphraseInvalid)];
 }
 

@@ -24,4 +24,6 @@
 + (UIImage *)tg_selectQRCodeActive;
 + (UIImage *)tg_selectPassphraseActive;
 
++ (UIImage *)tg_spinner;
+
 @end
