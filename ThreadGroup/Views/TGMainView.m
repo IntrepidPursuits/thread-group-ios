@@ -19,7 +19,6 @@
 #import "TGNetworkManager.h"
 #import "TGDevice.h"
 #import "TGAddingDeviceView.h"
-#import "TGMaskedView.h"
 #import "TGScannerView.h"
 
 @interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGAddingDeviceViewProtocol, TGScannerViewDelegate>
@@ -52,7 +51,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *successNetworkLabel;
 
 //Mask View
-@property (strong, nonatomic) TGMaskedView *maskedView;
 @property (strong, nonatomic) IBOutlet TGScannerView *scannerView;
 
 //Popup Notification
@@ -342,15 +340,12 @@
 #pragma mark - TGAddingDeviceView
 
 - (void)showAddingDeviceView {
-    self.maskedView.maskFrame = CGRectMake(CGRectGetMinX(self.addingDeviceView.frame), CGRectGetMinY(self.addingDeviceView.frame) + 70, CGRectGetWidth(self.addingDeviceView.frame), CGRectGetHeight(self.addingDeviceView.frame));
-    [self addSubview:self.maskedView];
     [self.addingDeviceView startAnimating];
     [self.addingDeviceView setDeviceName:@"Name" withNetworkName:@"Network name"];
     self.addingDeviceView.hidden = NO;
 }
 
 - (void)hideAddingDeviceView {
-    [self.maskedView removeFromSuperview];
     self.addingDeviceView.hidden = YES;
     [self.addingDeviceView stopAnimating];
 }
@@ -445,15 +440,6 @@
         }
     }
     return ssid;
-}
-
-#pragma mark - Lazy
-
-- (TGMaskedView *)maskedView {
-    if (!_maskedView) {
-        _maskedView = [[TGMaskedView alloc] initWithFrame:CGRectMake(0, -70, 1000, 1000)];
-    }
-    return _maskedView;
 }
 
 @end
