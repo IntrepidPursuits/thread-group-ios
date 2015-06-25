@@ -170,11 +170,8 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 }
 
 - (void)validateTextField:(NSString *)checkString {
-    if ([checkString length]) {
-        self.confirmButton.hidden = NO;
-    } else {
-        self.confirmButton.hidden = YES;
-    }
+    BOOL shouldHide = (checkString.length == 0);
+    self.confirmButton.hidden = shouldHide;
 }
 
 - (void)resetConnectCodeTextField {

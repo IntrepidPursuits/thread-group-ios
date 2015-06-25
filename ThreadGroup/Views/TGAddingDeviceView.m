@@ -59,7 +59,9 @@
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender {
-    [self.delegate addingDeviceViewDidCancelAddingRequest:self];
+    if ([self.delegate respondsToSelector:@selector(addingDeviceViewDidCancelAddingRequest:)]) {
+        [self.delegate addingDeviceViewDidCancelAddingRequest:self];
+    }
 }
 
 #pragma mark - Helper Methods

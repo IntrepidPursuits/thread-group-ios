@@ -57,13 +57,17 @@
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender {
-    [self.delegate routerAuthenticationCanceled:self];
+    if ([self.delegate respondsToSelector:@selector(routerAuthenticationCanceled:)]) {
+        [self.delegate routerAuthenticationCanceled:self];
+    }
 }
 
 #pragma mark - Delegate
 
 - (void)authenticationSuccess {
-    [self.delegate routerAuthenticationSuccessful:self];
+    if ([self.delegate respondsToSelector:@selector(routerAuthenticationSuccessful:)]) {
+        [self.delegate routerAuthenticationSuccessful:self];
+    }
 }
 
 - (void)authenticationFailure {
