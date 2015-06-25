@@ -41,6 +41,8 @@
 		D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */; };
 		D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */; };
 		D9446A831B335B14007C8D61 /* TGRouterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D9446A821B335B14007C8D61 /* TGRouterItem.m */; };
+		D9CA797B1B39F971000E3400 /* TGRouterAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CA797A1B39F971000E3400 /* TGRouterAuthenticationView.m */; };
+		D9CA797D1B39F99E000E3400 /* TGRouterAuthenticationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CA797C1B39F99E000E3400 /* TGRouterAuthenticationView.xib */; };
 		D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65BFD1B3090B800A184AB /* TGMainView.m */; };
 		D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65BFF1B3090D000A184AB /* TGMainView.xib */; };
 		D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */; };
@@ -119,6 +121,9 @@
 		D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeScreenViewController.xib; sourceTree = "<group>"; };
 		D9446A811B335B14007C8D61 /* TGRouterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGRouterItem.h; path = Models/Test/TGRouterItem.h; sourceTree = "<group>"; };
 		D9446A821B335B14007C8D61 /* TGRouterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGRouterItem.m; path = Models/Test/TGRouterItem.m; sourceTree = "<group>"; };
+		D9CA79791B39F971000E3400 /* TGRouterAuthenticationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterAuthenticationView.h; sourceTree = "<group>"; };
+		D9CA797A1B39F971000E3400 /* TGRouterAuthenticationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterAuthenticationView.m; sourceTree = "<group>"; };
+		D9CA797C1B39F99E000E3400 /* TGRouterAuthenticationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRouterAuthenticationView.xib; sourceTree = "<group>"; };
 		D9E65BFC1B3090B800A184AB /* TGMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainView.h; sourceTree = "<group>"; };
 		D9E65BFD1B3090B800A184AB /* TGMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainView.m; sourceTree = "<group>"; };
 		D9E65BFF1B3090D000A184AB /* TGMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainView.xib; sourceTree = "<group>"; };
@@ -315,6 +320,9 @@
 				D9FB301F1B385FD2002B6ED4 /* TGAddingDeviceView.xib */,
 				CDC447601B39F5790037BAF5 /* TGScannerView.h */,
 				CDC447611B39F5790037BAF5 /* TGScannerView.m */,
+				D9CA79791B39F971000E3400 /* TGRouterAuthenticationView.h */,
+				D9CA797A1B39F971000E3400 /* TGRouterAuthenticationView.m */,
+				D9CA797C1B39F99E000E3400 /* TGRouterAuthenticationView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -456,6 +464,7 @@
 				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
 				D9FB30201B385FD2002B6ED4 /* TGAddingDeviceView.xib in Resources */,
 				D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */,
+				D9CA797D1B39F99E000E3400 /* TGRouterAuthenticationView.xib in Resources */,
 				CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */,
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
 				CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */,
@@ -531,6 +540,7 @@
 				CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
 				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
+				D9CA797B1B39F971000E3400 /* TGRouterAuthenticationView.m in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				D9446A831B335B14007C8D61 /* TGRouterItem.m in Sources */,
