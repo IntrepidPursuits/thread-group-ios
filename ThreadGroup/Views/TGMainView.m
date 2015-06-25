@@ -121,8 +121,6 @@
         case TGMainViewStateLookingForRouters:
             [self resetWifiSearchView];
             [self resetRouterSearchView];
-            [self.findingNetworksSpinnerView startAnimating];
-            self.wifiSearchView.topSeperatorView.hidden = YES;
             [self hideAndShowViewsForState:viewState];
             [self animateViewsForState:viewState];
             break;
@@ -155,6 +153,7 @@
 - (void)hideAndShowViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
+            self.wifiSearchView.topSeperatorView.hidden = YES;
             self.findingNetworksView.hidden = NO;
             self.availableRoutersView.hidden = NO;
 
@@ -217,14 +216,12 @@
     NSArray *hiddenConstraints;
     switch (state) {
         case TGMainViewStateAddAnotherDevice:
-            enabledButtonConstraint = self.addDeviceTopLayoutConstraint
-            ;
+            enabledButtonConstraint = self.addDeviceTopLayoutConstraint;
             hiddenConstraints = @[self.findingNetworksPopupTopLayoutConstraint, self.passphraseButtonTopLayoutConstraint];
             break;
         case TGMainViewStateLookingForRouters:
             enabledButtonConstraint = self.findingNetworksPopupTopLayoutConstraint;
             hiddenConstraints = @[self.addDeviceTopLayoutConstraint, self.passphraseButtonTopLayoutConstraint];
-            [self.findingNetworksPopupView startAnimating];
             break;
         case TGMainViewStateConnectDeviceScanning:
             enabledButtonConstraint = self.passphraseButtonTopLayoutConstraint;

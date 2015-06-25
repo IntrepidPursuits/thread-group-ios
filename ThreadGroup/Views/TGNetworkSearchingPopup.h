@@ -10,7 +10,4 @@
 
 @interface TGNetworkSearchingPopup : UIView
 
-- (void)startAnimating;
-- (void)stopAnimating;
-
 @end
