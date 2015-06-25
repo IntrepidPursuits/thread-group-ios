@@ -27,18 +27,18 @@ static CGFloat const TGScannerYOffset = 32.0f;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-#if !TARGET_IPHONE_SIMULATOR
     [self configureScanner];
-#else
-    self.backgroundColor = [UIColor whiteColor];
-#endif
-    
     [self configureOverlay];
     [self configureMask];
+    [self setCameraEnabled:NO];
 }
 
 - (void)configureScanner {
+#if TARGET_IPHONE_SIMULATOR
+    self.backgroundColor = [UIColor whiteColor];
+    return;
+#endif
+    
     NSError *error;
     AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
@@ -89,8 +89,10 @@ static CGFloat const TGScannerYOffset = 32.0f;
 }
 
 - (void)stopScanning {
-    [self.captureSession stopRunning];
-    [self setCameraEnabled:NO];
+    if ([self.captureSession isRunning]) {
+        [self.captureSession stopRunning];
+        [self setCameraEnabled:NO];
+    }
 }
 
 - (void)setCameraEnabled:(BOOL)enabled {
