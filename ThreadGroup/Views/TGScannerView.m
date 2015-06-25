@@ -30,7 +30,7 @@ static CGFloat const TGScannerYOffset = 32.0f;
     [self configureScanner];
     [self configureOverlay];
     [self configureMask];
-    [self setCameraEnabled:NO];
+    [self setMaskViewEnabled:NO];
 }
 
 - (void)configureScanner {
@@ -44,7 +44,7 @@ static CGFloat const TGScannerYOffset = 32.0f;
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
     AVCaptureMetadataOutput *captureMetadataOutput = [AVCaptureMetadataOutput new];
     
-    if (!input) {
+    if (input == nil) {
         NSLog(@"%@", [error localizedDescription]);
     }
     
@@ -69,7 +69,6 @@ static CGFloat const TGScannerYOffset = 32.0f;
     [self.cameraOverlay setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-topOffset-[overlayView]->=0-|" options:0 metrics:@{@"topOffset" : @(TGScannerYOffset), @"overlaySize" : @(TGScannerViewOverlaySize)} views:@{@"overlayView" : self.cameraOverlay}]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
-
 }
 
 - (void)configureMask {
@@ -83,19 +82,26 @@ static CGFloat const TGScannerYOffset = 32.0f;
 
 #pragma mark - Public
 
-- (void)startScanning {
-    [self.captureSession startRunning];
-    [self setCameraEnabled:YES];
-}
-
-- (void)stopScanning {
-    if ([self.captureSession isRunning]) {
-        [self.captureSession stopRunning];
-        [self setCameraEnabled:NO];
+- (void)setContentMode:(TGScannerViewContentMode)contentMode {
+    _contentMode = contentMode;
+    switch (contentMode) {
+        case TGScannerViewContentModeActiveScanning:
+            [self.captureSession startRunning];
+            [self setMaskViewEnabled:YES];
+            break;
+        case TGScannerViewContentModeInactive:
+            if ([self.captureSession isRunning]) {
+                [self.captureSession stopRunning];
+                [self setMaskViewEnabled:NO];
+            }
+            break;
+        case TGScannerViewContentModeTutorial:
+            [self setMaskViewEnabled:YES];
+            break;
     }
 }
 
-- (void)setCameraEnabled:(BOOL)enabled {
+- (void)setMaskViewEnabled:(BOOL)enabled {
     CGFloat maskAlpha = (enabled) ? 0 : 1.0f;
     [UIView animateWithDuration:0.5f animations:^{
         self.maskView.alpha = maskAlpha;

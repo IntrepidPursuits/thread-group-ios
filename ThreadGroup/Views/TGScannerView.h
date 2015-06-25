@@ -11,18 +11,20 @@
 @class TGDevice;
 @protocol TGScannerViewDelegate;
 
+typedef NS_ENUM(NSUInteger, TGScannerViewContentMode) {
+    TGScannerViewContentModeActiveScanning,
+    TGScannerViewContentModeInactive,
+    TGScannerViewContentModeTutorial,
+};
+
 @interface TGScannerView : UIView
 
 @property (weak, nonatomic) id<TGScannerViewDelegate> delegate;
-
-- (void)startScanning;
-- (void)stopScanning;
+@property (nonatomic) TGScannerViewContentMode contentMode;
 
 @end
 
 @protocol TGScannerViewDelegate <NSObject>
-
 - (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device;
 - (void)TGScannerViewDidFailParsingDevice:(UIView *)scannerView;
-
 @end
