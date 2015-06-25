@@ -232,21 +232,18 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="oWS-5U-5Ep" firstAttribute="leading" secondItem="I7M-VR-hH9" secondAttribute="leading" id="7k4-De-OAf"/>
-                        <constraint firstAttribute="trailing" secondItem="cqy-4u-pMO" secondAttribute="trailing" id="7x9-VB-guV"/>
-                        <constraint firstAttribute="trailing" secondItem="pNG-UM-3Rz" secondAttribute="trailing" id="8ns-gp-fa3"/>
+                        <constraint firstAttribute="width" secondItem="pNG-UM-3Rz" secondAttribute="width" id="F7E-Wq-GdA"/>
                         <constraint firstAttribute="height" constant="56" id="FOT-9V-J42"/>
                         <constraint firstAttribute="height" secondItem="oWS-5U-5Ep" secondAttribute="height" id="Hs1-md-VKc"/>
                         <constraint firstItem="pNG-UM-3Rz" firstAttribute="leading" secondItem="I7M-VR-hH9" secondAttribute="leading" id="Jby-iw-wdz"/>
-                        <constraint firstAttribute="trailing" secondItem="oWS-5U-5Ep" secondAttribute="trailing" id="KuZ-sY-EhF"/>
                         <constraint firstItem="cqy-4u-pMO" firstAttribute="top" secondItem="I7M-VR-hH9" secondAttribute="top" id="Nms-Ys-8BJ"/>
-                        <constraint firstAttribute="bottom" secondItem="oWS-5U-5Ep" secondAttribute="bottom" id="Ntb-F8-4Nc"/>
-                        <constraint firstAttribute="bottom" secondItem="pNG-UM-3Rz" secondAttribute="bottom" id="T8y-F7-Tmp"/>
                         <constraint firstAttribute="height" secondItem="pNG-UM-3Rz" secondAttribute="height" id="ck1-nW-ao5"/>
-                        <constraint firstAttribute="bottom" secondItem="cqy-4u-pMO" secondAttribute="bottom" id="hZ6-UN-h1s"/>
                         <constraint firstItem="oWS-5U-5Ep" firstAttribute="top" secondItem="I7M-VR-hH9" secondAttribute="top" id="hiQ-9B-Cu2"/>
                         <constraint firstItem="cqy-4u-pMO" firstAttribute="leading" secondItem="I7M-VR-hH9" secondAttribute="leading" id="jAw-U1-dft"/>
                         <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="I7M-VR-hH9" secondAttribute="top" id="jB5-n6-Woh"/>
                         <constraint firstAttribute="height" secondItem="cqy-4u-pMO" secondAttribute="height" id="lPh-Zs-IHq"/>
+                        <constraint firstAttribute="width" secondItem="cqy-4u-pMO" secondAttribute="width" id="uPg-iC-c6C"/>
+                        <constraint firstItem="oWS-5U-5Ep" firstAttribute="width" secondItem="I7M-VR-hH9" secondAttribute="width" id="wqs-14-WEh"/>
                     </constraints>
                 </view>
             </subviews>
@@ -284,6 +281,7 @@
                 <constraint firstAttribute="trailing" secondItem="KzV-Dx-YPV" secondAttribute="trailing" id="uqd-CU-t70"/>
                 <constraint firstAttribute="trailing" secondItem="zqJ-mI-Yuc" secondAttribute="trailing" id="yTI-ye-Dj6"/>
             </constraints>
+            <point key="canvasLocation" x="30" y="613"/>
         </view>
     </objects>
     <resources>

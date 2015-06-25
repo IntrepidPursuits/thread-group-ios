@@ -27,18 +27,18 @@ static CGFloat const TGScannerYOffset = 32.0f;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-#if !TARGET_IPHONE_SIMULATOR
     [self configureScanner];
-#else
-    self.backgroundColor = [UIColor whiteColor];
-#endif
-    
     [self configureOverlay];
     [self configureMask];
+    [self setCameraEnabled:NO];
 }
 
 - (void)configureScanner {
+#if TARGET_IPHONE_SIMULATOR
+    self.backgroundColor = [UIColor whiteColor];
+    return;
+#endif
+    
     NSError *error;
     AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
@@ -67,10 +67,8 @@ static CGFloat const TGScannerYOffset = 32.0f;
     self.cameraOverlay = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_overlay"]];
     [self addSubview:self.cameraOverlay];
     [self.cameraOverlay setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-topOffset-[overlayView(overlaySize)]" options:0 metrics:@{@"topOffset" : @(TGScannerYOffset), @"overlaySize" : @(TGScannerViewOverlaySize)} views:@{@"overlayView" : self.cameraOverlay}]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-topOffset-[overlayView]->=0-|" options:0 metrics:@{@"topOffset" : @(TGScannerYOffset), @"overlaySize" : @(TGScannerViewOverlaySize)} views:@{@"overlayView" : self.cameraOverlay}]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
-    [self.cameraOverlay addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.cameraOverlay attribute:NSLayoutAttributeWidth multiplier:1.0 constant:TGScannerViewOverlaySize]];
-    [self.cameraOverlay addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.cameraOverlay attribute:NSLayoutAttributeHeight multiplier:1.0 constant:TGScannerViewOverlaySize]];
 
 }
 
@@ -91,8 +89,10 @@ static CGFloat const TGScannerYOffset = 32.0f;
 }
 
 - (void)stopScanning {
-    [self.captureSession stopRunning];
-    [self setCameraEnabled:NO];
+    if ([self.captureSession isRunning]) {
+        [self.captureSession stopRunning];
+        [self setCameraEnabled:NO];
+    }
 }
 
 - (void)setCameraEnabled:(BOOL)enabled {

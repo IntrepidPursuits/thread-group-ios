@@ -29,18 +29,13 @@
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
         self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self startAnimating];
     }
 }
 
 - (void)startAnimating {
-    
     [self.clockwiseSpinnerImageView threadGroup_animateClockwise];
     [self.counterClockwiseSpinnerImageView threadGroup_animateCounterClockwise];
-}
-
-- (void)stopAnimating {
-    [self.clockwiseSpinnerImageView.layer removeAllAnimations];
-    [self.counterClockwiseSpinnerImageView.layer removeAllAnimations];
 }
 
 @end
