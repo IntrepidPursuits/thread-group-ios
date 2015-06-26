@@ -8,6 +8,7 @@
 
 #import "TGAnimator.h"
 #import "UIImage+ThreadGroup.h"
+#import "UIView+ThreadGroup.h"
 
 /**
  *  Duration for transition animation
@@ -82,19 +83,9 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : toViewController.view}]];
 
-//    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[bar]|"
-//                                                                          options:0
-//                                                                          metrics:nil
-//                                                                            views:@{@"bar" : self.blurBackgroundView}]];
-//    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bar]|"
-//                                                                          options:0
-//                                                                          metrics:nil
-//                                                                            views:@{@"bar" : self.blurBackgroundView}]];
-
     //Initiai state of the animation
     toViewController.view.transform = CGAffineTransformMakeScale(0.5, 0.5);
     toViewController.view.alpha = 0;
-//    self.blurBackgroundView.alpha = 0;
 
     //animate
     [UIView animateWithDuration:duration
@@ -105,7 +96,6 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                      animations:^{
                          toViewController.view.transform = CGAffineTransformIdentity;
                          toViewController.view.alpha = 1;
-//                         self.blurBackgroundView.alpha = 1;
                      } completion:^(BOOL finished) {
                          if (finished) {
                              [transitionContext completeTransition:YES];
@@ -143,7 +133,6 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : fromViewController.view}]];
-
 
     // Animate with keyframes
     [UIView animateWithDuration:duration

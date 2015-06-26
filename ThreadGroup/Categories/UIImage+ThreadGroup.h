@@ -27,6 +27,4 @@
 + (UIImage *)tg_spinner;
 + (UIImage *)tg_tutorialView;
 
-+ (UIImage *)createImageFromView:(UIView *)view;
-
 @end
