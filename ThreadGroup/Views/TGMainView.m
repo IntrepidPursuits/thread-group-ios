@@ -55,9 +55,11 @@
 @property (weak, nonatomic) IBOutlet UIView *popupView;
 @property (weak, nonatomic) IBOutlet UIButton *addAnotherProductButton;
 @property (weak, nonatomic) IBOutlet UIButton *passPhraseButton;
+@property (weak, nonatomic) IBOutlet UIButton *tutorialDismissButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addDeviceTopLayoutConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passphraseButtonTopLayoutConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *findingNetworksPopupTopLayoutConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tutorialDismissTopLayoutConstraint;
 
 @end
 
@@ -104,6 +106,12 @@
     self.tableView.delegate = self.tableViewSource;
 }
 
+#pragma mark - Button Events
+
+- (IBAction)tutorialDismissButtonTapped:(id)sender {
+    [self setViewState:TGMainViewStateConnectDeviceScanning];
+}
+
 #pragma mark - View States
 
 - (void)setViewState:(TGMainViewState)viewState {
@@ -113,6 +121,7 @@
 
 - (void)configureMainViewForViewState:(TGMainViewState)viewState {
     [self setPopupNotificationForState:viewState animated:YES];
+    [self.scannerView setContentMode:[self scannerModeForViewState:viewState]];
     
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
@@ -123,14 +132,10 @@
             break;
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning:
+        case TGMainViewStateConnectDeviceTutorial:
             [self resetSelectDeviceView];
             [self hideAndShowViewsForState:viewState];
             [self animateViewsForState:viewState];
-            if (viewState == TGMainViewStateConnectDevicePassphrase) {
-                [self.scannerView stopScanning];
-            } else {
-                [self.scannerView startScanning];
-            }
             break;
         case TGMainViewStateAddAnotherDevice: {
             TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
@@ -158,6 +163,7 @@
             self.successView.hidden = YES;
             self.scannerView.hidden = YES;
             break;
+        case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDeviceScanning:
         case TGMainViewStateConnectDevicePassphrase:
             self.selectDeviceView.hidden = NO;
@@ -185,6 +191,7 @@
             }];
         }
             break;
+        case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
             [UIView animateWithDuration:0.4 animations:^{
@@ -208,25 +215,26 @@
 
 - (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated {
     NSLayoutConstraint *enabledButtonConstraint;
-    NSArray *hiddenConstraints;
+    NSMutableArray *hiddenConstraints = [@[self.addDeviceTopLayoutConstraint, self.passphraseButtonTopLayoutConstraint, self.findingNetworksPopupTopLayoutConstraint, self.tutorialDismissTopLayoutConstraint] mutableCopy];
     switch (state) {
         case TGMainViewStateAddAnotherDevice:
             enabledButtonConstraint = self.addDeviceTopLayoutConstraint;
-            hiddenConstraints = @[self.findingNetworksPopupTopLayoutConstraint, self.passphraseButtonTopLayoutConstraint];
             break;
         case TGMainViewStateLookingForRouters:
             enabledButtonConstraint = self.findingNetworksPopupTopLayoutConstraint;
-            hiddenConstraints = @[self.addDeviceTopLayoutConstraint, self.passphraseButtonTopLayoutConstraint];
             break;
         case TGMainViewStateConnectDeviceScanning:
             enabledButtonConstraint = self.passphraseButtonTopLayoutConstraint;
-            hiddenConstraints = @[self.addDeviceTopLayoutConstraint, self.findingNetworksPopupTopLayoutConstraint];
+            break;
+        case TGMainViewStateConnectDeviceTutorial:
+            enabledButtonConstraint = self.tutorialDismissTopLayoutConstraint;
             break;
         default:
             enabledButtonConstraint = nil;
-            hiddenConstraints = @[self.addDeviceTopLayoutConstraint, self.passphraseButtonTopLayoutConstraint, self.findingNetworksPopupTopLayoutConstraint];
             break;
     }
+    
+    [hiddenConstraints removeObject:enabledButtonConstraint];
     
     [UIView animateWithDuration:(animated) ? 0.4f : 0 animations:^{
         enabledButtonConstraint.constant = 0;
@@ -235,6 +243,20 @@
         }
         [self layoutIfNeeded];
     }];
+}
+
+- (TGScannerViewContentMode)scannerModeForViewState:(TGMainViewState)state {
+    switch (state) {
+        case TGMainViewStateConnectDeviceScanning:
+            return TGScannerViewContentModeActiveScanning;
+        case TGMainViewStateConnectDeviceTutorial:
+            return TGScannerViewContentModeTutorial;
+        case TGMainViewStateAddAnotherDevice:
+        case TGMainViewStateLookingForRouters:
+        case TGMainViewStateConnectDevicePassphrase:
+        default:
+            return TGScannerViewContentModeInactive;
+    }
 }
 
 #pragma mark - Wifi
@@ -378,8 +400,9 @@
 #pragma mark - TGScannerView Delegate
 
 - (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device {
-    [self.scannerView stopScanning];
+    [self.scannerView setContentMode:TGScannerViewContentModeInactive];
     //Show addProduct screen
+
     [device isPassphraseValidWithCompletion:^(BOOL success) {
         if (success) {
             //Hide addProduct screen
@@ -397,6 +420,10 @@
 
 - (void)TGScannerViewDidFailParsingDevice:(UIView *)scannerView {
     [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
+}
+
+- (void)TGScannerView:(UIView *)scannerView didTapInfoButton:(id)sender {
+    [self setViewState:TGMainViewStateConnectDeviceTutorial];
 }
 
 #pragma mark - Helper Methods
