@@ -19,6 +19,7 @@
 #import "TGNetworkManager.h"
 #import "TGDevice.h"
 #import "TGScannerView.h"
+#import "TGSettingsManager.h"
 
 @interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate>
 
@@ -109,6 +110,7 @@
 #pragma mark - Button Events
 
 - (IBAction)tutorialDismissButtonTapped:(id)sender {
+    [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
     [self setViewState:TGMainViewStateConnectDeviceScanning];
 }
 
@@ -120,6 +122,11 @@
 }
 
 - (void)configureMainViewForViewState:(TGMainViewState)viewState {
+    BOOL isScanning = (viewState == TGMainViewStateConnectDevicePassphrase || viewState == TGMainViewStateConnectDeviceScanning);
+    if (isScanning && [[TGSettingsManager sharedManager] hasSeenScannerTutorial] == NO) {
+        viewState = TGMainViewStateConnectDeviceTutorial;
+    }
+    
     [self setPopupNotificationForState:viewState animated:YES];
     [self.scannerView setContentMode:[self scannerModeForViewState:viewState]];
     
