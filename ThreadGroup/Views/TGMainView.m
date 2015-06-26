@@ -140,7 +140,9 @@
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning:
         case TGMainViewStateConnectDeviceTutorial:
-            [self resetSelectDeviceView];
+            if (viewState != TGMainViewStateConnectDeviceTutorial) {
+                [self resetSelectDeviceView];
+            }
             [self hideAndShowViewsForState:viewState];
             [self animateViewsForState:viewState];
             break;
