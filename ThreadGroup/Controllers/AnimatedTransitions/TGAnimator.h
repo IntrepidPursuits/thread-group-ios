@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface TGAnimator : NSObject
+typedef NS_ENUM(NSUInteger, TGTransitionType) {
+    TGTransitionTypePresent,
+    TGTransitionTypeDismiss
+};
+
+/**
+ *  To use: Remember to set the parent rootViewController as the transitioningDelegate. And the modalPresentationStyle to custom.
+ */
+@interface TGAnimator : NSObject <UIViewControllerAnimatedTransitioning>
+
+@property (nonatomic) TGTransitionType type;
 
 @end
