@@ -46,8 +46,8 @@
 		D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566F1B3C932400832112 /* TGAddProductViewController.m */; };
 		D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B456701B3C932400832112 /* TGAddProductViewController.xib */; };
 		D9B456761B3D999900832112 /* TGAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B456751B3D999900832112 /* TGAnimator.m */; };
-		D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65BFD1B3090B800A184AB /* TGMainView.m */; };
-		D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65BFF1B3090D000A184AB /* TGMainView.xib */; };
+		D9E65BFE1B3090B800A184AB /* TGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65BFD1B3090B800A184AB /* TGMainViewController.m */; };
+		D9E65C001B3090D000A184AB /* TGMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65BFF1B3090D000A184AB /* TGMainViewController.xib */; };
 		D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */; };
 		D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C0A1B31FD8800A184AB /* TGTableViewCell.m */; };
 		D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */; };
@@ -130,9 +130,9 @@
 		D9B456701B3C932400832112 /* TGAddProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGAddProductViewController.xib; sourceTree = "<group>"; };
 		D9B456741B3D999900832112 /* TGAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGAnimator.h; path = AnimatedTransitions/TGAnimator.h; sourceTree = "<group>"; };
 		D9B456751B3D999900832112 /* TGAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGAnimator.m; path = AnimatedTransitions/TGAnimator.m; sourceTree = "<group>"; };
-		D9E65BFC1B3090B800A184AB /* TGMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainView.h; sourceTree = "<group>"; };
-		D9E65BFD1B3090B800A184AB /* TGMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainView.m; sourceTree = "<group>"; };
-		D9E65BFF1B3090D000A184AB /* TGMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainView.xib; sourceTree = "<group>"; };
+		D9E65BFC1B3090B800A184AB /* TGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainViewController.h; sourceTree = "<group>"; };
+		D9E65BFD1B3090B800A184AB /* TGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainViewController.m; sourceTree = "<group>"; };
+		D9E65BFF1B3090D000A184AB /* TGMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainViewController.xib; sourceTree = "<group>"; };
 		D9E65C011B31AED800A184AB /* UIImage+ThreadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ThreadGroup.h"; sourceTree = "<group>"; };
 		D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ThreadGroup.m"; sourceTree = "<group>"; };
 		D9E65C091B31FD8800A184AB /* TGTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGTableViewCell.h; path = TableViewCell/TGTableViewCell.h; sourceTree = "<group>"; };
@@ -320,9 +320,9 @@
 				CDDB18E81B29ED9F008A84FD /* TGSelectDeviceStepView.h */,
 				CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */,
 				CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */,
-				D9E65BFC1B3090B800A184AB /* TGMainView.h */,
-				D9E65BFD1B3090B800A184AB /* TGMainView.m */,
-				D9E65BFF1B3090D000A184AB /* TGMainView.xib */,
+				D9E65BFC1B3090B800A184AB /* TGMainViewController.h */,
+				D9E65BFD1B3090B800A184AB /* TGMainViewController.m */,
+				D9E65BFF1B3090D000A184AB /* TGMainViewController.xib */,
 				D9E65C1B1B33362100A184AB /* TableView */,
 				D9E65C081B31FD6100A184AB /* TableViewCell */,
 				CDC447601B39F5790037BAF5 /* TGScannerView.h */,
@@ -477,7 +477,7 @@
 				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
 				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
-				D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */,
+				D9E65C001B3090D000A184AB /* TGMainViewController.xib in Resources */,
 				CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */,
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
 				CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */,
@@ -543,7 +543,7 @@
 				D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */,
 				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
-				D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */,
+				D9E65BFE1B3090B800A184AB /* TGMainViewController.m in Sources */,
 				D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,

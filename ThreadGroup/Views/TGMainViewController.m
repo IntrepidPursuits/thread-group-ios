@@ -7,7 +7,7 @@
 //
 
 #import <SystemConfiguration/CaptiveNetwork.h>
-#import "TGMainView.h"
+#import "TGMainViewController.h"
 #import "TGDeviceStepView.h"
 #import "TGNetworkSearchingPopup.h"
 #import "TGSpinnerView.h"
@@ -21,9 +21,7 @@
 #import "TGScannerView.h"
 #import "TGSettingsManager.h"
 
-@interface TGMainView() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate>
-
-@property (nonatomic, strong) UIView *nibView;
+@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate>
 
 //Wifi
 @property (weak, nonatomic) IBOutlet TGDeviceStepView *wifiSearchView;
@@ -64,19 +62,10 @@
 
 @end
 
-@implementation TGMainView
+@implementation TGMainViewController
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    if (self) {
-        self.nibView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-                                                      owner:self
-                                                    options:nil] lastObject];
-        [self addSubview:self.nibView];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
-    }
     [self configure];
 }
 
@@ -206,7 +195,7 @@
             [UIView animateWithDuration:0.4 animations:^{
                 self.selectDeviceView.alpha = 1;
                 self.scannerView.alpha = 1;
-                [self bringSubviewToFront:self.scannerView];
+                [self.view bringSubviewToFront:self.scannerView];
             }];
         }
             break;
@@ -250,7 +239,7 @@
         for (NSLayoutConstraint *constraint in hiddenConstraints) {
             constraint.constant = self.popupView.frame.size.height;
         }
-        [self layoutIfNeeded];
+        [self.view layoutIfNeeded];
     }];
 }
 
@@ -338,7 +327,7 @@
     TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
     self.selectDeviceView.contentMode = contentMode;
     self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
-    [self layoutIfNeeded];
+    [self.view layoutIfNeeded];
 }
 
 - (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
@@ -348,7 +337,7 @@
         TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
         [self.selectDeviceView setContentMode:newMode];
         self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
-        [self layoutIfNeeded];
+        [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self.selectDeviceView becomeFirstResponder];
     }];
@@ -381,7 +370,7 @@
         TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
         self.selectDeviceView.contentMode = contentMode;
         self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
-        [self layoutIfNeeded];
+        [self.view layoutIfNeeded];
     }];
 }
 
