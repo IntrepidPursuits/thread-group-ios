@@ -41,16 +41,16 @@
 		D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */; };
 		D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */; };
 		D9446A831B335B14007C8D61 /* TGRouterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D9446A821B335B14007C8D61 /* TGRouterItem.m */; };
-		D9CA797B1B39F971000E3400 /* TGRouterAuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CA797A1B39F971000E3400 /* TGRouterAuthenticationView.m */; };
-		D9CA797D1B39F99E000E3400 /* TGRouterAuthenticationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9CA797C1B39F99E000E3400 /* TGRouterAuthenticationView.xib */; };
+		D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */; };
+		D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */; };
+		D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566F1B3C932400832112 /* TGAddProductViewController.m */; };
+		D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B456701B3C932400832112 /* TGAddProductViewController.xib */; };
 		D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65BFD1B3090B800A184AB /* TGMainView.m */; };
 		D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65BFF1B3090D000A184AB /* TGMainView.xib */; };
 		D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */; };
 		D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C0A1B31FD8800A184AB /* TGTableViewCell.m */; };
 		D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */; };
 		D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C1D1B33364600A184AB /* TGTableView.m */; };
-		D9FB301E1B385FB8002B6ED4 /* TGAddingDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9FB301D1B385FB8002B6ED4 /* TGAddingDeviceView.m */; };
-		D9FB30201B385FD2002B6ED4 /* TGAddingDeviceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9FB301F1B385FD2002B6ED4 /* TGAddingDeviceView.xib */; };
 		D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D9FB30221B398C8D002B6ED4 /* TGDevice.m */; };
 		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
@@ -121,9 +121,12 @@
 		D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeScreenViewController.xib; sourceTree = "<group>"; };
 		D9446A811B335B14007C8D61 /* TGRouterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGRouterItem.h; path = Models/Test/TGRouterItem.h; sourceTree = "<group>"; };
 		D9446A821B335B14007C8D61 /* TGRouterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGRouterItem.m; path = Models/Test/TGRouterItem.m; sourceTree = "<group>"; };
-		D9CA79791B39F971000E3400 /* TGRouterAuthenticationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterAuthenticationView.h; sourceTree = "<group>"; };
-		D9CA797A1B39F971000E3400 /* TGRouterAuthenticationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterAuthenticationView.m; sourceTree = "<group>"; };
-		D9CA797C1B39F99E000E3400 /* TGRouterAuthenticationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRouterAuthenticationView.xib; sourceTree = "<group>"; };
+		D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterAuthViewController.h; sourceTree = "<group>"; };
+		D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterAuthViewController.m; sourceTree = "<group>"; };
+		D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRouterAuthViewController.xib; sourceTree = "<group>"; };
+		D9B4566E1B3C932400832112 /* TGAddProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGAddProductViewController.h; sourceTree = "<group>"; };
+		D9B4566F1B3C932400832112 /* TGAddProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGAddProductViewController.m; sourceTree = "<group>"; };
+		D9B456701B3C932400832112 /* TGAddProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGAddProductViewController.xib; sourceTree = "<group>"; };
 		D9E65BFC1B3090B800A184AB /* TGMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainView.h; sourceTree = "<group>"; };
 		D9E65BFD1B3090B800A184AB /* TGMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainView.m; sourceTree = "<group>"; };
 		D9E65BFF1B3090D000A184AB /* TGMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainView.xib; sourceTree = "<group>"; };
@@ -134,9 +137,6 @@
 		D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGTableViewCell.xib; path = TableViewCell/TGTableViewCell.xib; sourceTree = "<group>"; };
 		D9E65C1C1B33364600A184AB /* TGTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGTableView.h; path = TableView/TGTableView.h; sourceTree = "<group>"; };
 		D9E65C1D1B33364600A184AB /* TGTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGTableView.m; path = TableView/TGTableView.m; sourceTree = "<group>"; };
-		D9FB301C1B385FB8002B6ED4 /* TGAddingDeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGAddingDeviceView.h; sourceTree = "<group>"; };
-		D9FB301D1B385FB8002B6ED4 /* TGAddingDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGAddingDeviceView.m; sourceTree = "<group>"; };
-		D9FB301F1B385FD2002B6ED4 /* TGAddingDeviceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGAddingDeviceView.xib; sourceTree = "<group>"; };
 		D9FB30211B398C8D002B6ED4 /* TGDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGDevice.h; path = Models/TGDevice.h; sourceTree = "<group>"; };
 		D9FB30221B398C8D002B6ED4 /* TGDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGDevice.m; path = Models/TGDevice.m; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +291,12 @@
 				D93C81691B2F663000A86EE1 /* TGHomeScreenViewController.h */,
 				D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */,
 				D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */,
+				D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */,
+				D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */,
+				D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */,
+				D9B4566E1B3C932400832112 /* TGAddProductViewController.h */,
+				D9B4566F1B3C932400832112 /* TGAddProductViewController.m */,
+				D9B456701B3C932400832112 /* TGAddProductViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -315,14 +321,8 @@
 				D9E65BFF1B3090D000A184AB /* TGMainView.xib */,
 				D9E65C1B1B33362100A184AB /* TableView */,
 				D9E65C081B31FD6100A184AB /* TableViewCell */,
-				D9FB301C1B385FB8002B6ED4 /* TGAddingDeviceView.h */,
-				D9FB301D1B385FB8002B6ED4 /* TGAddingDeviceView.m */,
-				D9FB301F1B385FD2002B6ED4 /* TGAddingDeviceView.xib */,
 				CDC447601B39F5790037BAF5 /* TGScannerView.h */,
 				CDC447611B39F5790037BAF5 /* TGScannerView.m */,
-				D9CA79791B39F971000E3400 /* TGRouterAuthenticationView.h */,
-				D9CA797A1B39F971000E3400 /* TGRouterAuthenticationView.m */,
-				D9CA797C1B39F99E000E3400 /* TGRouterAuthenticationView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -459,12 +459,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */,
+				D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */,
 				CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */,
+				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
 				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
-				D9FB30201B385FD2002B6ED4 /* TGAddingDeviceView.xib in Resources */,
 				D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */,
-				D9CA797D1B39F99E000E3400 /* TGRouterAuthenticationView.xib in Resources */,
 				CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */,
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
 				CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */,
@@ -526,10 +526,11 @@
 			files = (
 				CDC447621B39F5790037BAF5 /* TGScannerView.m in Sources */,
 				CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */,
+				D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */,
 				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
 				D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */,
-				D9FB301E1B385FB8002B6ED4 /* TGAddingDeviceView.m in Sources */,
+				D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,
 				CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */,
@@ -540,7 +541,6 @@
 				CD8C68311B27451A0091B548 /* TGSettingsViewController.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
 				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
-				D9CA797B1B39F971000E3400 /* TGRouterAuthenticationView.m in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				D9446A831B335B14007C8D61 /* TGRouterItem.m in Sources */,

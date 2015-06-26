@@ -1,39 +1,36 @@
 //
-//  TGAddingDeviceView.m
+//  TGAddProductViewController.m
 //  ThreadGroup
 //
-//  Created by LuQuan Intrepid on 6/22/15.
+//  Created by LuQuan Intrepid on 6/25/15.
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "TGAddingDeviceView.h"
+#import "TGAddProductViewController.h"
 #import "TGSpinnerView.h"
 #import "UIFont+ThreadGroup.h"
 
-@interface TGAddingDeviceView()
-
-@property (strong, nonatomic) UIView *nibView;
-
+@interface TGAddProductViewController ()
 @property (weak, nonatomic) IBOutlet TGSpinnerView *spinnerView;
 @property (weak, nonatomic) IBOutlet UILabel *addingDeviceText;
 
-
 @end
 
-@implementation TGAddingDeviceView
+@implementation TGAddProductViewController
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    if (self) {
-        self.nibView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-                                                      owner:self
-                                                    options:nil] lastObject];
-        [self addSubview:self.nibView];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
-    }
+#pragma mark - ViewController Lifecycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self startAnimating];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self stopAnimating];
+}
+
+#pragma mark -
 
 - (void)setDeviceName:(NSString *)name withNetworkName:(NSString *)networkName {
     //Creating attributed strings
@@ -59,8 +56,8 @@
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(addingDeviceViewDidCancelAddingRequest:)]) {
-        [self.delegate addingDeviceViewDidCancelAddingRequest:self];
+    if ([self.delegate respondsToSelector:@selector(addProductDidCancelAddingRequest:)]) {
+        [self.delegate addProductDidCancelAddingRequest:self];
     }
 }
 
@@ -73,5 +70,6 @@
 - (NSDictionary *)bookFontAttributeDictionary {
     return @{NSFontAttributeName : [UIFont threadGroup_bookFontWithSize:16.0]};
 }
+
 
 @end

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,7 +25,6 @@
             <connections>
                 <outlet property="addAnotherProductButton" destination="cqy-4u-pMO" id="kL9-Hl-5kI"/>
                 <outlet property="addDeviceTopLayoutConstraint" destination="Nms-Ys-8BJ" id="Xvl-4c-Gkr"/>
-                <outlet property="addingDeviceView" destination="Tyo-GY-htB" id="W15-ST-NVA"/>
                 <outlet property="availableRoutersView" destination="zqJ-mI-Yuc" id="Pop-Fb-cjB"/>
                 <outlet property="findingNetworksPopupTopLayoutConstraint" destination="jB5-n6-Woh" id="IVt-gm-dbA"/>
                 <outlet property="findingNetworksPopupView" destination="pNG-UM-3Rz" id="xZ5-Kx-io1"/>
@@ -187,13 +186,6 @@
                         <constraint firstAttribute="centerX" secondItem="l3u-Xg-fdW" secondAttribute="centerX" id="cmo-xY-XEr"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tyo-GY-htB" customClass="TGAddingDeviceView">
-                    <rect key="frame" x="50" y="25" width="500" height="550"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="Tyo-GY-htB" secondAttribute="height" multiplier="1:1.1" id="iYW-r5-cZv"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7M-VR-hH9" userLabel="PopupView">
                     <rect key="frame" x="0.0" y="544" width="600" height="56"/>
                     <subviews>
@@ -259,10 +251,7 @@
                 <constraint firstAttribute="trailing" secondItem="Kmq-1i-QMp" secondAttribute="trailing" id="DDD-Pc-5Ux"/>
                 <constraint firstItem="I7M-VR-hH9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FwB-HV-xhl"/>
                 <constraint firstItem="Kmq-1i-QMp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KLT-aH-hxF"/>
-                <constraint firstItem="Tyo-GY-htB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="L3L-Sx-ij8"/>
                 <constraint firstAttribute="trailing" secondItem="5lN-Qt-CPc" secondAttribute="trailing" id="Ovi-zQ-GAf"/>
-                <constraint firstAttribute="centerX" secondItem="Tyo-GY-htB" secondAttribute="centerX" id="PSU-Pf-zn1"/>
-                <constraint firstAttribute="centerY" secondItem="Tyo-GY-htB" secondAttribute="centerY" id="RyO-Sy-vZG"/>
                 <constraint firstItem="5bh-tR-LN6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Sx0-xs-dY6"/>
                 <constraint firstItem="5bh-tR-LN6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Tlh-rL-bfK"/>
                 <constraint firstItem="5lN-Qt-CPc" firstAttribute="top" secondItem="5bh-tR-LN6" secondAttribute="bottom" id="UmD-i7-kZ3"/>

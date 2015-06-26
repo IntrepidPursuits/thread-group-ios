@@ -1,43 +1,36 @@
 //
-//  TGRouterAuthenticationView.m
+//  TGRouterAuthViewController.m
 //  ThreadGroup
 //
-//  Created by LuQuan Intrepid on 6/23/15.
+//  Created by LuQuan Intrepid on 6/25/15.
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "TGRouterAuthenticationView.h"
+#import "TGRouterAuthViewController.h"
 #import "UIFont+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 #import "TGNetworkManager.h"
 #import "TGRouterItem.h"
 
-@interface TGRouterAuthenticationView()
-
-@property (strong, nonatomic) UIView *nibView;
-
+@interface TGRouterAuthViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *routerLabel;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomBar;
-
 @end
 
-@implementation TGRouterAuthenticationView
+@implementation TGRouterAuthViewController
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    if (self) {
-        self.nibView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-                                                      owner:self
-                                                    options:nil] lastObject];
-        [self addSubview:self.nibView];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
-    }
-    [self resetView];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 - (void)resetView {
     self.errorLabel.hidden = YES;
@@ -107,5 +100,6 @@
     style.lineHeightMultiple = 1.5;
     return @{NSFontAttributeName : [UIFont threadGroup_bookFontWithSize:14.0], NSParagraphStyleAttributeName : style};
 }
+
 
 @end
