@@ -58,4 +58,8 @@
     return [UIImage imageNamed:@"steps_cancel_spinner"];
 }
 
++ (UIImage *)tg_tutorialView {
+    return [UIImage imageNamed:@"qr_tutorial"];
+}
+
 @end

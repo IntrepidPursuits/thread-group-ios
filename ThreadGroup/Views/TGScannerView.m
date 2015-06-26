@@ -9,6 +9,8 @@
 #import "TGScannerView.h"
 #import "TGDevice.h"
 #import <AVFoundation/AVFoundation.h>
+#import "UIFont+ThreadGroup.h"
+#import "UIImage+ThreadGroup.h"
 
 static CGFloat const TGScannerViewOverlaySize = 199.0f;
 static CGFloat const TGScannerYOffset = 32.0f;
@@ -116,13 +118,14 @@ static CGFloat const TGScannerTutorialButtonInset = 18.0f;
     
     UILabel *tutorialMessageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [tutorialMessageLabel setBackgroundColor:[UIColor clearColor]];
+    [tutorialMessageLabel setFont:[UIFont threadGroup_bookFontWithSize:14.0f]];
     [tutorialMessageLabel setNumberOfLines:0];
     [tutorialMessageLabel setText:@"Point your camera at the device Connect QR Code to scan it"];
     [tutorialMessageLabel setTextColor:[UIColor whiteColor]];
     [tutorialMessageLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.tutorialView addSubview:tutorialMessageLabel];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tutorial_test.png"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage tg_tutorialView]];
     [imageView setBackgroundColor:[UIColor clearColor]];
     [imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.tutorialView addSubview:imageView];
@@ -174,8 +177,7 @@ static CGFloat const TGScannerTutorialButtonInset = 18.0f;
 - (void)setTutorialViewHidden:(BOOL)hidden animated:(BOOL)animated {
     CGFloat tutorialViewAlpha = (hidden) ? 0 : 1.0f;
     
-    [UIView animateKeyframesWithDuration:0.8f delay:0 options:0 animations:^{
-        //
+    [UIView animateKeyframesWithDuration:0.6f delay:0 options:0 animations:^{
         [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0.5f animations:^{
             self.tutorialView.alpha = tutorialViewAlpha;
         }];
