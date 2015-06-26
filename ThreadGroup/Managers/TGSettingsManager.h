@@ -15,4 +15,7 @@
 - (BOOL)debugModeEnabled;
 - (void)setDebugModeEnabled:(BOOL)enabled;
 
+- (BOOL)hasSeenScannerTutorial;
+- (void)setHasSeenScannerTutorial:(BOOL)hasSeen;
+
 @end

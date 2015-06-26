@@ -9,6 +9,7 @@
 #import "TGSettingsManager.h"
 
 static NSString * const TGSettingsManagerDebugModeEnabled = @"TGSettingsManagerDebugModeEnabled";
+static NSString * const TGSettingsManagerHasSeenScannerTutorial = @"TGSettingsManagerHasSeenScannerTutorial";
 
 @implementation TGSettingsManager
 
@@ -29,6 +30,15 @@ static NSString * const TGSettingsManagerDebugModeEnabled = @"TGSettingsManagerD
 
 - (void)setDebugModeEnabled:(BOOL)enabled {
     [[NSUserDefaults standardUserDefaults] setObject:@(enabled) forKey:TGSettingsManagerDebugModeEnabled];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)hasSeenScannerTutorial {
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:TGSettingsManagerHasSeenScannerTutorial] boolValue];
+}
+
+- (void)setHasSeenScannerTutorial:(BOOL)hasSeen {
+    [[NSUserDefaults standardUserDefaults] setObject:@(hasSeen) forKey:TGSettingsManagerHasSeenScannerTutorial];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

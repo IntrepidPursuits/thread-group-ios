@@ -25,5 +25,6 @@
 + (UIImage *)tg_selectPassphraseActive;
 
 + (UIImage *)tg_spinner;
++ (UIImage *)tg_tutorialView;
 
 @end
