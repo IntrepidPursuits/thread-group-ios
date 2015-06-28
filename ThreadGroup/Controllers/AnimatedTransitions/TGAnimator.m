@@ -8,7 +8,6 @@
 
 #import "TGAnimator.h"
 #import "UIImage+ThreadGroup.h"
-#import "UIView+ThreadGroup.h"
 
 /**
  *  Duration for transition animation
