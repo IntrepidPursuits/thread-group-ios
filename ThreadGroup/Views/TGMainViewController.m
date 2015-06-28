@@ -64,15 +64,18 @@
 
 @implementation TGMainViewController
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     [self configure];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMainViewForViewState:TGMainViewStateLookingForRouters];
 }
 
 - (void)configure {
     [self setupTableViewSource];
-    [self setPopupNotificationForState:NSNotFound animated:NO];
-    
     self.scannerView.delegate = self;
 }
 
@@ -233,6 +236,7 @@
     }
     
     [hiddenConstraints removeObject:enabledButtonConstraint];
+    [self.view layoutIfNeeded];
     
     [UIView animateWithDuration:(animated) ? 0.4f : 0 animations:^{
         enabledButtonConstraint.constant = 0;
