@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @class TGTableView;
-@protocol TGMainViewProtocol;
 
 typedef NS_ENUM(NSInteger, TGMainViewState) {
     TGMainViewStateLookingForRouters,
@@ -22,7 +21,6 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
 @interface TGMainViewController : UIViewController
 
 @property (nonatomic) TGMainViewState viewState;
-@property (nonatomic, weak) id<TGMainViewProtocol> delegate;
 @property (strong, nonatomic) TGTableView *tableViewSource;
 
 //Wifi
@@ -43,9 +41,4 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
 
 //Finding threadNetworks Popup
 
-@end
-
-@protocol TGMainViewProtocol <NSObject>
-- (void)mainViewWifiButtonDidTap:(TGMainViewController *)mainView;
-- (void)mainViewRouterButtonDidTap:(TGMainViewController *)mainView;
 @end

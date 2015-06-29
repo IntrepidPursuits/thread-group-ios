@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TGRouterItem;
+
 @interface TGTableViewCell : UITableViewCell
 
-//TODO; Refactor this to take a network object
-@property (weak, nonatomic) IBOutlet UILabel *routerNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *networkNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *networkAddressLabel;
+- (void)configureWithRouter:(TGRouterItem *)router;
 
 @end
