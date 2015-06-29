@@ -15,6 +15,7 @@
 static CGFloat const TGScannerViewOverlaySize = 199.0f;
 static CGFloat const TGScannerYOffset = 32.0f;
 static CGFloat const TGScannerTutorialButtonInset = 18.0f;
+static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 
 @interface TGScannerView() <AVCaptureMetadataOutputObjectsDelegate>
 
@@ -72,7 +73,10 @@ static CGFloat const TGScannerTutorialButtonInset = 18.0f;
     
     self.videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     [self.videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    [self.videoPreviewLayer setFrame:self.layer.bounds];
+
+    CGRect extendedCameraFrame = self.layer.bounds;
+    extendedCameraFrame.size.height += fabs(TGScannerViewOverlayOffset);
+    [self.videoPreviewLayer setFrame:extendedCameraFrame];
     [self.layer addSublayer:self.videoPreviewLayer];
 }
 
@@ -106,8 +110,11 @@ static CGFloat const TGScannerTutorialButtonInset = 18.0f;
     [self.maskView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:self.maskView];
     [self.maskView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[maskView]-0-|" options:0 metrics:nil views:@{@"maskView" : self.maskView}]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[maskView]-0-|" options:0 metrics:nil views:@{@"maskView" : self.maskView}]];
+    
+    NSDictionary *metrics = @{@"BottomOffset" : @(TGScannerViewOverlayOffset)};
+    NSDictionary *views = @{@"maskView" : self.maskView};
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[maskView]-BottomOffset-|" options:0 metrics:metrics views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[maskView]-BottomOffset-|" options:0 metrics:metrics views:views]];
 }
 
 - (void)configureTutorialView {
