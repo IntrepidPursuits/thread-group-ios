@@ -402,6 +402,7 @@
 #pragma mark - TGScannerView Delegate
 
 - (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device {
+    [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
     [self.scannerView setContentMode:TGScannerViewContentModeInactive];
     //Show addProduct screen
 
