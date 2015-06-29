@@ -8,13 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class TGMainView;
 @class TGTableView;
-
-@protocol TGMainViewProtocol <NSObject>
-- (void)mainViewWifiButtonDidTap:(TGMainView *)mainView;
-- (void)mainViewRouterButtonDidTap:(TGMainView *)mainView;
-@end
+@protocol TGMainViewProtocol;
 
 typedef NS_ENUM(NSInteger, TGMainViewState) {
     TGMainViewStateLookingForRouters,
@@ -24,7 +19,7 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
     TGMainViewStateAddAnotherDevice
 };
 
-@interface TGMainView : UIView
+@interface TGMainViewController : UIViewController
 
 @property (nonatomic) TGMainViewState viewState;
 @property (nonatomic, weak) id<TGMainViewProtocol> delegate;
@@ -48,5 +43,9 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
 
 //Finding threadNetworks Popup
 
+@end
 
+@protocol TGMainViewProtocol <NSObject>
+- (void)mainViewWifiButtonDidTap:(TGMainViewController *)mainView;
+- (void)mainViewRouterButtonDidTap:(TGMainViewController *)mainView;
 @end

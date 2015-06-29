@@ -9,7 +9,7 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <Reachability/Reachability.h>
 #import "TGHomeScreenViewController.h"
-#import "TGMainView.h"
+#import "TGMainViewController.h"
 
 @interface TGHomeScreenViewController () <TGMainViewProtocol>
 
@@ -17,9 +17,9 @@
 
 //No Wifi View
 @property (weak, nonatomic) IBOutlet UIView *noWifiView;
-
+@property (weak, nonatomic) IBOutlet UIView *mainView;
 //Main View
-@property (weak, nonatomic) IBOutlet TGMainView *mainView;
+@property (strong, nonatomic) TGMainViewController *mainViewController;
 
 @end
 
@@ -66,7 +66,7 @@
 #pragma mark - Configuring Views
 
 - (void)hideAllViews {
-    self.mainView.hidden = YES;
+    self.mainViewController.view.hidden = YES;
     self.noWifiView.hidden = YES;
 }
 
@@ -81,14 +81,14 @@
 - (void)configureUIForReachableState {
     // If wifiView is already not hidden, I do not want to reset the state
     self.noWifiView.hidden = YES;
-    if (self.mainView.hidden == YES) {
-        self.mainView.hidden = NO;
-        self.mainView.viewState = TGMainViewStateLookingForRouters;
+    if (self.mainViewController.view.hidden == YES) {
+        self.mainViewController.view.hidden = NO;
+        [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
     }
 }
 
 - (void)configureUIForUnreachableState {
-    self.mainView.hidden = YES;
+    self.mainViewController.view.hidden = YES;
     self.noWifiView.hidden = NO;
 }
 
@@ -115,7 +115,13 @@
 #pragma mark - Main View
 
 - (void)setupMainView {
-    self.mainView.delegate = self;
+    self.mainViewController = [TGMainViewController new];
+    [self.mainViewController willMoveToParentViewController:self];
+    [self.mainViewController.view setFrame:self.mainView.bounds];
+    [self.mainView addSubview:self.mainViewController.view];
+    [self addChildViewController:self.mainViewController];
+    [self.mainViewController didMoveToParentViewController:self];
+    self.mainViewController.delegate = self;
 }
 
 #pragma mark - No Wifi View
@@ -126,14 +132,14 @@
 
 #pragma mark - TGMainViewDelegate
 
-- (void)mainViewWifiButtonDidTap:(TGMainView *)mainView {
+- (void)mainViewWifiButtonDidTap:(TGMainViewController *)mainView {
      NSLog(@"mainView wifi button tapped");
     [self navigateToPhoneSettingsScreen];
 }
 
-- (void)mainViewRouterButtonDidTap:(TGMainView *)mainView {
+- (void)mainViewRouterButtonDidTap:(TGMainViewController *)mainView {
     NSLog(@"mainView router button tapped");
-    self.mainView.viewState = TGMainViewStateLookingForRouters;
+    self.mainViewController.viewState = TGMainViewStateLookingForRouters;
 }
 
 #pragma mark - Notifications

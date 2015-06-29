@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -22,7 +22,7 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGMainView">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGMainViewController">
             <connections>
                 <outlet property="addAnotherProductButton" destination="cqy-4u-pMO" id="kL9-Hl-5kI"/>
                 <outlet property="addDeviceTopLayoutConstraint" destination="Nms-Ys-8BJ" id="Xvl-4c-Gkr"/>
@@ -44,6 +44,7 @@
                 <outlet property="tableView" destination="zWQ-k9-goJ" id="0bC-YU-1Ox"/>
                 <outlet property="tutorialDismissButton" destination="6HE-ty-DcE" id="Hnp-1c-xd6"/>
                 <outlet property="tutorialDismissTopLayoutConstraint" destination="HMj-nb-w1D" id="QqH-J9-HFn"/>
+                <outlet property="view" destination="iN0-l3-epB" id="FAM-Pj-0aO"/>
                 <outlet property="wifiSearchView" destination="5bh-tR-LN6" id="d2b-pM-jFk"/>
             </connections>
         </placeholder>
@@ -74,7 +75,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KzV-Dx-YPV" userLabel="CameraView" customClass="TGScannerView">
-                    <rect key="frame" x="0.0" y="192" width="600" height="408"/>
+                    <rect key="frame" x="0.0" y="192" width="600" height="352"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmq-1i-QMp" userLabel="SuccessView">
@@ -271,6 +272,7 @@
                 <constraint firstItem="I7M-VR-hH9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FwB-HV-xhl"/>
                 <constraint firstItem="Kmq-1i-QMp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KLT-aH-hxF"/>
                 <constraint firstAttribute="trailing" secondItem="5lN-Qt-CPc" secondAttribute="trailing" id="Ovi-zQ-GAf"/>
+                <constraint firstItem="I7M-VR-hH9" firstAttribute="top" secondItem="KzV-Dx-YPV" secondAttribute="bottom" id="RJD-PO-wmE"/>
                 <constraint firstItem="5bh-tR-LN6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Sx0-xs-dY6"/>
                 <constraint firstItem="5bh-tR-LN6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Tlh-rL-bfK"/>
                 <constraint firstItem="5lN-Qt-CPc" firstAttribute="top" secondItem="5bh-tR-LN6" secondAttribute="bottom" id="UmD-i7-kZ3"/>
@@ -284,11 +286,14 @@
                 <constraint firstItem="Tlm-wX-PEf" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="q32-wq-32w"/>
                 <constraint firstAttribute="bottom" secondItem="Tlm-wX-PEf" secondAttribute="bottom" id="qGD-w9-NGv"/>
                 <constraint firstItem="zqJ-mI-Yuc" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="qSK-EA-HF0"/>
-                <constraint firstAttribute="bottom" secondItem="KzV-Dx-YPV" secondAttribute="bottom" id="tgM-DF-46b"/>
                 <constraint firstAttribute="trailing" secondItem="Tlm-wX-PEf" secondAttribute="trailing" id="ugC-Lm-kok"/>
                 <constraint firstAttribute="trailing" secondItem="KzV-Dx-YPV" secondAttribute="trailing" id="uqd-CU-t70"/>
                 <constraint firstAttribute="trailing" secondItem="zqJ-mI-Yuc" secondAttribute="trailing" id="yTI-ye-Dj6"/>
             </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <point key="canvasLocation" x="30" y="613"/>
         </view>
     </objects>

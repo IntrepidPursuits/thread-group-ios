@@ -12,6 +12,8 @@
 		CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7B604E1B1F5469007FF820 /* Images.xcassets */; };
 		CD7B60521B1F5469007FF820 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7B60501B1F5469007FF820 /* LaunchScreen.xib */; };
 		CD7B605E1B1F5469007FF820 /* ThreadGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B605D1B1F5469007FF820 /* ThreadGroupTests.m */; };
+		CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8639391B4183300044B2BE /* TGMainViewController.m */; };
+		CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD86393A1B4183300044B2BE /* TGMainViewController.xib */; };
 		CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68191B272A290091B548 /* Gotham-Bold.otf */; };
 		CD8C681E1B272A290091B548 /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681A1B272A290091B548 /* Gotham-Book.otf */; };
 		CD8C681F1B272A290091B548 /* Gotham-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681B1B272A290091B548 /* Gotham-Light.otf */; };
@@ -46,8 +48,6 @@
 		D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566F1B3C932400832112 /* TGAddProductViewController.m */; };
 		D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B456701B3C932400832112 /* TGAddProductViewController.xib */; };
 		D9B456761B3D999900832112 /* TGAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B456751B3D999900832112 /* TGAnimator.m */; };
-		D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65BFD1B3090B800A184AB /* TGMainView.m */; };
-		D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65BFF1B3090D000A184AB /* TGMainView.xib */; };
 		D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */; };
 		D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C0A1B31FD8800A184AB /* TGTableViewCell.m */; };
 		D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */; };
@@ -79,6 +79,9 @@
 		CD7B60571B1F5469007FF820 /* ThreadGroupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadGroupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7B605C1B1F5469007FF820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD7B605D1B1F5469007FF820 /* ThreadGroupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadGroupTests.m; sourceTree = "<group>"; };
+		CD8639381B4183300044B2BE /* TGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainViewController.h; sourceTree = "<group>"; };
+		CD8639391B4183300044B2BE /* TGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainViewController.m; sourceTree = "<group>"; };
+		CD86393A1B4183300044B2BE /* TGMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainViewController.xib; sourceTree = "<group>"; };
 		CD8C68191B272A290091B548 /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
 		CD8C681A1B272A290091B548 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
 		CD8C681B1B272A290091B548 /* Gotham-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Light.otf"; sourceTree = "<group>"; };
@@ -130,9 +133,6 @@
 		D9B456701B3C932400832112 /* TGAddProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGAddProductViewController.xib; sourceTree = "<group>"; };
 		D9B456741B3D999900832112 /* TGAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGAnimator.h; path = AnimatedTransitions/TGAnimator.h; sourceTree = "<group>"; };
 		D9B456751B3D999900832112 /* TGAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGAnimator.m; path = AnimatedTransitions/TGAnimator.m; sourceTree = "<group>"; };
-		D9E65BFC1B3090B800A184AB /* TGMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainView.h; sourceTree = "<group>"; };
-		D9E65BFD1B3090B800A184AB /* TGMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainView.m; sourceTree = "<group>"; };
-		D9E65BFF1B3090D000A184AB /* TGMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainView.xib; sourceTree = "<group>"; };
 		D9E65C011B31AED800A184AB /* UIImage+ThreadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ThreadGroup.h"; sourceTree = "<group>"; };
 		D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ThreadGroup.m"; sourceTree = "<group>"; };
 		D9E65C091B31FD8800A184AB /* TGTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGTableViewCell.h; path = TableViewCell/TGTableViewCell.h; sourceTree = "<group>"; };
@@ -288,6 +288,9 @@
 		CD8C68281B273D020091B548 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CD8639381B4183300044B2BE /* TGMainViewController.h */,
+				CD8639391B4183300044B2BE /* TGMainViewController.m */,
+				CD86393A1B4183300044B2BE /* TGMainViewController.xib */,
 				D9B456731B3D997400832112 /* AnimatedTransitions */,
 				CD8C682E1B27451A0091B548 /* TGSettingsViewController.h */,
 				CD8C682F1B27451A0091B548 /* TGSettingsViewController.m */,
@@ -320,9 +323,6 @@
 				CDDB18E81B29ED9F008A84FD /* TGSelectDeviceStepView.h */,
 				CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */,
 				CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */,
-				D9E65BFC1B3090B800A184AB /* TGMainView.h */,
-				D9E65BFD1B3090B800A184AB /* TGMainView.m */,
-				D9E65BFF1B3090D000A184AB /* TGMainView.xib */,
 				D9E65C1B1B33362100A184AB /* TableView */,
 				D9E65C081B31FD6100A184AB /* TableViewCell */,
 				CDC447601B39F5790037BAF5 /* TGScannerView.h */,
@@ -475,9 +475,9 @@
 				D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */,
 				CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */,
 				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
+				CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
 				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
-				D9E65C001B3090D000A184AB /* TGMainView.xib in Resources */,
 				CD8C68321B27451A0091B548 /* TGSettingsViewController.xib in Resources */,
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
 				CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */,
@@ -543,8 +543,8 @@
 				D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */,
 				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
-				D9E65BFE1B3090B800A184AB /* TGMainView.m in Sources */,
 				D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */,
+				CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,
 				CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */,
