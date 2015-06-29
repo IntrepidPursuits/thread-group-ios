@@ -58,6 +58,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password is incorrect." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrl-OX-oof">
                     <rect key="frame" x="20" y="155" width="130" height="12"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
+                    <color key="textColor" red="0.82745098039999998" green="0.1843137255" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dup-kM-oTu" userLabel="Password Bottom Bar">
@@ -74,7 +75,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXc-Dp-FXr">
-                    <rect key="frame" x="550" y="171" width="30" height="405"/>
+                    <rect key="frame" x="550" y="171" width="30" height="409"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                     <state key="normal" title="OK">
                         <color key="titleColor" red="0.90588235289999997" green="0.48627450979999998" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -90,7 +91,7 @@
                 <constraint firstItem="bfg-lM-HgI" firstAttribute="leading" secondItem="VQi-Dd-VLn" secondAttribute="leading" id="2Dw-5y-Wci"/>
                 <constraint firstItem="vrl-OX-oof" firstAttribute="leading" secondItem="dup-kM-oTu" secondAttribute="leading" id="4QL-b4-6gE"/>
                 <constraint firstItem="jXc-Dp-FXr" firstAttribute="trailing" secondItem="dup-kM-oTu" secondAttribute="trailing" id="AQJ-MA-IxC"/>
-                <constraint firstAttribute="bottom" secondItem="jXc-Dp-FXr" secondAttribute="bottom" constant="24" id="Hyt-bm-Nae"/>
+                <constraint firstAttribute="bottom" secondItem="jXc-Dp-FXr" secondAttribute="bottom" constant="20" id="Hyt-bm-Nae"/>
                 <constraint firstItem="dup-kM-oTu" firstAttribute="top" secondItem="VQi-Dd-VLn" secondAttribute="bottom" constant="6" id="KhE-Pm-ehK"/>
                 <constraint firstItem="jXc-Dp-FXr" firstAttribute="top" secondItem="dup-kM-oTu" secondAttribute="bottom" constant="24" id="L55-9U-kCo"/>
                 <constraint firstAttribute="trailing" secondItem="bfg-lM-HgI" secondAttribute="trailing" constant="20" id="PW6-K2-gzc"/>

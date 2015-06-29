@@ -24,27 +24,34 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self resetView];
-    self.routerLabel.attributedText = [self createLabelFromItem:self.item];
 }
 
 - (void)resetView {
     self.errorLabel.hidden = YES;
     self.bottomBar.backgroundColor = [UIColor threadGroup_orange];
+    self.passwordTextField.text = @"";
+    [self.passwordTextField becomeFirstResponder];
+
+    self.routerLabel.attributedText = [self createLabelFromItem:self.item];
 }
 
 #pragma mark - IBActions
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
     [[TGNetworkManager sharedManager] connectToNetwork:self.passwordTextField.text completion:^(NSError *__autoreleasing *error) {
-        if (!error) {
+        BOOL successful = (BOOL)(arc4random() % 2);
+        if (successful) {
             [self authenticationSuccess];
+            NSLog(@"Router Authentication Successful!");
         } else {
             [self authenticationFailure];
+            NSLog(@"Router Authentication Failed!");
         }
     }];
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender {
+    [self.passwordTextField resignFirstResponder];
     if ([self.delegate respondsToSelector:@selector(routerAuthenticationCanceled:)]) {
         [self.delegate routerAuthenticationCanceled:self];
     }
@@ -53,6 +60,7 @@
 #pragma mark - Delegate
 
 - (void)authenticationSuccess {
+    [self.passwordTextField resignFirstResponder];
     if ([self.delegate respondsToSelector:@selector(routerAuthenticationSuccessful:)]) {
         [self.delegate routerAuthenticationSuccessful:self];
     }
