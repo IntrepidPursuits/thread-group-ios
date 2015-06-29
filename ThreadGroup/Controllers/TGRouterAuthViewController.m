@@ -21,35 +21,37 @@
 
 @implementation TGRouterAuthViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self resetView];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 - (void)resetView {
     self.errorLabel.hidden = YES;
     self.bottomBar.backgroundColor = [UIColor threadGroup_orange];
+    self.passwordTextField.text = @"";
+    [self.passwordTextField becomeFirstResponder];
+
+    self.routerLabel.attributedText = [self createLabelFromItem:self.item];
 }
 
 #pragma mark - IBActions
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
     [[TGNetworkManager sharedManager] connectToNetwork:self.passwordTextField.text completion:^(NSError *__autoreleasing *error) {
-        if (!error) {
+        BOOL successful = (BOOL)(arc4random() % 2);
+        if (successful) {
             [self authenticationSuccess];
+            NSLog(@"Router Authentication Successful!");
         } else {
             [self authenticationFailure];
+            NSLog(@"Router Authentication Failed!");
         }
     }];
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender {
+    [self.passwordTextField resignFirstResponder];
     if ([self.delegate respondsToSelector:@selector(routerAuthenticationCanceled:)]) {
         [self.delegate routerAuthenticationCanceled:self];
     }
@@ -58,6 +60,7 @@
 #pragma mark - Delegate
 
 - (void)authenticationSuccess {
+    [self.passwordTextField resignFirstResponder];
     if ([self.delegate respondsToSelector:@selector(routerAuthenticationSuccessful:)]) {
         [self.delegate routerAuthenticationSuccessful:self];
     }
@@ -69,11 +72,9 @@
     self.bottomBar.backgroundColor = [UIColor threadGroup_red];
 }
 
-#pragma mark - Setter
+#pragma mark - Helper Methods
 
-- (void)setItem:(TGRouterItem *)item {
-    _item = item;
-    //Creating attributed strings
+- (NSAttributedString *)createLabelFromItem:(TGRouterItem *)item {
     NSAttributedString *enter = [[NSAttributedString alloc] initWithString:@"Enter password to connect to " attributes:[self bookFontAttributeDictionary]];
     NSAttributedString *on = [[NSAttributedString alloc] initWithString:@" on " attributes:[self bookFontAttributeDictionary]];
     NSAttributedString *name = [[NSAttributedString alloc] initWithString:item.name attributes:[self boldFontAttributeDictionary]];
@@ -83,12 +84,8 @@
     [attString appendAttributedString:name];
     [attString appendAttributedString:on];
     [attString appendAttributedString:threadNetworkName];
-
-    self.routerLabel.attributedText = attString;
+    return attString;
 }
-
-#pragma mark - Helper Methods
-
 - (NSDictionary *)boldFontAttributeDictionary {
     NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
     style.lineHeightMultiple = 1.5;

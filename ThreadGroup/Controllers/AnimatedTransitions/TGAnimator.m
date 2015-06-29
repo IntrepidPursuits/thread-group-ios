@@ -62,22 +62,20 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
 
     //Create Image from fromViewController for blur
     UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    self.blurBackgroundView = [[UIVisualEffectView alloc] initWithEffect:blur];
+    UIVisualEffectView *blurBackgroundView = [[UIVisualEffectView alloc] initWithEffect:blur];
 
-    //Add blurBackgroundView to toViewController
     containerView.frame = finalFrame;
-    self.blurBackgroundView.frame = finalFrame;
+    blurBackgroundView.frame = finalFrame;
     toViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
 
+    [containerView addSubview:toViewController.view];
+    [containerView insertSubview:blurBackgroundView belowSubview:toViewController.view];
 
-    [containerView addSubview:self.blurBackgroundView];
-    [self.blurBackgroundView addSubview:toViewController.view];
-    //Constrain in a way to allow for the view content to size itself
-    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
+    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : toViewController.view}]];
-    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]-100-|"
+    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : toViewController.view}]];
@@ -85,6 +83,7 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
     //Initiai state of the animation
     toViewController.view.transform = CGAffineTransformMakeScale(0.5, 0.5);
     toViewController.view.alpha = 0;
+    blurBackgroundView.alpha = 0.0;
 
     //animate
     [UIView animateWithDuration:duration
@@ -95,6 +94,7 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                      animations:^{
                          toViewController.view.transform = CGAffineTransformIdentity;
                          toViewController.view.alpha = 1;
+                         blurBackgroundView.alpha = 1;
                      } completion:^(BOOL finished) {
                          if (finished) {
                              [transitionContext completeTransition:YES];
@@ -112,23 +112,23 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     CGRect finalFrame = [transitionContext finalFrameForViewController:toViewController];
 
-    //Add views and background
-    [containerView addSubview:toViewController.view];
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    UIVisualEffectView *blurBackgroundView = [[UIVisualEffectView alloc] initWithEffect:blur];
 
     containerView.frame = finalFrame;
     toViewController.view.frame = finalFrame;
-    self.blurBackgroundView.frame = finalFrame;
+    blurBackgroundView.frame = finalFrame;
     fromViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
 
+    [containerView addSubview:toViewController.view];
+    [containerView addSubview:blurBackgroundView];
+    [containerView addSubview:fromViewController.view];
 
-    [containerView addSubview:self.blurBackgroundView];
-    [self.blurBackgroundView addSubview:fromViewController.view];
-    //Constrain in a way to allow for the view content to size itself
-    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
+    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : fromViewController.view}]];
-    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]-100-|"
+    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : fromViewController.view}]];
@@ -136,14 +136,15 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
     // Animate with keyframes
     [UIView animateWithDuration:duration
                      animations:^{
-                         fromViewController.view.transform = CGAffineTransformMakeScale(0.9, 0.9);
+                         fromViewController.view.transform = CGAffineTransformMakeScale(0.5, 0.5);
                          fromViewController.view.alpha = 0.0;
-                         self.blurBackgroundView.alpha = 0.0;
+                         blurBackgroundView.alpha = 0.0;
                      }
                      completion:^(BOOL finished) {
-                         [self.blurBackgroundView removeFromSuperview];
-                         self.blurBackgroundView = nil;
-                         [transitionContext completeTransition:YES];
+                         if (finished) {
+                             [blurBackgroundView removeFromSuperview];
+                             [transitionContext completeTransition:YES];
+                         }
                      }];
 }
 
