@@ -50,9 +50,7 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 - (void)configureScanner {
 #if TARGET_IPHONE_SIMULATOR
     self.backgroundColor = [UIColor whiteColor];
-    return;
-#endif
-    
+#else
     NSError *error;
     AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
@@ -78,6 +76,7 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     extendedCameraFrame.size.height += fabs(TGScannerViewOverlayOffset);
     [self.videoPreviewLayer setFrame:extendedCameraFrame];
     [self.layer addSublayer:self.videoPreviewLayer];
+#endif
 }
 
 - (void)configureContainer {

@@ -11,7 +11,7 @@
 #import "TGHomeScreenViewController.h"
 #import "TGMainViewController.h"
 
-@interface TGHomeScreenViewController () <TGMainViewProtocol>
+@interface TGHomeScreenViewController ()
 
 @property (nonatomic, strong) Reachability *reachability;
 
@@ -121,25 +121,12 @@
     [self.mainView addSubview:self.mainViewController.view];
     [self addChildViewController:self.mainViewController];
     [self.mainViewController didMoveToParentViewController:self];
-    self.mainViewController.delegate = self;
 }
 
 #pragma mark - No Wifi View
 
 - (IBAction)findWifiButtonPressed:(UIButton *)sender {
-    [self navigateToPhoneSettingsScreen];
-}
-
-#pragma mark - TGMainViewDelegate
-
-- (void)mainViewWifiButtonDidTap:(TGMainViewController *)mainView {
-     NSLog(@"mainView wifi button tapped");
-    [self navigateToPhoneSettingsScreen];
-}
-
-- (void)mainViewRouterButtonDidTap:(TGMainViewController *)mainView {
-    NSLog(@"mainView router button tapped");
-    self.mainViewController.viewState = TGMainViewStateLookingForRouters;
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
 #pragma mark - Notifications
@@ -149,12 +136,6 @@
                                              selector:@selector(resetMainView)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:[UIApplication sharedApplication]];
-}
-
-#pragma mark - Helper Methods
-
-- (void)navigateToPhoneSettingsScreen {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
 #pragma mark - Dealloc
