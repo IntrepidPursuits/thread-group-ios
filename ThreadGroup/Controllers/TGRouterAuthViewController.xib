@@ -7,6 +7,7 @@
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
             <string>Gotham-Medium</string>
@@ -29,13 +30,13 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="VQi-Dd-VLn">
-                    <rect key="frame" x="184" y="120" width="232" height="15"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="VQi-Dd-VLn">
+                    <rect key="frame" x="20" y="125" width="560" height="15"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thread Admin Password" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F94-NC-Tj8">
-                    <rect key="frame" x="184" y="20" width="160" height="40"/>
+                    <rect key="frame" x="20" y="30" width="160" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="160" id="CNY-u2-2WY"/>
                     </constraints>
@@ -44,7 +45,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAs-P0-X6T">
-                    <rect key="frame" x="280" y="166" width="61" height="27"/>
+                    <rect key="frame" x="20" y="171" width="61" height="27"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                     <state key="normal" title="CANCEL">
                         <color key="titleColor" red="0.90588235289999997" green="0.48627450979999998" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -55,28 +56,25 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password is incorrect." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrl-OX-oof">
-                    <rect key="frame" x="184" y="150" width="130" height="12"/>
+                    <rect key="frame" x="20" y="155" width="130" height="12"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dup-kM-oTu" userLabel="Password Bottom Bar">
-                    <rect key="frame" x="184" y="141" width="232" height="1"/>
+                    <rect key="frame" x="20" y="146" width="560" height="1"/>
                     <color key="backgroundColor" red="0.90588235289999997" green="0.48627450979999998" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="PAw-TF-Quf"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfg-lM-HgI" userLabel="Router Label">
-                    <rect key="frame" x="184" y="76" width="232" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="232" id="Lhd-hM-PjD"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <rect key="frame" x="20" y="86" width="560" height="15"/>
+                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXc-Dp-FXr">
-                    <rect key="frame" x="386" y="166" width="30" height="27"/>
+                    <rect key="frame" x="550" y="171" width="30" height="405"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                     <state key="normal" title="OK">
                         <color key="titleColor" red="0.90588235289999997" green="0.48627450979999998" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -91,19 +89,21 @@
             <constraints>
                 <constraint firstItem="bfg-lM-HgI" firstAttribute="leading" secondItem="VQi-Dd-VLn" secondAttribute="leading" id="2Dw-5y-Wci"/>
                 <constraint firstItem="vrl-OX-oof" firstAttribute="leading" secondItem="dup-kM-oTu" secondAttribute="leading" id="4QL-b4-6gE"/>
-                <constraint firstItem="jXc-Dp-FXr" firstAttribute="leading" secondItem="eAs-P0-X6T" secondAttribute="trailing" constant="45" id="8wA-Pz-AiE"/>
                 <constraint firstItem="jXc-Dp-FXr" firstAttribute="trailing" secondItem="dup-kM-oTu" secondAttribute="trailing" id="AQJ-MA-IxC"/>
+                <constraint firstAttribute="bottom" secondItem="jXc-Dp-FXr" secondAttribute="bottom" constant="24" id="Hyt-bm-Nae"/>
                 <constraint firstItem="dup-kM-oTu" firstAttribute="top" secondItem="VQi-Dd-VLn" secondAttribute="bottom" constant="6" id="KhE-Pm-ehK"/>
                 <constraint firstItem="jXc-Dp-FXr" firstAttribute="top" secondItem="dup-kM-oTu" secondAttribute="bottom" constant="24" id="L55-9U-kCo"/>
+                <constraint firstAttribute="trailing" secondItem="bfg-lM-HgI" secondAttribute="trailing" constant="20" id="PW6-K2-gzc"/>
+                <constraint firstItem="vrl-OX-oof" firstAttribute="leading" secondItem="eAs-P0-X6T" secondAttribute="leading" id="Pwm-VB-qMr"/>
                 <constraint firstItem="vrl-OX-oof" firstAttribute="top" secondItem="dup-kM-oTu" secondAttribute="bottom" constant="8" id="RcO-9J-wD9"/>
-                <constraint firstAttribute="centerX" secondItem="bfg-lM-HgI" secondAttribute="centerX" id="XfC-dx-k8y"/>
                 <constraint firstItem="bfg-lM-HgI" firstAttribute="width" secondItem="VQi-Dd-VLn" secondAttribute="width" id="YHw-b4-r6o"/>
                 <constraint firstItem="VQi-Dd-VLn" firstAttribute="leading" secondItem="dup-kM-oTu" secondAttribute="leading" id="bzd-7S-PdL"/>
                 <constraint firstItem="eAs-P0-X6T" firstAttribute="top" secondItem="jXc-Dp-FXr" secondAttribute="top" id="d1K-UC-Sue"/>
                 <constraint firstItem="bfg-lM-HgI" firstAttribute="top" secondItem="F94-NC-Tj8" secondAttribute="bottom" constant="16" id="gF8-t7-ZPn"/>
+                <constraint firstItem="bfg-lM-HgI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="oKM-E2-KzJ"/>
                 <constraint firstItem="VQi-Dd-VLn" firstAttribute="top" secondItem="bfg-lM-HgI" secondAttribute="bottom" constant="24" id="t3x-hM-H7W"/>
                 <constraint firstItem="VQi-Dd-VLn" firstAttribute="width" secondItem="dup-kM-oTu" secondAttribute="width" id="xUN-kT-HGY"/>
-                <constraint firstItem="F94-NC-Tj8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="yFB-eD-LtL"/>
+                <constraint firstItem="F94-NC-Tj8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="yFB-eD-LtL"/>
                 <constraint firstItem="bfg-lM-HgI" firstAttribute="leading" secondItem="F94-NC-Tj8" secondAttribute="leading" id="yo3-KR-mow"/>
             </constraints>
         </view>
