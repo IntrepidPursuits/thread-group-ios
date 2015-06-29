@@ -20,8 +20,10 @@
 #import "TGDevice.h"
 #import "TGScannerView.h"
 #import "TGSettingsManager.h"
+#import "TGAnimator.h"
+#import "TGRouterAuthViewController.h"
 
-@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate>
+@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate>
 
 //Wifi
 @property (weak, nonatomic) IBOutlet TGDeviceStepView *wifiSearchView;
@@ -60,6 +62,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *findingNetworksPopupTopLayoutConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tutorialDismissTopLayoutConstraint;
 
+//RouterAuthVC
+@property (strong, nonatomic) TGRouterAuthViewController *routerAuthVC;
+
 @end
 
 @implementation TGMainViewController
@@ -69,14 +74,10 @@
     [self configure];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureMainViewForViewState:TGMainViewStateLookingForRouters];
-}
-
 - (void)configure {
     [self setupTableViewSource];
     self.scannerView.delegate = self;
+    self.modalPresentationStyle = UIModalPresentationCustom;
 }
 
 #pragma mark - Test
@@ -307,17 +308,23 @@
 }
 
 - (void)connectToRouterWithItem:(TGRouterItem *)item {
-    [[TGNetworkManager sharedManager] connectToNetwork:item
-                                            completion:^(NSError *__autoreleasing *error) {
-                                                if (!error) {
-                                                    [UIView animateWithDuration:0.4 animations:^{
-                                                        [self animateConnectedToRouterWithItem:item];
-                                                        self.viewState = TGMainViewStateConnectDeviceScanning;
-                                                    }];
-                                                } else {
-                                                    NSLog(@"Error connecting to network!");
-                                                }
-                                            }];
+    self.routerAuthVC.item = item;
+    [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+}
+
+#pragma mark - TGRouterAuthViewControllerDelegate
+
+- (void)routerAuthenticationSuccessful:(TGRouterAuthViewController *)routerAuthenticationView {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [UIView animateWithDuration:0.4 animations:^{
+        [self animateConnectedToRouterWithItem:routerAuthenticationView.item];
+        self.viewState = TGMainViewStateConnectDeviceScanning;
+    }];
+}
+
+- (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    self.viewState = TGMainViewStateLookingForRouters;
 }
 
 #pragma mark - Select/Add Devices
@@ -417,7 +424,6 @@
             //Hide addProduct screen
         }
     }];
-    
 }
 
 - (void)TGScannerViewDidFailParsingDevice:(UIView *)scannerView {
@@ -426,6 +432,20 @@
 
 - (void)TGScannerView:(UIView *)scannerView didTapInfoButton:(id)sender {
     [self setViewState:TGMainViewStateConnectDeviceTutorial];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    TGAnimator *animator = [[TGAnimator alloc] init];
+    animator.type = TGTransitionTypePresent;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    TGAnimator *animator = [[TGAnimator alloc] init];
+    animator.type = TGTransitionTypeDismiss;
+    return animator;
 }
 
 #pragma mark - Helper Methods
@@ -442,6 +462,17 @@
         }
     }
     return ssid;
+}
+
+#pragma mark - Lazy Load
+
+- (TGRouterAuthViewController *)routerAuthVC {
+    if (!_routerAuthVC) {
+        _routerAuthVC = [[TGRouterAuthViewController alloc] initWithNibName:nil bundle:nil];
+        _routerAuthVC.delegate = self;
+        _routerAuthVC.transitioningDelegate = self;
+    }
+    return _routerAuthVC;
 }
 
 @end
