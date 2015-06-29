@@ -72,12 +72,11 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
 
     [containerView addSubview:self.blurBackgroundView];
     [self.blurBackgroundView addSubview:toViewController.view];
-    //Constrain in a way to allow for the view content to size itself
     [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : toViewController.view}]];
-    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]-100-|"
+    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-150-[bar]"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : toViewController.view}]];
