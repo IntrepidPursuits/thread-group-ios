@@ -53,11 +53,12 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 - (void)commonInit {
     self.backgroundColor = [UIColor threadGroup_grey];
-    self.contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
     self.bottomBar.hidden = YES;
-    self.topBar.hidden = NO;
     self.confirmButton.hidden = YES;
+    self.confirmButton.layer.cornerRadius = 2.0f;
+    self.contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
     self.passphraseInputField.delegate = self;
+    self.topBar.hidden = NO;
 }
 
 #pragma mark - Public
