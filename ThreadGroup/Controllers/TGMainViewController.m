@@ -1,0 +1,478 @@
+//
+//  TGMainView.m
+//  ThreadGroup
+//
+//  Created by LuQuan Intrepid on 6/16/15.
+//  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
+//
+
+#import <SystemConfiguration/CaptiveNetwork.h>
+#import "TGMainViewController.h"
+#import "TGDeviceStepView.h"
+#import "TGNetworkSearchingPopup.h"
+#import "TGSpinnerView.h"
+#import "TGSelectDeviceStepView.h"
+#import "UIImage+ThreadGroup.h"
+#import "UIColor+ThreadGroup.h"
+#import "TGTableView.h"
+#import "TGRouterItem.h"
+#import "TGNetworkManager.h"
+#import "TGDevice.h"
+#import "TGScannerView.h"
+#import "TGSettingsManager.h"
+#import "TGAnimator.h"
+#import "TGRouterAuthViewController.h"
+
+@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate>
+
+//Wifi
+@property (weak, nonatomic) IBOutlet TGDeviceStepView *wifiSearchView;
+
+//Border Router
+@property (weak, nonatomic) IBOutlet TGDeviceStepView *routerSearchView;
+
+//Available Routers View
+@property (weak, nonatomic) IBOutlet UIView *availableRoutersView;
+@property (weak, nonatomic) IBOutlet TGTableView *tableView;
+
+//Finding Networks
+@property (weak, nonatomic) IBOutlet UIView *findingNetworksView;
+@property (weak, nonatomic) IBOutlet TGSpinnerView *findingNetworksSpinnerView;
+@property (weak, nonatomic) IBOutlet TGNetworkSearchingPopup *findingNetworksPopupView;
+
+//Select/Add Devices
+@property (weak, nonatomic) IBOutlet TGSelectDeviceStepView *selectDeviceView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectDeviceViewHeightLayoutConstraint;
+
+//Success View
+@property (weak, nonatomic) IBOutlet UIView *successView;
+@property (weak, nonatomic) IBOutlet UILabel *successDeviceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *successNetworkLabel;
+
+//Mask View
+@property (strong, nonatomic) IBOutlet TGScannerView *scannerView;
+
+//Popup Notification
+@property (weak, nonatomic) IBOutlet UIView *popupView;
+@property (weak, nonatomic) IBOutlet UIButton *addAnotherProductButton;
+@property (weak, nonatomic) IBOutlet UIButton *passPhraseButton;
+@property (weak, nonatomic) IBOutlet UIButton *tutorialDismissButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addDeviceTopLayoutConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passphraseButtonTopLayoutConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *findingNetworksPopupTopLayoutConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tutorialDismissTopLayoutConstraint;
+
+//RouterAuthVC
+@property (strong, nonatomic) TGRouterAuthViewController *routerAuthVC;
+
+@end
+
+@implementation TGMainViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self configure];
+}
+
+- (void)configure {
+    [self setupTableViewSource];
+    self.scannerView.delegate = self;
+    self.modalPresentationStyle = UIModalPresentationCustom;
+}
+
+#pragma mark - Test
+
+- (NSArray *)createTestObjects {
+    TGRouterItem *item1 = [[TGRouterItem alloc] initWithName:@"Router 1" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
+    TGRouterItem *item2 = [[TGRouterItem alloc] initWithName:@"Rotuer 2" networkName:@"Network 2" networkAddress:@"2001:db8::ff00:42:8329"];
+    TGRouterItem *item3 = [[TGRouterItem alloc] initWithName:@"Rotuer 3" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
+    TGRouterItem *item4 = [[TGRouterItem alloc] initWithName:@"Router 4" networkName:@"Network 3" networkAddress:@"2001:db8::ff00:42:8329"];
+    return @[item1, item2, item3, item4];
+}
+
+#pragma mark - Table View
+
+- (void)setupTableViewSource {
+    self.tableViewSource = [[TGTableView alloc] initWithFrame:self.tableView.frame style:UITableViewStylePlain];
+    self.tableViewSource.networkItems = [self createTestObjects];
+    self.tableViewSource.tableViewDelegate = self;
+    self.tableView.dataSource = self.tableViewSource;
+    self.tableView.delegate = self.tableViewSource;
+}
+
+#pragma mark - Button Events
+
+- (IBAction)tutorialDismissButtonTapped:(id)sender {
+    [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
+    [self setViewState:TGMainViewStateConnectDeviceScanning];
+}
+
+#pragma mark - View States
+
+- (void)setViewState:(TGMainViewState)viewState {
+    _viewState = viewState;
+    [self configureMainViewForViewState:viewState];
+}
+
+- (void)configureMainViewForViewState:(TGMainViewState)viewState {
+    BOOL isScanning = (viewState == TGMainViewStateConnectDevicePassphrase || viewState == TGMainViewStateConnectDeviceScanning);
+    if (isScanning && [[TGSettingsManager sharedManager] hasSeenScannerTutorial] == NO) {
+        viewState = TGMainViewStateConnectDeviceTutorial;
+    }
+    
+    [self setPopupNotificationForState:viewState animated:YES];
+    [self.scannerView setContentMode:[self scannerModeForViewState:viewState]];
+    
+    switch (viewState) {
+        case TGMainViewStateLookingForRouters:
+            [self resetWifiSearchView];
+            [self resetRouterSearchView];
+            [self hideAndShowViewsForState:viewState];
+            [self animateViewsForState:viewState];
+            break;
+        case TGMainViewStateConnectDevicePassphrase:
+        case TGMainViewStateConnectDeviceScanning:
+        case TGMainViewStateConnectDeviceTutorial:
+            if (viewState != TGMainViewStateConnectDeviceTutorial) {
+                [self resetSelectDeviceView];
+            }
+            [self hideAndShowViewsForState:viewState];
+            [self animateViewsForState:viewState];
+            break;
+        case TGMainViewStateAddAnotherDevice: {
+            TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
+            self.selectDeviceView.contentMode = completedMode;
+            self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:completedMode];
+
+            [self hideAndShowViewsForState:viewState];
+            [self animateViewsForState:viewState];
+        }
+            break;
+        default:
+            NSAssert(YES, @"viewState should not be undefined");
+            break;
+    }
+}
+
+- (void)hideAndShowViewsForState:(TGMainViewState)viewState {
+    switch (viewState) {
+        case TGMainViewStateLookingForRouters:
+            self.wifiSearchView.topSeperatorView.hidden = YES;
+            self.findingNetworksView.hidden = NO;
+            self.availableRoutersView.hidden = NO;
+
+            self.selectDeviceView.hidden = YES;
+            self.successView.hidden = YES;
+            self.scannerView.hidden = YES;
+            break;
+        case TGMainViewStateConnectDeviceTutorial:
+        case TGMainViewStateConnectDeviceScanning:
+        case TGMainViewStateConnectDevicePassphrase:
+            self.selectDeviceView.hidden = NO;
+            self.scannerView.hidden = NO;
+
+            self.availableRoutersView.hidden = YES;
+            self.findingNetworksView.hidden = YES;
+            self.successView.hidden = YES;
+            break;
+        case TGMainViewStateAddAnotherDevice:
+            self.successView.hidden = NO;
+            self.scannerView.hidden = YES;
+            break;
+        default:
+            NSAssert(YES, @"viewState should not be undefined");
+            break;
+    }
+}
+
+- (void)animateViewsForState:(TGMainViewState)viewState {
+    switch (viewState) {
+        case TGMainViewStateLookingForRouters: {
+            [UIView animateWithDuration:1.5 animations:^{
+                self.findingNetworksView.alpha = 0;
+            }];
+        }
+            break;
+        case TGMainViewStateConnectDeviceTutorial:
+        case TGMainViewStateConnectDevicePassphrase:
+        case TGMainViewStateConnectDeviceScanning: {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.selectDeviceView.alpha = 1;
+                self.scannerView.alpha = 1;
+                [self.view bringSubviewToFront:self.scannerView];
+            }];
+        }
+            break;
+        case TGMainViewStateAddAnotherDevice: {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.successView.alpha = 1;
+            }];
+        }
+            break;
+        default:
+            NSAssert(YES, @"viewState should not be undefined");
+            break;
+    }
+}
+
+- (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated {
+    NSLayoutConstraint *enabledButtonConstraint;
+    NSMutableArray *hiddenConstraints = [@[self.addDeviceTopLayoutConstraint, self.passphraseButtonTopLayoutConstraint, self.findingNetworksPopupTopLayoutConstraint, self.tutorialDismissTopLayoutConstraint] mutableCopy];
+    switch (state) {
+        case TGMainViewStateAddAnotherDevice:
+            enabledButtonConstraint = self.addDeviceTopLayoutConstraint;
+            break;
+        case TGMainViewStateLookingForRouters:
+            enabledButtonConstraint = self.findingNetworksPopupTopLayoutConstraint;
+            break;
+        case TGMainViewStateConnectDeviceScanning:
+            enabledButtonConstraint = self.passphraseButtonTopLayoutConstraint;
+            break;
+        case TGMainViewStateConnectDeviceTutorial:
+            enabledButtonConstraint = self.tutorialDismissTopLayoutConstraint;
+            break;
+        default:
+            enabledButtonConstraint = nil;
+            break;
+    }
+    
+    [hiddenConstraints removeObject:enabledButtonConstraint];
+    [self.view layoutIfNeeded];
+    
+    [UIView animateWithDuration:(animated) ? 0.4f : 0 animations:^{
+        enabledButtonConstraint.constant = 0;
+        for (NSLayoutConstraint *constraint in hiddenConstraints) {
+            constraint.constant = self.popupView.frame.size.height;
+        }
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (TGScannerViewContentMode)scannerModeForViewState:(TGMainViewState)state {
+    switch (state) {
+        case TGMainViewStateConnectDeviceScanning:
+            return TGScannerViewContentModeActiveScanning;
+        case TGMainViewStateConnectDeviceTutorial:
+            return TGScannerViewContentModeTutorial;
+        case TGMainViewStateAddAnotherDevice:
+        case TGMainViewStateLookingForRouters:
+        case TGMainViewStateConnectDevicePassphrase:
+        default:
+            return TGScannerViewContentModeInactive;
+    }
+}
+
+#pragma mark - Wifi
+
+- (void)resetWifiSearchView {
+    self.wifiSearchView.delegate = self;
+    [self.wifiSearchView setTopBarHidden:YES];
+    [self.wifiSearchView setBottomBarHidden:NO];
+    [self.wifiSearchView setIcon:[UIImage tg_wifiCompleted]];
+    [self.wifiSearchView setSpinnerActive:NO];
+    [self.wifiSearchView setTitle:@"Connected to Wi-Fi" subTitle:[self currentWifiSSID]];
+}
+
+#pragma mark - Border Router
+
+- (void)resetRouterSearchView {
+    self.routerSearchView.delegate = self;
+    self.routerSearchView.backgroundColor = [UIColor threadGroup_orange];
+    [self.routerSearchView setTopBarHidden:NO];
+    [self.routerSearchView setBottomBarHidden:YES];
+    [self.routerSearchView setIcon:[UIImage tg_routerActive]];
+    [self.routerSearchView setSpinnerActive:NO];
+    [self.routerSearchView setTitle:@"Select a Border Router" subTitle:@"Thread networks in your home"];
+    self.routerSearchView.topSeperatorView.hidden = YES;
+}
+
+- (void)connectRouterForItem:(TGRouterItem *)item {
+    //TODO: Will have to actually connect a real router
+    [self animateConnectingToRouterWithItem:item];
+    [self connectToRouterWithItem:item];
+}
+
+- (void)animateConnectingToRouterWithItem:(TGRouterItem *)item {
+    [self.routerSearchView setSpinnerActive:YES];
+    [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
+    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@ on %@", item.name, item.networkName]];
+}
+
+- (void)animateConnectedToRouterWithItem:(TGRouterItem *)item {
+    [self.routerSearchView setSpinnerActive:NO];
+    [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
+    [self.routerSearchView setTitle:item.name subTitle:item.networkName];
+    [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
+    [self.routerSearchView setBottomBarHidden:NO];
+    self.routerSearchView.topSeperatorView.hidden = NO;
+}
+
+- (void)connectToRouterWithItem:(TGRouterItem *)item {
+    self.routerAuthVC.item = item;
+    [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+}
+
+#pragma mark - TGRouterAuthViewControllerDelegate
+
+- (void)routerAuthenticationSuccessful:(TGRouterAuthViewController *)routerAuthenticationView {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [UIView animateWithDuration:0.4 animations:^{
+        [self animateConnectedToRouterWithItem:routerAuthenticationView.item];
+        self.viewState = TGMainViewStateConnectDeviceScanning;
+    }];
+}
+
+- (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    self.viewState = TGMainViewStateLookingForRouters;
+}
+
+#pragma mark - Select/Add Devices
+
+- (void)resetSelectDeviceView {
+    self.selectDeviceView.delegate = self;
+    self.selectDeviceView.alpha = 0;
+    self.scannerView.alpha = 0;
+    self.successView.alpha = 0;
+
+    TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
+    self.selectDeviceView.contentMode = contentMode;
+    self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
+    [self.view layoutIfNeeded];
+}
+
+- (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
+    self.viewState = TGMainViewStateConnectDevicePassphrase;
+    
+    [UIView animateWithDuration:0.4f animations:^{
+        TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
+        [self.selectDeviceView setContentMode:newMode];
+        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [self.selectDeviceView becomeFirstResponder];
+    }];
+}
+
+#pragma mark - Success View
+
+- (IBAction)addAnotherDeviceButtonPressed:(UIButton *)sender {
+    self.viewState = TGMainViewStateConnectDeviceScanning;
+}
+
+#pragma mark - TGDeviceStepViewDelegate
+
+- (void)TGDeviceStepView:(TGDeviceStepView *)stepView didTapIcon:(id)sender {
+    //the stepView sending could either be the wifiSearchView or the routerSearchView
+    if (stepView == self.wifiSearchView) {
+        [self.delegate mainViewWifiButtonDidTap:self];
+    } else if (stepView == self.routerSearchView) {
+        [self.delegate mainViewRouterButtonDidTap:self];
+    }
+}
+
+#pragma mark - TGSelectDeviceStepViewDelegate
+
+- (void)TGSelectDeviceStepViewDidTapScanCodeButton:(TGSelectDeviceStepView *)stepView {
+    [self setViewState:TGMainViewStateConnectDeviceScanning];
+    [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:YES];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
+        self.selectDeviceView.contentMode = contentMode;
+        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device{
+    //Show addProduct screen
+    [device isPassphraseValidWithCompletion:^(BOOL success) {
+        if (success) {
+            //Hide addProduct Screen
+            self.viewState = TGMainViewStateAddAnotherDevice;
+        } else {
+            NSLog(@"Adding device failed!");
+            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModePassphraseInvalid];
+            [self.selectDeviceView becomeFirstResponder];
+            //Hide addProduct screen
+        }
+    }];
+}
+
+#pragma mark - TGTableViewProtocol
+
+- (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouterItem *)item {
+    [self connectRouterForItem:item];
+}
+
+#pragma mark - TGScannerView Delegate
+
+- (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device {
+    [self.scannerView setContentMode:TGScannerViewContentModeInactive];
+    //Show addProduct screen
+
+    [device isPassphraseValidWithCompletion:^(BOOL success) {
+        if (success) {
+            //Hide addProduct screen
+            self.viewState = TGMainViewStateAddAnotherDevice;
+        } else {
+            // TODO: Show passphrase
+            NSLog(@"Adding device failed!");
+            self.viewState = TGMainViewStateConnectDeviceScanning;
+            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
+            //Hide addProduct screen
+        }
+    }];
+}
+
+- (void)TGScannerViewDidFailParsingDevice:(UIView *)scannerView {
+    [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
+}
+
+- (void)TGScannerView:(UIView *)scannerView didTapInfoButton:(id)sender {
+    [self setViewState:TGMainViewStateConnectDeviceTutorial];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    TGAnimator *animator = [[TGAnimator alloc] init];
+    animator.type = TGTransitionTypePresent;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    TGAnimator *animator = [[TGAnimator alloc] init];
+    animator.type = TGTransitionTypeDismiss;
+    return animator;
+}
+
+#pragma mark - Helper Methods
+
+- (NSString *)currentWifiSSID {
+    NSString *ssid;
+    NSArray *interfaces = (__bridge NSArray *)CNCopySupportedInterfaces();
+
+    for (NSString *interface in interfaces) {
+        CFDictionaryRef networkDetails = CNCopyCurrentNetworkInfo((__bridge CFStringRef) interface);
+        if (networkDetails) {
+            ssid = (NSString *)CFDictionaryGetValue (networkDetails, kCNNetworkInfoKeySSID);
+            CFRelease(networkDetails);
+        }
+    }
+    return ssid;
+}
+
+#pragma mark - Lazy Load
+
+- (TGRouterAuthViewController *)routerAuthVC {
+    if (!_routerAuthVC) {
+        _routerAuthVC = [[TGRouterAuthViewController alloc] initWithNibName:nil bundle:nil];
+        _routerAuthVC.delegate = self;
+        _routerAuthVC.transitioningDelegate = self;
+    }
+    return _routerAuthVC;
+}
+
+@end

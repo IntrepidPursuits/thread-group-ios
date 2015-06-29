@@ -1,0 +1,51 @@
+//
+//  TGMainView.h
+//  ThreadGroup
+//
+//  Created by LuQuan Intrepid on 6/16/15.
+//  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@class TGTableView;
+@protocol TGMainViewProtocol;
+
+typedef NS_ENUM(NSInteger, TGMainViewState) {
+    TGMainViewStateLookingForRouters,
+    TGMainViewStateConnectDeviceScanning,
+    TGMainViewStateConnectDevicePassphrase,
+    TGMainViewStateConnectDeviceTutorial,
+    TGMainViewStateAddAnotherDevice
+};
+
+@interface TGMainViewController : UIViewController
+
+@property (nonatomic) TGMainViewState viewState;
+@property (nonatomic, weak) id<TGMainViewProtocol> delegate;
+@property (strong, nonatomic) TGTableView *tableViewSource;
+
+//Wifi
+
+- (void)resetWifiSearchView;
+
+//Border Router
+
+- (void)resetRouterSearchView;
+
+//Select Devices
+
+//Camera View
+
+//Success View
+
+//Finding thread networks
+
+//Finding threadNetworks Popup
+
+@end
+
+@protocol TGMainViewProtocol <NSObject>
+- (void)mainViewWifiButtonDidTap:(TGMainViewController *)mainView;
+- (void)mainViewRouterButtonDidTap:(TGMainViewController *)mainView;
+@end
