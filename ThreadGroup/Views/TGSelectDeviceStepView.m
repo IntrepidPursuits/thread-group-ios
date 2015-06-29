@@ -166,13 +166,28 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *checkString = [self.passphraseInputField.text stringByReplacingCharactersInRange:range withString:string];
-    [self validateTextField:checkString];
-    return YES;
+    
+    BOOL validConnectCodeCharacters = [self connectCodeContainsValidCharacters:checkString];
+    BOOL connectCodeMeetsMinimumRequirement = (checkString.length >= TGDeviceConnectCodeMinimumCharacters);
+    BOOL connectCodeMeetsMaximumRequirement = (checkString.length <= TGDeviceConnectCodeMaximumCharacters);
+    BOOL validLength = (connectCodeMeetsMinimumRequirement && connectCodeMeetsMaximumRequirement);
+    
+    if (connectCodeMeetsMaximumRequirement && validConnectCodeCharacters) {
+        BOOL shouldShowConfirmButton = validLength;
+        self.confirmButton.hidden = !shouldShowConfirmButton;
+    }
+
+    return (validConnectCodeCharacters && connectCodeMeetsMaximumRequirement);
 }
 
-- (void)validateTextField:(NSString *)checkString {
-    BOOL shouldHide = (checkString.length == 0);
-    self.confirmButton.hidden = shouldHide;
+- (BOOL)connectCodeContainsValidCharacters:(NSString *)checkString {
+    NSMutableCharacterSet *validCharacters = [NSMutableCharacterSet uppercaseLetterCharacterSet];
+    [validCharacters formUnionWithCharacterSet:[NSCharacterSet decimalDigitCharacterSet]];
+    [validCharacters removeCharactersInString:@"IOQZ"];
+    [validCharacters invert];
+    
+    NSRange range = [checkString rangeOfCharacterFromSet:validCharacters];
+    return (range.location == NSNotFound);
 }
 
 - (void)resetConnectCodeTextField {

@@ -9,6 +9,9 @@
 #import "TGDevice.h"
 #import "TGNetworkManager.h"
 
+const NSUInteger TGDeviceConnectCodeMaximumCharacters = 16;
+const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
+
 @interface TGDevice()
 
 @property (nonatomic, strong) NSString *passphrase;
