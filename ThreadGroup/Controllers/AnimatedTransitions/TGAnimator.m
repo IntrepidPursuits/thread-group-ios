@@ -9,9 +9,6 @@
 #import "TGAnimator.h"
 #import "UIImage+ThreadGroup.h"
 
-/**
- *  Duration for transition animation
- */
 static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
 
 @interface TGAnimator()
@@ -56,14 +53,11 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                     toViewController:(UIViewController *)toViewController
                      inContainerView:(UIView *)containerView {
 
-    //Transition properties
     CGRect finalFrame = [transitionContext finalFrameForViewController:toViewController];
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     
-    //Create Snapshot of from view
     UIView *snapshotFromView = [fromViewController.view snapshotViewAfterScreenUpdates:NO];
 
-    //Create Image from fromViewController for blur
     UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *blurBackgroundView = [[UIVisualEffectView alloc] initWithEffect:blur];
 
@@ -85,21 +79,20 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : toViewController.view}]];
 
-    //Initiai state of the animation
-    toViewController.view.transform = CGAffineTransformMakeScale(0.5, 0.5);
-    toViewController.view.alpha = 0;
-    blurBackgroundView.alpha = 0.0;
+    toViewController.view.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+    toViewController.view.alpha = 0.0f;
+    blurBackgroundView.alpha = 0.0f;
+    snapshotFromView.alpha = 1.0f;
 
-    //animate
     [UIView animateWithDuration:duration
-                          delay:0
-         usingSpringWithDamping:0.8
-          initialSpringVelocity:0.0
+                          delay:0.0
+         usingSpringWithDamping:0.8f
+          initialSpringVelocity:0.0f
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          toViewController.view.transform = CGAffineTransformIdentity;
-                         toViewController.view.alpha = 1;
-                         blurBackgroundView.alpha = 1;
+                         toViewController.view.alpha = 1.0f;
+                         blurBackgroundView.alpha = 1.0f;
                      } completion:^(BOOL finished) {
                          [transitionContext completeTransition:finished];
                      }];
@@ -111,7 +104,7 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                   fromViewController:(UIViewController *)fromViewController
                     toViewController:(UIViewController *)toViewController
                      inContainerView:(UIView *)containerView {
-    //Transition properties
+
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     CGRect finalFrame = [transitionContext finalFrameForViewController:toViewController];
 
@@ -136,12 +129,11 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : fromViewController.view}]];
 
-    // Animate with keyframes
     [UIView animateWithDuration:duration
                      animations:^{
-                         fromViewController.view.transform = CGAffineTransformMakeScale(0.5, 0.5);
-                         fromViewController.view.alpha = 0.0;
-                         blurBackgroundView.alpha = 0.0;
+                         fromViewController.view.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+                         fromViewController.view.alpha = 0.0f;
+                         blurBackgroundView.alpha = 0.0f;
                      }
                      completion:^(BOOL finished) {
                          if (finished) {
