@@ -24,6 +24,7 @@ const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
     self = [super init];
     if (self) {
         _passphrase = passphrase;
+        _name = passphrase;
     }
     return self;
 }
