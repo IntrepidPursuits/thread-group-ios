@@ -93,11 +93,8 @@
 #pragma mark - Table View
 
 - (void)setupTableViewSource {
-    self.tableViewSource = [[TGTableView alloc] initWithFrame:self.tableView.frame style:UITableViewStylePlain];
-    self.tableViewSource.networkItems = [self createTestObjects];
-    self.tableViewSource.tableViewDelegate = self;
-    self.tableView.dataSource = self.tableViewSource;
-    self.tableView.delegate = self.tableViewSource;
+    [self.tableView setNetworkItems:[self createTestObjects]];
+    [self.tableView setTableViewDelegate:self];
 }
 
 #pragma mark - Button Events
@@ -105,6 +102,23 @@
 - (IBAction)tutorialDismissButtonTapped:(id)sender {
     [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
     [self setViewState:TGMainViewStateConnectDeviceScanning];
+}
+
+- (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
+    self.viewState = TGMainViewStateConnectDevicePassphrase;
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
+        [self.selectDeviceView setContentMode:newMode];
+        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [self.selectDeviceView becomeFirstResponder];
+    }];
+}
+
+- (IBAction)addAnotherDeviceButtonPressed:(UIButton *)sender {
+    self.viewState = TGMainViewStateConnectDeviceScanning;
 }
 
 #pragma mark - View States
@@ -246,9 +260,6 @@
             return TGScannerViewContentModeActiveScanning;
         case TGMainViewStateConnectDeviceTutorial:
             return TGScannerViewContentModeTutorial;
-        case TGMainViewStateAddAnotherDevice:
-        case TGMainViewStateLookingForRouters:
-        case TGMainViewStateConnectDevicePassphrase:
         default:
             return TGScannerViewContentModeInactive;
     }
@@ -317,7 +328,6 @@
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
     [self dismissViewControllerAnimated:YES completion:nil];
-//    self.viewState = TGMainViewStateLookingForRouters;
 }
 
 #pragma mark - Select/Add Devices
@@ -332,25 +342,6 @@
     self.selectDeviceView.contentMode = contentMode;
     self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
     [self.view layoutIfNeeded];
-}
-
-- (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
-    self.viewState = TGMainViewStateConnectDevicePassphrase;
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
-        [self.selectDeviceView setContentMode:newMode];
-        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
-        [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        [self.selectDeviceView becomeFirstResponder];
-    }];
-}
-
-#pragma mark - Success View
-
-- (IBAction)addAnotherDeviceButtonPressed:(UIButton *)sender {
-    self.viewState = TGMainViewStateConnectDeviceScanning;
 }
 
 #pragma mark - TGDeviceStepViewDelegate
@@ -393,7 +384,7 @@
     }];
 }
 
-#pragma mark - TGTableViewProtocol
+#pragma mark - TGTableView Delegate
 
 - (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouterItem *)item {
     [self connectRouterForItem:item];
