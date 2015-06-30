@@ -199,6 +199,7 @@
 - (void)animateViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters: {
+            [self.findingNetworksSpinnerView startAnimating];
             [UIView animateWithDuration:1.5 animations:^{
                 self.findingNetworksView.alpha = 0.0f;
             }];
