@@ -70,14 +70,26 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
     [containerView addSubview:toViewController.view];
     [containerView insertSubview:blurBackgroundView belowSubview:toViewController.view];
 
-    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
-                                                                                    options:0
-                                                                                    metrics:nil
-                                                                                      views:@{@"bar" : toViewController.view}]];
-    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]"
-                                                                                    options:0
-                                                                                    metrics:nil
-                                                                                      views:@{@"bar" : toViewController.view}]];
+    if (self.isPopup) {
+        [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[bar]-20-|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:@{@"bar" : toViewController.view}]];
+        [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[bar]-40-|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:@{@"bar" : toViewController.view}]];
+
+    } else {
+        [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:@{@"bar" : toViewController.view}]];
+        [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]-(>=100)-|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:@{@"bar" : toViewController.view}]];
+    }
 
     toViewController.view.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
     toViewController.view.alpha = 0.0f;
@@ -120,14 +132,25 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
     [containerView addSubview:blurBackgroundView];
     [containerView addSubview:fromViewController.view];
 
-    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
-                                                                                    options:0
-                                                                                    metrics:nil
-                                                                                      views:@{@"bar" : fromViewController.view}]];
-    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]"
-                                                                                    options:0
-                                                                                    metrics:nil
-                                                                                      views:@{@"bar" : fromViewController.view}]];
+    if (self.isPopup) {
+        [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[bar]-20-|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:@{@"bar" : fromViewController.view}]];
+        [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[bar]-40-|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:@{@"bar" : fromViewController.view}]];
+    } else {
+        [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:@{@"bar" : fromViewController.view}]];
+        [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]-(>=100)-|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:@{@"bar" : fromViewController.view}]];
+    }
 
     [UIView animateWithDuration:duration
                      animations:^{

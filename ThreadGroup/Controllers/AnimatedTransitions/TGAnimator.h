@@ -20,5 +20,6 @@ typedef NS_ENUM(NSUInteger, TGTransitionType) {
 @interface TGAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
 @property (nonatomic) TGTransitionType type;
+@property (nonatomic) BOOL isPopup;
 
 @end
