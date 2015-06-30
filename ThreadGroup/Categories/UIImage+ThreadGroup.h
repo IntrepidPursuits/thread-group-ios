@@ -27,4 +27,7 @@
 + (UIImage *)tg_spinner;
 + (UIImage *)tg_tutorialView;
 
++ (UIImage *)tg_largeClockwiseSpinner;
++ (UIImage *)tg_largeCounterClockwiseSpinner;
+
 @end

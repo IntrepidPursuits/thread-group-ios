@@ -8,27 +8,35 @@
 
 #import "TGSpinnerView.h"
 #import "UIView+Animations.h"
+#import "UIImage+ThreadGroup.h"
 
 @interface TGSpinnerView()
 
 @property (nonatomic, strong) UIView *nibView;
-@property (weak, nonatomic) IBOutlet UIImageView *spinnerLargeCounterClockwiseImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *spinnerLargeClockwiseImageView;
+@property (strong, nonatomic) UIImageView *spinnerLargeCounterClockwiseImageView;
+@property (strong, nonatomic) UIImageView *spinnerLargeClockwiseImageView;
 @end
 
 @implementation TGSpinnerView
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    if (self) {
-        self.nibView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-                                                      owner:self
-                                                    options:nil] lastObject];
-        [self addSubview:self.nibView];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
-    }
+    [self configureImageViews];
+    [self startAnimating];
+}
+
+- (void)configureImageViews {
+    self.spinnerLargeClockwiseImageView = [[UIImageView alloc] initWithImage:[UIImage tg_largeClockwiseSpinner]];
+    [self.spinnerLargeClockwiseImageView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
+    [self.spinnerLargeClockwiseImageView setContentMode:UIViewContentModeCenter];
+    [self.spinnerLargeClockwiseImageView setFrame:self.bounds];
+    [self addSubview:self.spinnerLargeClockwiseImageView];
+    
+    self.spinnerLargeCounterClockwiseImageView = [[UIImageView alloc] initWithImage:[UIImage tg_largeCounterClockwiseSpinner]];
+    [self.spinnerLargeCounterClockwiseImageView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
+    [self.spinnerLargeCounterClockwiseImageView setContentMode:UIViewContentModeCenter];
+    [self.spinnerLargeCounterClockwiseImageView setFrame:self.bounds];
+    [self addSubview:self.spinnerLargeCounterClockwiseImageView];
 }
 
 #pragma mark - Public
