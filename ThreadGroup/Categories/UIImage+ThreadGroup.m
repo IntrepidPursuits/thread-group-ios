@@ -62,12 +62,4 @@
     return [UIImage imageNamed:@"qr_tutorial"];
 }
 
-+ (UIImage *)tg_largeClockwiseSpinner {
-    return [UIImage imageNamed:@"spinner_large_clockwise"];
-}
-
-+ (UIImage *)tg_largeCounterClockwiseSpinner {
-    return [UIImage imageNamed:@"spinner_large_counter_clockwise"];
-}
-
 @end

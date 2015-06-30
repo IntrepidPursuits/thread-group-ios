@@ -58,6 +58,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     self.confirmButton.layer.cornerRadius = 2.0f;
     self.contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
     self.passphraseInputField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.passphraseInputField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.passphraseInputField.delegate = self;
     self.topBar.hidden = NO;
 }
@@ -164,12 +165,12 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 }
 
 - (IBAction)confirmButtonTapped:(id)sender {
-    [self.passphraseInputField resignFirstResponder];
-    [self resetConnectCodeTextField];
-
     //TODO: would need to perform this same process with passphrase obtained from QR code
     TGDevice *device = [self createDeviceWithPassphrase:self.passphraseInputField.text];
 
+    [self.passphraseInputField resignFirstResponder];
+    [self resetConnectCodeTextField];
+    
     if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapConfirmButton:validateWithDevice:)]) {
         [self.delegate TGSelectDeviceStepViewDidTapConfirmButton:self validateWithDevice:device];
     }
