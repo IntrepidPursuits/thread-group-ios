@@ -69,57 +69,44 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
         [self setPassphraseInputViewHidden:YES];
     }
 
-    if (_contentMode != TGSelectDeviceStepViewContentModeComplete) {
-        self.topSeperatorBar.hidden = YES;
-    }
-    
+    _contentMode = contentMode;
     switch (contentMode) {
         case TGSelectDeviceStepViewContentModePassphrase: {
             self.titleLabel.text = @"Enter Connect Code";
             self.subTitleLabel.text = @"Read this off the product you're connecting";
-            self.nibView.backgroundColor = [UIColor threadGroup_orange];
-            self.iconImageView.image = [UIImage tg_selectPassphraseActive];
-            self.topSeperatorBar.hidden = YES;
             [self setPassphraseInputViewHidden:NO];
         }
             break;
         case TGSelectDeviceStepViewContentModePassphraseInvalid: {
             self.titleLabel.text = @"Wrong Connect Code";
             self.subTitleLabel.text = @"Please check Connect Code and try again";
-            self.nibView.backgroundColor = [UIColor threadGroup_red];
-            self.iconImageView.image = [UIImage tg_selectDeviceError];
             [self setPassphraseInputViewHidden:NO];
-            self.topSeperatorBar.hidden = YES;
         }
             break;
         case TGSelectDeviceStepViewContentModeScanQRCode: {
             self.titleLabel.text = @"Scan Device QR Code";
             self.subTitleLabel.text = @"You can also enter the Connect Code manually";
-            self.nibView.backgroundColor = [UIColor threadGroup_orange];
-            self.iconImageView.image = [UIImage tg_selectQRCodeActive];
-            self.topSeperatorBar.hidden = YES;
         }
             break;
         case TGSelectDeviceStepViewContentModeScanQRCodeInvalid: {
             self.titleLabel.text = @"Wrong Connect QR Code";
             self.subTitleLabel.text = @"Please check your product compatibility";
-            self.nibView.backgroundColor = [UIColor threadGroup_red];
-            self.iconImageView.image = [UIImage tg_selectDeviceError];
-            self.topSeperatorBar.hidden = YES;
         }
             break;
         case TGSelectDeviceStepViewContentModeComplete: {
             self.titleLabel.text = @"Smart Thermostat";
             self.subTitleLabel.text = @"Intrepid's Thread Network";
-            self.nibView.backgroundColor = [UIColor threadGroup_grey];
-            self.iconImageView.image = [UIImage tg_selectDeviceCompleted];
-            self.topSeperatorBar.hidden = NO;
         }
             break;
     }
+    
+    self.iconImageView.image = [self iconImageForContentMode:contentMode];
+    self.nibView.backgroundColor = [self backgroundColorForContentMode:contentMode];
+    self.topSeperatorBar.hidden = (contentMode != TGSelectDeviceStepViewContentModeComplete);
     [self.iconImageView threadGroup_animatePopup];
     [self setPassphraseInputViewHidden:(contentMode != TGSelectDeviceStepViewContentModePassphrase && contentMode != TGSelectDeviceStepViewContentModePassphraseInvalid)];
 }
+
 
 + (CGFloat)heightForContentMode:(TGSelectDeviceStepViewContentMode)contentMode {
     switch (contentMode) {
@@ -132,12 +119,37 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     }
 }
 
-#pragma mark - Animations
+#pragma mark - Layout
 
 - (void)setPassphraseInputViewHidden:(BOOL)hidden {
     self.passphraseInputField.hidden = hidden;
     self.scanCodeButton.hidden = hidden;
     self.textboxLine.hidden = hidden;
+}
+
+- (void)resetConnectCodeTextField {
+    self.confirmButton.hidden = YES;
+    self.passphraseInputField.text = @"";
+}
+
+- (UIColor *)backgroundColorForContentMode:(TGSelectDeviceStepViewContentMode)contentMode {
+    switch (contentMode) {
+        case TGSelectDeviceStepViewContentModeComplete:             return [UIColor threadGroup_grey];
+        case TGSelectDeviceStepViewContentModePassphrase:           return [UIColor threadGroup_orange];
+        case TGSelectDeviceStepViewContentModeScanQRCode:           return [UIColor threadGroup_orange];
+        case TGSelectDeviceStepViewContentModePassphraseInvalid:    return [UIColor threadGroup_red];
+        case TGSelectDeviceStepViewContentModeScanQRCodeInvalid:    return [UIColor threadGroup_red];
+    }
+}
+
+- (UIImage *)iconImageForContentMode:(TGSelectDeviceStepViewContentMode)contentMode {
+    switch (contentMode) {
+        case TGSelectDeviceStepViewContentModeComplete:             return [UIImage tg_selectDeviceCompleted];
+        case TGSelectDeviceStepViewContentModePassphrase:           return [UIImage tg_selectPassphraseActive];
+        case TGSelectDeviceStepViewContentModeScanQRCode:           return [UIImage tg_selectQRCodeActive];
+        case TGSelectDeviceStepViewContentModePassphraseInvalid:    return [UIImage tg_selectDeviceError];
+        case TGSelectDeviceStepViewContentModeScanQRCodeInvalid:    return [UIImage tg_selectDeviceError];
+    }
 }
 
 #pragma mark - Button Events
@@ -189,11 +201,6 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     
     NSRange range = [checkString rangeOfCharacterFromSet:validCharacters];
     return (range.location == NSNotFound);
-}
-
-- (void)resetConnectCodeTextField {
-    self.confirmButton.hidden = YES;
-    self.passphraseInputField.text = @"";
 }
 
 #pragma mark - TGDevice

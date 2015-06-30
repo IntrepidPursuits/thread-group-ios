@@ -23,6 +23,8 @@ static NSString * const kTGTableViewCellReuseIdentifier = @"TGTableViewCell";
     [super awakeFromNib];
     [self registerNib:[UINib nibWithNibName:kTGTableViewCellName bundle:nil] forCellReuseIdentifier:kTGTableViewCellReuseIdentifier];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.dataSource = self;
+    self.delegate = self;
 }
 
 #pragma mark - DataSource
