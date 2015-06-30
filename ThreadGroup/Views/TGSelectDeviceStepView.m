@@ -57,6 +57,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     self.confirmButton.hidden = YES;
     self.confirmButton.layer.cornerRadius = 2.0f;
     self.contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
+    self.passphraseInputField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     self.passphraseInputField.delegate = self;
     self.topBar.hidden = NO;
 }
