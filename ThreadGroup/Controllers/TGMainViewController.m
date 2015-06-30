@@ -84,8 +84,8 @@
 
 - (NSArray *)createTestObjects {
     TGRouterItem *item1 = [[TGRouterItem alloc] initWithName:@"Router 1" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
-    TGRouterItem *item2 = [[TGRouterItem alloc] initWithName:@"Rotuer 2" networkName:@"Network 2" networkAddress:@"2001:db8::ff00:42:8329"];
-    TGRouterItem *item3 = [[TGRouterItem alloc] initWithName:@"Rotuer 3" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
+    TGRouterItem *item2 = [[TGRouterItem alloc] initWithName:@"Router 2" networkName:@"Network 2" networkAddress:@"2001:db8::ff00:42:8329"];
+    TGRouterItem *item3 = [[TGRouterItem alloc] initWithName:@"Router 3" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
     TGRouterItem *item4 = [[TGRouterItem alloc] initWithName:@"Router 4" networkName:@"Network 3" networkAddress:@"2001:db8::ff00:42:8329"];
     return @[item1, item2, item3, item4];
 }
@@ -127,31 +127,23 @@
         case TGMainViewStateLookingForRouters:
             [self resetWifiSearchView];
             [self resetRouterSearchView];
-            [self hideAndShowViewsForState:viewState];
-            [self animateViewsForState:viewState];
             break;
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning:
-        case TGMainViewStateConnectDeviceTutorial:
-            if (viewState != TGMainViewStateConnectDeviceTutorial) {
-                [self resetSelectDeviceView];
-            }
-            [self hideAndShowViewsForState:viewState];
-            [self animateViewsForState:viewState];
+            [self resetSelectDeviceView];
             break;
         case TGMainViewStateAddAnotherDevice: {
             TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
             self.selectDeviceView.contentMode = completedMode;
             self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:completedMode];
-
-            [self hideAndShowViewsForState:viewState];
-            [self animateViewsForState:viewState];
         }
             break;
         default:
-            NSAssert(YES, @"viewState should not be undefined");
             break;
     }
+    
+    [self hideAndShowViewsForState:viewState];
+    [self animateViewsForState:viewState];
 }
 
 - (void)hideAndShowViewsForState:(TGMainViewState)viewState {
@@ -189,7 +181,7 @@
     switch (viewState) {
         case TGMainViewStateLookingForRouters: {
             [UIView animateWithDuration:1.5 animations:^{
-                self.findingNetworksView.alpha = 0;
+                self.findingNetworksView.alpha = 0.0f;
             }];
         }
             break;
@@ -197,15 +189,15 @@
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
             [UIView animateWithDuration:0.4 animations:^{
-                self.selectDeviceView.alpha = 1;
-                self.scannerView.alpha = 1;
+                self.selectDeviceView.alpha = 1.0f;
+                self.scannerView.alpha = 1.0f;
                 [self.view bringSubviewToFront:self.scannerView];
             }];
         }
             break;
         case TGMainViewStateAddAnotherDevice: {
             [UIView animateWithDuration:0.4 animations:^{
-                self.successView.alpha = 1;
+                self.successView.alpha = 1.0f;
             }];
         }
             break;
@@ -239,8 +231,8 @@
     [hiddenConstraints removeObject:enabledButtonConstraint];
     [self.view layoutIfNeeded];
     
-    [UIView animateWithDuration:(animated) ? 0.4f : 0 animations:^{
-        enabledButtonConstraint.constant = 0;
+    [UIView animateWithDuration:(animated) ? 0.4 : 0 animations:^{
+        enabledButtonConstraint.constant = 0.0f;
         for (NSLayoutConstraint *constraint in hiddenConstraints) {
             constraint.constant = self.popupView.frame.size.height;
         }
@@ -332,9 +324,9 @@
 
 - (void)resetSelectDeviceView {
     self.selectDeviceView.delegate = self;
-    self.selectDeviceView.alpha = 0;
-    self.scannerView.alpha = 0;
-    self.successView.alpha = 0;
+    self.selectDeviceView.alpha = 0.0f;
+    self.scannerView.alpha = 0.0f;
+    self.successView.alpha = 0.0f;
 
     TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
     self.selectDeviceView.contentMode = contentMode;
@@ -345,7 +337,7 @@
 - (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
     self.viewState = TGMainViewStateConnectDevicePassphrase;
     
-    [UIView animateWithDuration:0.4f animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
         [self.selectDeviceView setContentMode:newMode];
         self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];

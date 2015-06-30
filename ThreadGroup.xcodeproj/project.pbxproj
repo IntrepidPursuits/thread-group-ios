@@ -301,6 +301,8 @@
 		CD8C68331B28703F0091B548 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D9E65C1B1B33362100A184AB /* TableView */,
+				D9E65C081B31FD6100A184AB /* TableViewCell */,
 				CD8C68341B2870730091B548 /* TGSpinnerView.h */,
 				CD8C68351B2870730091B548 /* TGSpinnerView.m */,
 				CD8C68391B28804D0091B548 /* TGDeviceStepView.h */,
@@ -312,8 +314,6 @@
 				CDDB18E81B29ED9F008A84FD /* TGSelectDeviceStepView.h */,
 				CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */,
 				CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */,
-				D9E65C1B1B33362100A184AB /* TableView */,
-				D9E65C081B31FD6100A184AB /* TableViewCell */,
 				CDC447601B39F5790037BAF5 /* TGScannerView.h */,
 				CDC447611B39F5790037BAF5 /* TGScannerView.m */,
 			);
