@@ -22,8 +22,9 @@
 #import "TGSettingsManager.h"
 #import "TGAnimator.h"
 #import "TGRouterAuthViewController.h"
+#import "TGAddProductViewController.h"
 
-@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate>
+@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate>
 
 //Wifi
 @property (weak, nonatomic) IBOutlet TGDeviceStepView *wifiSearchView;
@@ -64,6 +65,10 @@
 
 //RouterAuthVC
 @property (strong, nonatomic) TGRouterAuthViewController *routerAuthVC;
+
+//AddProductVC
+@property (strong, nonatomic) TGAddProductViewController *addProductVC;
+@property (nonatomic) BOOL ignoreAddProduct;
 
 @end
 
@@ -328,6 +333,7 @@
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
     [self dismissViewControllerAnimated:YES completion:nil];
+    self.viewState = TGMainViewStateLookingForRouters;
 }
 
 #pragma mark - Select/Add Devices
@@ -369,19 +375,41 @@
     }];
 }
 
-- (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device{
-    //Show addProduct screen
+- (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device {
+    [self.addProductVC setDevice:device andRouter:self.routerAuthVC.item];
+    [self showAddProductVC];
+
     [device isPassphraseValidWithCompletion:^(BOOL success) {
-        if (success) {
-            //Hide addProduct Screen
-            self.viewState = TGMainViewStateAddAnotherDevice;
-        } else {
-            NSLog(@"Adding device failed!");
-            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModePassphraseInvalid];
-            [self.selectDeviceView becomeFirstResponder];
-            //Hide addProduct screen
+        if (!self.ignoreAddProduct) {
+            if (success) {
+                [self hideAddProductVC];
+                self.viewState = TGMainViewStateAddAnotherDevice;
+            } else {
+                NSLog(@"Adding device failed!");
+                [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModePassphraseInvalid];
+                [self.selectDeviceView becomeFirstResponder];
+                [self hideAddProductVC];
+            }
         }
     }];
+}
+
+#pragma mark - TGAddProductViewController
+
+- (void)showAddProductVC {
+    self.ignoreAddProduct = NO;
+    [self presentViewController:self.addProductVC animated:YES completion:nil];
+}
+
+- (void)hideAddProductVC {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)addProductDidCancelAddingRequest:(TGAddProductViewController *)addProductViewController {
+    NSLog(@"Add Product Cancelled! Ignore API call return!");
+    self.ignoreAddProduct = YES;
+    [self hideAddProductVC];
+    [self.selectDeviceView becomeFirstResponder];
 }
 
 #pragma mark - TGTableView Delegate
@@ -395,18 +423,21 @@
 - (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device {
     [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
     [self.scannerView setContentMode:TGScannerViewContentModeInactive];
-    //Show addProduct screen
+
+    [self.addProductVC setDevice:device andRouter:self.routerAuthVC.item];
+    [self showAddProductVC];
 
     [device isPassphraseValidWithCompletion:^(BOOL success) {
-        if (success) {
-            //Hide addProduct screen
-            self.viewState = TGMainViewStateAddAnotherDevice;
-        } else {
-            // TODO: Show passphrase
-            NSLog(@"Adding device failed!");
-            self.viewState = TGMainViewStateConnectDeviceScanning;
-            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
-            //Hide addProduct screen
+        if (!self.ignoreAddProduct) {
+            if (success) {
+                [self hideAddProductVC];
+                self.viewState = TGMainViewStateAddAnotherDevice;
+            } else {
+                NSLog(@"Adding device failed!");
+                self.viewState = TGMainViewStateConnectDeviceScanning;
+                [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
+                [self hideAddProductVC];
+            }
         }
     }];
 }
@@ -458,6 +489,15 @@
         _routerAuthVC.transitioningDelegate = self;
     }
     return _routerAuthVC;
+}
+
+- (TGAddProductViewController *)addProductVC {
+    if (!_addProductVC) {
+        _addProductVC = [[TGAddProductViewController alloc] initWithNibName:nil bundle:nil];
+        _addProductVC.delegate = self;
+        _addProductVC.transitioningDelegate = self;
+    }
+    return _addProductVC;
 }
 
 @end
