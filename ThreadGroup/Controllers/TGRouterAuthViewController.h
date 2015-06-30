@@ -19,5 +19,4 @@
 @interface TGRouterAuthViewController : UIViewController
 @property (nonatomic, weak) id<TGRouterAuthViewControllerDelegate> delegate;
 @property (nonatomic, strong) TGRouterItem *item;
-- (void)resetView;
 @end

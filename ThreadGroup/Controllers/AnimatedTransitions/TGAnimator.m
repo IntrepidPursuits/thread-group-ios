@@ -9,9 +9,6 @@
 #import "TGAnimator.h"
 #import "UIImage+ThreadGroup.h"
 
-/**
- *  Duration for transition animation
- */
 static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
 
 @interface TGAnimator()
@@ -56,49 +53,48 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                     toViewController:(UIViewController *)toViewController
                      inContainerView:(UIView *)containerView {
 
-    //Transition properties
     CGRect finalFrame = [transitionContext finalFrameForViewController:toViewController];
     NSTimeInterval duration = [self transitionDuration:transitionContext];
+    
+    UIView *snapshotFromView = [fromViewController.view snapshotViewAfterScreenUpdates:NO];
 
-    //Create Image from fromViewController for blur
     UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    self.blurBackgroundView = [[UIVisualEffectView alloc] initWithEffect:blur];
+    UIVisualEffectView *blurBackgroundView = [[UIVisualEffectView alloc] initWithEffect:blur];
 
-    //Add blurBackgroundView to toViewController
+    snapshotFromView.frame = finalFrame;
     containerView.frame = finalFrame;
-    self.blurBackgroundView.frame = finalFrame;
+    blurBackgroundView.frame = finalFrame;
     toViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
 
+    [containerView addSubview:snapshotFromView];
+    [containerView addSubview:toViewController.view];
+    [containerView insertSubview:blurBackgroundView belowSubview:toViewController.view];
 
-    [containerView addSubview:self.blurBackgroundView];
-    [self.blurBackgroundView addSubview:toViewController.view];
-    //Constrain in a way to allow for the view content to size itself
-    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
+    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : toViewController.view}]];
-    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]-100-|"
+    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : toViewController.view}]];
 
-    //Initiai state of the animation
-    toViewController.view.transform = CGAffineTransformMakeScale(0.5, 0.5);
-    toViewController.view.alpha = 0;
+    toViewController.view.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+    toViewController.view.alpha = 0.0f;
+    blurBackgroundView.alpha = 0.0f;
+    snapshotFromView.alpha = 1.0f;
 
-    //animate
     [UIView animateWithDuration:duration
-                          delay:0
-         usingSpringWithDamping:0.8
-          initialSpringVelocity:0.0
+                          delay:0.0
+         usingSpringWithDamping:0.8f
+          initialSpringVelocity:0.0f
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          toViewController.view.transform = CGAffineTransformIdentity;
-                         toViewController.view.alpha = 1;
+                         toViewController.view.alpha = 1.0f;
+                         blurBackgroundView.alpha = 1.0f;
                      } completion:^(BOOL finished) {
-                         if (finished) {
-                             [transitionContext completeTransition:YES];
-                         }
+                         [transitionContext completeTransition:finished];
                      }];
 }
 
@@ -108,42 +104,42 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                   fromViewController:(UIViewController *)fromViewController
                     toViewController:(UIViewController *)toViewController
                      inContainerView:(UIView *)containerView {
-    //Transition properties
+
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     CGRect finalFrame = [transitionContext finalFrameForViewController:toViewController];
 
-    //Add views and background
-    [containerView addSubview:toViewController.view];
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    UIVisualEffectView *blurBackgroundView = [[UIVisualEffectView alloc] initWithEffect:blur];
 
     containerView.frame = finalFrame;
     toViewController.view.frame = finalFrame;
-    self.blurBackgroundView.frame = finalFrame;
+    blurBackgroundView.frame = finalFrame;
     fromViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
 
+    [containerView addSubview:toViewController.view];
+    [containerView addSubview:blurBackgroundView];
+    [containerView addSubview:fromViewController.view];
 
-    [containerView addSubview:self.blurBackgroundView];
-    [self.blurBackgroundView addSubview:fromViewController.view];
-    //Constrain in a way to allow for the view content to size itself
-    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
+    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[bar]-40-|"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : fromViewController.view}]];
-    [self.blurBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]-100-|"
+    [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:@{@"bar" : fromViewController.view}]];
 
-    // Animate with keyframes
     [UIView animateWithDuration:duration
                      animations:^{
-                         fromViewController.view.transform = CGAffineTransformMakeScale(0.9, 0.9);
-                         fromViewController.view.alpha = 0.0;
-                         self.blurBackgroundView.alpha = 0.0;
+                         fromViewController.view.transform = CGAffineTransformMakeScale(0.5f, 0.5f);
+                         fromViewController.view.alpha = 0.0f;
+                         blurBackgroundView.alpha = 0.0f;
                      }
                      completion:^(BOOL finished) {
-                         [self.blurBackgroundView removeFromSuperview];
-                         self.blurBackgroundView = nil;
-                         [transitionContext completeTransition:YES];
+                         if (finished) {
+                             [blurBackgroundView removeFromSuperview];
+                         }
+                         [transitionContext completeTransition:finished];
                      }];
 }
 
