@@ -284,6 +284,7 @@
     [self.routerSearchView setSpinnerActive:NO];
     [self.routerSearchView setTitle:@"Select a Border Router" subTitle:@"Thread networks in your home"];
     self.routerSearchView.topSeperatorView.hidden = YES;
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
 }
 
 - (void)connectRouterForItem:(TGRouterItem *)item {
@@ -365,9 +366,9 @@
 - (void)TGDeviceStepView:(TGDeviceStepView *)stepView didTapIcon:(id)sender {
     //the stepView sending could either be the wifiSearchView or the routerSearchView
     if (stepView == self.wifiSearchView) {
-        [self.delegate mainViewWifiButtonDidTap:self];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     } else if (stepView == self.routerSearchView) {
-        [self.delegate mainViewRouterButtonDidTap:self];
+        [self setViewState:TGMainViewStateLookingForRouters];
     }
 }
 
@@ -409,6 +410,7 @@
 #pragma mark - TGScannerView Delegate
 
 - (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device {
+    [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
     [self.scannerView setContentMode:TGScannerViewContentModeInactive];
     //Show addProduct screen
 

@@ -19,3 +19,6 @@
 - (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion;
 
 @end
+
+extern const NSUInteger TGDeviceConnectCodeMaximumCharacters;
+extern const NSUInteger TGDeviceConnectCodeMinimumCharacters;
