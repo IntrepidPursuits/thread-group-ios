@@ -21,6 +21,7 @@
 		CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68231B2730050091B548 /* UIFont+ThreadGroup.m */; };
 		CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68261B273A8B0091B548 /* UIColor+ThreadGroup.m */; };
 		CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C68351B2870730091B548 /* TGSpinnerView.m */; };
+		CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68371B2870800091B548 /* TGSpinnerView.xib */; };
 		CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C683A1B28804D0091B548 /* TGDeviceStepView.m */; };
 		CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */; };
 		CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */; };
@@ -89,6 +90,7 @@
 		CD8C68261B273A8B0091B548 /* UIColor+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ThreadGroup.m"; sourceTree = "<group>"; };
 		CD8C68341B2870730091B548 /* TGSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSpinnerView.h; sourceTree = "<group>"; };
 		CD8C68351B2870730091B548 /* TGSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSpinnerView.m; sourceTree = "<group>"; };
+		CD8C68371B2870800091B548 /* TGSpinnerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSpinnerView.xib; sourceTree = "<group>"; };
 		CD8C68391B28804D0091B548 /* TGDeviceStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGDeviceStepView.h; sourceTree = "<group>"; };
 		CD8C683A1B28804D0091B548 /* TGDeviceStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGDeviceStepView.m; sourceTree = "<group>"; };
 		CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGDeviceStepView.xib; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				D9E65C081B31FD6100A184AB /* TableViewCell */,
 				CD8C68341B2870730091B548 /* TGSpinnerView.h */,
 				CD8C68351B2870730091B548 /* TGSpinnerView.m */,
+				CD8C68371B2870800091B548 /* TGSpinnerView.xib */,
 				CD8C68391B28804D0091B548 /* TGDeviceStepView.h */,
 				CD8C683A1B28804D0091B548 /* TGDeviceStepView.m */,
 				CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */,
@@ -462,6 +465,7 @@
 			files = (
 				D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */,
 				D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */,
+				CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */,
 				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
 				CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
