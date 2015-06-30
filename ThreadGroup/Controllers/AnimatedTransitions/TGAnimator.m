@@ -59,15 +59,20 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
     //Transition properties
     CGRect finalFrame = [transitionContext finalFrameForViewController:toViewController];
     NSTimeInterval duration = [self transitionDuration:transitionContext];
+    
+    //Create Snapshot of from view
+    UIView *snapshotFromView = [fromViewController.view snapshotViewAfterScreenUpdates:NO];
 
     //Create Image from fromViewController for blur
     UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *blurBackgroundView = [[UIVisualEffectView alloc] initWithEffect:blur];
 
+    snapshotFromView.frame = finalFrame;
     containerView.frame = finalFrame;
     blurBackgroundView.frame = finalFrame;
     toViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
 
+    [containerView addSubview:snapshotFromView];
     [containerView addSubview:toViewController.view];
     [containerView insertSubview:blurBackgroundView belowSubview:toViewController.view];
 
@@ -96,9 +101,7 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                          toViewController.view.alpha = 1;
                          blurBackgroundView.alpha = 1;
                      } completion:^(BOOL finished) {
-                         if (finished) {
-                             [transitionContext completeTransition:YES];
-                         }
+                         [transitionContext completeTransition:finished];
                      }];
 }
 
@@ -143,8 +146,8 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
                      completion:^(BOOL finished) {
                          if (finished) {
                              [blurBackgroundView removeFromSuperview];
-                             [transitionContext completeTransition:YES];
                          }
+                         [transitionContext completeTransition:finished];
                      }];
 }
 
