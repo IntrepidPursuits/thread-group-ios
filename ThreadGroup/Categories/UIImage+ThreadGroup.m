@@ -22,6 +22,10 @@
     return [UIImage imageNamed:@"nav_log_info"];
 }
 
++ (UIImage *)tg_shareAction {
+    return [UIImage imageNamed:@"action_share_log"];
+}
+
 + (UIImage *)tg_wifiCompleted {
     return [UIImage imageNamed:@"steps_wifi_completed"];
 }
