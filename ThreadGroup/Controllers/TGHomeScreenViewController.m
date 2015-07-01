@@ -10,16 +10,22 @@
 #import <Reachability/Reachability.h>
 #import "TGHomeScreenViewController.h"
 #import "TGMainViewController.h"
+#import "TGPopupContentViewController.h"
+#import "TGAnimator.h"
 
-@interface TGHomeScreenViewController ()
+@interface TGHomeScreenViewController () <UIViewControllerTransitioningDelegate, TGPopupContentViewControllerDelegate>
 
 @property (nonatomic, strong) Reachability *reachability;
 
 //No Wifi View
 @property (weak, nonatomic) IBOutlet UIView *noWifiView;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
+
 //Main View
 @property (strong, nonatomic) TGMainViewController *mainViewController;
+
+//PopupContentViewController
+@property (strong, nonatomic) TGPopupContentViewController *popupContentVC;
 
 @end
 
@@ -37,6 +43,7 @@
     [self registerForReturnFromBackgroundNotification];
     [self setupMainView];
     [self hideAllViews];
+    self.modalPresentationStyle = UIModalPresentationCustom;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,16 +99,6 @@
     self.noWifiView.hidden = NO;
 }
 
-#pragma mark - App States
-
-//We should list out the different states that the app can exist in
-/* 
- *  1) No wifi connection
-       Only thing to interact with there is the "Find Wifi Connection" button, which i am assuming would bring the user to the iPhone setting screen
- *  2) Connected to Wifi, looking for border routers
- *  3) Connected to Wifi, scan device or enter in passphrase
- *  4) Connected to Wifi, device added, have the option to add a new device into the network.
- */
 #pragma mark - Header View
 
 - (IBAction)moreButtonPressed:(UIButton *)sender {
@@ -110,6 +107,14 @@
 
 - (IBAction)logButtonPressed:(UIButton *)sender {
     NSLog(@"Show App Log");
+    [self.popupContentVC setContentTitle:@"Application Debug Log" andButtons:@[]];
+    [self presentViewController:self.popupContentVC animated:YES completion:nil];
+}
+
+#pragma mark - TGPopupContentViewControllerDelegate
+
+- (void)popupContentViewControllerDidPressButtonAtIndex:(NSUInteger)index {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Main View
@@ -136,6 +141,33 @@
                                              selector:@selector(resetMainView)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:[UIApplication sharedApplication]];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    TGAnimator *animator = [TGAnimator new];
+    animator.type = TGTransitionTypePresent;
+    animator.isPopup = YES;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    TGAnimator *animator = [TGAnimator new];
+    animator.type = TGTransitionTypeDismiss;
+    animator.isPopup = YES;
+    return animator;
+}
+
+#pragma mark - Lazy load
+
+- (TGPopupContentViewController *)popupContentVC {
+    if (!_popupContentVC) {
+        _popupContentVC = [[TGPopupContentViewController alloc] initWithNibName:nil bundle:nil];
+        _popupContentVC.transitioningDelegate = self;
+        _popupContentVC.delegate = self;
+    }
+    return _popupContentVC;
 }
 
 #pragma mark - Dealloc
