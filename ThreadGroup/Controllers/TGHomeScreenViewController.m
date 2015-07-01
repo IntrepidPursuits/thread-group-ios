@@ -12,6 +12,8 @@
 #import "TGMainViewController.h"
 #import "TGPopupContentViewController.h"
 #import "TGAnimator.h"
+#import "TGButton.h"
+#import "UIImage+ThreadGroup.h"
 
 @interface TGHomeScreenViewController () <UIViewControllerTransitioningDelegate, TGPopupContentViewControllerDelegate>
 
@@ -27,6 +29,7 @@
 //PopupContentViewController
 @property (strong, nonatomic) TGPopupContentViewController *popupContentVC;
 
+@property (strong, nonatomic) NSArray *buttons;
 @end
 
 @implementation TGHomeScreenViewController
@@ -107,14 +110,26 @@
 
 - (IBAction)logButtonPressed:(UIButton *)sender {
     NSLog(@"Show App Log");
-    [self.popupContentVC setContentTitle:@"Application Debug Log" andButtons:@[]];
+    self.popupContentVC.popupType = TGPopupTypeLog;
+    self.buttons = [self createButtonsFor:self.popupContentVC];
+    [self.popupContentVC setContentTitle:@"Application Debug Log" andButtons:self.buttons];
     [self presentViewController:self.popupContentVC animated:YES completion:nil];
 }
 
 #pragma mark - TGPopupContentViewControllerDelegate
 
 - (void)popupContentViewControllerDidPressButtonAtIndex:(NSUInteger)index {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    switch (self.popupContentVC.popupType) {
+        case TGPopupTypeLog:
+            [self handleButtonPressedAtIndex:index forPopupType:TGPopupTypeLog];
+            break;
+        case TGPopupTypeTOS:
+            [self handleButtonPressedAtIndex:index forPopupType:TGPopupTypeTOS];
+            break;
+        default:
+            NSAssert(YES, @"TGPopupType is undefined");
+            break;
+    }
 }
 
 #pragma mark - Main View
@@ -168,6 +183,55 @@
         _popupContentVC.delegate = self;
     }
     return _popupContentVC;
+}
+
+#pragma mark - Button creation
+
+- (NSArray *)createButtonsFor:(TGPopupContentViewController *)popupVC {
+    NSMutableArray *buttons = [NSMutableArray new];
+    switch (popupVC.popupType) {
+        case TGPopupTypeLog: {
+            TGButton *shareButton = [[TGButton alloc] initWithTitle:@"SHARE" andImage:[UIImage tg_shareAction]];
+            TGButton *clearButton = [[TGButton alloc] initWithTitle:@"CLEAR" andImage:nil];
+            TGButton *okButton = [[TGButton alloc] initWithTitle:@"OK" andImage:nil];
+
+            [buttons addObject:shareButton];
+            [buttons addObject:clearButton];
+            [buttons addObject:okButton];
+
+            break;
+        }
+        case TGPopupTypeTOS: {
+            TGButton *okButton = [[TGButton alloc] initWithTitle:@"OK" andImage:nil];
+            [buttons addObject:okButton];
+            break;
+        }
+        default:
+            NSAssert(YES, @"TGPopupType is undefined");
+            break;
+    }
+    return buttons;
+}
+
+#pragma mark - Button Actions
+
+- (void)handleButtonPressedAtIndex:(NSUInteger)index forPopupType:(TGPopupType)popupType {
+    if (popupType == TGPopupTypeLog) {
+        switch (index) {
+            case 0:
+                NSLog(@"Share button pressed!");
+                break;
+            case 1:
+                NSLog(@"Clear button pressed!");
+                break;
+            case 2:
+                [self dismissViewControllerAnimated:YES completion:nil];
+                break;
+            default:
+                NSAssert(index > 2, @"Button index is out of bounds!");
+                break;
+        }
+    }
 }
 
 #pragma mark - Dealloc

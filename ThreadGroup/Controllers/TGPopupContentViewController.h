@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, TGPopupType) {
+    TGPopupTypeLog,
+    TGPopupTypeTOS
+};
+
 @class TGPopupContentViewController;
 
 @protocol TGPopupContentViewControllerDelegate <NSObject>
@@ -15,8 +20,8 @@
 @end
 
 @interface TGPopupContentViewController : UIViewController
-
 @property (nonatomic, weak) id<TGPopupContentViewControllerDelegate> delegate;
-- (void)setContentTitle:(NSString *)contentTitle andButtons:(NSArray *)buttons;
+@property (nonatomic) TGPopupType popupType;
 
+- (void)setContentTitle:(NSString *)contentTitle andButtons:(NSArray *)buttons;
 @end
