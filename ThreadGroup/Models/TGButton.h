@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface TGButton : UIButton
-
-- (instancetype)init;
+- (instancetype)initWithTitle:(NSString *)title andImage:(UIImage *)image;
 @end

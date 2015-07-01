@@ -10,29 +10,22 @@
 #import "UIColor+ThreadGroup.h"
 #import "UIFont+ThreadGroup.h"
 
-@interface TGButton()
-
-@end
-
 @implementation TGButton
 
-- (instancetype)init {
+- (instancetype)initWithTitle:(NSString *)title andImage:(UIImage *)image {
     self = [UIButton buttonWithType:UIButtonTypeSystem];
     if (self) {
-        self.tintColor = [UIColor threadGroup_orange]; //Assuming this would take care of the titleLabel color
+        self.backgroundColor = [UIColor whiteColor];
+        self.tintColor = [UIColor threadGroup_orange];
         self.titleLabel.font = [UIFont threadGroup_mediumFontWithSize:14.0f];
+
+        [self setTitle:title forState:UIControlStateNormal];
+        if (image) {
+            [self setImage:image forState:UIControlStateNormal];
+            self.titleEdgeInsets = UIEdgeInsetsMake(0.0f, 8.0f, 0.0f, 0.0f);
+            self.imageEdgeInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 8.0f);
+        }
     }
     return self;
 }
-
-#pragma mark - 
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 @end
