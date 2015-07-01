@@ -11,7 +11,7 @@
 #import "TGHomeScreenViewController.h"
 #import "TGMainViewController.h"
 #import "TGPopupContentViewController.h"
-#import "TGAnimator.h"
+#import "TGPopupContentAnimator.h"
 #import "TGButton.h"
 #import "UIImage+ThreadGroup.h"
 
@@ -161,16 +161,14 @@
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    TGAnimator *animator = [TGAnimator new];
+    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
     animator.type = TGTransitionTypePresent;
-    animator.isPopup = YES;
     return animator;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    TGAnimator *animator = [TGAnimator new];
+    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
     animator.type = TGTransitionTypeDismiss;
-    animator.isPopup = YES;
     return animator;
 }
 
