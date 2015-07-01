@@ -16,12 +16,14 @@
 		0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0946F4041B500DF300EDB5DE /* TGSelectableCell.m */; };
 		0946F4071B500DF300EDB5DE /* TGSelectableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */; };
 		CD7B60441B1F5469007FF820 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60431B1F5469007FF820 /* main.m */; };
+		CD7B60441B1F5469007FF820 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60431B1F5469007FF820 /* main.mm */; };
 		CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60461B1F5469007FF820 /* AppDelegate.m */; };
 		CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7B604E1B1F5469007FF820 /* Images.xcassets */; };
 		CD7B60521B1F5469007FF820 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7B60501B1F5469007FF820 /* LaunchScreen.xib */; };
 		CD7B605E1B1F5469007FF820 /* ThreadGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B605D1B1F5469007FF820 /* ThreadGroupTests.m */; };
 		CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8639391B4183300044B2BE /* TGMainViewController.m */; };
 		CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD86393A1B4183300044B2BE /* TGMainViewController.xib */; };
+		CD86393F1B4330140044B2BE /* TGIotivityWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD86393E1B4330140044B2BE /* TGIotivityWrapper.mm */; };
 		CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68191B272A290091B548 /* Gotham-Bold.otf */; };
 		CD8C681E1B272A290091B548 /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681A1B272A290091B548 /* Gotham-Book.otf */; };
 		CD8C681F1B272A290091B548 /* Gotham-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681B1B272A290091B548 /* Gotham-Light.otf */; };
@@ -34,6 +36,9 @@
 		CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */; };
 		CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */; };
 		CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */; };
+		CD8D26911B4440B2003B5610 /* libcoap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8D268B1B443D3E003B5610 /* libcoap.a */; };
+		CD8D26921B4440B2003B5610 /* libconnectivity_abstraction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8D268C1B443D3E003B5610 /* libconnectivity_abstraction.a */; };
+		CD8D26931B4440B2003B5610 /* liboctbstack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8D268D1B443D3E003B5610 /* liboctbstack.a */; };
 		CD8FFD741B39DCEA00481DE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */; };
 		CD8FFD771B39DCF300481DE7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD751B39DCF300481DE7 /* CoreMedia.framework */; };
 		CD8FFD781B39DCF300481DE7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */; };
@@ -68,7 +73,6 @@
 		D9EA94F81B55559F00A419D4 /* TGNetworkConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EA94F71B55559F00A419D4 /* TGNetworkConfigModel.m */; };
 		D9EA94FB1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EA94FA1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m */; };
 		D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D9FB30221B398C8D002B6ED4 /* TGDevice.m */; };
-		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,7 +102,7 @@
 		4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroup.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup.release.xcconfig"; sourceTree = "<group>"; };
 		CD7B603E1B1F5469007FF820 /* ThreadGroup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreadGroup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7B60421B1F5469007FF820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CD7B60431B1F5469007FF820 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CD7B60431B1F5469007FF820 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		CD7B60451B1F5469007FF820 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CD7B60461B1F5469007FF820 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CD7B604E1B1F5469007FF820 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		CD8639381B4183300044B2BE /* TGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainViewController.h; sourceTree = "<group>"; };
 		CD8639391B4183300044B2BE /* TGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainViewController.m; sourceTree = "<group>"; };
 		CD86393A1B4183300044B2BE /* TGMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainViewController.xib; sourceTree = "<group>"; };
+		CD86393D1B4330140044B2BE /* TGIotivityWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGIotivityWrapper.h; sourceTree = "<group>"; };
+		CD86393E1B4330140044B2BE /* TGIotivityWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TGIotivityWrapper.mm; sourceTree = "<group>"; };
 		CD8C68191B272A290091B548 /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
 		CD8C681A1B272A290091B548 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
 		CD8C681B1B272A290091B548 /* Gotham-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Light.otf"; sourceTree = "<group>"; };
@@ -126,6 +132,9 @@
 		CD8C683E1B289EDC0091B548 /* TGNetworkSearchingPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkSearchingPopup.h; sourceTree = "<group>"; };
 		CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkSearchingPopup.m; sourceTree = "<group>"; };
 		CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkSearchingPopup.xib; sourceTree = "<group>"; };
+		CD8D268B1B443D3E003B5610 /* libcoap.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoap.a; path = iotivity/out/ios/universal/libcoap.a; sourceTree = "<group>"; };
+		CD8D268C1B443D3E003B5610 /* libconnectivity_abstraction.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libconnectivity_abstraction.a; path = iotivity/out/ios/universal/libconnectivity_abstraction.a; sourceTree = "<group>"; };
+		CD8D268D1B443D3E003B5610 /* liboctbstack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liboctbstack.a; path = iotivity/out/ios/universal/liboctbstack.a; sourceTree = "<group>"; };
 		CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		CD8FFD751B39DCF300481DE7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -197,7 +206,9 @@
 				CD8FFD7A1B39DCFC00481DE7 /* QuartzCore.framework in Frameworks */,
 				CD8FFD7C1B39DD0B00481DE7 /* libiconv.dylib in Frameworks */,
 				CDDB18F01B2B27B9008A84FD /* SystemConfiguration.framework in Frameworks */,
-				E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */,
+				CD8D26911B4440B2003B5610 /* libcoap.a in Frameworks */,
+				CD8D26921B4440B2003B5610 /* libconnectivity_abstraction.a in Frameworks */,
+				CD8D26931B4440B2003B5610 /* liboctbstack.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +253,9 @@
 		2104FEA234D389D850092AA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD8D268B1B443D3E003B5610 /* libcoap.a */,
+				CD8D268C1B443D3E003B5610 /* libconnectivity_abstraction.a */,
+				CD8D268D1B443D3E003B5610 /* liboctbstack.a */,
 				CD8FFD7D1B39DD3E00481DE7 /* libzbar.a */,
 				CD8FFD7B1B39DD0B00481DE7 /* libiconv.dylib */,
 				CD8FFD791B39DCFC00481DE7 /* QuartzCore.framework */,
@@ -305,7 +319,7 @@
 			children = (
 				CD8C68181B2724E00091B548 /* Fonts */,
 				CD7B60421B1F5469007FF820 /* Info.plist */,
-				CD7B60431B1F5469007FF820 /* main.m */,
+				CD7B60431B1F5469007FF820 /* main.mm */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -410,6 +424,8 @@
 				CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */,
 				D95BC6901B45992400271ED7 /* TGLogManager.h */,
 				D95BC6911B45992400271ED7 /* TGLogManager.m */,
+				CD86393D1B4330140044B2BE /* TGIotivityWrapper.h */,
+				CD86393E1B4330140044B2BE /* TGIotivityWrapper.mm */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -646,7 +662,7 @@
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,
 				CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */,
-				CD7B60441B1F5469007FF820 /* main.m in Sources */,
+				CD7B60441B1F5469007FF820 /* main.mm in Sources */,
 				CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */,
 				CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */,
 				D95BC6921B45992400271ED7 /* TGLogManager.m in Sources */,
@@ -660,6 +676,7 @@
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */,
 				D9EA94F51B55528700A419D4 /* TGNetworkConfigRowModel.m in Sources */,
+				CD86393F1B4330140044B2BE /* TGIotivityWrapper.mm in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				D95BC6891B43378400271ED7 /* TGButton.m in Sources */,
 				0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */,
@@ -787,15 +804,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${SRCROOT}/iotivity/resource\"/**",
+				);
 				INFOPLIST_FILE = ThreadGroup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Patrick/Developer/iotivity/out/ios/i386/release,
-					/Users/Patrick/Developer/iotivity/out/ios/armv7/release,
-					"$(PROJECT_DIR)/ThreadGroup/ZBarSDK",
-					"$(PROJECT_DIR)/ThreadGroup/Contrib/ZBarSDK",
-					"$(PROJECT_DIR)/ThreadGroup/Contrib/LibzBar",
+					"$(PROJECT_DIR)/iotivity/out/ios/universal",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -809,15 +828,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${SRCROOT}/iotivity/resource\"/**",
+				);
 				INFOPLIST_FILE = ThreadGroup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Patrick/Developer/iotivity/out/ios/i386/release,
-					/Users/Patrick/Developer/iotivity/out/ios/armv7/release,
-					"$(PROJECT_DIR)/ThreadGroup/ZBarSDK",
-					"$(PROJECT_DIR)/ThreadGroup/Contrib/ZBarSDK",
-					"$(PROJECT_DIR)/ThreadGroup/Contrib/LibzBar",
+					"$(PROJECT_DIR)/iotivity/out/ios/universal",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
