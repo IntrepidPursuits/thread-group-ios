@@ -13,6 +13,7 @@
 + (UIImage *)tg_navThreadLogo;
 + (UIImage *)tg_navMoreMenu;
 + (UIImage *)tg_navLogInfo;
++ (UIImage *)tg_shareAction;
 
 + (UIImage *)tg_wifiCompleted;
 + (UIImage *)tg_routerActive;

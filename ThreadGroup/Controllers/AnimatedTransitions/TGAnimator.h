@@ -21,4 +21,7 @@ typedef NS_ENUM(NSUInteger, TGTransitionType) {
 
 @property (nonatomic) TGTransitionType type;
 
+- (NSArray *)verticalConstraintsForView:(UIView *)view;
+- (NSArray *)horizontalConstraintsForView:(UIView *)view;
+
 @end

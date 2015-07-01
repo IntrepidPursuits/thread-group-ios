@@ -10,17 +10,26 @@
 #import <Reachability/Reachability.h>
 #import "TGHomeScreenViewController.h"
 #import "TGMainViewController.h"
+#import "TGPopupContentViewController.h"
+#import "TGPopupContentAnimator.h"
+#import "TGButton.h"
+#import "UIImage+ThreadGroup.h"
 
-@interface TGHomeScreenViewController ()
+@interface TGHomeScreenViewController () <UIViewControllerTransitioningDelegate, TGPopupContentViewControllerDelegate>
 
 @property (nonatomic, strong) Reachability *reachability;
 
 //No Wifi View
 @property (weak, nonatomic) IBOutlet UIView *noWifiView;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
+
 //Main View
 @property (strong, nonatomic) TGMainViewController *mainViewController;
 
+//PopupContentViewController
+@property (strong, nonatomic) TGPopupContentViewController *popupContentVC;
+
+@property (strong, nonatomic) NSArray *buttons;
 @end
 
 @implementation TGHomeScreenViewController
@@ -37,6 +46,7 @@
     [self registerForReturnFromBackgroundNotification];
     [self setupMainView];
     [self hideAllViews];
+    self.modalPresentationStyle = UIModalPresentationCustom;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,16 +102,6 @@
     self.noWifiView.hidden = NO;
 }
 
-#pragma mark - App States
-
-//We should list out the different states that the app can exist in
-/* 
- *  1) No wifi connection
-       Only thing to interact with there is the "Find Wifi Connection" button, which i am assuming would bring the user to the iPhone setting screen
- *  2) Connected to Wifi, looking for border routers
- *  3) Connected to Wifi, scan device or enter in passphrase
- *  4) Connected to Wifi, device added, have the option to add a new device into the network.
- */
 #pragma mark - Header View
 
 - (IBAction)moreButtonPressed:(UIButton *)sender {
@@ -110,6 +110,26 @@
 
 - (IBAction)logButtonPressed:(UIButton *)sender {
     NSLog(@"Show App Log");
+    self.popupContentVC.popupType = TGPopupTypeLog;
+    self.buttons = [self createButtonsFor:self.popupContentVC];
+    [self.popupContentVC setContentTitle:@"Application Debug Log" andButtons:self.buttons];
+    [self presentViewController:self.popupContentVC animated:YES completion:nil];
+}
+
+#pragma mark - TGPopupContentViewControllerDelegate
+
+- (void)popupContentViewControllerDidPressButtonAtIndex:(NSUInteger)index {
+    switch (self.popupContentVC.popupType) {
+        case TGPopupTypeLog:
+            [self handleButtonPressedAtIndex:index forPopupType:TGPopupTypeLog];
+            break;
+        case TGPopupTypeTOS:
+            [self handleButtonPressedAtIndex:index forPopupType:TGPopupTypeTOS];
+            break;
+        default:
+            NSAssert(YES, @"TGPopupType is undefined");
+            break;
+    }
 }
 
 #pragma mark - Main View
@@ -136,6 +156,80 @@
                                              selector:@selector(resetMainView)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:[UIApplication sharedApplication]];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
+    animator.type = TGTransitionTypePresent;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
+    animator.type = TGTransitionTypeDismiss;
+    return animator;
+}
+
+#pragma mark - Lazy load
+
+- (TGPopupContentViewController *)popupContentVC {
+    if (!_popupContentVC) {
+        _popupContentVC = [[TGPopupContentViewController alloc] initWithNibName:nil bundle:nil];
+        _popupContentVC.transitioningDelegate = self;
+        _popupContentVC.delegate = self;
+    }
+    return _popupContentVC;
+}
+
+#pragma mark - Button creation
+
+- (NSArray *)createButtonsFor:(TGPopupContentViewController *)popupVC {
+    NSMutableArray *buttons = [NSMutableArray new];
+    switch (popupVC.popupType) {
+        case TGPopupTypeLog: {
+            TGButton *shareButton = [[TGButton alloc] initWithTitle:@"SHARE" andImage:[UIImage tg_shareAction]];
+            TGButton *clearButton = [[TGButton alloc] initWithTitle:@"CLEAR" andImage:nil];
+            TGButton *okButton = [[TGButton alloc] initWithTitle:@"OK" andImage:nil];
+
+            [buttons addObject:shareButton];
+            [buttons addObject:clearButton];
+            [buttons addObject:okButton];
+
+            break;
+        }
+        case TGPopupTypeTOS: {
+            TGButton *okButton = [[TGButton alloc] initWithTitle:@"OK" andImage:nil];
+            [buttons addObject:okButton];
+            break;
+        }
+        default:
+            NSAssert(YES, @"TGPopupType is undefined");
+            break;
+    }
+    return buttons;
+}
+
+#pragma mark - Button Actions
+
+- (void)handleButtonPressedAtIndex:(NSUInteger)index forPopupType:(TGPopupType)popupType {
+    if (popupType == TGPopupTypeLog) {
+        switch (index) {
+            case 0:
+                NSLog(@"Share button pressed!");
+                break;
+            case 1:
+                NSLog(@"Clear button pressed!");
+                break;
+            case 2:
+                [self dismissViewControllerAnimated:YES completion:nil];
+                break;
+            default:
+                NSAssert(index > 2, @"Button index is out of bounds!");
+                break;
+        }
+    }
 }
 
 #pragma mark - Dealloc
