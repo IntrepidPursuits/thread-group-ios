@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class TGPopupContentViewController;
+
+@protocol TGPopupContentViewControllerDelegate <NSObject>
+- (void)popupContentViewControllerDidPressButtonAtIndex:(NSUInteger)index;
+@end
+
 @interface TGPopupContentViewController : UIViewController
+
+@property (nonatomic, weak) id<TGPopupContentViewControllerDelegate> delegate;
+- (void)setContentTitle:(NSString *)contentTitle andButtons:(NSArray *)buttons;
 
 @end
