@@ -35,32 +35,17 @@
                         <constraint firstAttribute="height" constant="1" id="HMe-Og-H9S"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLN-oE-n7u" userLabel="Content View">
-                    <rect key="frame" x="0.0" y="53" width="600" height="491"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxJ-xz-1xQ">
-                            <rect key="frame" x="280" y="231" width="40" height="30"/>
-                            <state key="normal" title="Close">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="2yd-cE-vhQ"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="centerX" secondItem="bxJ-xz-1xQ" secondAttribute="centerX" id="SuT-na-fTW"/>
-                        <constraint firstAttribute="height" priority="750" constant="500" id="k6W-vx-NfB"/>
-                        <constraint firstAttribute="centerY" secondItem="bxJ-xz-1xQ" secondAttribute="centerY" id="w5s-57-9MQ"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Hc-8h-JWD" userLabel="Buttons PlaceholderVIew">
                     <rect key="frame" x="0.0" y="544" width="600" height="56"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.83137254900000002" green="0.82745098039999998" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="yed-Kp-hEB"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLN-oE-n7u" userLabel="Content View">
+                    <rect key="frame" x="0.0" y="53" width="600" height="491"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="750" constant="500" id="k6W-vx-NfB"/>
                     </constraints>
                 </view>
             </subviews>
