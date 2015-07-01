@@ -216,15 +216,21 @@
 - (void)handleButtonPressedAtIndex:(NSUInteger)index forPopupType:(TGPopupType)popupType {
     if (popupType == TGPopupTypeLog) {
         switch (index) {
-            case 0:
+            case 0: {
                 NSLog(@"Share button pressed!");
+                UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems:@[@"dfsdfds"] applicationActivities:nil];
+                activity.excludedActivityTypes = @[UIActivityTypePostToFacebook, UIActivityTypePostToFlickr, UIActivityTypePostToTencentWeibo, UIActivityTypePostToTwitter, UIActivityTypePostToVimeo, UIActivityTypePostToWeibo];
+                [self.popupContentVC presentViewController:activity animated:YES completion:nil];
                 break;
-            case 1:
+            }
+            case 1: {
                 NSLog(@"Clear button pressed!");
                 break;
-            case 2:
+            }
+            case 2: {
                 [self dismissViewControllerAnimated:YES completion:nil];
                 break;
+            }
             default:
                 NSAssert(index > 2, @"Button index is out of bounds!");
                 break;
