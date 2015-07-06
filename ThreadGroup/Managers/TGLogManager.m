@@ -59,8 +59,13 @@ static const char* kTGLogFacilityConstant = "com.threadgroup.log";
     return consoleLog;
 }
 
-- (void)clearLog {
-    //Somehow go thru ASl and clear all the logs for the app only.
+- (void)resetLog {
+    //The way I "clear" the log is to change the time key on the query to now 
+    //I will get an empty log back
+    NSTimeInterval timeInterval = [NSDate date].timeIntervalSince1970;
+    NSString *timeFilter = [NSString stringWithFormat:@"%f", timeInterval];
+    const char * timeFilterStr = [timeFilter cStringUsingEncoding:NSUTF8StringEncoding];
+    asl_set_query(self.queryMessage, ASL_KEY_TIME, timeFilterStr, ASL_QUERY_OP_GREATER);
 }
 
 #pragma mark - Setup

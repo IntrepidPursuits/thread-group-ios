@@ -14,6 +14,6 @@
 
 - (void)logMessage:(NSString *)message;
 - (NSArray *)getLog;
-- (void)clearLog;
+- (void)resetLog;
 
 @end
