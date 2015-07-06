@@ -9,13 +9,13 @@
 #import <asl.h>
 #import "TGLogManager.h"
 
+static const char* kTGLogFacilityConstant = "com.threadgroup.log";
+
 @interface TGLogManager()
 
 @property (nonatomic) aslclient client;
 @property (nonatomic) aslmsg queryMessage;
 @property (nonatomic) aslmsg recordMessage;
-
-
 
 @end
 @implementation TGLogManager
@@ -31,31 +31,31 @@
 }
 
 - (void)logMessage:(NSString *)message {
-    //Create message and send that to ASL
     const char *msg = [message UTF8String];
+    //We will set all app logs to ASL_LEVEL_NOTICE
     asl_log(self.client, self.recordMessage, ASL_LEVEL_NOTICE, "%s", msg);
 }
 
 - (NSArray *)getLog {
-    //Generate a query and get all logs from ASL that return the logs at the level we have specified and perhaps the facility as well in order to make sure that we only get the logs we want
     NSMutableArray *consoleLog = [NSMutableArray array];
 
-    asl_set_query(self.queryMessage, ASL_KEY_MSG, NULL, ASL_QUERY_OP_LESS_EQUAL);
-    asl_set(self.queryMessage, ASL_KEY_FACILITY, "io.intrepid.threadgroup");
     aslresponse response = asl_search(self.client, self.queryMessage);
-
-    asl_free(self.queryMessage);
 
     aslmsg message;
     while((message = asl_next(response)))
     {
         const char *msg = asl_get(message, ASL_KEY_MSG);
-        [consoleLog addObject:[NSString stringWithCString:msg encoding:NSUTF8StringEncoding]];
+        const char *time = asl_get(message, ASL_KEY_TIME);
+        NSDate *dateFromTime = [NSDate dateWithTimeIntervalSince1970:(strtod(time, NULL))];
+
+        NSString *timeString = [self convertDateToLocalTimeZone:dateFromTime];
+        NSString *msgString = [NSString stringWithCString:msg encoding:NSUTF8StringEncoding];
+
+        [consoleLog addObject:[NSString stringWithFormat:@"%@ : %@", timeString, msgString]];
     }
 
     asl_release(response);
-    asl_close(self.client);
-    
+
     return consoleLog;
 }
 
@@ -66,37 +66,26 @@
 #pragma mark - Setup
 
 - (void)setup {
-    self.client = asl_open(NULL, NULL, ASL_OPT_STDERR);
-    asl_set(self.client, ASL_KEY_FACILITY, "io.intrepid.threadgroup");
+    //Set a unique facility so we can target our log queries and entries
+    self.client = asl_open(NULL, kTGLogFacilityConstant, ASL_OPT_STDERR);
 
     self.queryMessage = asl_new(ASL_TYPE_QUERY);
     self.recordMessage = asl_new(ASL_TYPE_MSG);
+
+    //Get log who has the unique ASL_KEY_FACILITY
+    asl_set_query(self.queryMessage, ASL_KEY_FACILITY, kTGLogFacilityConstant, ASL_QUERY_OP_EQUAL);
+
+    //On device, log entries are only visible to root by default.
+    //We need to set the ASL_KEY_READ_UID to -1 in order for the calling process to see its log entries
+    asl_set(self.recordMessage, ASL_KEY_READ_UID, "-1");
 }
 
-- (NSArray *)console {
-    NSMutableArray *consoleLog = [NSMutableArray array];
+#pragma mark - Helper
 
-    aslclient client = asl_open(NULL, NULL, ASL_OPT_STDERR);
-
-
-    aslmsg query = asl_new(ASL_TYPE_QUERY);
-    asl_set_query(query, ASL_KEY_MSG, NULL, ASL_QUERY_OP_NOT_EQUAL);
-    aslresponse response = asl_search(client, query);
-
-    asl_free(query);
-
-    aslmsg message;
-    while((message = asl_next(response)))
-    {
-
-        const char *msg = asl_get(message, ASL_KEY_MSG);
-        [consoleLog addObject:[NSString stringWithCString:msg encoding:NSUTF8StringEncoding]];
-    }
-
-    asl_release(response);
-    asl_close(client);
-    
-    return consoleLog;
+- (NSString *)convertDateToLocalTimeZone:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+    dateFormatter.timeZone = [NSTimeZone localTimeZone];
+    return [dateFormatter stringFromDate:date];
 }
-
 @end
