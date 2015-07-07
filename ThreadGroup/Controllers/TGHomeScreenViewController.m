@@ -48,6 +48,7 @@
     [self setupMainView];
     [self hideAllViews];
     self.modalPresentationStyle = UIModalPresentationCustom;
+    [[TGLogManager sharedManager] logMessage:@"HomeScreenVC viewDidLoad"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,6 +80,7 @@
 - (void)hideAllViews {
     self.mainViewController.view.hidden = YES;
     self.noWifiView.hidden = YES;
+    [[TGLogManager sharedManager] logMessage:@"HomeScreenVC hideAllViews"];
 }
 
 - (void)resetMainView {
@@ -106,11 +108,11 @@
 #pragma mark - Header View
 
 - (IBAction)moreButtonPressed:(UIButton *)sender {
-    NSLog(@"Show drop down menu");
+    [[TGLogManager sharedManager] logMessage:@"Show drop down menu"];
 }
 
 - (IBAction)logButtonPressed:(UIButton *)sender {
-    NSLog(@"Show App Log");
+    [[TGLogManager sharedManager] logMessage:@"Show App Log"];
     self.popupContentVC.popupType = TGPopupTypeLog;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Application Debug Log" andButtons:self.buttons];
