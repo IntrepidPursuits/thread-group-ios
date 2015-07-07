@@ -13,7 +13,7 @@
 + (instancetype)sharedManager;
 
 - (void)logMessage:(NSString *)message;
-- (NSArray *)getLog;
+- (NSString *)getLog;
 - (void)resetLog;
 
 @end

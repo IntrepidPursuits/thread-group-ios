@@ -36,7 +36,7 @@ static const char* kTGLogFacilityConstant = "com.threadgroup.log";
     asl_log(self.client, self.recordMessage, ASL_LEVEL_NOTICE, "%s", msg);
 }
 
-- (NSArray *)getLog {
+- (NSString *)getLog {
     NSMutableArray *consoleLog = [NSMutableArray array];
 
     aslresponse response = asl_search(self.client, self.queryMessage);
@@ -51,12 +51,15 @@ static const char* kTGLogFacilityConstant = "com.threadgroup.log";
         NSString *timeString = [self convertDateToLocalTimeZone:dateFromTime];
         NSString *msgString = [NSString stringWithCString:msg encoding:NSUTF8StringEncoding];
 
-        [consoleLog addObject:[NSString stringWithFormat:@"%@ : %@", timeString, msgString]];
+        [consoleLog addObject:[NSString stringWithFormat:@"%@\n%@", timeString, msgString]];
     }
 
     asl_release(response);
 
-    return consoleLog;
+    //Two newline characters are needed to actually make a newline between the items.
+    NSString *logs = [consoleLog componentsJoinedByString:@"\n\n"];
+
+    return logs;
 }
 
 - (void)resetLog {
