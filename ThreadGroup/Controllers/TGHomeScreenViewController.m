@@ -14,6 +14,7 @@
 #import "TGPopupContentAnimator.h"
 #import "TGButton.h"
 #import "UIImage+ThreadGroup.h"
+#import "TGLogManager.h"
 
 @interface TGHomeScreenViewController () <UIViewControllerTransitioningDelegate, TGPopupContentViewControllerDelegate>
 
@@ -113,6 +114,7 @@
     self.popupContentVC.popupType = TGPopupTypeLog;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Application Debug Log" andButtons:self.buttons];
+    self.popupContentVC.textContent = [[TGLogManager sharedManager] getLog];
     [self presentViewController:self.popupContentVC animated:YES completion:nil];
 }
 
@@ -218,13 +220,16 @@
         switch (index) {
             case 0: {
                 NSLog(@"Share button pressed!");
-                UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems:@[@"dfsdfds"] applicationActivities:nil];
+                UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems:@[self.popupContentVC.textContent] applicationActivities:nil];
                 activity.excludedActivityTypes = @[UIActivityTypePostToFacebook, UIActivityTypePostToFlickr, UIActivityTypePostToTencentWeibo, UIActivityTypePostToTwitter, UIActivityTypePostToVimeo, UIActivityTypePostToWeibo];
                 [self.popupContentVC presentViewController:activity animated:YES completion:nil];
                 break;
             }
             case 1: {
                 NSLog(@"Clear button pressed!");
+                [[TGLogManager sharedManager] resetLog];
+                self.popupContentVC.textContent = [[TGLogManager sharedManager] getLog];
+                [self.popupContentVC resetTextView];
                 break;
             }
             case 2: {
