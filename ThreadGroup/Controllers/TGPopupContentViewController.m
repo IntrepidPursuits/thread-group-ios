@@ -13,21 +13,28 @@
 
 @interface TGPopupContentViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *buttonsPlaceholderView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @property (strong, nonatomic) NSArray *buttons;
 @property (strong, nonatomic) NSString *name;
+
 @end
 
 @implementation TGPopupContentViewController
 
 #pragma mark - ViewController Lifecycle
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.textView.textContainerInset = UIEdgeInsetsMake(24.0f, 24.0f, 24.0f, 24.0f);
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.titleLabel.text = self.name;
     [self setupButtons];
+    [self resetTextView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -62,6 +69,12 @@
         preceedingButton = button;
     }
     [self.buttonsPlaceholderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[preceeding]|" options:0 metrics:nil views:@{@"preceeding" : preceedingButton}]];
+}
+
+#pragma mark - TextView
+
+- (void)resetTextView {
+    self.textView.text = self.textContent;
 }
 
 - (void)buttonPressed:(id)sender {
