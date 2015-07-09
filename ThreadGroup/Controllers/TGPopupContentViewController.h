@@ -21,7 +21,10 @@ typedef NS_ENUM(NSUInteger, TGPopupType) {
 
 @interface TGPopupContentViewController : UIViewController
 @property (nonatomic, weak) id<TGPopupContentViewControllerDelegate> delegate;
+@property (strong, nonatomic) NSString *textContent;
 @property (nonatomic) TGPopupType popupType;
 
 - (void)setContentTitle:(NSString *)contentTitle andButtons:(NSArray *)buttons;
+- (void)resetTextView;
+
 @end

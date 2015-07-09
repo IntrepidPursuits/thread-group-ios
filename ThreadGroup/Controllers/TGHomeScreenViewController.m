@@ -14,6 +14,7 @@
 #import "TGPopupContentAnimator.h"
 #import "TGButton.h"
 #import "UIImage+ThreadGroup.h"
+#import "TGLogManager.h"
 
 @interface TGHomeScreenViewController () <UIViewControllerTransitioningDelegate, TGPopupContentViewControllerDelegate>
 
@@ -47,6 +48,7 @@
     [self setupMainView];
     [self hideAllViews];
     self.modalPresentationStyle = UIModalPresentationCustom;
+    [[TGLogManager sharedManager] logMessage:@"HomeScreenVC viewDidLoad"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -78,6 +80,7 @@
 - (void)hideAllViews {
     self.mainViewController.view.hidden = YES;
     self.noWifiView.hidden = YES;
+    [[TGLogManager sharedManager] logMessage:@"HomeScreenVC hideAllViews"];
 }
 
 - (void)resetMainView {
@@ -105,14 +108,15 @@
 #pragma mark - Header View
 
 - (IBAction)moreButtonPressed:(UIButton *)sender {
-    NSLog(@"Show drop down menu");
+    [[TGLogManager sharedManager] logMessage:@"Show drop down menu"];
 }
 
 - (IBAction)logButtonPressed:(UIButton *)sender {
-    NSLog(@"Show App Log");
+    [[TGLogManager sharedManager] logMessage:@"Show App Log"];
     self.popupContentVC.popupType = TGPopupTypeLog;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Application Debug Log" andButtons:self.buttons];
+    self.popupContentVC.textContent = [[TGLogManager sharedManager] getLog];
     [self presentViewController:self.popupContentVC animated:YES completion:nil];
 }
 
@@ -216,15 +220,26 @@
 - (void)handleButtonPressedAtIndex:(NSUInteger)index forPopupType:(TGPopupType)popupType {
     if (popupType == TGPopupTypeLog) {
         switch (index) {
-            case 0:
+            case 0: {
                 NSLog(@"Share button pressed!");
+                [self dismissViewControllerAnimated:YES completion:^{
+                    UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems:@[self.popupContentVC.textContent] applicationActivities:nil];
+                    activity.excludedActivityTypes = @[UIActivityTypePostToFacebook, UIActivityTypePostToFlickr, UIActivityTypePostToTencentWeibo, UIActivityTypePostToTwitter, UIActivityTypePostToVimeo, UIActivityTypePostToWeibo];
+                    [self presentViewController:activity animated:YES completion:nil];
+                }];
                 break;
-            case 1:
+            }
+            case 1: {
                 NSLog(@"Clear button pressed!");
+                [[TGLogManager sharedManager] resetLog];
+                self.popupContentVC.textContent = [[TGLogManager sharedManager] getLog];
+                [self.popupContentVC resetTextView];
                 break;
-            case 2:
+            }
+            case 2: {
                 [self dismissViewControllerAnimated:YES completion:nil];
                 break;
+            }
             default:
                 NSAssert(index > 2, @"Button index is out of bounds!");
                 break;
