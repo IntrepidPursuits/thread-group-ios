@@ -222,9 +222,11 @@
         switch (index) {
             case 0: {
                 NSLog(@"Share button pressed!");
-                UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems:@[self.popupContentVC.textContent] applicationActivities:nil];
-                activity.excludedActivityTypes = @[UIActivityTypePostToFacebook, UIActivityTypePostToFlickr, UIActivityTypePostToTencentWeibo, UIActivityTypePostToTwitter, UIActivityTypePostToVimeo, UIActivityTypePostToWeibo];
-                [self.popupContentVC presentViewController:activity animated:YES completion:nil];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    UIActivityViewController *activity = [[UIActivityViewController alloc] initWithActivityItems:@[self.popupContentVC.textContent] applicationActivities:nil];
+                    activity.excludedActivityTypes = @[UIActivityTypePostToFacebook, UIActivityTypePostToFlickr, UIActivityTypePostToTencentWeibo, UIActivityTypePostToTwitter, UIActivityTypePostToVimeo, UIActivityTypePostToWeibo];
+                    [self presentViewController:activity animated:YES completion:nil];
+                }];
                 break;
             }
             case 1: {
