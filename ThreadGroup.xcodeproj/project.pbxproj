@@ -16,6 +16,9 @@
 		0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0946F4041B500DF300EDB5DE /* TGSelectableCell.m */; };
 		0946F4071B500DF300EDB5DE /* TGSelectableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */; };
 		CD7B60441B1F5469007FF820 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60431B1F5469007FF820 /* main.m */; };
+		0A7AD34DC5A3297901411D32 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
+		CD095A031B45CC6C007DACFA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD095A021B45CC6C007DACFA /* libc++.dylib */; };
+		CD4E72591B4C826C00DBA98D /* libMeshCop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4E72581B4C826C00DBA98D /* libMeshCop.a */; };
 		CD7B60441B1F5469007FF820 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60431B1F5469007FF820 /* main.mm */; };
 		CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60461B1F5469007FF820 /* AppDelegate.m */; };
 		CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7B604E1B1F5469007FF820 /* Images.xcassets */; };
@@ -36,9 +39,6 @@
 		CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */; };
 		CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */; };
 		CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */; };
-		CD8D26911B4440B2003B5610 /* libcoap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8D268B1B443D3E003B5610 /* libcoap.a */; };
-		CD8D26921B4440B2003B5610 /* libconnectivity_abstraction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8D268C1B443D3E003B5610 /* libconnectivity_abstraction.a */; };
-		CD8D26931B4440B2003B5610 /* liboctbstack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8D268D1B443D3E003B5610 /* liboctbstack.a */; };
 		CD8FFD741B39DCEA00481DE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */; };
 		CD8FFD771B39DCF300481DE7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD751B39DCF300481DE7 /* CoreMedia.framework */; };
 		CD8FFD781B39DCF300481DE7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */; };
@@ -100,6 +100,10 @@
 		0946F4041B500DF300EDB5DE /* TGSelectableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGSelectableCell.m; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.m; sourceTree = "<group>"; };
 		0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGSelectableCell.xib; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.xib; sourceTree = "<group>"; };
 		4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroup.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup.release.xcconfig"; sourceTree = "<group>"; };
+		CD095A021B45CC6C007DACFA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		CD095A0D1B45E09C007DACFA /* libc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libc_common.a; path = iotivity/out/ios/universal/libc_common.a; sourceTree = "<group>"; };
+		CD4E72581B4C826C00DBA98D /* libMeshCop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMeshCop.a; path = Pods/libMeshCop/ios/MeshCop/libMeshCop.a; sourceTree = "<group>"; };
+		CD7AE8081B4B0A35007A58E0 /* libocsrm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocsrm.a; path = "../iotivity-private/out/ios/arm64/debug/libocsrm.a"; sourceTree = "<group>"; };
 		CD7B603E1B1F5469007FF820 /* ThreadGroup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreadGroup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7B60421B1F5469007FF820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD7B60431B1F5469007FF820 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -200,15 +204,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD095A031B45CC6C007DACFA /* libc++.dylib in Frameworks */,
 				CD8FFD741B39DCEA00481DE7 /* AVFoundation.framework in Frameworks */,
 				CD8FFD771B39DCF300481DE7 /* CoreMedia.framework in Frameworks */,
 				CD8FFD781B39DCF300481DE7 /* CoreVideo.framework in Frameworks */,
 				CD8FFD7A1B39DCFC00481DE7 /* QuartzCore.framework in Frameworks */,
 				CD8FFD7C1B39DD0B00481DE7 /* libiconv.dylib in Frameworks */,
 				CDDB18F01B2B27B9008A84FD /* SystemConfiguration.framework in Frameworks */,
-				CD8D26911B4440B2003B5610 /* libcoap.a in Frameworks */,
-				CD8D26921B4440B2003B5610 /* libconnectivity_abstraction.a in Frameworks */,
-				CD8D26931B4440B2003B5610 /* liboctbstack.a in Frameworks */,
+				0A7AD34DC5A3297901411D32 /* libPods-ThreadGroup.a in Frameworks */,
+				CD4E72591B4C826C00DBA98D /* libMeshCop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +257,10 @@
 		2104FEA234D389D850092AA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD4E72581B4C826C00DBA98D /* libMeshCop.a */,
+				CD7AE8081B4B0A35007A58E0 /* libocsrm.a */,
+				CD095A0D1B45E09C007DACFA /* libc_common.a */,
+				CD095A021B45CC6C007DACFA /* libc++.dylib */,
 				CD8D268B1B443D3E003B5610 /* libcoap.a */,
 				CD8D268C1B443D3E003B5610 /* libconnectivity_abstraction.a */,
 				CD8D268D1B443D3E003B5610 /* liboctbstack.a */,
@@ -275,6 +283,13 @@
 				4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CD095A011B45CC26007DACFA /* Contrib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Contrib;
 			sourceTree = "<group>";
 		};
 		CD7B60351B1F5469007FF820 = {
@@ -300,6 +315,7 @@
 		CD7B60401B1F5469007FF820 /* ThreadGroup */ = {
 			isa = PBXGroup;
 			children = (
+				CD095A011B45CC26007DACFA /* Contrib */,
 				D9446A7F1B335ADD007C8D61 /* Models */,
 				CDDB18F11B2B2AF8008A84FD /* Managers */,
 				CD8C68331B28703F0091B548 /* Views */,
@@ -742,10 +758,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -809,13 +821,19 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
 					"\"${SRCROOT}/iotivity/resource\"/**",
+					"\"$(SRCROOT)/iotivity/extlibs/tinydtls\"/**",
 				);
 				INFOPLIST_FILE = ThreadGroup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iotivity/out/ios/universal",
+					"/Users/Patrick/Developer/iotivity-private/out/ios/arm64/debug",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Thread-Group-Libraries-fvawmtfbldonpschxbqydfrlqpsq/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/ThreadGroup/Contrib",
+					"$(PROJECT_DIR)/Pods/libMeshCop/ios/MeshCop",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -833,13 +851,19 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
 					"\"${SRCROOT}/iotivity/resource\"/**",
+					"\"$(SRCROOT)/iotivity/extlibs/tinydtls\"/**",
 				);
 				INFOPLIST_FILE = ThreadGroup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iotivity/out/ios/universal",
+					"/Users/Patrick/Developer/iotivity-private/out/ios/arm64/debug",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Thread-Group-Libraries-fvawmtfbldonpschxbqydfrlqpsq/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/ThreadGroup/Contrib",
+					"$(PROJECT_DIR)/Pods/libMeshCop/ios/MeshCop",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
