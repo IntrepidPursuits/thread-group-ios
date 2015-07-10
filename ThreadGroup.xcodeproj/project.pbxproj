@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0946F3F41B500AEB00EDB5DE /* TGNetworkConfigViewController.m */; };
+		0946F3F71B500AEB00EDB5DE /* TGNetworkConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0946F3F51B500AEB00EDB5DE /* TGNetworkConfigViewController.xib */; };
+		0946F3FC1B500DC300EDB5DE /* TGGeneralCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0946F3FA1B500DC300EDB5DE /* TGGeneralCell.m */; };
+		0946F3FD1B500DC300EDB5DE /* TGGeneralCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0946F3FB1B500DC300EDB5DE /* TGGeneralCell.xib */; };
+		0946F4011B500DDC00EDB5DE /* TGNetworkInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0946F3FF1B500DDC00EDB5DE /* TGNetworkInfoCell.m */; };
+		0946F4021B500DDC00EDB5DE /* TGNetworkInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0946F4001B500DDC00EDB5DE /* TGNetworkInfoCell.xib */; };
+		0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0946F4041B500DF300EDB5DE /* TGSelectableCell.m */; };
+		0946F4071B500DF300EDB5DE /* TGSelectableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */; };
 		CD7B60441B1F5469007FF820 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60431B1F5469007FF820 /* main.m */; };
 		CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60461B1F5469007FF820 /* AppDelegate.m */; };
 		CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7B604E1B1F5469007FF820 /* Images.xcassets */; };
@@ -71,6 +79,18 @@
 
 /* Begin PBXFileReference section */
 		003FB1823A20615E43F8CCC8 /* Pods-ThreadGroup.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroup.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup.debug.xcconfig"; sourceTree = "<group>"; };
+		0946F3F31B500AEB00EDB5DE /* TGNetworkConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNetworkConfigViewController.h; path = ThreadNetworkConfig/TGNetworkConfigViewController.h; sourceTree = "<group>"; };
+		0946F3F41B500AEB00EDB5DE /* TGNetworkConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNetworkConfigViewController.m; path = ThreadNetworkConfig/TGNetworkConfigViewController.m; sourceTree = "<group>"; };
+		0946F3F51B500AEB00EDB5DE /* TGNetworkConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGNetworkConfigViewController.xib; path = ThreadNetworkConfig/TGNetworkConfigViewController.xib; sourceTree = "<group>"; };
+		0946F3F91B500DC300EDB5DE /* TGGeneralCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGGeneralCell.h; path = TableViewCell/ThreadNetworkConfig/TGGeneralCell.h; sourceTree = "<group>"; };
+		0946F3FA1B500DC300EDB5DE /* TGGeneralCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGGeneralCell.m; path = TableViewCell/ThreadNetworkConfig/TGGeneralCell.m; sourceTree = "<group>"; };
+		0946F3FB1B500DC300EDB5DE /* TGGeneralCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGGeneralCell.xib; path = TableViewCell/ThreadNetworkConfig/TGGeneralCell.xib; sourceTree = "<group>"; };
+		0946F3FE1B500DDC00EDB5DE /* TGNetworkInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNetworkInfoCell.h; path = TableViewCell/ThreadNetworkConfig/TGNetworkInfoCell.h; sourceTree = "<group>"; };
+		0946F3FF1B500DDC00EDB5DE /* TGNetworkInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNetworkInfoCell.m; path = TableViewCell/ThreadNetworkConfig/TGNetworkInfoCell.m; sourceTree = "<group>"; };
+		0946F4001B500DDC00EDB5DE /* TGNetworkInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGNetworkInfoCell.xib; path = TableViewCell/ThreadNetworkConfig/TGNetworkInfoCell.xib; sourceTree = "<group>"; };
+		0946F4031B500DF300EDB5DE /* TGSelectableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGSelectableCell.h; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.h; sourceTree = "<group>"; };
+		0946F4041B500DF300EDB5DE /* TGSelectableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGSelectableCell.m; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.m; sourceTree = "<group>"; };
+		0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGSelectableCell.xib; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.xib; sourceTree = "<group>"; };
 		4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroup.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup.release.xcconfig"; sourceTree = "<group>"; };
 		CD7B603E1B1F5469007FF820 /* ThreadGroup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreadGroup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7B60421B1F5469007FF820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -179,6 +199,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0946F3F21B500AA500EDB5DE /* ThreadNetworkConfig */ = {
+			isa = PBXGroup;
+			children = (
+				0946F3F31B500AEB00EDB5DE /* TGNetworkConfigViewController.h */,
+				0946F3F41B500AEB00EDB5DE /* TGNetworkConfigViewController.m */,
+				0946F3F51B500AEB00EDB5DE /* TGNetworkConfigViewController.xib */,
+			);
+			name = ThreadNetworkConfig;
+			sourceTree = "<group>";
+		};
+		0946F3F81B500C8D00EDB5DE /* ThreadNetworkConfig */ = {
+			isa = PBXGroup;
+			children = (
+				0946F3F91B500DC300EDB5DE /* TGGeneralCell.h */,
+				0946F3FA1B500DC300EDB5DE /* TGGeneralCell.m */,
+				0946F3FB1B500DC300EDB5DE /* TGGeneralCell.xib */,
+				0946F3FE1B500DDC00EDB5DE /* TGNetworkInfoCell.h */,
+				0946F3FF1B500DDC00EDB5DE /* TGNetworkInfoCell.m */,
+				0946F4001B500DDC00EDB5DE /* TGNetworkInfoCell.xib */,
+				0946F4031B500DF300EDB5DE /* TGSelectableCell.h */,
+				0946F4041B500DF300EDB5DE /* TGSelectableCell.m */,
+				0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */,
+			);
+			name = ThreadNetworkConfig;
+			sourceTree = "<group>";
+		};
 		2104FEA234D389D850092AA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +343,7 @@
 		CD8C68281B273D020091B548 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0946F3F21B500AA500EDB5DE /* ThreadNetworkConfig */,
 				CD8639381B4183300044B2BE /* TGMainViewController.h */,
 				CD8639391B4183300044B2BE /* TGMainViewController.m */,
 				CD86393A1B4183300044B2BE /* TGMainViewController.xib */,
@@ -388,6 +435,7 @@
 		D9E65C081B31FD6100A184AB /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				0946F3F81B500C8D00EDB5DE /* ThreadNetworkConfig */,
 				D9E65C091B31FD8800A184AB /* TGTableViewCell.h */,
 				D9E65C0A1B31FD8800A184AB /* TGTableViewCell.m */,
 				D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */,
@@ -489,6 +537,7 @@
 				D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */,
 				D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */,
 				CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */,
+				0946F3FD1B500DC300EDB5DE /* TGGeneralCell.xib in Resources */,
 				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
 				D95BC6861B43246E00271ED7 /* TGPopupContentViewController.xib in Resources */,
 				CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */,
@@ -500,6 +549,9 @@
 				CD8C68201B272A290091B548 /* Gotham-Medium.otf in Resources */,
 				CD8C681E1B272A290091B548 /* Gotham-Book.otf in Resources */,
 				CD7B60521B1F5469007FF820 /* LaunchScreen.xib in Resources */,
+				0946F4021B500DDC00EDB5DE /* TGNetworkInfoCell.xib in Resources */,
+				0946F4071B500DF300EDB5DE /* TGSelectableCell.xib in Resources */,
+				0946F3F71B500AEB00EDB5DE /* TGNetworkConfigViewController.xib in Resources */,
 				D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */,
 				CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */,
 			);
@@ -558,6 +610,7 @@
 				D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */,
 				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
+				0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */,
 				D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */,
 				D95BC68F1B446D8900271ED7 /* TGPopupContentAnimator.m in Sources */,
 				CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */,
@@ -570,14 +623,17 @@
 				D95BC6921B45992400271ED7 /* TGLogManager.m in Sources */,
 				D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
+				0946F4011B500DDC00EDB5DE /* TGNetworkInfoCell.m in Sources */,
 				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				D95BC6891B43378400271ED7 /* TGButton.m in Sources */,
+				0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */,
 				D9446A831B335B14007C8D61 /* TGRouterItem.m in Sources */,
 				CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */,
 				CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */,
+				0946F3FC1B500DC300EDB5DE /* TGGeneralCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
