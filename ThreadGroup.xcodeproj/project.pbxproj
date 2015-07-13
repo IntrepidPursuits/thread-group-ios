@@ -63,6 +63,7 @@
 		D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C0A1B31FD8800A184AB /* TGTableViewCell.m */; };
 		D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */; };
 		D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C1D1B33364600A184AB /* TGTableView.m */; };
+		D9EA94EE1B543D7B00A419D4 /* TGHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EA94ED1B543D7B00A419D4 /* TGHeaderView.m */; };
 		D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D9FB30221B398C8D002B6ED4 /* TGDevice.m */; };
 		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
@@ -169,6 +170,8 @@
 		D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGTableViewCell.xib; path = TableViewCell/TGTableViewCell.xib; sourceTree = "<group>"; };
 		D9E65C1C1B33364600A184AB /* TGTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGTableView.h; path = TableView/TGTableView.h; sourceTree = "<group>"; };
 		D9E65C1D1B33364600A184AB /* TGTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGTableView.m; path = TableView/TGTableView.m; sourceTree = "<group>"; };
+		D9EA94EC1B543D7B00A419D4 /* TGHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGHeaderView.h; path = TableViewCell/ThreadNetworkConfig/TGHeaderView.h; sourceTree = "<group>"; };
+		D9EA94ED1B543D7B00A419D4 /* TGHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGHeaderView.m; path = TableViewCell/ThreadNetworkConfig/TGHeaderView.m; sourceTree = "<group>"; };
 		D9FB30211B398C8D002B6ED4 /* TGDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGDevice.h; path = Models/TGDevice.h; sourceTree = "<group>"; };
 		D9FB30221B398C8D002B6ED4 /* TGDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGDevice.m; path = Models/TGDevice.m; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +224,8 @@
 				0946F4031B500DF300EDB5DE /* TGSelectableCell.h */,
 				0946F4041B500DF300EDB5DE /* TGSelectableCell.m */,
 				0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */,
+				D9EA94EC1B543D7B00A419D4 /* TGHeaderView.h */,
+				D9EA94ED1B543D7B00A419D4 /* TGHeaderView.m */,
 			);
 			name = ThreadNetworkConfig;
 			sourceTree = "<group>";
@@ -625,6 +630,7 @@
 				D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
 				0946F4011B500DDC00EDB5DE /* TGNetworkInfoCell.m in Sources */,
+				D9EA94EE1B543D7B00A419D4 /* TGHeaderView.m in Sources */,
 				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */,
