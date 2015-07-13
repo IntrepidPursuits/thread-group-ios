@@ -24,21 +24,9 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
 @property (strong, nonatomic) TGTableView *tableViewSource;
 
 //Wifi
-
 - (void)resetWifiSearchView;
 
 //Border Router
-
 - (void)resetRouterSearchView;
-
-//Select Devices
-
-//Camera View
-
-//Success View
-
-//Finding thread networks
-
-//Finding threadNetworks Popup
 
 @end

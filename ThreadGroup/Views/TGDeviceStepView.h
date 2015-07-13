@@ -20,11 +20,13 @@
 - (void)setIcon:(UIImage *)icon;
 - (void)setTitle:(NSString *)title subTitle:(NSString *)subTitle;
 - (void)setTopBarHidden:(BOOL)hidden;
+- (void)setThreadConfigHidden:(BOOL)hidden;
 
 @end
 
 @protocol TGDeviceStepViewDelegate <NSObject>
 
 - (void)TGDeviceStepView:(TGDeviceStepView *)stepView didTapIcon:(id)sender;
+- (void)TGDeviceStepView:(TGDeviceStepView *)stepView didTapThreadConfig:(id)sender;
 
 @end

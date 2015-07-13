@@ -23,6 +23,7 @@
 #import "TGAnimator.h"
 #import "TGRouterAuthViewController.h"
 #import "TGAddProductViewController.h"
+#import "TGNetworkConfigViewController.h"
 
 @interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate>
 
@@ -70,6 +71,9 @@
 @property (strong, nonatomic) TGAddProductViewController *addProductVC;
 @property (nonatomic) BOOL ignoreAddProduct;
 
+//Thread Network Config
+@property (strong, nonatomic) TGNetworkConfigViewController *threadConfig;
+
 @end
 
 @implementation TGMainViewController
@@ -77,12 +81,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configure];
+    [self commonInit];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)configure {
     [self setupTableViewSource];
     self.scannerView.delegate = self;
     self.modalPresentationStyle = UIModalPresentationCustom;
+}
+
+- (void)commonInit {
+    self.threadConfig = [[TGNetworkConfigViewController alloc] initWithNibName:nil bundle:nil];
 }
 
 #pragma mark - Test
@@ -280,6 +294,7 @@
     [self.wifiSearchView setIcon:[UIImage tg_wifiCompleted]];
     [self.wifiSearchView setSpinnerActive:NO];
     [self.wifiSearchView setTitle:@"Connected to Wi-Fi" subTitle:[self currentWifiSSID]];
+    [self.wifiSearchView setThreadConfigHidden:YES];
 }
 
 #pragma mark - Border Router
@@ -293,6 +308,7 @@
     [self.routerSearchView setSpinnerActive:NO];
     [self.routerSearchView setTitle:@"Select a Border Router" subTitle:@"Thread networks in your home"];
     self.routerSearchView.topSeperatorView.hidden = YES;
+    [self.routerSearchView setThreadConfigHidden:YES];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
 }
 
@@ -314,6 +330,7 @@
     [self.routerSearchView setTitle:item.name subTitle:item.networkName];
     [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
     [self.routerSearchView setBottomBarHidden:NO];
+    [self.routerSearchView setThreadConfigHidden:NO];
     self.routerSearchView.topSeperatorView.hidden = NO;
 }
 
@@ -359,6 +376,13 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     } else if (stepView == self.routerSearchView) {
         [self setViewState:TGMainViewStateLookingForRouters];
+    }
+}
+
+- (void)TGDeviceStepView:(TGDeviceStepView *)stepView didTapThreadConfig:(id)sender {
+    //Check that stepView is routerSearchView
+    if (stepView == self.routerSearchView) {
+        [self.navigationController pushViewController:self.threadConfig animated:YES];
     }
 }
 
