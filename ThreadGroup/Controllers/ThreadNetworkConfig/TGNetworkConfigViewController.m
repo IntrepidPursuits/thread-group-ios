@@ -8,8 +8,8 @@
 
 #import "TGNetworkConfigViewController.h"
 
-@interface TGNetworkConfigViewController ()
-
+@interface TGNetworkConfigViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 /*
@@ -30,6 +30,8 @@
 
 @implementation TGNetworkConfigViewController
 
+#pragma mark - ViewController Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -45,4 +47,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 0;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //dequeue the proper reusable cell here because i have three different cells and each will have a different reuser identifier
+    return [UITableViewCell new];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //What to do witht the selected cells
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //Maybe need to unselect the cells here so that the cells do not get "stuck" in the selected state
+    
+}
 @end
