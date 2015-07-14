@@ -15,6 +15,7 @@
 #import "TGSelectableCell.h"
 #import "TGNetworkConfigModel.h"
 #import "TGNetworkConfigRowModel.h"
+#import "TGNetworkNameViewController.h"
 
 static NSString * const kTGGeneralCellReuseIdentifier = @"TGGeneralCellReuseIdentifier";
 static NSString * const kTGNetworkInfoCellReuseIdentifier = @"TGNetworkInfoCellReuseIdentifier";
@@ -53,11 +54,6 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
 
     self.navigationController.navigationBar.backItem.title = @"";
     [self.navigationItem setTitle:@"Network Settings"];
-
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor] , NSFontAttributeName : [UIFont threadGroup_mediumFontWithSize:17.0f]};
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barTintColor = [UIColor threadGroup_orange];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 #pragma mark - UITableViewDataSource
@@ -125,6 +121,26 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    TGNetworkConfigRowModel *row = [self.model rowForIndexPath:indexPath];
+    switch (row.actionType) {
+        case TGNetworkConfigActionName: {
+            TGNetworkNameViewController *nameVC = [[TGNetworkNameViewController alloc] initWithNibName:nil bundle:nil];
+            nameVC.textFieldText = row.subtitle;
+            [self.navigationController pushViewController:nameVC animated:YES];
+            break;
+        }
+        case TGNetworkConfigActionChannel: {
+            break;
+        }
+        case TGNetworkConfigActionSecurity: {
+            break;
+        }
+        case TGNetworkConfigActionPassword: {
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - Lazy Load
