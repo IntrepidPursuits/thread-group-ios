@@ -50,6 +50,8 @@
 		CDDB18F01B2B27B9008A84FD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDB18EF1B2B27B9008A84FD /* SystemConfiguration.framework */; };
 		CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18F31B2B2B24008A84FD /* TGSettingsManager.m */; };
 		CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */; };
+		D917C4D91B558CF5000A5BE2 /* TGNetworkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */; };
+		D917C4DA1B558CF5000A5BE2 /* TGNetworkNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */; };
 		D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */; };
 		D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */; };
 		D9446A831B335B14007C8D61 /* TGRouterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D9446A821B335B14007C8D61 /* TGRouterItem.m */; };
@@ -156,6 +158,10 @@
 		CDDB18F31B2B2B24008A84FD /* TGSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSettingsManager.m; sourceTree = "<group>"; };
 		CDDB18F51B2B2C1B008A84FD /* TGNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkManager.h; sourceTree = "<group>"; };
 		CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkManager.m; sourceTree = "<group>"; };
+		D917C4D41B558CD6000A5BE2 /* TGNetworkConfigAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TGNetworkConfigAction.h; path = Models/ThreadNetworkConfig/TGNetworkConfigAction.h; sourceTree = "<group>"; };
+		D917C4D61B558CF5000A5BE2 /* TGNetworkNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkNameViewController.h; sourceTree = "<group>"; };
+		D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkNameViewController.m; sourceTree = "<group>"; };
+		D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkNameViewController.xib; sourceTree = "<group>"; };
 		D93C81691B2F663000A86EE1 /* TGHomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHomeScreenViewController.h; sourceTree = "<group>"; };
 		D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHomeScreenViewController.m; sourceTree = "<group>"; };
 		D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeScreenViewController.xib; sourceTree = "<group>"; };
@@ -228,6 +234,7 @@
 		0946F3F21B500AA500EDB5DE /* ThreadNetworkConfig */ = {
 			isa = PBXGroup;
 			children = (
+				D917C4D51B558CF5000A5BE2 /* General */,
 				0946F3F31B500AEB00EDB5DE /* TGNetworkConfigViewController.h */,
 				0946F3F41B500AEB00EDB5DE /* TGNetworkConfigViewController.m */,
 				0946F3F51B500AEB00EDB5DE /* TGNetworkConfigViewController.xib */,
@@ -437,6 +444,17 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		D917C4D51B558CF5000A5BE2 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				D917C4D61B558CF5000A5BE2 /* TGNetworkNameViewController.h */,
+				D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */,
+				D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */,
+			);
+			name = General;
+			path = ThreadNetworkConfig/General;
+			sourceTree = "<group>";
+		};
 		D9446A7F1B335ADD007C8D61 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +517,7 @@
 				D9EA94F71B55559F00A419D4 /* TGNetworkConfigModel.m */,
 				D9EA94F91B55647E00A419D4 /* TGNetworkConfigHeaderModel.h */,
 				D9EA94FA1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m */,
+				D917C4D41B558CD6000A5BE2 /* TGNetworkConfigAction.h */,
 			);
 			name = ThreadNetworkConfig;
 			sourceTree = "<group>";
@@ -598,6 +617,7 @@
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
 				CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */,
 				CD8C681F1B272A290091B548 /* Gotham-Light.otf in Resources */,
+				D917C4DA1B558CF5000A5BE2 /* TGNetworkNameViewController.xib in Resources */,
 				CD8C68201B272A290091B548 /* Gotham-Medium.otf in Resources */,
 				CD8C681E1B272A290091B548 /* Gotham-Book.otf in Resources */,
 				CD7B60521B1F5469007FF820 /* LaunchScreen.xib in Resources */,
@@ -658,6 +678,7 @@
 			files = (
 				CDC447621B39F5790037BAF5 /* TGScannerView.m in Sources */,
 				D9B456761B3D999900832112 /* TGAnimator.m in Sources */,
+				D917C4D91B558CF5000A5BE2 /* TGNetworkNameViewController.m in Sources */,
 				CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */,
 				D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */,
 				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
