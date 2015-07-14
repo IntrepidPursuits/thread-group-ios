@@ -10,10 +10,11 @@
 
 @implementation TGNetworkConfigRowModel
 
-+ (TGNetworkConfigRowModel *)rowModelWithTitle:(NSString *)title rowType:(TGNetworkConfigRowType)rowType {
++ (TGNetworkConfigRowModel *)rowModelWithTitle:(NSString *)title rowType:(TGNetworkConfigRowType)rowType actionType:(TGNetworkConfigAction)actionType{
     TGNetworkConfigRowModel *model = [[TGNetworkConfigRowModel alloc] init];
     model.title = title;
     model.rowType = rowType;
+    model.actionType = actionType;
     return model;
 }
 

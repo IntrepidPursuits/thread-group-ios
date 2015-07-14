@@ -9,5 +9,12 @@
 #ifndef ThreadGroup_TGNetworkConfigAction_h
 #define ThreadGroup_TGNetworkConfigAction_h
 
+typedef NS_ENUM(NSUInteger, TGNetworkConfigAction) {
+    TGNetworkConfigActionName,
+    TGNetworkConfigActionChannel,
+    TGNetworkConfigActionSecurity,
+    TGNetworkConfigActionPassword,
+    TGNetworkConfigActionNone
+};
 
 #endif

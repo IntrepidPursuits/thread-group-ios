@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TGNetworkConfigAction.h"
 
 typedef NS_ENUM(NSUInteger, TGNetworkConfigRowType) {
     TGNetworkConfigRowTypeGeneral,
@@ -19,8 +20,10 @@ typedef NS_ENUM(NSUInteger, TGNetworkConfigRowType) {
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *subtitle;
 @property (nonatomic) TGNetworkConfigRowType rowType;
+@property (nonatomic) TGNetworkConfigAction actionType;
 
 + (TGNetworkConfigRowModel *)rowModelWithTitle:(NSString *)title
-                                       rowType:(TGNetworkConfigRowType)rowType;
+                                       rowType:(TGNetworkConfigRowType)rowType
+                                    actionType:(TGNetworkConfigAction)actionType;
 
 @end
