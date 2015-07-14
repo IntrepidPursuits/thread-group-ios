@@ -18,6 +18,10 @@
     return [UIColor colorWithRed:(71.0f/255.0f) green:(72.0f/255.0f) blue:(65.0f/255.0f) alpha:1.0f];
 }
 
++ (UIColor *)threadGroup_warmGrey {
+    return [UIColor colorWithRed:(136.0f/255.0f) green:(135.0f/255.0f) blue:(135.0f/255.0f) alpha:1.0f];
+}
+
 + (UIColor *)threadGroup_orange {
     return [UIColor colorWithRed:(231.0f/255.0f) green:(124.0f/255.0f) blue:(50.0f/255.0f) alpha:1.0f];
 }

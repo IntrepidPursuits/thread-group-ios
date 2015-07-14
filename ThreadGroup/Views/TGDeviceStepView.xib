@@ -18,6 +18,7 @@
                 <outlet property="iconImageView" destination="5E1-rV-mgT" id="JHr-tx-x0Z"/>
                 <outlet property="spinnerImageView" destination="SU5-DX-395" id="EGW-ns-iiD"/>
                 <outlet property="subTitleLabel" destination="q4i-9g-eJJ" id="Hss-bo-Z9z"/>
+                <outlet property="threadConfig" destination="8EH-dj-ykJ" id="c8P-yZ-TVf"/>
                 <outlet property="titleLabel" destination="afr-k4-fow" id="BjR-9M-AAb"/>
                 <outlet property="topBarView" destination="Eh8-fe-dCS" id="vHL-9P-pXw"/>
                 <outlet property="topSeperatorView" destination="FeY-pR-sWQ" id="FdA-ct-eMG"/>
@@ -74,13 +75,22 @@
                         <constraint firstAttribute="height" constant="1" id="8TF-Es-ROM"/>
                     </constraints>
                 </view>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="router_settings" translatesAutoresizingMaskIntoConstraints="NO" id="8EH-dj-ykJ">
+                    <rect key="frame" x="349" y="23" width="18" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="Oso-Jk-cet"/>
+                        <constraint firstAttribute="width" constant="18" id="pFM-tb-Ye4"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.27843135595321655" green="0.28235286474227905" blue="0.25490197539329529" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
                 <constraint firstItem="afr-k4-fow" firstAttribute="leading" secondItem="5E1-rV-mgT" secondAttribute="trailing" constant="18" id="4Ut-FL-19s"/>
                 <constraint firstItem="WlN-nY-N3E" firstAttribute="centerX" secondItem="5E1-rV-mgT" secondAttribute="centerX" id="5TQ-Un-RpV"/>
+                <constraint firstAttribute="trailing" secondItem="8EH-dj-ykJ" secondAttribute="trailing" constant="19" id="7Sa-gC-d4R"/>
                 <constraint firstAttribute="trailing" secondItem="q4i-9g-eJJ" secondAttribute="trailing" constant="8" id="BSB-5l-idv"/>
                 <constraint firstItem="WlN-nY-N3E" firstAttribute="top" secondItem="5E1-rV-mgT" secondAttribute="bottom" id="D2o-B0-HHe"/>
+                <constraint firstItem="5E1-rV-mgT" firstAttribute="centerY" secondItem="8EH-dj-ykJ" secondAttribute="centerY" id="DrC-Cd-kYm"/>
                 <constraint firstItem="SU5-DX-395" firstAttribute="width" secondItem="5E1-rV-mgT" secondAttribute="width" id="GvD-9o-lQ9"/>
                 <constraint firstItem="5E1-rV-mgT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="Ix4-SM-yv4"/>
                 <constraint firstItem="q4i-9g-eJJ" firstAttribute="top" secondItem="afr-k4-fow" secondAttribute="bottom" id="LAg-jx-OCj"/>
@@ -104,6 +114,7 @@
         </view>
     </objects>
     <resources>
+        <image name="router_settings" width="24" height="24"/>
         <image name="steps_cancel_spinner" width="40" height="40"/>
     </resources>
 </document>

@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomBarView;
 @property (weak, nonatomic) IBOutlet UIView *topBarView;
+@property (weak, nonatomic) IBOutlet UIImageView *threadConfig;
 
 @end
 
@@ -45,8 +46,10 @@
     [self setSpinnerHidden:YES animated:NO];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapIcon)];
-    [tapGesture setNumberOfTapsRequired:1];
     [self.iconImageView addGestureRecognizer:tapGesture];
+
+    UITapGestureRecognizer *threadConfigTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapThreadConfig)];
+    [self.threadConfig addGestureRecognizer:threadConfigTap];
 }
 
 #pragma mark - Public
@@ -81,6 +84,10 @@
     self.topBarView.hidden = hidden;
 }
 
+- (void)setThreadConfigHidden:(BOOL)hidden {
+    self.threadConfig.hidden = hidden;
+}
+
 #pragma mark - Animations
 
 - (void)setSpinnerHidden:(BOOL)hidden animated:(BOOL)animated{
@@ -101,6 +108,12 @@
 - (void)didTapIcon {
     if ([self.delegate respondsToSelector:@selector(TGDeviceStepView:didTapIcon:)]) {
         [self.delegate TGDeviceStepView:self didTapIcon:self.iconImageView];
+    }
+}
+
+- (void)didTapThreadConfig {
+    if ([self.delegate respondsToSelector:@selector(TGDeviceStepView:didTapThreadConfig:)]) {
+        [self.delegate TGDeviceStepView:self didTapThreadConfig:self.threadConfig];
     }
 }
 
