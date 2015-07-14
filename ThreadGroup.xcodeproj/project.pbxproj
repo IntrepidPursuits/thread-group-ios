@@ -60,6 +60,8 @@
 		D95BC6891B43378400271ED7 /* TGButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6881B43378400271ED7 /* TGButton.m */; };
 		D95BC68F1B446D8900271ED7 /* TGPopupContentAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC68E1B446D8900271ED7 /* TGPopupContentAnimator.m */; };
 		D95BC6921B45992400271ED7 /* TGLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6911B45992400271ED7 /* TGLogManager.m */; };
+		D96C04AA1B55ACAF00B4DB1B /* TGNetworkChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96C04A81B55ACAF00B4DB1B /* TGNetworkChannelViewController.m */; };
+		D96C04AB1B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96C04A91B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib */; };
 		D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */; };
 		D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */; };
 		D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566F1B3C932400832112 /* TGAddProductViewController.m */; };
@@ -176,6 +178,9 @@
 		D95BC68E1B446D8900271ED7 /* TGPopupContentAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGPopupContentAnimator.m; path = AnimatedTransitions/TGPopupContentAnimator.m; sourceTree = "<group>"; };
 		D95BC6901B45992400271ED7 /* TGLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGLogManager.h; sourceTree = "<group>"; };
 		D95BC6911B45992400271ED7 /* TGLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGLogManager.m; sourceTree = "<group>"; };
+		D96C04A71B55ACAF00B4DB1B /* TGNetworkChannelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkChannelViewController.h; sourceTree = "<group>"; };
+		D96C04A81B55ACAF00B4DB1B /* TGNetworkChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkChannelViewController.m; sourceTree = "<group>"; };
+		D96C04A91B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkChannelViewController.xib; sourceTree = "<group>"; };
 		D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterAuthViewController.h; sourceTree = "<group>"; };
 		D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterAuthViewController.m; sourceTree = "<group>"; };
 		D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRouterAuthViewController.xib; sourceTree = "<group>"; };
@@ -450,6 +455,9 @@
 				D917C4D61B558CF5000A5BE2 /* TGNetworkNameViewController.h */,
 				D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */,
 				D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */,
+				D96C04A71B55ACAF00B4DB1B /* TGNetworkChannelViewController.h */,
+				D96C04A81B55ACAF00B4DB1B /* TGNetworkChannelViewController.m */,
+				D96C04A91B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib */,
 			);
 			name = General;
 			path = ThreadNetworkConfig/General;
@@ -611,6 +619,7 @@
 				0946F3FD1B500DC300EDB5DE /* TGGeneralCell.xib in Resources */,
 				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
 				D95BC6861B43246E00271ED7 /* TGPopupContentViewController.xib in Resources */,
+				D96C04AB1B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib in Resources */,
 				CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
 				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
@@ -705,6 +714,7 @@
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */,
 				D9EA94F51B55528700A419D4 /* TGNetworkConfigRowModel.m in Sources */,
+				D96C04AA1B55ACAF00B4DB1B /* TGNetworkChannelViewController.m in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				D95BC6891B43378400271ED7 /* TGButton.m in Sources */,
 				0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */,
