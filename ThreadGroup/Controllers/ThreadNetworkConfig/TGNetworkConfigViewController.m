@@ -20,6 +20,7 @@ static NSString * const kTGGeneralCellReuseIdentifier = @"TGGeneralCellReuseIden
 static NSString * const kTGNetworkInfoCellReuseIdentifier = @"TGNetworkInfoCellReuseIdentifier";
 static NSString * const kTGSelectableCellReuseIdentifier = @"TGSelectableCellReuseIdentifier";
 static NSString * const KTGHeaderViewReuseIdentifier = @"TGHeaderViewReuseIdentifier";
+static CGFloat const kTGSectionHeaderHeight = 36.0f;
 
 @interface TGNetworkConfigViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -109,7 +110,7 @@ static NSString * const KTGHeaderViewReuseIdentifier = @"TGHeaderViewReuseIdenti
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 36.0f;
+    return kTGSectionHeaderHeight;
 }
 
 #pragma mark - TableView footer
@@ -117,15 +118,13 @@ static NSString * const KTGHeaderViewReuseIdentifier = @"TGHeaderViewReuseIdenti
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     //This is to essentially remove the footer.
     //Returning 0.0f will set the footer height to some default value
-    return 0.01f;
+    return FLT_MIN;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //What to do witht the selected cells
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-
 }
 
 #pragma mark - Lazy Load
