@@ -19,15 +19,17 @@
     self.textField.delegate = self;
 }
 
-- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-    [super dismissViewControllerAnimated:flag completion:completion];
-    [self.textField resignFirstResponder];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.textField.text = self.textFieldText;
+    self.navigationController.navigationBar.backItem.title = @"";
+
+    [self.navigationItem setTitle:@"Name"];
 }
 
-#pragma mark - Setter
-
-- (void)setTextFieldText:(NSString *)text {
-    self.textField.text = text;
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.textField becomeFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -37,7 +39,8 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.textField resignFirstResponder];
+    [self.navigationController popViewControllerAnimated:YES];
     return YES;
 }
 

@@ -10,6 +10,6 @@
 
 @interface TGNetworkNameViewController : UIViewController
 
-- (void)setTextFieldText:(NSString *)text;
+@property (strong, nonatomic) NSString *textFieldText;
 
 @end
