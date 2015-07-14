@@ -8,12 +8,6 @@
 
 #import "TGSelectableCell.h"
 
-/*
- This cell handles the UI for the the change admin password cell.
- 
- Background color of the cell, font and color for the Cell
- */
-
 @implementation TGSelectableCell
 
 - (void)awakeFromNib {

@@ -8,15 +8,6 @@
 
 #import "TGNetworkInfoCell.h"
 
-/*
- 
- This cell will be non selectable
- 
- Set the background color of the cell, font and color of the label texts
- 
- The 
- */
-
 @implementation TGNetworkInfoCell
 
 - (void)awakeFromNib {
