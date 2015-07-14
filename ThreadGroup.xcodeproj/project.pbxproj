@@ -64,6 +64,9 @@
 		D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */; };
 		D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C1D1B33364600A184AB /* TGTableView.m */; };
 		D9EA94EE1B543D7B00A419D4 /* TGHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EA94ED1B543D7B00A419D4 /* TGHeaderView.m */; };
+		D9EA94F51B55528700A419D4 /* TGNetworkConfigRowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EA94F41B55528700A419D4 /* TGNetworkConfigRowModel.m */; };
+		D9EA94F81B55559F00A419D4 /* TGNetworkConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EA94F71B55559F00A419D4 /* TGNetworkConfigModel.m */; };
+		D9EA94FB1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EA94FA1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m */; };
 		D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D9FB30221B398C8D002B6ED4 /* TGDevice.m */; };
 		E286BDF1506655D3D137F7F6 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 /* End PBXBuildFile section */
@@ -172,6 +175,12 @@
 		D9E65C1D1B33364600A184AB /* TGTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGTableView.m; path = TableView/TGTableView.m; sourceTree = "<group>"; };
 		D9EA94EC1B543D7B00A419D4 /* TGHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGHeaderView.h; path = TableViewCell/ThreadNetworkConfig/TGHeaderView.h; sourceTree = "<group>"; };
 		D9EA94ED1B543D7B00A419D4 /* TGHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGHeaderView.m; path = TableViewCell/ThreadNetworkConfig/TGHeaderView.m; sourceTree = "<group>"; };
+		D9EA94F31B55528700A419D4 /* TGNetworkConfigRowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNetworkConfigRowModel.h; path = Models/ThreadNetworkConfig/TGNetworkConfigRowModel.h; sourceTree = "<group>"; };
+		D9EA94F41B55528700A419D4 /* TGNetworkConfigRowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNetworkConfigRowModel.m; path = Models/ThreadNetworkConfig/TGNetworkConfigRowModel.m; sourceTree = "<group>"; };
+		D9EA94F61B55559F00A419D4 /* TGNetworkConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNetworkConfigModel.h; path = Models/ThreadNetworkConfig/TGNetworkConfigModel.h; sourceTree = "<group>"; };
+		D9EA94F71B55559F00A419D4 /* TGNetworkConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNetworkConfigModel.m; path = Models/ThreadNetworkConfig/TGNetworkConfigModel.m; sourceTree = "<group>"; };
+		D9EA94F91B55647E00A419D4 /* TGNetworkConfigHeaderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNetworkConfigHeaderModel.h; path = Models/ThreadNetworkConfig/TGNetworkConfigHeaderModel.h; sourceTree = "<group>"; };
+		D9EA94FA1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNetworkConfigHeaderModel.m; path = Models/ThreadNetworkConfig/TGNetworkConfigHeaderModel.m; sourceTree = "<group>"; };
 		D9FB30211B398C8D002B6ED4 /* TGDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGDevice.h; path = Models/TGDevice.h; sourceTree = "<group>"; };
 		D9FB30221B398C8D002B6ED4 /* TGDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGDevice.m; path = Models/TGDevice.m; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,6 +417,7 @@
 		D9446A7F1B335ADD007C8D61 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D9EA94EF1B55521700A419D4 /* ThreadNetworkConfig */,
 				D9446A801B335AE3007C8D61 /* Test */,
 				D9FB30211B398C8D002B6ED4 /* TGDevice.h */,
 				D9FB30221B398C8D002B6ED4 /* TGDevice.m */,
@@ -455,6 +465,19 @@
 				D9E65C1D1B33364600A184AB /* TGTableView.m */,
 			);
 			name = TableView;
+			sourceTree = "<group>";
+		};
+		D9EA94EF1B55521700A419D4 /* ThreadNetworkConfig */ = {
+			isa = PBXGroup;
+			children = (
+				D9EA94F31B55528700A419D4 /* TGNetworkConfigRowModel.h */,
+				D9EA94F41B55528700A419D4 /* TGNetworkConfigRowModel.m */,
+				D9EA94F61B55559F00A419D4 /* TGNetworkConfigModel.h */,
+				D9EA94F71B55559F00A419D4 /* TGNetworkConfigModel.m */,
+				D9EA94F91B55647E00A419D4 /* TGNetworkConfigHeaderModel.h */,
+				D9EA94FA1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m */,
+			);
+			name = ThreadNetworkConfig;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -628,12 +651,15 @@
 				CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */,
 				D95BC6921B45992400271ED7 /* TGLogManager.m in Sources */,
 				D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */,
+				D9EA94FB1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m in Sources */,
+				D9EA94F81B55559F00A419D4 /* TGNetworkConfigModel.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
 				0946F4011B500DDC00EDB5DE /* TGNetworkInfoCell.m in Sources */,
 				D9EA94EE1B543D7B00A419D4 /* TGHeaderView.m in Sources */,
 				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */,
+				D9EA94F51B55528700A419D4 /* TGNetworkConfigRowModel.m in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				D95BC6891B43378400271ED7 /* TGButton.m in Sources */,
 				0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */,
