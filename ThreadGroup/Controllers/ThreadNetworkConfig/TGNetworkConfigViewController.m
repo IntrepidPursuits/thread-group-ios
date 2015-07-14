@@ -7,9 +7,23 @@
 //
 
 #import "TGNetworkConfigViewController.h"
+#import "TGGeneralCell.h"
+#import "UIFont+ThreadGroup.h"
+#import "UIColor+ThreadGroup.h"
+#import "TGHeaderView.h"
+#import "TGNetworkInfoCell.h"
+#import "TGSelectableCell.h"
+#import "TGNetworkConfigModel.h"
+#import "TGNetworkConfigRowModel.h"
+
+static NSString * const kTGGeneralCellReuseIdentifier = @"TGGeneralCellReuseIdentifier";
+static NSString * const kTGNetworkInfoCellReuseIdentifier = @"TGNetworkInfoCellReuseIdentifier";
+static NSString * const kTGSelectableCellReuseIdentifier = @"TGSelectableCellReuseIdentifier";
+static NSString * const KTGHeaderViewReuseIdentifier = @"TGHeaderViewReuseIdentifier";
 
 @interface TGNetworkConfigViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) TGNetworkConfigModel *model;
 @end
 
 /*
@@ -34,42 +48,109 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self tableViewSetup];
+}
+
+- (void)tableViewSetup {
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.layoutMargins = UIEdgeInsetsZero;
+
+    [self.tableView registerNib:[UINib nibWithNibName:@"TGGeneralCell" bundle:nil] forCellReuseIdentifier:kTGGeneralCellReuseIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TGNetworkInfoCell" bundle:nil] forCellReuseIdentifier:kTGNetworkInfoCellReuseIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TGSelectableCell" bundle:nil] forCellReuseIdentifier:kTGSelectableCellReuseIdentifier];
+    [self.tableView registerClass:[TGHeaderView class] forHeaderFooterViewReuseIdentifier:KTGHeaderViewReuseIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.navigationController.navigationBar.backItem.title = @"";
+    [self.navigationItem setTitle:@"Network Settings"];
+
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor] , NSFontAttributeName : [UIFont threadGroup_mediumFontWithSize:17.0f]};
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor threadGroup_orange];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return [self.model numberOfSections];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [self.model numberofRowsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //dequeue the proper reusable cell here because i have three different cells and each will have a different reuser identifier
-    return [UITableViewCell new];
+    TGNetworkConfigRowModel *row = [self.model rowForIndexPath:indexPath];
+    UITableViewCell *returnCell;
+    switch (row.rowType) {
+        case TGNetworkConfigRowTypeGeneral: {
+            TGGeneralCell *generalCell = [self.tableView dequeueReusableCellWithIdentifier:kTGGeneralCellReuseIdentifier forIndexPath:indexPath];
+            generalCell.textLabel.text = row.title;
+            generalCell.detailTextLabel.text = row.subtitle;
+            returnCell = generalCell;
+            break;
+        }
+        case TGNetworkConfigRowTypeSelectable: {
+            TGSelectableCell *selectableCell = [self.tableView dequeueReusableCellWithIdentifier:kTGSelectableCellReuseIdentifier forIndexPath:indexPath];
+            selectableCell.textLabel.text = row.title;
+            returnCell = selectableCell;
+            break;
+        }
+        case TGNetworkConfigRowTypeInfo: {
+            TGNetworkInfoCell *infoCell = [self.tableView dequeueReusableCellWithIdentifier:kTGNetworkInfoCellReuseIdentifier forIndexPath:indexPath];
+            infoCell.textLabel.text = row.title;
+            infoCell.detailTextLabel.text = row.subtitle;
+            returnCell = infoCell;
+            break;
+        }
+        default:
+            NSAssert(YES, @"Row model should have a row type");
+            break;
+    }
+    return returnCell;
+}
+
+#pragma mark - TableView header
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    TGHeaderView *headerView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:KTGHeaderViewReuseIdentifier];
+    [headerView setTitle:[self.model headerTitleForSection:section]];
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 36.0f;
+}
+
+#pragma mark - TableView footer
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    //This is to essentially remove the footer.
+    //Returning 0.0f will set the footer height to some default value
+    return 0.01f;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //What to do witht the selected cells
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //Maybe need to unselect the cells here so that the cells do not get "stuck" in the selected state
-    
+#pragma mark - Lazy Load
+
+- (TGNetworkConfigModel *)model {
+    if (!_model) {
+        _model = [[TGNetworkConfigModel alloc] init];
+    }
+    return _model;
 }
+
 @end
