@@ -10,4 +10,6 @@
 
 @interface TGNetworkChannelViewController : UIViewController
 
+@property (nonatomic) NSInteger selectedIndex;
+
 @end

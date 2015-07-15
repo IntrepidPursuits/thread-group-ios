@@ -11,6 +11,7 @@
 @implementation TGSelectableCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.layoutMargins = UIEdgeInsetsZero;
 }
 
