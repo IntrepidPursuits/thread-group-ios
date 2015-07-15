@@ -38,7 +38,7 @@
     TGNetworkConfigRowModel *channel = [TGNetworkConfigRowModel rowModelWithTitle:@"CHANNEL"
                                                                           rowType:TGNetworkConfigRowTypeGeneral
                                                                        actionType:TGNetworkConfigActionChannel];
-    channel.subtitle = @"5";
+    channel.subtitle = @"15";
     TGNetworkConfigRowModel *security = [TGNetworkConfigRowModel rowModelWithTitle:@"SECURITY"
                                                                            rowType:TGNetworkConfigRowTypeGeneral
                                                                         actionType:TGNetworkConfigActionSecurity];
