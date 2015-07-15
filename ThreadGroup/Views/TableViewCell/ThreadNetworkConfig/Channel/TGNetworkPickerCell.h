@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TGNetworkChannelCell : UITableViewCell
+@interface TGNetworkPickerCell : UITableViewCell
 
 @property (nonatomic) BOOL isCheckMarkHidden;
 

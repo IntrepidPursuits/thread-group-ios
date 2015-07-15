@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "TGNetworkChannelCell.h"
+#import "TGNetworkPickerCell.h"
 
-@implementation TGNetworkChannelCell
+@implementation TGNetworkPickerCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

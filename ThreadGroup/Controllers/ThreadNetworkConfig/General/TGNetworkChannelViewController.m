@@ -7,11 +7,11 @@
 //
 
 #import "TGNetworkChannelViewController.h"
-#import "TGNetworkChannelCell.h"
+#import "TGNetworkPickerCell.h"
 #import "UIFont+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 
-static NSString * const kTGNetworkChannelReuseIdentifier = @"TGNetworkChannelReuseIdentifier";
+static NSString * const kTGNetworkPickerCellReuseIdentifier = @"TGNetworkPickerCellReuseIdentifier";
 static NSInteger const kTGMeshCopChannelMinimumNumber = 11;
 static NSInteger const kTGMeshCopChannelMaximumNumber = 26;
 
@@ -30,7 +30,7 @@ static NSInteger const kTGMeshCopChannelMaximumNumber = 26;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.layoutMargins = UIEdgeInsetsZero;
-    [self.tableView registerNib:[UINib nibWithNibName:@"TGNetworkChannelCell" bundle:nil] forCellReuseIdentifier:kTGNetworkChannelReuseIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TGNetworkPickerCell" bundle:nil] forCellReuseIdentifier:kTGNetworkPickerCellReuseIdentifier];
 }
 
 #pragma mark - UITableViewDataSource
@@ -40,7 +40,7 @@ static NSInteger const kTGMeshCopChannelMaximumNumber = 26;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TGNetworkChannelCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTGNetworkChannelReuseIdentifier forIndexPath:indexPath];
+    TGNetworkPickerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTGNetworkPickerCellReuseIdentifier forIndexPath:indexPath];
     cell.textLabel.text = self.channels[indexPath.row];
     if (indexPath.row == [self.channels indexOfObject:[NSString stringWithFormat:@"%d", self.selectedIndex]]) {
         cell.isCheckMarkHidden = NO;
@@ -60,8 +60,8 @@ static NSInteger const kTGMeshCopChannelMaximumNumber = 26;
 
 - (void)showCheckmark:(BOOL)show forCellAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    if ([cell isKindOfClass:[TGNetworkChannelCell class]]) {
-        TGNetworkChannelCell *channelCell = (TGNetworkChannelCell *)cell;
+    if ([cell isKindOfClass:[TGNetworkPickerCell class]]) {
+        TGNetworkPickerCell *channelCell = (TGNetworkPickerCell *)cell;
         channelCell.isCheckMarkHidden = show;
     }
 }
