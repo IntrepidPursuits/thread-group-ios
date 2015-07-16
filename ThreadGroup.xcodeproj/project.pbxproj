@@ -66,6 +66,8 @@
 		D96C04B11B569D2F00B4DB1B /* TGNetworkPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96C04AF1B569D2F00B4DB1B /* TGNetworkPickerCell.xib */; };
 		D96C04B51B56CF8D00B4DB1B /* TGNetworkSecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96C04B31B56CF8D00B4DB1B /* TGNetworkSecurityViewController.m */; };
 		D96C04B61B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96C04B41B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib */; };
+		D96C04BA1B56EDAE00B4DB1B /* TGNetworkSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96C04B81B56EDAE00B4DB1B /* TGNetworkSliderCell.m */; };
+		D96C04BB1B56EDAE00B4DB1B /* TGNetworkSliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96C04B91B56EDAE00B4DB1B /* TGNetworkSliderCell.xib */; };
 		D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */; };
 		D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */; };
 		D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566F1B3C932400832112 /* TGAddProductViewController.m */; };
@@ -191,6 +193,9 @@
 		D96C04B21B56CF8D00B4DB1B /* TGNetworkSecurityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkSecurityViewController.h; sourceTree = "<group>"; };
 		D96C04B31B56CF8D00B4DB1B /* TGNetworkSecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkSecurityViewController.m; sourceTree = "<group>"; };
 		D96C04B41B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkSecurityViewController.xib; sourceTree = "<group>"; };
+		D96C04B71B56EDAE00B4DB1B /* TGNetworkSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNetworkSliderCell.h; path = TableViewCell/ThreadNetworkConfig/Channel/TGNetworkSliderCell.h; sourceTree = "<group>"; };
+		D96C04B81B56EDAE00B4DB1B /* TGNetworkSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNetworkSliderCell.m; path = TableViewCell/ThreadNetworkConfig/Channel/TGNetworkSliderCell.m; sourceTree = "<group>"; };
+		D96C04B91B56EDAE00B4DB1B /* TGNetworkSliderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGNetworkSliderCell.xib; path = TableViewCell/ThreadNetworkConfig/Channel/TGNetworkSliderCell.xib; sourceTree = "<group>"; };
 		D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterAuthViewController.h; sourceTree = "<group>"; };
 		D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterAuthViewController.m; sourceTree = "<group>"; };
 		D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRouterAuthViewController.xib; sourceTree = "<group>"; };
@@ -505,6 +510,9 @@
 				D96C04AD1B569D2F00B4DB1B /* TGNetworkPickerCell.h */,
 				D96C04AE1B569D2F00B4DB1B /* TGNetworkPickerCell.m */,
 				D96C04AF1B569D2F00B4DB1B /* TGNetworkPickerCell.xib */,
+				D96C04B71B56EDAE00B4DB1B /* TGNetworkSliderCell.h */,
+				D96C04B81B56EDAE00B4DB1B /* TGNetworkSliderCell.m */,
+				D96C04B91B56EDAE00B4DB1B /* TGNetworkSliderCell.xib */,
 			);
 			name = Channel;
 			sourceTree = "<group>";
@@ -661,6 +669,7 @@
 				0946F3F71B500AEB00EDB5DE /* TGNetworkConfigViewController.xib in Resources */,
 				D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */,
 				CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */,
+				D96C04BB1B56EDAE00B4DB1B /* TGNetworkSliderCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +751,7 @@
 				D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */,
 				D9EA94F51B55528700A419D4 /* TGNetworkConfigRowModel.m in Sources */,
 				D96C04AA1B55ACAF00B4DB1B /* TGNetworkChannelViewController.m in Sources */,
+				D96C04BA1B56EDAE00B4DB1B /* TGNetworkSliderCell.m in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				D95BC6891B43378400271ED7 /* TGButton.m in Sources */,
 				0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */,
