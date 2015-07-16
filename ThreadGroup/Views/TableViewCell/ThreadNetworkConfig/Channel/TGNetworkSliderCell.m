@@ -8,16 +8,25 @@
 
 #import "TGNetworkSliderCell.h"
 
+@interface TGNetworkSliderCell()
+
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+@end
+
 @implementation TGNetworkSliderCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
 
-    // Configure the view for the selected state
+- (IBAction)sliderValueChanged:(UISlider *)sender {
+    NSLog(@"%f", sender.value);
 }
 
 @end

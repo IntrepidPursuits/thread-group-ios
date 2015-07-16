@@ -17,6 +17,7 @@
 #import "TGNetworkConfigRowModel.h"
 #import "TGNetworkNameViewController.h"
 #import "TGNetworkChannelViewController.h"
+#import "TGNetworkSecurityViewController.h"
 
 static NSString * const kTGGeneralCellReuseIdentifier = @"TGGeneralCellReuseIdentifier";
 static NSString * const kTGNetworkInfoCellReuseIdentifier = @"TGNetworkInfoCellReuseIdentifier";
@@ -137,6 +138,8 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
             break;
         }
         case TGNetworkConfigActionSecurity: {
+            TGNetworkSecurityViewController *securityVC = [[TGNetworkSecurityViewController alloc] initWithNibName:nil bundle:nil];
+            [self.navigationController pushViewController:securityVC animated:YES];
             break;
         }
         case TGNetworkConfigActionPassword: {

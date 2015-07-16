@@ -7,31 +7,72 @@
 //
 
 #import "TGNetworkSecurityViewController.h"
+#import "TGNetworkPickerCell.h"
+#import "TGNetworkSliderCell.h"
 
-@interface TGNetworkSecurityViewController ()
+static NSString * const kTGNetworkPickerCellReuseIdentifier = @"TGNetworkPickerCellReuseIdentifier";
+static NSString * const kTGNetworkSliderCellReuseIdentifier = @"TGNetworkSliderCellReuseIdentifier";
 
+@interface TGNetworkSecurityViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation TGNetworkSecurityViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.layoutMargins = UIEdgeInsetsZero;
+
+    self.tableView.estimatedRowHeight = 50.0f;
+
+    [self.tableView registerNib:[UINib nibWithNibName:@"TGNetworkPickerCell" bundle:nil] forCellReuseIdentifier:kTGNetworkPickerCellReuseIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TGNetworkSliderCell" bundle:nil] forCellReuseIdentifier:kTGNetworkSliderCellReuseIdentifier];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 2;
+    } else {
+        return 1;
+    }
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *returnCell;
+    switch (indexPath.section) {
+        case 0: {
+            TGNetworkPickerCell *pickerCell = [self.tableView dequeueReusableCellWithIdentifier:kTGNetworkPickerCellReuseIdentifier forIndexPath:indexPath];
+            returnCell = pickerCell;
+            break;
+        }
+        case 1: {
+            TGNetworkSliderCell *sliderCell = [self.tableView dequeueReusableCellWithIdentifier:kTGNetworkSliderCellReuseIdentifier forIndexPath:indexPath];
+            returnCell = sliderCell;
+            break;
+        }
+        default:
+            break;
+    }
+    return returnCell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+}
+
 
 @end

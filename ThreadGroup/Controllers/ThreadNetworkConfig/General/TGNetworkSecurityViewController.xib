@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGNetworkSecurityViewController">
             <connections>
+                <outlet property="tableView" destination="9lb-tv-Y59" id="wQA-bU-ya1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +14,19 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="9lb-tv-Y59">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="9lb-tv-Y59" secondAttribute="trailing" id="4eh-hT-wdu"/>
+                <constraint firstAttribute="bottom" secondItem="9lb-tv-Y59" secondAttribute="bottom" id="4ff-5z-tiA"/>
+                <constraint firstItem="9lb-tv-Y59" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="b1F-uu-9q5"/>
+                <constraint firstItem="9lb-tv-Y59" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tbc-gI-ZYy"/>
+            </constraints>
         </view>
     </objects>
 </document>
