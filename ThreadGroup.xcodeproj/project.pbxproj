@@ -26,7 +26,7 @@
 		CD7B605E1B1F5469007FF820 /* ThreadGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B605D1B1F5469007FF820 /* ThreadGroupTests.m */; };
 		CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8639391B4183300044B2BE /* TGMainViewController.m */; };
 		CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD86393A1B4183300044B2BE /* TGMainViewController.xib */; };
-		CD86393F1B4330140044B2BE /* TGIotivityWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD86393E1B4330140044B2BE /* TGIotivityWrapper.mm */; };
+		CD86393F1B4330140044B2BE /* TGMeshcopManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD86393E1B4330140044B2BE /* TGMeshcopManager.mm */; };
 		CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68191B272A290091B548 /* Gotham-Bold.otf */; };
 		CD8C681E1B272A290091B548 /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681A1B272A290091B548 /* Gotham-Book.otf */; };
 		CD8C681F1B272A290091B548 /* Gotham-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C681B1B272A290091B548 /* Gotham-Light.otf */; };
@@ -117,8 +117,8 @@
 		CD8639381B4183300044B2BE /* TGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainViewController.h; sourceTree = "<group>"; };
 		CD8639391B4183300044B2BE /* TGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainViewController.m; sourceTree = "<group>"; };
 		CD86393A1B4183300044B2BE /* TGMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainViewController.xib; sourceTree = "<group>"; };
-		CD86393D1B4330140044B2BE /* TGIotivityWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGIotivityWrapper.h; sourceTree = "<group>"; };
-		CD86393E1B4330140044B2BE /* TGIotivityWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TGIotivityWrapper.mm; sourceTree = "<group>"; };
+		CD86393D1B4330140044B2BE /* TGMeshcopManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMeshcopManager.h; sourceTree = "<group>"; };
+		CD86393E1B4330140044B2BE /* TGMeshcopManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TGMeshcopManager.mm; sourceTree = "<group>"; };
 		CD8C68191B272A290091B548 /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
 		CD8C681A1B272A290091B548 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
 		CD8C681B1B272A290091B548 /* Gotham-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Light.otf"; sourceTree = "<group>"; };
@@ -285,13 +285,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		CD095A011B45CC26007DACFA /* Contrib */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Contrib;
-			sourceTree = "<group>";
-		};
 		CD7B60351B1F5469007FF820 = {
 			isa = PBXGroup;
 			children = (
@@ -315,7 +308,6 @@
 		CD7B60401B1F5469007FF820 /* ThreadGroup */ = {
 			isa = PBXGroup;
 			children = (
-				CD095A011B45CC26007DACFA /* Contrib */,
 				D9446A7F1B335ADD007C8D61 /* Models */,
 				CDDB18F11B2B2AF8008A84FD /* Managers */,
 				CD8C68331B28703F0091B548 /* Views */,
@@ -440,8 +432,8 @@
 				CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */,
 				D95BC6901B45992400271ED7 /* TGLogManager.h */,
 				D95BC6911B45992400271ED7 /* TGLogManager.m */,
-				CD86393D1B4330140044B2BE /* TGIotivityWrapper.h */,
-				CD86393E1B4330140044B2BE /* TGIotivityWrapper.mm */,
+				CD86393D1B4330140044B2BE /* TGMeshcopManager.h */,
+				CD86393E1B4330140044B2BE /* TGMeshcopManager.mm */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -693,6 +685,7 @@
 				D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */,
 				D9EA94F51B55528700A419D4 /* TGNetworkConfigRowModel.m in Sources */,
 				CD86393F1B4330140044B2BE /* TGIotivityWrapper.mm in Sources */,
+				CD86393F1B4330140044B2BE /* TGMeshcopManager.mm in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
 				D95BC6891B43378400271ED7 /* TGButton.m in Sources */,
 				0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */,
