@@ -26,7 +26,8 @@
 }
 
 - (IBAction)sliderValueChanged:(UISlider *)sender {
-    NSLog(@"%f", sender.value);
+    NSInteger roundedValue = nearbyintf(sender.value);
+    self.timeLabel.text = [NSString stringWithFormat:@"%d", roundedValue];
 }
 
 @end

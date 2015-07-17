@@ -9,9 +9,12 @@
 #import "TGNetworkSecurityViewController.h"
 #import "TGNetworkPickerCell.h"
 #import "TGNetworkSliderCell.h"
+#import "TGHeaderView.h"
 
 static NSString * const kTGNetworkPickerCellReuseIdentifier = @"TGNetworkPickerCellReuseIdentifier";
 static NSString * const kTGNetworkSliderCellReuseIdentifier = @"TGNetworkSliderCellReuseIdentifier";
+static NSString * const KTGHeaderViewReuseIdentifier = @"TGHeaderViewReuseIdentifier";
+static CGFloat const kTGHeaderViewHeightConstant = 36.0f;
 
 @interface TGNetworkSecurityViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -24,11 +27,11 @@ static NSString * const kTGNetworkSliderCellReuseIdentifier = @"TGNetworkSliderC
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.layoutMargins = UIEdgeInsetsZero;
-
     self.tableView.estimatedRowHeight = 50.0f;
 
     [self.tableView registerNib:[UINib nibWithNibName:@"TGNetworkPickerCell" bundle:nil] forCellReuseIdentifier:kTGNetworkPickerCellReuseIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"TGNetworkSliderCell" bundle:nil] forCellReuseIdentifier:kTGNetworkSliderCellReuseIdentifier];
+    [self.tableView registerClass:[TGHeaderView class] forHeaderFooterViewReuseIdentifier:KTGHeaderViewReuseIdentifier];
 }
 
 #pragma mark - UITableViewDataSource
@@ -50,6 +53,8 @@ static NSString * const kTGNetworkSliderCellReuseIdentifier = @"TGNetworkSliderC
     switch (indexPath.section) {
         case 0: {
             TGNetworkPickerCell *pickerCell = [self.tableView dequeueReusableCellWithIdentifier:kTGNetworkPickerCellReuseIdentifier forIndexPath:indexPath];
+            pickerCell.isCheckMarkHidden = YES;
+            pickerCell.textLabel.text = @"Security Options";
             returnCell = pickerCell;
             break;
         }
@@ -68,11 +73,32 @@ static NSString * const kTGNetworkSliderCellReuseIdentifier = @"TGNetworkSliderC
     return UITableViewAutomaticDimension;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return kTGHeaderViewHeightConstant;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return FLT_MIN;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    TGHeaderView *header = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:KTGHeaderViewReuseIdentifier];
+    if (section == 0) {
+        [header setTitle:@"Security"];
+    } else {
+        [header setTitle:@"Key Rotation Duration"];
+    }
+    return header;
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[TGNetworkPickerCell class]]) {
+        TGNetworkPickerCell *pickerCell = (TGNetworkPickerCell *)cell;
+        pickerCell.isCheckMarkHidden = !pickerCell.isCheckMarkHidden;
+    }
 }
-
 
 @end
