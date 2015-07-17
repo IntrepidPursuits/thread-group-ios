@@ -1,0 +1,4 @@
+[submodule "iotivity"]
+	path = iotivity
+	url = git@github.com:IntrepidPursuits/iotivity-private.git
+	branch = intrepid-ios-build-script
