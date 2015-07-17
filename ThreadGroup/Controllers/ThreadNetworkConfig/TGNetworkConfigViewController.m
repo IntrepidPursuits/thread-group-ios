@@ -18,6 +18,8 @@
 #import "TGNetworkNameViewController.h"
 #import "TGNetworkChannelViewController.h"
 #import "TGNetworkSecurityViewController.h"
+#import "TGAnimator.h"
+#import "TGPasswordViewController.h"
 
 static NSString * const kTGGeneralCellReuseIdentifier = @"TGGeneralCellReuseIdentifier";
 static NSString * const kTGNetworkInfoCellReuseIdentifier = @"TGNetworkInfoCellReuseIdentifier";
@@ -25,7 +27,7 @@ static NSString * const kTGSelectableCellReuseIdentifier = @"TGSelectableCellReu
 static NSString * const KTGHeaderViewReuseIdentifier = @"TGHeaderViewReuseIdentifier";
 static CGFloat const kTGSectionHeaderHeight = 36.0f;
 
-@interface TGNetworkConfigViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TGNetworkConfigViewController () <UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) TGNetworkConfigModel *model;
 @end
@@ -36,6 +38,7 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.modalPresentationStyle = UIModalPresentationCustom;
     [self tableViewSetup];
 }
 
@@ -143,6 +146,9 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
             break;
         }
         case TGNetworkConfigActionPassword: {
+            TGPasswordViewController *passwordVC = [[TGPasswordViewController alloc] initWithNibName:nil bundle:nil];
+            passwordVC.transitioningDelegate = self;
+            [self presentViewController:passwordVC animated:YES completion:nil];
             break;
         }
         default:
@@ -157,6 +163,20 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
         _model = [[TGNetworkConfigModel alloc] init];
     }
     return _model;
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    TGAnimator *animator = [TGAnimator new];
+    animator.type = TGTransitionTypePresent;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    TGAnimator *animator = [TGAnimator new];
+    animator.type = TGTransitionTypeDismiss;
+    return animator;
 }
 
 @end

@@ -68,6 +68,8 @@
 		D96C04B61B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96C04B41B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib */; };
 		D96C04BA1B56EDAE00B4DB1B /* TGNetworkSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96C04B81B56EDAE00B4DB1B /* TGNetworkSliderCell.m */; };
 		D96C04BB1B56EDAE00B4DB1B /* TGNetworkSliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96C04B91B56EDAE00B4DB1B /* TGNetworkSliderCell.xib */; };
+		D96C04D51B594DE400B4DB1B /* TGPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96C04D31B594DE400B4DB1B /* TGPasswordViewController.m */; };
+		D96C04D61B594DE400B4DB1B /* TGPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96C04D41B594DE400B4DB1B /* TGPasswordViewController.xib */; };
 		D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */; };
 		D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */; };
 		D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566F1B3C932400832112 /* TGAddProductViewController.m */; };
@@ -196,6 +198,9 @@
 		D96C04B71B56EDAE00B4DB1B /* TGNetworkSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNetworkSliderCell.h; path = TableViewCell/ThreadNetworkConfig/Channel/TGNetworkSliderCell.h; sourceTree = "<group>"; };
 		D96C04B81B56EDAE00B4DB1B /* TGNetworkSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNetworkSliderCell.m; path = TableViewCell/ThreadNetworkConfig/Channel/TGNetworkSliderCell.m; sourceTree = "<group>"; };
 		D96C04B91B56EDAE00B4DB1B /* TGNetworkSliderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGNetworkSliderCell.xib; path = TableViewCell/ThreadNetworkConfig/Channel/TGNetworkSliderCell.xib; sourceTree = "<group>"; };
+		D96C04D21B594DE400B4DB1B /* TGPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPasswordViewController.h; sourceTree = "<group>"; };
+		D96C04D31B594DE400B4DB1B /* TGPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPasswordViewController.m; sourceTree = "<group>"; };
+		D96C04D41B594DE400B4DB1B /* TGPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGPasswordViewController.xib; sourceTree = "<group>"; };
 		D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterAuthViewController.h; sourceTree = "<group>"; };
 		D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterAuthViewController.m; sourceTree = "<group>"; };
 		D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRouterAuthViewController.xib; sourceTree = "<group>"; };
@@ -477,6 +482,9 @@
 				D96C04B21B56CF8D00B4DB1B /* TGNetworkSecurityViewController.h */,
 				D96C04B31B56CF8D00B4DB1B /* TGNetworkSecurityViewController.m */,
 				D96C04B41B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib */,
+				D96C04D21B594DE400B4DB1B /* TGPasswordViewController.h */,
+				D96C04D31B594DE400B4DB1B /* TGPasswordViewController.m */,
+				D96C04D41B594DE400B4DB1B /* TGPasswordViewController.xib */,
 			);
 			name = General;
 			path = ThreadNetworkConfig/General;
@@ -653,6 +661,7 @@
 				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
 				D95BC6861B43246E00271ED7 /* TGPopupContentViewController.xib in Resources */,
 				D96C04AB1B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib in Resources */,
+				D96C04D61B594DE400B4DB1B /* TGPasswordViewController.xib in Resources */,
 				D96C04B61B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib in Resources */,
 				CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
@@ -722,6 +731,7 @@
 			files = (
 				CDC447621B39F5790037BAF5 /* TGScannerView.m in Sources */,
 				D96C04B01B569D2F00B4DB1B /* TGNetworkPickerCell.m in Sources */,
+				D96C04D51B594DE400B4DB1B /* TGPasswordViewController.m in Sources */,
 				D9B456761B3D999900832112 /* TGAnimator.m in Sources */,
 				D917C4D91B558CF5000A5BE2 /* TGNetworkNameViewController.m in Sources */,
 				CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */,

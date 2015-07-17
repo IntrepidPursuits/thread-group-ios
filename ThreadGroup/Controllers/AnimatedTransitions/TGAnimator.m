@@ -141,7 +141,7 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
 }
 
 - (NSArray *)verticalConstraintsForView:(UIView *)view {
-    return [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[bar]-(>=100)-|"
+    return [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-80-[bar]-(>=100)-|"
                                                    options:0
                                                    metrics:nil
                                                      views:@{@"bar" : view}];
