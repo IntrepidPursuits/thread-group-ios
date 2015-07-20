@@ -10,7 +10,9 @@
 
 typedef NS_ENUM(NSUInteger, TGPopupType) {
     TGPopupTypeLog,
-    TGPopupTypeTOS
+    TGPopupTypeTOS,
+    TGPopupTypeAbout,
+    TGPopupTypeHelp
 };
 
 @class TGPopupContentViewController;
