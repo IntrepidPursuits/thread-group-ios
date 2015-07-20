@@ -7,6 +7,13 @@
 //
 
 #import "TGRouterItem.h"
+#import <arpa/inet.h>
+
+typedef union {
+    struct sockaddr sa;
+    struct sockaddr_in ipv4;
+    struct sockaddr_in6 ipv6;
+} ip_socket_address;
 
 @implementation TGRouterItem
 
@@ -18,6 +25,41 @@
         _networkAddress = networkAddress;
     }
     return self;
+}
+
+- (instancetype)initWithService:(NSNetService *)service {
+    NSString *name = service.name;
+    NSString *networkName = service.hostName;
+    NSString *address = [self decodeIPAddressFromService:service];
+    return [self initWithName:name networkName:networkName networkAddress:address];
+}
+
+- (NSString *)decodeIPAddressFromService:(NSNetService *)netService {
+    NSArray *addresses = netService.addresses;
+    char addressBuffer[INET6_ADDRSTRLEN];
+    
+    for (NSData *data in addresses) {
+        memset(addressBuffer, 0, INET6_ADDRSTRLEN);
+        
+        ip_socket_address *socketAddress = (ip_socket_address *)[data bytes];
+        
+        if (socketAddress && (socketAddress->sa.sa_family == AF_INET || socketAddress->sa.sa_family == AF_INET6)) {
+            const char *addressStr = inet_ntop(
+                                               socketAddress->sa.sa_family,
+                                               (socketAddress->sa.sa_family == AF_INET ? (void *) &(socketAddress->ipv4.sin_addr) : (void *) &(socketAddress->ipv6.sin6_addr)),
+                                               addressBuffer,
+                                               sizeof(addressBuffer));
+            
+            int port = ntohs(socketAddress->sa.sa_family == AF_INET ? socketAddress->ipv4.sin_port : socketAddress->ipv6.sin6_port);
+            
+            if (addressStr && port) {
+                NSLog(@"Found service at %s:%d", addressStr, port);
+                return [NSString stringWithFormat:@"%s:%d", addressStr, port];
+            }
+        }
+    }
+    
+    return nil;
 }
 
 @end

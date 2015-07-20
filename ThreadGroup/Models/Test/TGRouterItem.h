@@ -10,10 +10,10 @@
 
 @interface TGRouterItem : NSObject
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *networkName;
-@property (nonatomic, strong) NSString *networkAddress;
+@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSString *networkName;
+@property (nonatomic, readonly) NSString *networkAddress;
 
-- (instancetype)initWithName:(NSString *)name networkName:(NSString *)networkName networkAddress:(NSString *)networkAddress;
+- (instancetype)initWithService:(NSNetService *)service;
 
 @end
