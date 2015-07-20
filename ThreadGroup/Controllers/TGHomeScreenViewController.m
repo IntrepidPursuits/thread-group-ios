@@ -129,6 +129,7 @@
     self.popupContentVC.popupType = TGPopupTypeTOS;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Terms of Service" andButtons:self.buttons];
+    //Rather than Lorem Ipsum, I just have the log showing
     self.popupContentVC.textContent = [[TGLogManager sharedManager] getLog];
     [self presentViewController:self.popupContentVC animated:YES completion:nil];
 }
@@ -136,9 +137,10 @@
 - (void)showAbout {
     [[TGLogManager sharedManager] logMessage:@"Show About"];
     self.popupContentVC.popupType = TGPopupTypeAbout;
+    self.popupContentVC.textViewAlignment = NSTextAlignmentCenter; //Text alignment is reset back to justified in popup's controller
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"About" andButtons:self.buttons];
-    self.popupContentVC.textContent = [[TGLogManager sharedManager] getLog];
+    self.popupContentVC.textContent = [self textForAbout];
     [self presentViewController:self.popupContentVC animated:YES completion:nil];
 }
 
@@ -147,6 +149,7 @@
     self.popupContentVC.popupType = TGPopupTypeAbout;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Help" andButtons:self.buttons];
+    //Rather than Lorem Ipsum, I just have the log showing
     self.popupContentVC.textContent = [[TGLogManager sharedManager] getLog];
     [self presentViewController:self.popupContentVC animated:YES completion:nil];
 }
@@ -296,6 +299,26 @@
         NSLog(@"Ok Button pressed");
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+#pragma mark - TextContent
+
+- (NSString *)textForAbout {
+    NSString *title = @"Thread Group Sample Comminisioning Application for iOS";
+    NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+    NSString *version = infoDictionary[(NSString *)kCFBundleVersionKey];
+    NSString *versionString = [NSString stringWithFormat:@"Version: %@", version];
+    NSString *additionalInfo = @"For demonstration and reference purposes only";
+    NSString *intrepid = @"Brought to you by Intrepid Pursuits\nhttp://www.intrepid.io";
+    NSString *thread = @"Owned and maintained by Thread Group inc.\nhttp://www.threadgroup.org";
+    NSMutableString *string = [NSMutableString new];
+    [string appendFormat:@"%@\n\n",title];
+    [string appendFormat:@"%@\n\n",versionString];
+    [string appendFormat:@"%@\n\n",additionalInfo];
+    [string appendFormat:@"%@\n\n",intrepid];
+    [string appendFormat:@"%@",thread];
+
+    return string;
 }
 
 #pragma mark - UIAlertController
