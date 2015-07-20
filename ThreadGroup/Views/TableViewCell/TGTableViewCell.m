@@ -32,8 +32,8 @@
 
 - (void)updateLayout {
     self.routerNameLabel.text = self.router.name;
-    self.networkNameLabel.text = @"A Network";
-    self.networkAddressLabel.text = @"DE:AD:BE:EF";
+    self.networkNameLabel.text = self.router.networkName;
+    self.networkAddressLabel.text = self.router.networkAddress;
 }
 
 @end
