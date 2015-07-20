@@ -11,6 +11,7 @@
 @implementation TGNetworkInfoCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.layoutMargins = UIEdgeInsetsZero;
 }
 

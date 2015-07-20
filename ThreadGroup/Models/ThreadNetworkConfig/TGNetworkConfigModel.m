@@ -32,16 +32,20 @@
     generalHeader.title = @"GENERAL";
 
     TGNetworkConfigRowModel *name = [TGNetworkConfigRowModel rowModelWithTitle:@"NAME"
-                                                                              rowType:TGNetworkConfigRowTypeGeneral];
+                                                                       rowType:TGNetworkConfigRowTypeGeneral
+                                                                    actionType:TGNetworkConfigActionName];
     name.subtitle = @"Intrepid Thread Network";
     TGNetworkConfigRowModel *channel = [TGNetworkConfigRowModel rowModelWithTitle:@"CHANNEL"
-                                                                          rowType:TGNetworkConfigRowTypeGeneral];
-    channel.subtitle = @"5";
+                                                                          rowType:TGNetworkConfigRowTypeGeneral
+                                                                       actionType:TGNetworkConfigActionChannel];
+    channel.subtitle = @"15";
     TGNetworkConfigRowModel *security = [TGNetworkConfigRowModel rowModelWithTitle:@"SECURITY"
-                                                                           rowType:TGNetworkConfigRowTypeGeneral];
+                                                                           rowType:TGNetworkConfigRowTypeGeneral
+                                                                        actionType:TGNetworkConfigActionSecurity];
     security.subtitle = @"Out-of-band restricted";
     TGNetworkConfigRowModel *threadPassword = [TGNetworkConfigRowModel rowModelWithTitle:@"CHANGE THREAD ADMIN PASSWORD..."
-                                                                                 rowType:TGNetworkConfigRowTypeSelectable];
+                                                                                 rowType:TGNetworkConfigRowTypeSelectable
+                                                                              actionType:TGNetworkConfigActionPassword];
     generalHeader.rows = @[name, channel, security, threadPassword];
 
     //Network Info
@@ -49,19 +53,24 @@
     infoHeader.title = @"NETWORK INFO";
 
     TGNetworkConfigRowModel *panID = [TGNetworkConfigRowModel rowModelWithTitle:@"PANID"
-                                                                        rowType:TGNetworkConfigRowTypeInfo];
+                                                                        rowType:TGNetworkConfigRowTypeInfo
+                                                                     actionType:TGNetworkConfigActionNone];
     panID.subtitle = @"12344567";
     TGNetworkConfigRowModel *xPanID = [TGNetworkConfigRowModel rowModelWithTitle:@"XPANID"
-                                                                        rowType:TGNetworkConfigRowTypeInfo];
+                                                                         rowType:TGNetworkConfigRowTypeInfo
+                                                                      actionType:TGNetworkConfigActionNone];
     xPanID.subtitle = @"0987876524359";
     TGNetworkConfigRowModel *masterKey = [TGNetworkConfigRowModel rowModelWithTitle:@"MASTER KEY"
-                                                                        rowType:TGNetworkConfigRowTypeInfo];
+                                                                            rowType:TGNetworkConfigRowTypeInfo
+                                                                         actionType:TGNetworkConfigActionNone];
     masterKey.subtitle = @"54as8u9567lk";
     TGNetworkConfigRowModel *keySequence = [TGNetworkConfigRowModel rowModelWithTitle:@"KEY SEQUENCE"
-                                                                        rowType:TGNetworkConfigRowTypeInfo];
+                                                                              rowType:TGNetworkConfigRowTypeInfo
+                                                                           actionType:TGNetworkConfigActionNone];
     keySequence.subtitle = @"45425673jd99782kkl";
     TGNetworkConfigRowModel *meshLocalULA = [TGNetworkConfigRowModel rowModelWithTitle:@"MESH LOCAL ULA"
-                                                                        rowType:TGNetworkConfigRowTypeInfo];
+                                                                               rowType:TGNetworkConfigRowTypeInfo
+                                                                            actionType:TGNetworkConfigActionNone];
     meshLocalULA.subtitle = @"ULA3779992000kksss";
     infoHeader.rows = @[panID, xPanID, masterKey, keySequence, meshLocalULA];
 

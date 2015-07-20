@@ -15,6 +15,11 @@
 #import "TGSelectableCell.h"
 #import "TGNetworkConfigModel.h"
 #import "TGNetworkConfigRowModel.h"
+#import "TGNetworkNameViewController.h"
+#import "TGNetworkChannelViewController.h"
+#import "TGNetworkSecurityViewController.h"
+#import "TGAnimator.h"
+#import "TGPasswordViewController.h"
 
 static NSString * const kTGGeneralCellReuseIdentifier = @"TGGeneralCellReuseIdentifier";
 static NSString * const kTGNetworkInfoCellReuseIdentifier = @"TGNetworkInfoCellReuseIdentifier";
@@ -22,7 +27,7 @@ static NSString * const kTGSelectableCellReuseIdentifier = @"TGSelectableCellReu
 static NSString * const KTGHeaderViewReuseIdentifier = @"TGHeaderViewReuseIdentifier";
 static CGFloat const kTGSectionHeaderHeight = 36.0f;
 
-@interface TGNetworkConfigViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TGNetworkConfigViewController () <UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) TGNetworkConfigModel *model;
 @end
@@ -33,6 +38,7 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.modalPresentationStyle = UIModalPresentationCustom;
     [self tableViewSetup];
 }
 
@@ -53,11 +59,6 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
 
     self.navigationController.navigationBar.backItem.title = @"";
     [self.navigationItem setTitle:@"Network Settings"];
-
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor] , NSFontAttributeName : [UIFont threadGroup_mediumFontWithSize:17.0f]};
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barTintColor = [UIColor threadGroup_orange];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 #pragma mark - UITableViewDataSource
@@ -125,6 +126,34 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    TGNetworkConfigRowModel *row = [self.model rowForIndexPath:indexPath];
+    switch (row.actionType) {
+        case TGNetworkConfigActionName: {
+            TGNetworkNameViewController *nameVC = [[TGNetworkNameViewController alloc] initWithNibName:nil bundle:nil];
+            nameVC.textFieldText = row.subtitle;
+            [self.navigationController pushViewController:nameVC animated:YES];
+            break;
+        }
+        case TGNetworkConfigActionChannel: {
+            TGNetworkChannelViewController *channelVC = [[TGNetworkChannelViewController alloc] initWithNibName:nil bundle:nil];
+            channelVC.selectedIndex = [row.subtitle integerValue];
+            [self.navigationController pushViewController:channelVC animated:YES];
+            break;
+        }
+        case TGNetworkConfigActionSecurity: {
+            TGNetworkSecurityViewController *securityVC = [[TGNetworkSecurityViewController alloc] initWithNibName:nil bundle:nil];
+            [self.navigationController pushViewController:securityVC animated:YES];
+            break;
+        }
+        case TGNetworkConfigActionPassword: {
+            TGPasswordViewController *passwordVC = [[TGPasswordViewController alloc] initWithNibName:nil bundle:nil];
+            passwordVC.transitioningDelegate = self;
+            [self presentViewController:passwordVC animated:YES completion:nil];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - Lazy Load
@@ -134,6 +163,20 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
         _model = [[TGNetworkConfigModel alloc] init];
     }
     return _model;
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    TGAnimator *animator = [TGAnimator new];
+    animator.type = TGTransitionTypePresent;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    TGAnimator *animator = [TGAnimator new];
+    animator.type = TGTransitionTypeDismiss;
+    return animator;
 }
 
 @end

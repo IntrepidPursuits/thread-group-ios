@@ -11,6 +11,7 @@
 @implementation TGGeneralCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.layoutMargins = UIEdgeInsetsZero;
 }
 
