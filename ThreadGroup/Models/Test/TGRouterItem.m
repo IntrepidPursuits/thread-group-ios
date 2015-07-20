@@ -62,4 +62,23 @@ typedef union {
     return nil;
 }
 
+#pragma mark - Overridden
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Router Name: <%@> Network: <%@> Address: <%@>", self.name, self.networkName, self.networkAddress];
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL objectIsNetService = [object isKindOfClass:[self class]];
+    return (objectIsNetService) ? [self isEqualToRouter:object] : NO;
+}
+
+- (BOOL)isEqualToRouter:(TGRouterItem *)router {
+    return (
+            ([self.name isEqualToString:router.name]) &&
+            ([self.networkName isEqualToString:router.networkName]) &&
+            ([self.networkAddress isEqualToString:router.networkAddress])
+            );
+}
+
 @end

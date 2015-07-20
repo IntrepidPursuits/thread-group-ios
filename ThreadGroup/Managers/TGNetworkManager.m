@@ -13,6 +13,7 @@ static NSString * const TGNetworkManagerMeshcopServiceType = @"_thread-net._udp"
 static NSString * const TGNetworkManagerMeshcopServiceDomain = @"local";
 static NSString * const TGNetworkManagerMeshcopServicePort = @"19779";
 static NSUInteger const TGNetworkManagerMeshcopServiceTimeout = 15;
+static NSUInteger const TGNetworkManagerMeshcopServiceRetryCount = 3;
 
 @interface TGNetworkManager() <NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
@@ -20,6 +21,7 @@ static NSUInteger const TGNetworkManagerMeshcopServiceTimeout = 15;
 @property (nonatomic, strong) TGNetworkManagerFindRoutersCompletionBlock findingNetworksCallback;
 @property (nonatomic, strong) NSMutableArray *threadServices;
 @property (nonatomic, strong) NSMutableArray *netServices;
+@property (nonatomic, strong) NSMutableDictionary *retryDict;
 
 @end
 
@@ -42,6 +44,7 @@ static NSUInteger const TGNetworkManagerMeshcopServiceTimeout = 15;
         [self.borderRouterServiceBrowser stop];
     }
     
+    self.retryDict = [NSMutableDictionary new];
     self.netServices = [NSMutableArray new];
     self.threadServices = [NSMutableArray new];
     self.borderRouterServiceBrowser = [NSNetServiceBrowser new];
@@ -73,16 +76,21 @@ static NSUInteger const TGNetworkManagerMeshcopServiceTimeout = 15;
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
-    NSLog(@"REMOVE: %@", aNetService);
+    TGRouterItem *router = [[TGRouterItem alloc] initWithService:aNetService];
+    NSLog(@"Removed Router: %@", router);
+    [self.netServices removeObject:router];
+
+    if (self.findingNetworksCallback) {
+        self.findingNetworksCallback(self.threadServices, nil, moreComing);
+    }
 }
 
 #pragma mark - NSNetServiceDelegate
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
     TGRouterItem *router = [[TGRouterItem alloc] initWithService:sender];
+    NSLog(@"Resolved address of router: %@", router);
     [self.threadServices addObject:router];
-    
-    NSLog(@"Service: %@", sender);
     
     if (self.findingNetworksCallback) {
         self.findingNetworksCallback(self.threadServices, nil, YES);
@@ -90,7 +98,19 @@ static NSUInteger const TGNetworkManagerMeshcopServiceTimeout = 15;
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
-    NSLog(@"Error: %@", errorDict);
+    NSNetServicesError error = [[errorDict objectForKey:NSNetServicesErrorCode] integerValue];
+    if (error == NSNetServicesTimeoutError) {
+        NSLog(@"Timeout trying to resolve router address");
+        NSNumber *retryDictHash = @(sender.hash);
+        NSInteger currentRetryCount = [[self.retryDict objectForKey:retryDictHash] integerValue];
+        NSLog(@"Current retry count for router: %ld", currentRetryCount);
+        if (currentRetryCount < TGNetworkManagerMeshcopServiceRetryCount) {
+            NSLog(@"Retrying router address resolve");
+            [sender resolveWithTimeout:TGNetworkManagerMeshcopServiceTimeout];
+            currentRetryCount += 1;
+            [self.retryDict setObject:@(currentRetryCount) forKey:retryDictHash];
+        }
+    }
 }
 
 @end
