@@ -99,21 +99,15 @@
     self.threadConfig = [[TGNetworkConfigViewController alloc] initWithNibName:nil bundle:nil];
 }
 
-#pragma mark - Test
-
-- (NSArray *)createTestObjects {
-    TGRouter *item1 = [[TGRouter alloc] initWithName:@"Router 1" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
-    TGRouter *item2 = [[TGRouter alloc] initWithName:@"Router 2" networkName:@"Network 2" networkAddress:@"2001:db8::ff00:42:8329"];
-    TGRouter *item3 = [[TGRouter alloc] initWithName:@"Router 3" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
-    TGRouter *item4 = [[TGRouter alloc] initWithName:@"Router 4" networkName:@"Network 3" networkAddress:@"2001:db8::ff00:42:8329"];
-    return @[item1, item2, item3, item4];
-}
-
 #pragma mark - Table View
 
 - (void)setupTableViewSource {
-    [self.tableView setNetworkItems:[self createTestObjects]];
     [self.tableView setTableViewDelegate:self];
+    [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *__autoreleasing *error, BOOL stillSearching) {
+        [self.tableView setNetworkItems:networks];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        NSLog(@"%@ Searching (Found %ld)", stillSearching ? @"Still" : @"Done", networks.count);
+    }];
 }
 
 #pragma mark - Button Events

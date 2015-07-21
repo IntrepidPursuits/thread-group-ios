@@ -37,7 +37,7 @@ static NSUInteger const TGNetworkManagerMeshcopServiceRetryCount = 3;
 }
 
 - (void)findLocalThreadNetworksCompletion:(TGNetworkManagerFindRoutersCompletionBlock)completion {
-    NSLog(@"Finding Thread Networks");
+    NSLog(@"Finding Border Routers");
     self.findingNetworksCallback = completion;
     
     if (self.borderRouterServiceBrowser) {
@@ -100,7 +100,7 @@ static NSUInteger const TGNetworkManagerMeshcopServiceRetryCount = 3;
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
     NSNetServicesError error = [[errorDict objectForKey:NSNetServicesErrorCode] integerValue];
     if (error == NSNetServicesTimeoutError) {
-        NSLog(@"Timeout trying to resolve router address");
+        NSLog(@"Timeout attempting to resolve router address");
         NSNumber *retryDictHash = @(sender.hash);
         NSInteger currentRetryCount = [[self.retryDict objectForKey:retryDictHash] integerValue];
         NSLog(@"Current retry count for router: %ld", currentRetryCount);
