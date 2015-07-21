@@ -317,7 +317,7 @@
 - (void)animateConnectingToRouterWithItem:(TGRouter *)item {
     [self.routerSearchView setSpinnerActive:YES];
     [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
-    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@ on %@", item.name, item.networkName]];
+    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@", item.name]];
 }
 
 - (void)animateConnectedToRouterWithItem:(TGRouter *)item {
