@@ -15,7 +15,7 @@
 #import "UIImage+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 #import "TGTableView.h"
-#import "TGRouterItem.h"
+#import "TGRouter.h"
 #import "TGNetworkManager.h"
 #import "TGDevice.h"
 #import "TGScannerView.h"
@@ -99,21 +99,15 @@
     self.threadConfig = [[TGNetworkConfigViewController alloc] initWithNibName:nil bundle:nil];
 }
 
-#pragma mark - Test
-
-- (NSArray *)createTestObjects {
-    TGRouterItem *item1 = [[TGRouterItem alloc] initWithName:@"Router 1" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
-    TGRouterItem *item2 = [[TGRouterItem alloc] initWithName:@"Router 2" networkName:@"Network 2" networkAddress:@"2001:db8::ff00:42:8329"];
-    TGRouterItem *item3 = [[TGRouterItem alloc] initWithName:@"Router 3" networkName:@"Network 1" networkAddress:@"2001:db8::ff00:42:8329"];
-    TGRouterItem *item4 = [[TGRouterItem alloc] initWithName:@"Router 4" networkName:@"Network 3" networkAddress:@"2001:db8::ff00:42:8329"];
-    return @[item1, item2, item3, item4];
-}
-
 #pragma mark - Table View
 
 - (void)setupTableViewSource {
-    [self.tableView setNetworkItems:[self createTestObjects]];
     [self.tableView setTableViewDelegate:self];
+    [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *__autoreleasing *error, BOOL stillSearching) {
+        [self.tableView setNetworkItems:networks];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        NSLog(@"%@ Searching (Found %ld)", stillSearching ? @"Still" : @"Done", networks.count);
+    }];
 }
 
 #pragma mark - Button Events
@@ -312,19 +306,19 @@
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
 }
 
-- (void)connectRouterForItem:(TGRouterItem *)item {
+- (void)connectRouterForItem:(TGRouter *)item {
     //TODO: Will have to actually connect a real router
     [self animateConnectingToRouterWithItem:item];
     [self connectToRouterWithItem:item];
 }
 
-- (void)animateConnectingToRouterWithItem:(TGRouterItem *)item {
+- (void)animateConnectingToRouterWithItem:(TGRouter *)item {
     [self.routerSearchView setSpinnerActive:YES];
     [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
     [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@ on %@", item.name, item.networkName]];
 }
 
-- (void)animateConnectedToRouterWithItem:(TGRouterItem *)item {
+- (void)animateConnectedToRouterWithItem:(TGRouter *)item {
     [self.routerSearchView setSpinnerActive:NO];
     [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
     [self.routerSearchView setTitle:item.name subTitle:item.networkName];
@@ -334,7 +328,7 @@
     self.routerSearchView.topSeperatorView.hidden = NO;
 }
 
-- (void)connectToRouterWithItem:(TGRouterItem *)item {
+- (void)connectToRouterWithItem:(TGRouter *)item {
     self.routerAuthVC.item = item;
     [self presentViewController:self.routerAuthVC animated:YES completion:nil];
 }
@@ -439,7 +433,7 @@
 
 #pragma mark - TGTableView Delegate
 
-- (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouterItem *)item {
+- (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouter *)item {
     [self connectRouterForItem:item];
 }
 

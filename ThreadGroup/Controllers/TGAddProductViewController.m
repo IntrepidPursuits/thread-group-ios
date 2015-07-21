@@ -10,14 +10,14 @@
 #import "TGSpinnerView.h"
 #import "UIFont+ThreadGroup.h"
 #import "TGDevice.h"
-#import "TGRouterItem.h"
+#import "TGRouter.h"
 
 @interface TGAddProductViewController ()
 @property (weak, nonatomic) IBOutlet TGSpinnerView *spinnerView;
 @property (weak, nonatomic) IBOutlet UILabel *addingDeviceText;
 
 @property (strong, nonatomic) TGDevice *device;
-@property (strong, nonatomic) TGRouterItem *router;
+@property (strong, nonatomic) TGRouter *router;
 @end
 
 @implementation TGAddProductViewController
@@ -32,7 +32,7 @@
 
 #pragma mark -
 
-- (void)setDevice:(TGDevice *)device andRouter:(TGRouterItem *)router {
+- (void)setDevice:(TGDevice *)device andRouter:(TGRouter *)router {
     _device = device;
     _router = router;
 }
@@ -45,7 +45,7 @@
 
 #pragma mark - Helper Methods
 
-- (NSAttributedString *)createLabelFromDevice:(TGDevice *)device andRouter:(TGRouterItem *)router {
+- (NSAttributedString *)createLabelFromDevice:(TGDevice *)device andRouter:(TGRouter *)router {
     //Creating attributed strings
     NSAttributedString *adding = [[NSAttributedString alloc] initWithString:@"Adding " attributes:[self bookFontAttributeDictionary]];
     NSAttributedString *to = [[NSAttributedString alloc] initWithString:@" to " attributes:[self bookFontAttributeDictionary]];

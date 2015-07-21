@@ -10,7 +10,7 @@
 
 @interface TGPasswordViewController : UIViewController
 
-//This will probably be replaced by TGRouterItem
+//This will probably be replaced by TGRouter
 @property (strong, nonatomic) NSString *routerNetwork;
 
 @end
