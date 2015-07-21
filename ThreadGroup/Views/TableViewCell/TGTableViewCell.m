@@ -7,7 +7,7 @@
 //
 
 #import "TGTableViewCell.h"
-#import "TGRouterItem.h"
+#import "TGRouter.h"
 
 @interface TGTableViewCell()
 
@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *routerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *networkNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *networkAddressLabel;
-@property (strong, nonatomic) TGRouterItem *router;
+@property (strong, nonatomic) TGRouter *router;
 
 @end
 
@@ -23,7 +23,7 @@
 
 #pragma mark - Public
 
-- (void)configureWithRouter:(TGRouterItem *)router {
+- (void)configureWithRouter:(TGRouter *)router {
     self.router = router;
     [self updateLayout];
 }

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class TGAddProductViewController;
-@class TGRouterItem;
+@class TGRouter;
 @class TGDevice;
 
 @protocol TGAddProductViewControllerDelegate <NSObject>
@@ -19,6 +19,6 @@
 @interface TGAddProductViewController : UIViewController
 
 @property (nonatomic, weak) id<TGAddProductViewControllerDelegate> delegate;
-- (void)setDevice:(TGDevice *)device andRouter:(TGRouterItem *)router;
+- (void)setDevice:(TGDevice *)device andRouter:(TGRouter *)router;
 //Should make it so that when the view is being shown, we should start animationg and we can stop animating when we are done with the view.
 @end

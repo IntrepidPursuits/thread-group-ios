@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class TGRouterItem;
+@class TGRouter;
 @class TGRouterAuthViewController;
 
 @protocol TGRouterAuthViewControllerDelegate <NSObject>
@@ -18,5 +18,5 @@
 
 @interface TGRouterAuthViewController : UIViewController
 @property (nonatomic, weak) id<TGRouterAuthViewControllerDelegate> delegate;
-@property (nonatomic, strong) TGRouterItem *item;
+@property (nonatomic, strong) TGRouter *item;
 @end

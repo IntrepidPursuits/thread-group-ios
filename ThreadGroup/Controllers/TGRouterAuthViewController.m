@@ -10,7 +10,7 @@
 #import "UIFont+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 #import "TGNetworkManager.h"
-#import "TGRouterItem.h"
+#import "TGRouter.h"
 
 @interface TGRouterAuthViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *routerLabel;
@@ -74,7 +74,7 @@
 
 #pragma mark - Helper Methods
 
-- (NSAttributedString *)createLabelFromItem:(TGRouterItem *)item {
+- (NSAttributedString *)createLabelFromItem:(TGRouter *)item {
     NSAttributedString *enter = [[NSAttributedString alloc] initWithString:@"Enter password to connect to " attributes:[self bookFontAttributeDictionary]];
     NSAttributedString *on = [[NSAttributedString alloc] initWithString:@" on " attributes:[self bookFontAttributeDictionary]];
     NSAttributedString *name = [[NSAttributedString alloc] initWithString:item.name attributes:[self boldFontAttributeDictionary]];

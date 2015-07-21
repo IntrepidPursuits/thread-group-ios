@@ -1,12 +1,12 @@
 //
-//  TGRouterItem.m
+//  TGRouter.m
 //  ThreadGroup
 //
 //  Created by LuQuan Intrepid on 6/18/15.
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "TGRouterItem.h"
+#import "TGRouter.h"
 #import <arpa/inet.h>
 
 typedef union {
@@ -15,7 +15,7 @@ typedef union {
     struct sockaddr_in6 ipv6;
 } ip_socket_address;
 
-@implementation TGRouterItem
+@implementation TGRouter
 
 - (instancetype)initWithName:(NSString *)name networkName:(NSString *)networkName networkAddress:(NSString *)networkAddress {
     self = [super init];
@@ -73,7 +73,7 @@ typedef union {
     return (objectIsNetService) ? [self isEqualToRouter:object] : NO;
 }
 
-- (BOOL)isEqualToRouter:(TGRouterItem *)router {
+- (BOOL)isEqualToRouter:(TGRouter *)router {
     return (
             ([self.name isEqualToString:router.name]) &&
             ([self.networkName isEqualToString:router.networkName]) &&

@@ -1,5 +1,5 @@
 //
-//  TGRouterItem.h
+//  TGRouter.h
 //  ThreadGroup
 //
 //  Created by LuQuan Intrepid on 6/18/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TGRouterItem : NSObject
+@interface TGRouter : NSObject
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *networkName;

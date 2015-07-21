@@ -7,7 +7,7 @@
 //
 
 #import "TGNetworkManager.h"
-#import "TGRouterItem.h"
+#import "TGRouter.h"
 
 static NSString * const TGNetworkManagerMeshcopServiceType = @"_thread-net._udp";
 static NSString * const TGNetworkManagerMeshcopServiceDomain = @"local";
@@ -76,7 +76,7 @@ static NSUInteger const TGNetworkManagerMeshcopServiceRetryCount = 3;
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
-    TGRouterItem *router = [[TGRouterItem alloc] initWithService:aNetService];
+    TGRouter *router = [[TGRouter alloc] initWithService:aNetService];
     NSLog(@"Removed Router: %@", router);
     [self.netServices removeObject:router];
 
@@ -88,7 +88,7 @@ static NSUInteger const TGNetworkManagerMeshcopServiceRetryCount = 3;
 #pragma mark - NSNetServiceDelegate
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
-    TGRouterItem *router = [[TGRouterItem alloc] initWithService:sender];
+    TGRouter *router = [[TGRouter alloc] initWithService:sender];
     NSLog(@"Resolved address of router: %@", router);
     [self.threadServices addObject:router];
     

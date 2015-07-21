@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @class TGTableView;
-@class TGRouterItem;
+@class TGRouter;
 
 @protocol TGTableViewProtocol <NSObject>
-- (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouterItem *)item;
+- (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouter *)item;
 @end
 
 @interface TGTableView : UITableView <UITableViewDataSource, UITableViewDelegate>

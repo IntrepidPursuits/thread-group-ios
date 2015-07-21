@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class TGRouterItem;
+@class TGRouter;
 
 @interface TGTableViewCell : UITableViewCell
 
-- (void)configureWithRouter:(TGRouterItem *)router;
+- (void)configureWithRouter:(TGRouter *)router;
 
 @end

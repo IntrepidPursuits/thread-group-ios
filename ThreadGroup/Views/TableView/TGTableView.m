@@ -8,7 +8,7 @@
 
 #import "TGTableView.h"
 #import "TGTableViewCell.h"
-#import "TGRouterItem.h"
+#import "TGRouter.h"
 
 static NSString * const kTGTableViewCellName = @"TGTableViewCell";
 static NSString * const kTGTableViewCellReuseIdentifier = @"TGTableViewCell";
@@ -35,7 +35,7 @@ static NSString * const kTGTableViewCellReuseIdentifier = @"TGTableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TGTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTGTableViewCellReuseIdentifier forIndexPath:indexPath];
-    TGRouterItem *item = self.networkItems[indexPath.item];
+    TGRouter *item = self.networkItems[indexPath.item];
     [cell configureWithRouter:item];
     return cell;
 }
@@ -47,7 +47,7 @@ static NSString * const kTGTableViewCellReuseIdentifier = @"TGTableViewCell";
 #pragma mark - Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TGRouterItem *selectedRouter = self.networkItems[indexPath.item];
+    TGRouter *selectedRouter = self.networkItems[indexPath.item];
     if ([self.tableViewDelegate respondsToSelector:@selector(tableView:didSelectItem:)]) {
         [self.tableViewDelegate tableView:self didSelectItem:selectedRouter];
     }
