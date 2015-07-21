@@ -33,7 +33,9 @@
 - (void)updateLayout {
     self.routerNameLabel.text = self.router.name;
     self.networkNameLabel.text = self.router.networkName;
-    self.networkAddressLabel.text = self.router.networkAddress;
+    
+    NSString *networkAddress = [NSString stringWithFormat:@"%@:%ld", self.router.ipAddress, (long)self.router.port];
+    self.networkAddressLabel.text = networkAddress;
 }
 
 @end

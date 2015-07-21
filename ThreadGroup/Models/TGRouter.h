@@ -12,7 +12,8 @@
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *networkName;
-@property (nonatomic, readonly) NSString *networkAddress;
+@property (nonatomic, readonly) NSString *ipAddress;
+@property (nonatomic, readonly) NSInteger port;
 
 - (instancetype)initWithService:(NSNetService *)service;
 

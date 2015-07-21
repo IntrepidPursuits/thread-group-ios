@@ -17,21 +17,17 @@ typedef union {
 
 @implementation TGRouter
 
-- (instancetype)initWithName:(NSString *)name networkName:(NSString *)networkName networkAddress:(NSString *)networkAddress {
+- (instancetype)initWithService:(NSNetService *)service {
     self = [super init];
     if (self) {
-        _name = name;
-        _networkName = networkName;
-        _networkAddress = networkAddress;
+        _name = service.name;
+        _networkName = service.hostName;
+
+        NSString *networkAddress = [self decodeIPAddressFromService:service];
+        _ipAddress = [networkAddress componentsSeparatedByString:@":"][0];
+        _port = [[networkAddress componentsSeparatedByString:@":"][1] integerValue];
     }
     return self;
-}
-
-- (instancetype)initWithService:(NSNetService *)service {
-    NSString *name = service.name;
-    NSString *networkName = service.hostName;
-    NSString *address = [self decodeIPAddressFromService:service];
-    return [self initWithName:name networkName:networkName networkAddress:address];
 }
 
 - (NSString *)decodeIPAddressFromService:(NSNetService *)netService {
@@ -64,7 +60,7 @@ typedef union {
 #pragma mark - Overridden
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Router Name: <%@> Network: <%@> Address: <%@>", self.name, self.networkName, self.networkAddress];
+    return [NSString stringWithFormat:@"Router Name: <%@> Network: <%@> Address: <%@> Port: <%ld>", self.name, self.networkName, self.ipAddress, (long)self.port];
 }
 
 - (BOOL)isEqual:(id)object {
@@ -76,7 +72,8 @@ typedef union {
     return (
             ([self.name isEqualToString:router.name]) &&
             ([self.networkName isEqualToString:router.networkName]) &&
-            ([self.networkAddress isEqualToString:router.networkAddress])
+            ([self.ipAddress isEqualToString:router.ipAddress]) &&
+            (self.port == router.port)
             );
 }
 
