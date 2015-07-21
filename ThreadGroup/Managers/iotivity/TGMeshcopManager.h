@@ -15,10 +15,9 @@
 - (void)setMeshCopEnabled:(BOOL)enabled;
 - (void)addAnyJoinerCredentials:(NSString *)joinerCredentials;
 - (void)addJoinerWithIdentifier:(NSString *)identifier credentials:(NSString *)credentials;
-- (void)changeToHostAtAddress:(NSString *)address commissionerPort:(NSInteger)port networkType:(CATransportAdapter_t)networkType networkName:(NSString *)name secured:(BOOL)secured;
+- (BOOL)changeToHostAtAddress:(NSString *)address commissionerPort:(NSInteger)port networkType:(CATransportAdapter_t)networkType networkName:(NSString *)name secured:(BOOL)secured;
 - (NSData *)petitionAsCommissioner:(NSString *)commissionerIdentifier;
-- (void)setCallback:(MCCallback_t)callback;
-- (void)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK;
+- (BOOL)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK;
 - (void)setPassphrase:(NSString *)passphrase;
 
 @end

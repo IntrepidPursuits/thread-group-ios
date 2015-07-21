@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^TGNetworkManagerFindRoutersCompletionBlock)(NSArray *networks, NSError **error, BOOL stillSearching);
+@class TGRouter;
+typedef void (^TGNetworkManagerFindRoutersCompletionBlock)(NSArray *networks, NSError *error, BOOL stillSearching);
 
 @interface TGNetworkManager : NSObject
 
 + (instancetype)sharedManager;
 + (NSString *)currentWifiSSID;
 - (void)findLocalThreadNetworksCompletion:(TGNetworkManagerFindRoutersCompletionBlock)completion;
-- (void)connectToNetwork:(id)network completion:(void (^)(NSError **error))completion;
-- (void)connectDevice:(id)device completion:(void (^)(NSError **error))completion;
+- (void)connectToRouter:(TGRouter *)router completion:(void (^)(NSError *error))completion;
+- (void)connectDevice:(id)device completion:(void (^)(NSError *error))completion;
 
 @end

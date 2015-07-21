@@ -40,8 +40,7 @@
 #pragma mark - IBActions
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
-    [self setUserInteractionEnabled:NO];
-    [[TGNetworkManager sharedManager] connectToNetwork:self.passwordTextField.text completion:^(NSError *__autoreleasing *error) {
+    [[TGNetworkManager sharedManager] connectToRouter:self.item completion:^(NSError *error) {
         BOOL successful = (BOOL)(arc4random() % 2);
         if (successful) {
             [self authenticationSuccess];

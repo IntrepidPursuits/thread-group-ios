@@ -20,6 +20,7 @@
 		CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */; };
 		CD095A031B45CC6C007DACFA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD095A021B45CC6C007DACFA /* libc++.dylib */; };
 		CD4E72591B4C826C00DBA98D /* libMeshCop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4E72581B4C826C00DBA98D /* libMeshCop.a */; };
+		CD75D2881B6AAA3500C7972D /* TGNetworkCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = CD75D2871B6AAA3500C7972D /* TGNetworkCallback.m */; };
 		CD7B60441B1F5469007FF820 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60431B1F5469007FF820 /* main.mm */; };
 		CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60461B1F5469007FF820 /* AppDelegate.m */; };
 		CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7B604E1B1F5469007FF820 /* Images.xcassets */; };
@@ -42,7 +43,6 @@
 		CD8FFD781B39DCF300481DE7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */; };
 		CD8FFD7A1B39DCFC00481DE7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD791B39DCFC00481DE7 /* QuartzCore.framework */; };
 		CD8FFD7C1B39DD0B00481DE7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD7B1B39DD0B00481DE7 /* libiconv.dylib */; };
-		CDC1742C1B5953F000FF70A2 /* TGMeshcopManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD86393E1B4330140044B2BE /* TGMeshcopManager.mm */; };
 		CDC447621B39F5790037BAF5 /* TGScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC447611B39F5790037BAF5 /* TGScannerView.m */; };
 		CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC447671B3A53290037BAF5 /* UIView+Animations.m */; };
 		CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */; };
@@ -51,7 +51,8 @@
 		CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18F31B2B2B24008A84FD /* TGSettingsManager.m */; };
 		CDDB18F71B2B2C1B008A84FD /* TGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */; };
 		CDFFFF051B5E8AEA0011EA4B /* TGRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFFFF041B5E8AEA0011EA4B /* TGRouter.m */; };
-		CDFFFF081B5E9EA10011EA4B /* TGRouterServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFFFF071B5E9EA10011EA4B /* TGRouterServiceBrowser.m */; };
+		CDFFFF0E1B5EC6130011EA4B /* TGMeshcopManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDFFFF0B1B5EC6130011EA4B /* TGMeshcopManager.mm */; };
+		CDFFFF0F1B5EC6130011EA4B /* TGRouterServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFFFF0D1B5EC6130011EA4B /* TGRouterServiceBrowser.m */; };
 		D917C4D91B558CF5000A5BE2 /* TGNetworkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */; };
 		D917C4DA1B558CF5000A5BE2 /* TGNetworkNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */; };
 		D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D93717791B617BDC00BE55DD /* TGPopup.m */; };
@@ -131,6 +132,8 @@
 		CD095A021B45CC6C007DACFA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CD095A0D1B45E09C007DACFA /* libc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libc_common.a; path = iotivity/out/ios/universal/libc_common.a; sourceTree = "<group>"; };
 		CD4E72581B4C826C00DBA98D /* libMeshCop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMeshCop.a; path = Pods/libMeshCop/ios/MeshCop/libMeshCop.a; sourceTree = "<group>"; };
+		CD75D2861B6AAA3500C7972D /* TGNetworkCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkCallback.h; sourceTree = "<group>"; };
+		CD75D2871B6AAA3500C7972D /* TGNetworkCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkCallback.m; sourceTree = "<group>"; };
 		CD7AE8081B4B0A35007A58E0 /* libocsrm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocsrm.a; path = "../iotivity-private/out/ios/arm64/debug/libocsrm.a"; sourceTree = "<group>"; };
 		CD7B603E1B1F5469007FF820 /* ThreadGroup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreadGroup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7B60421B1F5469007FF820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,8 +148,6 @@
 		CD8639381B4183300044B2BE /* TGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainViewController.h; sourceTree = "<group>"; };
 		CD8639391B4183300044B2BE /* TGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainViewController.m; sourceTree = "<group>"; };
 		CD86393A1B4183300044B2BE /* TGMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainViewController.xib; sourceTree = "<group>"; };
-		CD86393D1B4330140044B2BE /* TGMeshcopManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMeshcopManager.h; sourceTree = "<group>"; };
-		CD86393E1B4330140044B2BE /* TGMeshcopManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TGMeshcopManager.mm; sourceTree = "<group>"; };
 		CD8C68191B272A290091B548 /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
 		CD8C681A1B272A290091B548 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
 		CD8C681B1B272A290091B548 /* Gotham-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Light.otf"; sourceTree = "<group>"; };
@@ -184,8 +185,10 @@
 		CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkManager.m; sourceTree = "<group>"; };
 		CDFFFF031B5E8AEA0011EA4B /* TGRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGRouter.h; path = Models/TGRouter.h; sourceTree = "<group>"; };
 		CDFFFF041B5E8AEA0011EA4B /* TGRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGRouter.m; path = Models/TGRouter.m; sourceTree = "<group>"; };
-		CDFFFF061B5E9EA10011EA4B /* TGRouterServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterServiceBrowser.h; sourceTree = "<group>"; };
-		CDFFFF071B5E9EA10011EA4B /* TGRouterServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterServiceBrowser.m; sourceTree = "<group>"; };
+		CDFFFF0A1B5EC6130011EA4B /* TGMeshcopManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMeshcopManager.h; sourceTree = "<group>"; };
+		CDFFFF0B1B5EC6130011EA4B /* TGMeshcopManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TGMeshcopManager.mm; sourceTree = "<group>"; };
+		CDFFFF0C1B5EC6130011EA4B /* TGRouterServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterServiceBrowser.h; sourceTree = "<group>"; };
+		CDFFFF0D1B5EC6130011EA4B /* TGRouterServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterServiceBrowser.m; sourceTree = "<group>"; };
 		D917C4D41B558CD6000A5BE2 /* TGNetworkConfigAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TGNetworkConfigAction.h; path = Models/ThreadNetworkConfig/TGNetworkConfigAction.h; sourceTree = "<group>"; };
 		D917C4D61B558CF5000A5BE2 /* TGNetworkNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkNameViewController.h; sourceTree = "<group>"; };
 		D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkNameViewController.m; sourceTree = "<group>"; };
@@ -497,22 +500,32 @@
 		CDDB18F11B2B2AF8008A84FD /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				CDFFFF091B5EC5EA0011EA4B /* iotivity */,
 				CDDB18F21B2B2B24008A84FD /* TGSettingsManager.h */,
 				CDDB18F31B2B2B24008A84FD /* TGSettingsManager.m */,
 				CDDB18F51B2B2C1B008A84FD /* TGNetworkManager.h */,
 				CDDB18F61B2B2C1B008A84FD /* TGNetworkManager.m */,
 				D95BC6901B45992400271ED7 /* TGLogManager.h */,
 				D95BC6911B45992400271ED7 /* TGLogManager.m */,
-				CD86393D1B4330140044B2BE /* TGMeshcopManager.h */,
-				CD86393E1B4330140044B2BE /* TGMeshcopManager.mm */,
-				CDFFFF061B5E9EA10011EA4B /* TGRouterServiceBrowser.h */,
-				CDFFFF071B5E9EA10011EA4B /* TGRouterServiceBrowser.m */,
 				D937177B1B62831200BE55DD /* TGKeychainManager.h */,
 				D937177C1B62831200BE55DD /* TGKeychainManager.m */,
 				D96AF2BD1B67F9C0005F66E4 /* TGQRCodeParser.h */,
 				D96AF2BE1B67F9C0005F66E4 /* TGQRCodeParser.m */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		CDFFFF091B5EC5EA0011EA4B /* iotivity */ = {
+			isa = PBXGroup;
+			children = (
+				CDFFFF0A1B5EC6130011EA4B /* TGMeshcopManager.h */,
+				CDFFFF0B1B5EC6130011EA4B /* TGMeshcopManager.mm */,
+				CDFFFF0C1B5EC6130011EA4B /* TGRouterServiceBrowser.h */,
+				CDFFFF0D1B5EC6130011EA4B /* TGRouterServiceBrowser.m */,
+				CD75D2861B6AAA3500C7972D /* TGNetworkCallback.h */,
+				CD75D2871B6AAA3500C7972D /* TGNetworkCallback.m */,
+			);
+			path = iotivity;
 			sourceTree = "<group>";
 		};
 		D917C4D51B558CF5000A5BE2 /* General */ = {
@@ -795,8 +808,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDFFFF0F1B5EC6130011EA4B /* TGRouterServiceBrowser.m in Sources */,
 				CDC447621B39F5790037BAF5 /* TGScannerView.m in Sources */,
 				D96C04B01B569D2F00B4DB1B /* TGNetworkPickerCell.m in Sources */,
+				CDFFFF0E1B5EC6130011EA4B /* TGMeshcopManager.mm in Sources */,
 				D96C04D51B594DE400B4DB1B /* TGPasswordViewController.m in Sources */,
 				D9B456761B3D999900832112 /* TGAnimator.m in Sources */,
 				D917C4D91B558CF5000A5BE2 /* TGNetworkNameViewController.m in Sources */,
@@ -809,7 +824,7 @@
 				D937177D1B62831200BE55DD /* TGKeychainManager.m in Sources */,
 				0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */,
 				D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */,
-				CDFFFF081B5E9EA10011EA4B /* TGRouterServiceBrowser.m in Sources */,
+				CD75D2881B6AAA3500C7972D /* TGNetworkCallback.m in Sources */,
 				D95BC68F1B446D8900271ED7 /* TGPopupContentAnimator.m in Sources */,
 				CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */,
 				D9E1A9DD1B6032EB00B3DA2C /* TGPopupParentView.m in Sources */,
@@ -830,7 +845,6 @@
 				0946F4011B500DDC00EDB5DE /* TGNetworkInfoCell.m in Sources */,
 				D9EA94EE1B543D7B00A419D4 /* TGHeaderView.m in Sources */,
 				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
-				CDC1742C1B5953F000FF70A2 /* TGMeshcopManager.mm in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */,
 				CC5BA3E11B6BE9E300898505 /* TGNoCameraAccessView.m in Sources */,
