@@ -12,9 +12,9 @@
 #import "UIFont+ThreadGroup.h"
 
 @interface TGPopupContentViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *buttonsPlaceholderView;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @property (strong, nonatomic) NSArray *buttons;
 @property (strong, nonatomic) NSString *name;
@@ -42,6 +42,7 @@
     for (TGButton *button in self.buttons) {
         [button removeFromSuperview];
     }
+    [self resetTextAlignment];
 }
 
 #pragma mark - Buttons
@@ -74,7 +75,15 @@
 #pragma mark - TextView
 
 - (void)resetTextView {
+    //This is a workaround for textView bug.
+    //The textView will retain previous words identified as links or phone numbers, making the text formatting wrong when new text is added.
+    self.textView.text = nil;
     self.textView.text = self.textContent;
+    self.textView.textAlignment = self.textViewAlignment;
+}
+
+- (void)resetTextAlignment {
+    self.textViewAlignment = NSTextAlignmentJustified;
 }
 
 - (void)buttonPressed:(id)sender {
