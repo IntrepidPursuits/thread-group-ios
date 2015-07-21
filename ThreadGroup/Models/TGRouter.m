@@ -53,7 +53,6 @@ typedef union {
             int port = ntohs(socketAddress->sa.sa_family == AF_INET ? socketAddress->ipv4.sin_port : socketAddress->ipv6.sin6_port);
             
             if (addressStr && port) {
-                NSLog(@"Found service at %s:%d", addressStr, port);
                 return [NSString stringWithFormat:@"%s:%d", addressStr, port];
             }
         }

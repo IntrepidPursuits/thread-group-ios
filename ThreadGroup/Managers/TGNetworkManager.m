@@ -8,20 +8,13 @@
 
 #import "TGNetworkManager.h"
 #import "TGRouter.h"
+#import "TGRouterServiceBrowser.h"
 
-static NSString * const TGNetworkManagerMeshcopServiceType = @"_thread-net._udp";
-static NSString * const TGNetworkManagerMeshcopServiceDomain = @"local";
-static NSString * const TGNetworkManagerMeshcopServicePort = @"19779";
-static NSUInteger const TGNetworkManagerMeshcopServiceTimeout = 15;
-static NSUInteger const TGNetworkManagerMeshcopServiceRetryCount = 3;
+@interface TGNetworkManager() <TGRouterServiceBrowserDelegate>
 
-@interface TGNetworkManager() <NSNetServiceBrowserDelegate, NSNetServiceDelegate>
-
-@property (nonatomic, strong) NSNetServiceBrowser *borderRouterServiceBrowser;
+@property (nonatomic, strong) TGRouterServiceBrowser *routerServiceBrowser;
 @property (nonatomic, strong) TGNetworkManagerFindRoutersCompletionBlock findingNetworksCallback;
 @property (nonatomic, strong) NSMutableArray *threadServices;
-@property (nonatomic, strong) NSMutableArray *netServices;
-@property (nonatomic, strong) NSMutableDictionary *retryDict;
 
 @end
 
@@ -37,22 +30,14 @@ static NSUInteger const TGNetworkManagerMeshcopServiceRetryCount = 3;
 }
 
 - (void)findLocalThreadNetworksCompletion:(TGNetworkManagerFindRoutersCompletionBlock)completion {
-    NSLog(@"Finding Border Routers");
+    NSLog(@"Searching For Border Routers");
     self.findingNetworksCallback = completion;
-    
-    if (self.borderRouterServiceBrowser) {
-        [self.borderRouterServiceBrowser stop];
-    }
-    
-    self.retryDict = [NSMutableDictionary new];
-    self.netServices = [NSMutableArray new];
-    self.threadServices = [NSMutableArray new];
-    self.borderRouterServiceBrowser = [NSNetServiceBrowser new];
-    self.borderRouterServiceBrowser.delegate = self;
-    [self.borderRouterServiceBrowser searchForServicesOfType:TGNetworkManagerMeshcopServiceType inDomain:TGNetworkManagerMeshcopServiceDomain];
+    [self.routerServiceBrowser startSearching];
 }
 
 - (void)connectToNetwork:(id)network completion:(void (^)(NSError **error))completion {
+    NSLog(@"Stopping border router discovery");
+    
     NSLog(@"Connecting to mock network ... waiting 3 seconds");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         completion(nil);
@@ -66,30 +51,13 @@ static NSUInteger const TGNetworkManagerMeshcopServiceRetryCount = 3;
     });
 }
 
-#pragma mark - NSNetServiceBrowserDelegate
+#pragma mark - TGRouterServiceBrowserDelegate
 
-- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
-    [self.netServices addObject:aNetService];
-    
-    aNetService.delegate = self;
-    [aNetService resolveWithTimeout:TGNetworkManagerMeshcopServiceTimeout];
-}
-
-- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
-    TGRouter *router = [[TGRouter alloc] initWithService:aNetService];
-    NSLog(@"Removed Router: %@", router);
-    [self.netServices removeObject:router];
-
-    if (self.findingNetworksCallback) {
-        self.findingNetworksCallback(self.threadServices, nil, moreComing);
+- (void)TGRouterServiceBrowser:(TGRouterServiceBrowser *)browser didResolveRouter:(TGRouter *)router {
+    if (self.threadServices == nil) {
+        self.threadServices = [NSMutableArray new];
     }
-}
-
-#pragma mark - NSNetServiceDelegate
-
-- (void)netServiceDidResolveAddress:(NSNetService *)sender {
-    TGRouter *router = [[TGRouter alloc] initWithService:sender];
-    NSLog(@"Resolved address of router: %@", router);
+    
     [self.threadServices addObject:router];
     
     if (self.findingNetworksCallback) {
@@ -97,20 +65,14 @@ static NSUInteger const TGNetworkManagerMeshcopServiceRetryCount = 3;
     }
 }
 
-- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
-    NSNetServicesError error = [[errorDict objectForKey:NSNetServicesErrorCode] integerValue];
-    if (error == NSNetServicesTimeoutError) {
-        NSLog(@"Timeout attempting to resolve router address");
-        NSNumber *retryDictHash = @(sender.hash);
-        NSInteger currentRetryCount = [[self.retryDict objectForKey:retryDictHash] integerValue];
-        NSLog(@"Current retry count for router: %ld", currentRetryCount);
-        if (currentRetryCount < TGNetworkManagerMeshcopServiceRetryCount) {
-            NSLog(@"Retrying router address resolve");
-            [sender resolveWithTimeout:TGNetworkManagerMeshcopServiceTimeout];
-            currentRetryCount += 1;
-            [self.retryDict setObject:@(currentRetryCount) forKey:retryDictHash];
-        }
+#pragma mark - Lazy
+
+- (TGRouterServiceBrowser *)routerServiceBrowser {
+    if (_routerServiceBrowser == nil) {
+        _routerServiceBrowser = [TGRouterServiceBrowser new];
+        [_routerServiceBrowser setDelegate:self];
     }
+    return _routerServiceBrowser;
 }
 
 @end
