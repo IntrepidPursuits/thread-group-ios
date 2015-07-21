@@ -243,22 +243,13 @@
 
             break;
         }
-        case TGPopupTypeTOS: {
-            TGButton *okButton = [[TGButton alloc] initWithTitle:@"OK" andImage:nil];
-            [buttons addObject:okButton];
-            break;
-        }
-        case TGPopupTypeAbout: {
-            TGButton *okButton = [[TGButton alloc] initWithTitle:@"OK" andImage:nil];
-            [buttons addObject:okButton];
-            break;
-        }
+        case TGPopupTypeTOS:
+        case TGPopupTypeAbout:
         case TGPopupTypeHelp: {
             TGButton *okButton = [[TGButton alloc] initWithTitle:@"OK" andImage:nil];
             [buttons addObject:okButton];
             break;
         }
-
         default:
             NSAssert(YES, @"TGPopupType is undefined");
             break;
