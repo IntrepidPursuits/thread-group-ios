@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+@import AudioToolbox;
+
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "TGMainViewController.h"
 #import "TGDeviceStepView.h"
@@ -403,6 +405,7 @@
             if (success) {
                 [self hideAddProductVC];
                 self.viewState = TGMainViewStateAddAnotherDevice;
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             } else {
                 NSLog(@"Adding device failed!");
                 [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModePassphraseInvalid];
@@ -451,6 +454,7 @@
             if (success) {
                 [self hideAddProductVC];
                 self.viewState = TGMainViewStateAddAnotherDevice;
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             } else {
                 NSLog(@"Adding device failed!");
                 self.viewState = TGMainViewStateConnectDeviceScanning;
