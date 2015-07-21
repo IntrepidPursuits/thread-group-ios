@@ -11,7 +11,6 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "TGMainViewController.h"
 #import "TGDeviceStepView.h"
-#import "TGNetworkSearchingPopup.h"
 #import "TGSpinnerView.h"
 #import "TGSelectDeviceStepView.h"
 #import "UIImage+ThreadGroup.h"
@@ -42,7 +41,6 @@
 //Finding Networks
 @property (weak, nonatomic) IBOutlet UIView *findingNetworksView;
 @property (weak, nonatomic) IBOutlet TGSpinnerView *findingNetworksSpinnerView;
-@property (weak, nonatomic) IBOutlet TGNetworkSearchingPopup *findingNetworksPopupView;
 
 //Select/Add Devices
 @property (weak, nonatomic) IBOutlet TGSelectDeviceStepView *selectDeviceView;
