@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Book.otf">
@@ -21,21 +21,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner_small_clockwise" translatesAutoresizingMaskIntoConstraints="NO" id="LfT-xR-QAk" userLabel="Spinner Clockwise">
-                    <rect key="frame" x="16" y="11" width="24" height="24"/>
+                    <rect key="frame" x="16" y="12" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="GVU-5G-rHV"/>
                         <constraint firstAttribute="width" constant="24" id="knJ-Zn-grR"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner_small_counter_clockwise" translatesAutoresizingMaskIntoConstraints="NO" id="9Bk-Qx-PtZ">
-                    <rect key="frame" x="16" y="11" width="24" height="24"/>
+                    <rect key="frame" x="16" y="12" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="kGM-ws-0LL"/>
                         <constraint firstAttribute="height" constant="24" id="mtR-ia-oog"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Still looking for Thread Networks..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezP-rW-AfI">
-                    <rect key="frame" x="56" y="16" width="318" height="14.5"/>
+                    <rect key="frame" x="56" y="17" width="318" height="15"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                     <color key="textColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -43,9 +43,9 @@
             </subviews>
             <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="LfT-xR-QAk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="BFS-5r-s11"/>
-                <constraint firstItem="ezP-rW-AfI" firstAttribute="centerY" secondItem="9Bk-Qx-PtZ" secondAttribute="centerY" constant="0.5" id="IjA-s2-2gE"/>
+                <constraint firstItem="ezP-rW-AfI" firstAttribute="centerY" secondItem="9Bk-Qx-PtZ" secondAttribute="centerY" id="IjA-s2-2gE"/>
                 <constraint firstItem="9Bk-Qx-PtZ" firstAttribute="centerY" secondItem="LfT-xR-QAk" secondAttribute="centerY" id="JOA-qX-K6p"/>
+                <constraint firstAttribute="centerY" secondItem="9Bk-Qx-PtZ" secondAttribute="centerY" id="SmW-lb-iGd"/>
                 <constraint firstItem="9Bk-Qx-PtZ" firstAttribute="centerX" secondItem="LfT-xR-QAk" secondAttribute="centerX" id="TQu-8l-VFo"/>
                 <constraint firstItem="9Bk-Qx-PtZ" firstAttribute="height" secondItem="LfT-xR-QAk" secondAttribute="height" id="Xaw-fq-uSo"/>
                 <constraint firstItem="LfT-xR-QAk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="lbr-GD-Jco"/>
