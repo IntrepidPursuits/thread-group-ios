@@ -69,7 +69,7 @@ static NSUInteger const TGRouterServiceBrowserRetryCount = 5;
     if (error == NSNetServicesTimeoutError) {
         NSNumber *retryDictHash = @(sender.hash);
         NSInteger currentRetryCount = [[self.retryDict objectForKey:retryDictHash] integerValue];
-        NSLog(@"Timeout resolving router address. Current retry count <%ld>", currentRetryCount);
+        NSLog(@"Timeout resolving router address. Current retry count <%d>", currentRetryCount);
         
         if (++currentRetryCount < TGRouterServiceBrowserRetryCount) {
             NSLog(@"Retrying router address resolve");

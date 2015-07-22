@@ -109,7 +109,7 @@
         }];
         [self.tableView setNetworkItems:networks];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        NSLog(@"%@ Searching (Found %ld)", stillSearching ? @"Still" : @"Done", networks.count);
+        NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
     }];
 }
 
