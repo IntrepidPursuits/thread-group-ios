@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -23,23 +24,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Router Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ue-zy-A7c">
-                        <rect key="frame" x="24" y="8" width="107" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Router Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ue-zy-A7c">
+                        <rect key="frame" x="24" y="8" width="374" height="21"/>
                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="16"/>
                         <color key="textColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Network Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="k2P-tV-CJZ">
-                        <rect key="frame" x="24" y="33" width="186" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Network Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2P-tV-CJZ">
+                        <rect key="frame" x="24" y="33" width="183" height="15"/>
                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                         <color key="textColor" red="0.83137254900000002" green="0.82745098039999998" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IPV6 ADDRESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YJV-K9-R0J">
-                        <rect key="frame" x="210" y="35" width="180" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="180" id="hcJ-Yi-QRc"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IPV6 ADDRESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJV-K9-R0J">
+                        <rect key="frame" x="211" y="35" width="179" height="12"/>
                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.26000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -55,11 +53,13 @@
                 <constraints>
                     <constraint firstItem="k2P-tV-CJZ" firstAttribute="top" secondItem="3Ue-zy-A7c" secondAttribute="bottom" constant="4" id="04x-Aw-WtL"/>
                     <constraint firstAttribute="bottom" secondItem="MM8-IP-YwU" secondAttribute="bottom" id="I5v-F6-B1e"/>
-                    <constraint firstItem="YJV-K9-R0J" firstAttribute="leading" secondItem="k2P-tV-CJZ" secondAttribute="trailing" id="IiD-oF-YW0"/>
+                    <constraint firstAttribute="centerX" secondItem="k2P-tV-CJZ" secondAttribute="trailing" id="JYf-RV-tZQ"/>
                     <constraint firstItem="3Ue-zy-A7c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="RGp-Yw-IZ7"/>
+                    <constraint firstAttribute="trailing" secondItem="3Ue-zy-A7c" secondAttribute="trailing" constant="16" id="WLn-2W-zIz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="YJV-K9-R0J" secondAttribute="trailing" constant="16" id="aGH-ve-Srd"/>
                     <constraint firstAttribute="trailing" secondItem="MM8-IP-YwU" secondAttribute="trailing" constant="16" id="bQg-Fk-tDB"/>
                     <constraint firstItem="3Ue-zy-A7c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="crS-EG-tpr"/>
+                    <constraint firstItem="YJV-K9-R0J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="4" id="eow-OG-TGW"/>
                     <constraint firstItem="k2P-tV-CJZ" firstAttribute="leading" secondItem="3Ue-zy-A7c" secondAttribute="leading" id="l2J-Br-ykZ"/>
                     <constraint firstItem="YJV-K9-R0J" firstAttribute="centerY" secondItem="k2P-tV-CJZ" secondAttribute="centerY" id="ncR-8q-P78"/>
                     <constraint firstAttribute="bottomMargin" secondItem="k2P-tV-CJZ" secondAttribute="bottom" id="w9M-xi-D1j"/>
