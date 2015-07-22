@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Book.otf">
@@ -51,8 +52,8 @@
                         <constraint firstAttribute="width" constant="1" id="aWk-hg-Wr6"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can also enter a passphrase manually" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWP-he-gYW">
-                    <rect key="frame" x="72" y="28" width="248" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can also enter a passphrase manually" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LWP-he-gYW">
+                    <rect key="frame" x="72" y="33" width="272" height="12"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                     <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -66,13 +67,13 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan Device QR Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnB-ks-Mhm">
-                    <rect key="frame" x="72" y="14" width="154" height="15"/>
+                    <rect key="frame" x="72" y="16" width="154" height="15"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JA1-Xd-IQR" userLabel="Passphrase View">
-                    <rect key="frame" x="72" y="56" width="288" height="84"/>
+                    <rect key="frame" x="72" y="61" width="288" height="84"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05K-wq-6fE" userLabel="Textbox Bottom Line">
                             <rect key="frame" x="0.0" y="27" width="272" height="1"/>
@@ -146,32 +147,27 @@
             </subviews>
             <color key="backgroundColor" red="0.27843135600000002" green="0.28235286469999998" blue="0.25490197539999998" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
-                <constraint firstItem="vnB-ks-Mhm" firstAttribute="top" secondItem="kph-Nx-iQc" secondAttribute="top" id="4Uu-kA-uLz"/>
-                <constraint firstItem="LWP-he-gYW" firstAttribute="top" secondItem="vnB-ks-Mhm" secondAttribute="bottom" id="Cj8-Hq-s5u"/>
                 <constraint firstAttribute="trailing" secondItem="vvH-26-dQ2" secondAttribute="trailing" constant="16" id="EEt-BT-jYr"/>
                 <constraint firstItem="kph-Nx-iQc" firstAttribute="top" secondItem="Una-tt-WWH" secondAttribute="bottom" id="IQk-oJ-UKe"/>
                 <constraint firstItem="kph-Nx-iQc" firstAttribute="centerX" secondItem="Una-tt-WWH" secondAttribute="centerX" id="KWB-XU-JsE"/>
                 <constraint firstItem="LWP-he-gYW" firstAttribute="leading" secondItem="vnB-ks-Mhm" secondAttribute="leading" id="QNV-y5-N8v"/>
+                <constraint firstItem="kph-Nx-iQc" firstAttribute="centerY" secondItem="LWP-he-gYW" secondAttribute="top" constant="-1" id="SPp-NF-fFo"/>
                 <constraint firstAttribute="bottom" secondItem="dcx-kd-Ied" secondAttribute="bottom" id="SW3-7X-8NB"/>
                 <constraint firstAttribute="trailing" secondItem="JA1-Xd-IQR" secondAttribute="trailing" id="VH1-QN-6cG"/>
                 <constraint firstItem="vnB-ks-Mhm" firstAttribute="leading" secondItem="JA1-Xd-IQR" secondAttribute="leading" id="YOz-m2-wyT"/>
-                <constraint firstAttribute="bottom" secondItem="JA1-Xd-IQR" secondAttribute="bottom" id="bMX-sz-whA"/>
                 <constraint firstItem="JA1-Xd-IQR" firstAttribute="top" secondItem="LWP-he-gYW" secondAttribute="bottom" constant="16" id="bOW-0j-0EZ"/>
                 <constraint firstItem="dcx-kd-Ied" firstAttribute="top" secondItem="kph-Nx-iQc" secondAttribute="bottom" id="cmY-FQ-cgP"/>
                 <constraint firstItem="kph-Nx-iQc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="dHT-dG-2d9"/>
                 <constraint firstItem="Una-tt-WWH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e50-AB-ial"/>
                 <constraint firstItem="vvH-26-dQ2" firstAttribute="leading" secondItem="Una-tt-WWH" secondAttribute="trailing" constant="35" id="lP1-2g-rvV"/>
+                <constraint firstItem="kph-Nx-iQc" firstAttribute="centerY" secondItem="vnB-ks-Mhm" secondAttribute="bottom" constant="1" id="lXX-xG-GVt"/>
                 <constraint firstItem="dcx-kd-Ied" firstAttribute="centerX" secondItem="kph-Nx-iQc" secondAttribute="centerX" id="m1K-re-tnj"/>
                 <constraint firstItem="vnB-ks-Mhm" firstAttribute="leading" secondItem="kph-Nx-iQc" secondAttribute="trailing" constant="18" id="rDK-nh-gdE"/>
+                <constraint firstAttribute="trailing" secondItem="LWP-he-gYW" secondAttribute="trailing" constant="16" id="sCF-Us-9Bx"/>
                 <constraint firstItem="vvH-26-dQ2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tOs-1g-rhl"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="bMX-sz-whA"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="-8" y="-139.5"/>
         </view>
     </objects>

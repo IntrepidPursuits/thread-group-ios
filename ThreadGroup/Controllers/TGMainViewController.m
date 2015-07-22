@@ -11,7 +11,6 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "TGMainViewController.h"
 #import "TGDeviceStepView.h"
-#import "TGNetworkSearchingPopup.h"
 #import "TGSpinnerView.h"
 #import "TGSelectDeviceStepView.h"
 #import "UIImage+ThreadGroup.h"
@@ -42,7 +41,6 @@
 //Finding Networks
 @property (weak, nonatomic) IBOutlet UIView *findingNetworksView;
 @property (weak, nonatomic) IBOutlet TGSpinnerView *findingNetworksSpinnerView;
-@property (weak, nonatomic) IBOutlet TGNetworkSearchingPopup *findingNetworksPopupView;
 
 //Select/Add Devices
 @property (weak, nonatomic) IBOutlet TGSelectDeviceStepView *selectDeviceView;
@@ -106,9 +104,12 @@
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
     [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *__autoreleasing *error, BOOL stillSearching) {
+        [UIView animateWithDuration:1.5 animations:^{
+            self.findingNetworksView.alpha = 0.0f;
+        }];
         [self.tableView setNetworkItems:networks];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        NSLog(@"%@ Searching (Found %ld)", stillSearching ? @"Still" : @"Done", networks.count);
+        NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
     }];
 }
 
@@ -210,9 +211,6 @@
     switch (viewState) {
         case TGMainViewStateLookingForRouters: {
             [self.findingNetworksSpinnerView startAnimating];
-            [UIView animateWithDuration:1.5 animations:^{
-                self.findingNetworksView.alpha = 0.0f;
-            }];
         }
             break;
         case TGMainViewStateConnectDeviceTutorial:
@@ -317,7 +315,7 @@
 - (void)animateConnectingToRouterWithItem:(TGRouter *)item {
     [self.routerSearchView setSpinnerActive:YES];
     [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
-    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@ on %@", item.name, item.networkName]];
+    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@", item.name]];
 }
 
 - (void)animateConnectedToRouterWithItem:(TGRouter *)item {

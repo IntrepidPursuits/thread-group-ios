@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Book.otf">
@@ -56,14 +57,14 @@
                         <constraint firstAttribute="height" constant="36" id="f06-Kr-8I4"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected to Wifi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afr-k4-fow">
-                    <rect key="frame" x="72" y="14" width="306" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected to Wifi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="afr-k4-fow">
+                    <rect key="frame" x="72" y="16" width="269" height="15"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThreadNetwork" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4i-9g-eJJ">
-                    <rect key="frame" x="72" y="29" width="306" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThreadNetwork" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4i-9g-eJJ">
+                    <rect key="frame" x="72" y="33" width="269" height="12"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                     <color key="textColor" white="1" alpha="0.70000000000000007" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -88,12 +89,10 @@
                 <constraint firstItem="afr-k4-fow" firstAttribute="leading" secondItem="5E1-rV-mgT" secondAttribute="trailing" constant="18" id="4Ut-FL-19s"/>
                 <constraint firstItem="WlN-nY-N3E" firstAttribute="centerX" secondItem="5E1-rV-mgT" secondAttribute="centerX" id="5TQ-Un-RpV"/>
                 <constraint firstAttribute="trailing" secondItem="8EH-dj-ykJ" secondAttribute="trailing" constant="19" id="7Sa-gC-d4R"/>
-                <constraint firstAttribute="trailing" secondItem="q4i-9g-eJJ" secondAttribute="trailing" constant="8" id="BSB-5l-idv"/>
                 <constraint firstItem="WlN-nY-N3E" firstAttribute="top" secondItem="5E1-rV-mgT" secondAttribute="bottom" id="D2o-B0-HHe"/>
                 <constraint firstItem="5E1-rV-mgT" firstAttribute="centerY" secondItem="8EH-dj-ykJ" secondAttribute="centerY" id="DrC-Cd-kYm"/>
                 <constraint firstItem="SU5-DX-395" firstAttribute="width" secondItem="5E1-rV-mgT" secondAttribute="width" id="GvD-9o-lQ9"/>
                 <constraint firstItem="5E1-rV-mgT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="Ix4-SM-yv4"/>
-                <constraint firstItem="q4i-9g-eJJ" firstAttribute="top" secondItem="afr-k4-fow" secondAttribute="bottom" id="LAg-jx-OCj"/>
                 <constraint firstItem="SU5-DX-395" firstAttribute="height" secondItem="5E1-rV-mgT" secondAttribute="height" id="Ocf-7K-stF"/>
                 <constraint firstItem="5E1-rV-mgT" firstAttribute="centerX" secondItem="Eh8-fe-dCS" secondAttribute="centerX" id="P90-qo-GVh"/>
                 <constraint firstItem="SU5-DX-395" firstAttribute="centerY" secondItem="5E1-rV-mgT" secondAttribute="centerY" id="SiW-5M-Ubx"/>
@@ -101,11 +100,13 @@
                 <constraint firstAttribute="trailing" secondItem="FeY-pR-sWQ" secondAttribute="trailing" constant="16" id="d1P-Db-gq3"/>
                 <constraint firstItem="Eh8-fe-dCS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hdg-Ai-RBM"/>
                 <constraint firstItem="FeY-pR-sWQ" firstAttribute="leading" secondItem="Eh8-fe-dCS" secondAttribute="trailing" constant="35" id="hgv-qj-DGc"/>
-                <constraint firstAttribute="trailing" secondItem="afr-k4-fow" secondAttribute="trailing" constant="8" id="mQV-Q8-JhA"/>
+                <constraint firstItem="afr-k4-fow" firstAttribute="bottom" secondItem="5E1-rV-mgT" secondAttribute="centerY" constant="-1" id="iTY-Ce-yu4"/>
+                <constraint firstItem="8EH-dj-ykJ" firstAttribute="leading" secondItem="afr-k4-fow" secondAttribute="trailing" constant="8" id="kpZ-Zw-w1r"/>
+                <constraint firstItem="q4i-9g-eJJ" firstAttribute="top" secondItem="5E1-rV-mgT" secondAttribute="centerY" constant="1" id="kzz-Zc-Idj"/>
                 <constraint firstAttribute="bottom" secondItem="WlN-nY-N3E" secondAttribute="bottom" id="pa5-yc-Fkp"/>
+                <constraint firstItem="8EH-dj-ykJ" firstAttribute="leading" secondItem="q4i-9g-eJJ" secondAttribute="trailing" constant="8" id="rVd-kO-JDe"/>
                 <constraint firstItem="FeY-pR-sWQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="u2O-DX-CJN"/>
                 <constraint firstItem="q4i-9g-eJJ" firstAttribute="leading" secondItem="afr-k4-fow" secondAttribute="leading" id="u3z-8v-zB1"/>
-                <constraint firstItem="afr-k4-fow" firstAttribute="top" secondItem="5E1-rV-mgT" secondAttribute="top" id="ufB-cS-IxU"/>
                 <constraint firstItem="SU5-DX-395" firstAttribute="centerX" secondItem="5E1-rV-mgT" secondAttribute="centerX" id="vnZ-EY-e8w"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
