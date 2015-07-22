@@ -104,6 +104,9 @@
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
     [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *__autoreleasing *error, BOOL stillSearching) {
+        [UIView animateWithDuration:1.5 animations:^{
+            self.findingNetworksView.alpha = 0.0f;
+        }];
         [self.tableView setNetworkItems:networks];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         NSLog(@"%@ Searching (Found %ld)", stillSearching ? @"Still" : @"Done", networks.count);
@@ -208,9 +211,6 @@
     switch (viewState) {
         case TGMainViewStateLookingForRouters: {
             [self.findingNetworksSpinnerView startAnimating];
-            [UIView animateWithDuration:1.5 animations:^{
-                self.findingNetworksView.alpha = 0.0f;
-            }];
         }
             break;
         case TGMainViewStateConnectDeviceTutorial:
