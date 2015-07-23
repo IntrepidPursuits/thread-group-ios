@@ -8,12 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@class TGConnectCodePopup;
-
-@protocol TGConnectCodePopupDelegate <NSObject>
-- (void)didPressConnectCodePopup:(TGConnectCodePopup *)popup;
-@end
-
 @interface TGConnectCodePopup : UIView
-@property (nonatomic) id<TGConnectCodePopupDelegate> delegate;
 @end

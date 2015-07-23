@@ -10,10 +10,5 @@
 
 @class TGTutorialPopup;
 
-@protocol TGTutorialPopupDelegate <NSObject>
-- (void)didPressTutorialPopup:(TGTutorialPopup *)popup;
-@end
-
 @interface TGTutorialPopup : UIView
-@property (nonatomic) id<TGTutorialPopupDelegate> delegate;
 @end

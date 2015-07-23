@@ -10,7 +10,6 @@
 
 @interface TGAddDevicePopup()
 @property (strong, nonatomic) UIView *nibView;
-@property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation TGAddDevicePopup
@@ -26,14 +25,6 @@
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
         self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
     }
-    [self addGestureRecognizer:self.tapGesture];
-}
-
-- (UITapGestureRecognizer *)tapGesture {
-    if (!_tapGesture) {
-        _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.delegate action:@selector(didPressAddDevicePopup:)];
-    }
-    return _tapGesture;
 }
 
 @end

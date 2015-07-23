@@ -11,7 +11,6 @@
 @interface TGConnectCodePopup()
 
 @property (strong, nonatomic) UIView *nibView;
-@property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation TGConnectCodePopup
@@ -27,14 +26,6 @@
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
         self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
     }
-    [self addGestureRecognizer:self.tapGesture];
-}
-
-- (UITapGestureRecognizer *)tapGesture {
-    if (!_tapGesture) {
-        _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.delegate action:@selector(didPressConnectCodePopup:)];
-    }
-    return _tapGesture;
 }
 
 @end

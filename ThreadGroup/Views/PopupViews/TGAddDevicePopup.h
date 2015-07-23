@@ -10,10 +10,5 @@
 
 @class TGAddDevicePopup;
 
-@protocol TGAddDevicePopupDelegate <NSObject>
-- (void)didPressAddDevicePopup:(TGAddDevicePopup *)popup;
-@end
-
 @interface TGAddDevicePopup : UIView
-@property (nonatomic) id<TGAddDevicePopupDelegate> delegate;
 @end
