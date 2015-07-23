@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class TGPopupParentView;
+@protocol TGPopupParentViewDelegate <NSObject>
+- (void)parentPopup:(TGPopupParentView *)popupParent didReceiveTouchForChildPopupAtIndex:(NSInteger)index;
+@end
+
 @interface TGPopupParentView : UIView
+@property (nonatomic) id<TGPopupParentViewDelegate> delegate;
+- (void)setPopups:(NSArray *)popups;
+- (void)bringChildPopupToFront:(UIView *)childPopup;
+
+- (NSInteger)numberOfPopups;
+- (UIView *)popupAtIndex:(NSInteger)index;
+- (NSInteger)indexOfPopup:(UIView *)popup;
 
 @end
