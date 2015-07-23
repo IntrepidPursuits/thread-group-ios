@@ -26,6 +26,14 @@
 #import "TGAddProductViewController.h"
 #import "TGNetworkConfigViewController.h"
 
+#import "TGPopupParentView.h"
+#import "TGNetworkSearchingPopup.h"
+#import "TGConnectCodePopup.h"
+#import "TGTutorialPopup.h"
+#import "TGAddDevicePopup.h"
+
+static CGFloat const kTGPopupParentViewHeight = 56.0f;
+
 @interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate>
 
 //Wifi
@@ -55,14 +63,14 @@
 @property (strong, nonatomic) IBOutlet TGScannerView *scannerView;
 
 //Popup Notification
-@property (weak, nonatomic) IBOutlet UIView *popupView;
-@property (weak, nonatomic) IBOutlet UIButton *addAnotherProductButton;
-@property (weak, nonatomic) IBOutlet UIButton *passPhraseButton;
-@property (weak, nonatomic) IBOutlet UIButton *tutorialDismissButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addDeviceTopLayoutConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passphraseButtonTopLayoutConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *findingNetworksPopupTopLayoutConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tutorialDismissTopLayoutConstraint;
+@property (weak, nonatomic) IBOutlet TGPopupParentView *popupView;
+@property (strong, nonatomic) NSArray *popups;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *popupViewBottomConstraint;
+@property (strong, nonatomic) TGNetworkSearchingPopup *networkPopup;
+@property (strong, nonatomic) TGConnectCodePopup *connectCodePopup;
+@property (strong, nonatomic) TGTutorialPopup *tutorialPopup;
+@property (strong, nonatomic) TGAddDevicePopup *addDevicePopup;
+
 
 //RouterAuthVC
 @property (strong, nonatomic) TGRouterAuthViewController *routerAuthVC;
@@ -97,6 +105,7 @@
 
 - (void)commonInit {
     self.threadConfig = [[TGNetworkConfigViewController alloc] initWithNibName:nil bundle:nil];
+    [self.popupView setPopups:self.popups];
 }
 
 #pragma mark - Table View
@@ -236,34 +245,30 @@
 }
 
 - (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated {
-    NSLayoutConstraint *enabledButtonConstraint;
-    NSMutableArray *hiddenConstraints = [@[self.addDeviceTopLayoutConstraint, self.passphraseButtonTopLayoutConstraint, self.findingNetworksPopupTopLayoutConstraint, self.tutorialDismissTopLayoutConstraint] mutableCopy];
     switch (state) {
         case TGMainViewStateAddAnotherDevice:
-            enabledButtonConstraint = self.addDeviceTopLayoutConstraint;
+            [self.popupView bringChildPopupToFront:self.addDevicePopup];
+            self.popupViewBottomConstraint.constant = 0.0f;
             break;
         case TGMainViewStateLookingForRouters:
-            enabledButtonConstraint = self.findingNetworksPopupTopLayoutConstraint;
+            [self.popupView bringChildPopupToFront:self.networkPopup];
+            self.popupViewBottomConstraint.constant = 0.0f;
             break;
         case TGMainViewStateConnectDeviceScanning:
-            enabledButtonConstraint = self.passphraseButtonTopLayoutConstraint;
+            [self.popupView bringChildPopupToFront:self.connectCodePopup];
+            self.popupViewBottomConstraint.constant = 0.0f;
             break;
         case TGMainViewStateConnectDeviceTutorial:
-            enabledButtonConstraint = self.tutorialDismissTopLayoutConstraint;
+            [self.popupView bringChildPopupToFront:self.tutorialPopup];
+            self.popupViewBottomConstraint.constant = 0.0f;
             break;
         default:
-            enabledButtonConstraint = nil;
+            //This hides the popupView
+            self.popupViewBottomConstraint.constant = kTGPopupParentViewHeight;
             break;
     }
     
-    [hiddenConstraints removeObject:enabledButtonConstraint];
-    [self.view layoutIfNeeded];
-    
     [UIView animateWithDuration:(animated) ? 0.4 : 0 animations:^{
-        enabledButtonConstraint.constant = 0.0f;
-        for (NSLayoutConstraint *constraint in hiddenConstraints) {
-            constraint.constant = self.popupView.frame.size.height;
-        }
         [self.view layoutIfNeeded];
     }];
 }
@@ -519,6 +524,17 @@
         _addProductVC.transitioningDelegate = self;
     }
     return _addProductVC;
+}
+
+- (NSArray *)popups {
+    if (!_popups) {
+        self.networkPopup = [[TGNetworkSearchingPopup alloc] initWithCoder:nil];
+        self.connectCodePopup = [[TGConnectCodePopup alloc] initWithFrame:CGRectZero];
+        self.tutorialPopup = [[TGTutorialPopup alloc] initWithFrame:CGRectZero];
+        self.addDevicePopup = [[TGAddDevicePopup alloc] initWithFrame:CGRectZero];
+        _popups = @[self.networkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
+    }
+    return _popups;
 }
 
 @end
