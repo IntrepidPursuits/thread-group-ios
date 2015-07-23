@@ -18,12 +18,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    for (UIView *popupView in self.popups) {
-        [self addSubview:popupView];
-        popupView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : popupView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : popupView}]];
-    }
     [self addGestureRecognizer:self.tapGesture];
 }
 
@@ -59,6 +53,12 @@
 
 - (void)setPopups:(NSArray *)popups {
     _popups = popups;
+    for (UIView *popupView in popups) {
+        [self addSubview:popupView];
+        popupView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : popupView}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : popupView}]];
+    }
 }
 
 - (UITapGestureRecognizer *)tapGesture {
