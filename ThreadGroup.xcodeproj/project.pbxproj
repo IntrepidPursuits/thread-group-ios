@@ -52,6 +52,7 @@
 		CDFFFF081B5E9EA10011EA4B /* TGRouterServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFFFF071B5E9EA10011EA4B /* TGRouterServiceBrowser.m */; };
 		D917C4D91B558CF5000A5BE2 /* TGNetworkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */; };
 		D917C4DA1B558CF5000A5BE2 /* TGNetworkNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */; };
+		D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D93717791B617BDC00BE55DD /* TGPopup.m */; };
 		D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */; };
 		D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */; };
 		D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6831B43246E00271ED7 /* TGPopupContentViewController.m */; };
@@ -181,6 +182,8 @@
 		D917C4D61B558CF5000A5BE2 /* TGNetworkNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkNameViewController.h; sourceTree = "<group>"; };
 		D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkNameViewController.m; sourceTree = "<group>"; };
 		D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkNameViewController.xib; sourceTree = "<group>"; };
+		D93717781B617BDC00BE55DD /* TGPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPopup.h; sourceTree = "<group>"; };
+		D93717791B617BDC00BE55DD /* TGPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPopup.m; sourceTree = "<group>"; };
 		D93C81691B2F663000A86EE1 /* TGHomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHomeScreenViewController.h; sourceTree = "<group>"; };
 		D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHomeScreenViewController.m; sourceTree = "<group>"; };
 		D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeScreenViewController.xib; sourceTree = "<group>"; };
@@ -564,6 +567,8 @@
 				D9E1A9E81B60374000B3DA2C /* TGAddDevicePopup.h */,
 				D9E1A9E91B60374000B3DA2C /* TGAddDevicePopup.m */,
 				D9E1A9EB1B60374F00B3DA2C /* TGAddDevicePopup.xib */,
+				D93717781B617BDC00BE55DD /* TGPopup.h */,
+				D93717791B617BDC00BE55DD /* TGPopup.m */,
 			);
 			path = PopupViews;
 			sourceTree = "<group>";
@@ -789,6 +794,7 @@
 				CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */,
 				CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */,
 				D95BC6921B45992400271ED7 /* TGLogManager.m in Sources */,
+				D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */,
 				D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */,
 				D9EA94FB1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m in Sources */,
 				D9EA94F81B55559F00A419D4 /* TGNetworkConfigModel.m in Sources */,
