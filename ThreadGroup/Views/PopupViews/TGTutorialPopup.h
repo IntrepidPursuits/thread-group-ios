@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TGPopup.h"
 
-@class TGTutorialPopup;
-
-@interface TGTutorialPopup : UIView
+@interface TGTutorialPopup : TGPopup
 @end

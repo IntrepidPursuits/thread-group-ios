@@ -34,7 +34,7 @@
 
 static CGFloat const kTGPopupParentViewHeight = 56.0f;
 
-@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate>
+@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate, TGPopupParentViewDelegate>
 
 //Wifi
 @property (weak, nonatomic) IBOutlet TGDeviceStepView *wifiSearchView;
@@ -106,6 +106,7 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
 - (void)commonInit {
     self.threadConfig = [[TGNetworkConfigViewController alloc] initWithNibName:nil bundle:nil];
     [self.popupView setPopups:self.popups];
+    self.popupView.delegate = self;
 }
 
 #pragma mark - Table View
@@ -120,30 +121,6 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
     }];
-}
-
-#pragma mark - Button Events
-
-- (IBAction)tutorialDismissButtonTapped:(id)sender {
-    [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
-    [self setViewState:TGMainViewStateConnectDeviceScanning];
-}
-
-- (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
-    self.viewState = TGMainViewStateConnectDevicePassphrase;
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
-        [self.selectDeviceView setContentMode:newMode];
-        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
-        [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        [self.selectDeviceView becomeFirstResponder];
-    }];
-}
-
-- (IBAction)addAnotherDeviceButtonPressed:(UIButton *)sender {
-    self.viewState = TGMainViewStateConnectDeviceScanning;
 }
 
 #pragma mark - View States
@@ -490,6 +467,29 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
     return animator;
 }
 
+#pragma mark - TGPopupParentDelegate
+
+- (void)parentPopup:(TGPopupParentView *)popupParent didReceiveTouchForChildPopupAtIndex:(NSInteger)index {
+    UIView *selectedView = [self.popupView popupAtIndex:index];
+    if ([selectedView isKindOfClass:[self.tutorialPopup class]]) {
+        [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
+        [self setViewState:TGMainViewStateConnectDeviceScanning];
+    } else if ([selectedView isKindOfClass:[self.addDevicePopup class]]) {
+        self.viewState = TGMainViewStateConnectDeviceScanning;
+    } else if ([selectedView isKindOfClass:[self.connectCodePopup class]]) {
+        self.viewState = TGMainViewStateConnectDevicePassphrase;
+        [self setPopupNotificationForState:8 animated:NO];
+        [UIView animateWithDuration:0.4 animations:^{
+            TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
+            [self.selectDeviceView setContentMode:newMode];
+            self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [self.selectDeviceView becomeFirstResponder];
+        }];
+    }
+}
+
 #pragma mark - Helper Methods
 
 - (NSString *)currentWifiSSID {
@@ -528,10 +528,10 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
 
 - (NSArray *)popups {
     if (!_popups) {
-        self.networkPopup = [[TGNetworkSearchingPopup alloc] initWithCoder:nil];
-        self.connectCodePopup = [[TGConnectCodePopup alloc] initWithFrame:CGRectZero];
-        self.tutorialPopup = [[TGTutorialPopup alloc] initWithFrame:CGRectZero];
-        self.addDevicePopup = [[TGAddDevicePopup alloc] initWithFrame:CGRectZero];
+        self.networkPopup = [[TGNetworkSearchingPopup alloc] init];
+        self.connectCodePopup = [[TGConnectCodePopup alloc] init];
+        self.tutorialPopup = [[TGTutorialPopup alloc] init];
+        self.addDevicePopup = [[TGAddDevicePopup alloc] init];
         _popups = @[self.networkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
     }
     return _popups;

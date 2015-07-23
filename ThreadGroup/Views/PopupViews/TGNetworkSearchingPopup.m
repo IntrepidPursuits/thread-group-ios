@@ -10,27 +10,18 @@
 #import "UIView+Animations.h"
 
 @interface TGNetworkSearchingPopup()
-
-@property (strong, nonatomic) UIView *nibView;
 @property (weak, nonatomic) IBOutlet UIImageView *clockwiseSpinnerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *counterClockwiseSpinnerImageView;
-
 @end
 
 @implementation TGNetworkSearchingPopup
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
+- (instancetype)init {
+    self = [super init];
     if (self) {
-        self.nibView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-                                                      owner:self
-                                                    options:nil] lastObject];
-        [self addSubview:self.nibView];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
         [self startAnimating];
     }
+    return self;
 }
 
 - (void)startAnimating {

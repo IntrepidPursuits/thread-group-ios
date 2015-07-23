@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TGPopup.h"
 
-@interface TGConnectCodePopup : UIView
+@interface TGConnectCodePopup : TGPopup
 @end

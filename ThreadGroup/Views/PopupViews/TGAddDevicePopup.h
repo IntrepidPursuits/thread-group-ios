@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TGPopup.h"
 
-@class TGAddDevicePopup;
-
-@interface TGAddDevicePopup : UIView
+@interface TGAddDevicePopup : TGPopup
 @end
