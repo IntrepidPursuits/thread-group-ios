@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TGRouter.h"
+
+@class TGRouter;
 
 @interface TGKeychainManager : NSObject
 
 + (instancetype)sharedManager;
-- (void)saveRouterItem:(TGRouter *)router;
-- (TGRouter *)getRouterItem;
+- (void)saveRouterItem:(TGRouter *)router withCompletion:(void(^)(NSError *error))completion;
+- (void)getRouterItemWithCompletion:(void(^)(TGRouter *router, NSError *error))completion;
 
 @end
