@@ -471,12 +471,12 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
 
 - (void)parentPopup:(TGPopupParentView *)popupParent didReceiveTouchForChildPopupAtIndex:(NSInteger)index {
     UIView *selectedView = [self.popupView popupAtIndex:index];
-    if ([selectedView isKindOfClass:[self.tutorialPopup class]]) {
+    if (selectedView == self.tutorialPopup) {
         [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
         [self setViewState:TGMainViewStateConnectDeviceScanning];
-    } else if ([selectedView isKindOfClass:[self.addDevicePopup class]]) {
+    } else if (selectedView == self.addDevicePopup) {
         self.viewState = TGMainViewStateConnectDeviceScanning;
-    } else if ([selectedView isKindOfClass:[self.connectCodePopup class]]) {
+    } else if (selectedView == self.connectCodePopup) {
         self.viewState = TGMainViewStateConnectDevicePassphrase;
         [self setPopupNotificationForState:8 animated:NO];
         [UIView animateWithDuration:0.4 animations:^{
@@ -528,10 +528,10 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
 
 - (NSArray *)popups {
     if (!_popups) {
-        self.networkPopup = [[TGNetworkSearchingPopup alloc] init];
-        self.connectCodePopup = [[TGConnectCodePopup alloc] init];
-        self.tutorialPopup = [[TGTutorialPopup alloc] init];
-        self.addDevicePopup = [[TGAddDevicePopup alloc] init];
+        self.networkPopup = [TGNetworkSearchingPopup new];
+        self.connectCodePopup = [TGConnectCodePopup new];
+        self.tutorialPopup = [TGTutorialPopup new];
+        self.addDevicePopup = [TGAddDevicePopup new];
         _popups = @[self.networkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
     }
     return _popups;

@@ -53,6 +53,9 @@
 
 - (void)setPopups:(NSArray *)popups {
     _popups = popups;
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
     for (UIView *popupView in popups) {
         [self addSubview:popupView];
         popupView.translatesAutoresizingMaskIntoConstraints = NO;
