@@ -15,6 +15,13 @@ typedef union {
     struct sockaddr_in6 ipv6;
 } ip_socket_address;
 
+@interface TGRouter() <NSSecureCoding>
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *networkName;
+@property (nonatomic, strong) NSString *ipAddress;
+@property (nonatomic) NSInteger port;
+@end
+
 @implementation TGRouter
 
 - (instancetype)initWithService:(NSNetService *)service {
@@ -55,6 +62,30 @@ typedef union {
     }
     
     return nil;
+}
+
+#pragma mark - NSSecureCodiing
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        self.name = [aDecoder decodeObjectForKey:@"name"];
+        self.networkName = [aDecoder decodeObjectForKey:@"networkName"];
+        self.ipAddress = [aDecoder decodeObjectForKey:@"ipAddress"];
+        self.port = [aDecoder decodeIntegerForKey:@"port"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.networkName forKey:@"networkName"];
+    [aCoder encodeObject:self.ipAddress forKey:@"ipAddress"];
+    [aCoder encodeInteger:self.port forKey:@"port"];
 }
 
 #pragma mark - Overridden
