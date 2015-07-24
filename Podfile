@@ -3,4 +3,5 @@ source 'https://github.com/CocoaPods/Specs.git'
 target "ThreadGroup" do
 pod 'Reachability'
 pod 'libMeshCop', :git => 'git@github.com:IntrepidPursuits/iotivity-private.git', :branch => 'intrepid-ios-build'
+pod 'UICKeyChainStore', '~> 2.0'
 end
