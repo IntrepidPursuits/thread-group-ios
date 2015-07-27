@@ -8,7 +8,6 @@
 
 @import AudioToolbox;
 
-#import <SystemConfiguration/CaptiveNetwork.h>
 #import "TGMainViewController.h"
 #import "TGDeviceStepView.h"
 #import "TGSpinnerView.h"
@@ -269,7 +268,7 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
     [self.wifiSearchView setBottomBarHidden:NO];
     [self.wifiSearchView setIcon:[UIImage tg_wifiCompleted]];
     [self.wifiSearchView setSpinnerActive:NO];
-    [self.wifiSearchView setTitle:@"Connected to Wi-Fi" subTitle:[self currentWifiSSID]];
+    [self.wifiSearchView setTitle:@"Connected to Wi-Fi" subTitle:[TGNetworkManager currentWifiSSID]];
     [self.wifiSearchView setThreadConfigHidden:YES];
 }
 
@@ -488,22 +487,6 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
             [self.selectDeviceView becomeFirstResponder];
         }];
     }
-}
-
-#pragma mark - Helper Methods
-
-- (NSString *)currentWifiSSID {
-    NSString *ssid;
-    NSArray *interfaces = (__bridge NSArray *)CNCopySupportedInterfaces();
-
-    for (NSString *interface in interfaces) {
-        CFDictionaryRef networkDetails = CNCopyCurrentNetworkInfo((__bridge CFStringRef) interface);
-        if (networkDetails) {
-            ssid = (NSString *)CFDictionaryGetValue (networkDetails, kCNNetworkInfoKeySSID);
-            CFRelease(networkDetails);
-        }
-    }
-    return ssid;
 }
 
 #pragma mark - Lazy Load

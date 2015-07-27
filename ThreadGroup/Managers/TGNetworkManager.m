@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+#import <SystemConfiguration/CaptiveNetwork.h>
 #import "TGNetworkManager.h"
 #import "TGRouter.h"
 #import "TGRouterServiceBrowser.h"
@@ -49,6 +50,22 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         completion(nil);
     });
+}
+
+#pragma mark - Wifi SSID
+
++ (NSString *)currentWifiSSID {
+    NSString *ssid;
+    NSArray *interfaces = (__bridge NSArray *)CNCopySupportedInterfaces();
+
+    for (NSString *interface in interfaces) {
+        CFDictionaryRef networkDetails = CNCopyCurrentNetworkInfo((__bridge CFStringRef) interface);
+        if (networkDetails) {
+            ssid = (NSString *)CFDictionaryGetValue (networkDetails, kCNNetworkInfoKeySSID);
+            CFRelease(networkDetails);
+        }
+    }
+    return ssid;
 }
 
 #pragma mark - TGRouterServiceBrowserDelegate
