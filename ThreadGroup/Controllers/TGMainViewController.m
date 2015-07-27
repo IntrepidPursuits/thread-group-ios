@@ -26,7 +26,15 @@
 #import "TGAddProductViewController.h"
 #import "TGNetworkConfigViewController.h"
 
-@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate>
+#import "TGPopupParentView.h"
+#import "TGNetworkSearchingPopup.h"
+#import "TGConnectCodePopup.h"
+#import "TGTutorialPopup.h"
+#import "TGAddDevicePopup.h"
+
+static CGFloat const kTGPopupParentViewHeight = 56.0f;
+
+@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate, TGPopupParentViewDelegate>
 
 //Wifi
 @property (weak, nonatomic) IBOutlet TGDeviceStepView *wifiSearchView;
@@ -55,14 +63,14 @@
 @property (strong, nonatomic) IBOutlet TGScannerView *scannerView;
 
 //Popup Notification
-@property (weak, nonatomic) IBOutlet UIView *popupView;
-@property (weak, nonatomic) IBOutlet UIButton *addAnotherProductButton;
-@property (weak, nonatomic) IBOutlet UIButton *passPhraseButton;
-@property (weak, nonatomic) IBOutlet UIButton *tutorialDismissButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addDeviceTopLayoutConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passphraseButtonTopLayoutConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *findingNetworksPopupTopLayoutConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tutorialDismissTopLayoutConstraint;
+@property (weak, nonatomic) IBOutlet TGPopupParentView *popupView;
+@property (strong, nonatomic) NSArray *popups;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *popupViewBottomConstraint;
+@property (strong, nonatomic) TGNetworkSearchingPopup *networkPopup;
+@property (strong, nonatomic) TGConnectCodePopup *connectCodePopup;
+@property (strong, nonatomic) TGTutorialPopup *tutorialPopup;
+@property (strong, nonatomic) TGAddDevicePopup *addDevicePopup;
+
 
 //RouterAuthVC
 @property (strong, nonatomic) TGRouterAuthViewController *routerAuthVC;
@@ -97,6 +105,8 @@
 
 - (void)commonInit {
     self.threadConfig = [[TGNetworkConfigViewController alloc] initWithNibName:nil bundle:nil];
+    [self.popupView setPopups:self.popups];
+    self.popupView.delegate = self;
 }
 
 #pragma mark - Table View
@@ -111,30 +121,6 @@
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
     }];
-}
-
-#pragma mark - Button Events
-
-- (IBAction)tutorialDismissButtonTapped:(id)sender {
-    [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
-    [self setViewState:TGMainViewStateConnectDeviceScanning];
-}
-
-- (IBAction)usePassphraseButtonPressed:(UIButton *)sender {
-    self.viewState = TGMainViewStateConnectDevicePassphrase;
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
-        [self.selectDeviceView setContentMode:newMode];
-        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
-        [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        [self.selectDeviceView becomeFirstResponder];
-    }];
-}
-
-- (IBAction)addAnotherDeviceButtonPressed:(UIButton *)sender {
-    self.viewState = TGMainViewStateConnectDeviceScanning;
 }
 
 #pragma mark - View States
@@ -236,34 +222,30 @@
 }
 
 - (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated {
-    NSLayoutConstraint *enabledButtonConstraint;
-    NSMutableArray *hiddenConstraints = [@[self.addDeviceTopLayoutConstraint, self.passphraseButtonTopLayoutConstraint, self.findingNetworksPopupTopLayoutConstraint, self.tutorialDismissTopLayoutConstraint] mutableCopy];
     switch (state) {
         case TGMainViewStateAddAnotherDevice:
-            enabledButtonConstraint = self.addDeviceTopLayoutConstraint;
+            [self.popupView bringChildPopupToFront:self.addDevicePopup];
+            self.popupViewBottomConstraint.constant = 0.0f;
             break;
         case TGMainViewStateLookingForRouters:
-            enabledButtonConstraint = self.findingNetworksPopupTopLayoutConstraint;
+            [self.popupView bringChildPopupToFront:self.networkPopup];
+            self.popupViewBottomConstraint.constant = 0.0f;
             break;
         case TGMainViewStateConnectDeviceScanning:
-            enabledButtonConstraint = self.passphraseButtonTopLayoutConstraint;
+            [self.popupView bringChildPopupToFront:self.connectCodePopup];
+            self.popupViewBottomConstraint.constant = 0.0f;
             break;
         case TGMainViewStateConnectDeviceTutorial:
-            enabledButtonConstraint = self.tutorialDismissTopLayoutConstraint;
+            [self.popupView bringChildPopupToFront:self.tutorialPopup];
+            self.popupViewBottomConstraint.constant = 0.0f;
             break;
         default:
-            enabledButtonConstraint = nil;
+            //This hides the popupView
+            self.popupViewBottomConstraint.constant = kTGPopupParentViewHeight;
             break;
     }
     
-    [hiddenConstraints removeObject:enabledButtonConstraint];
-    [self.view layoutIfNeeded];
-    
     [UIView animateWithDuration:(animated) ? 0.4 : 0 animations:^{
-        enabledButtonConstraint.constant = 0.0f;
-        for (NSLayoutConstraint *constraint in hiddenConstraints) {
-            constraint.constant = self.popupView.frame.size.height;
-        }
         [self.view layoutIfNeeded];
     }];
 }
@@ -485,6 +467,29 @@
     return animator;
 }
 
+#pragma mark - TGPopupParentDelegate
+
+- (void)parentPopup:(TGPopupParentView *)popupParent didReceiveTouchForChildPopupAtIndex:(NSInteger)index {
+    UIView *selectedView = [self.popupView popupAtIndex:index];
+    if (selectedView == self.tutorialPopup) {
+        [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
+        [self setViewState:TGMainViewStateConnectDeviceScanning];
+    } else if (selectedView == self.addDevicePopup) {
+        self.viewState = TGMainViewStateConnectDeviceScanning;
+    } else if (selectedView == self.connectCodePopup) {
+        self.viewState = TGMainViewStateConnectDevicePassphrase;
+        [self setPopupNotificationForState:8 animated:NO];
+        [UIView animateWithDuration:0.4 animations:^{
+            TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
+            [self.selectDeviceView setContentMode:newMode];
+            self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [self.selectDeviceView becomeFirstResponder];
+        }];
+    }
+}
+
 #pragma mark - Helper Methods
 
 - (NSString *)currentWifiSSID {
@@ -519,6 +524,17 @@
         _addProductVC.transitioningDelegate = self;
     }
     return _addProductVC;
+}
+
+- (NSArray *)popups {
+    if (!_popups) {
+        self.networkPopup = [TGNetworkSearchingPopup new];
+        self.connectCodePopup = [TGConnectCodePopup new];
+        self.tutorialPopup = [TGTutorialPopup new];
+        self.addDevicePopup = [TGAddDevicePopup new];
+        _popups = @[self.networkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
+    }
+    return _popups;
 }
 
 @end

@@ -5,10 +5,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Gotham-Bold.otf">
-            <string>Gotham-Bold</string>
-            <string>Gotham-Bold</string>
-        </mutableArray>
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
@@ -18,21 +14,16 @@
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
             <string>Gotham-Medium</string>
-            <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGMainViewController">
             <connections>
-                <outlet property="addAnotherProductButton" destination="cqy-4u-pMO" id="kL9-Hl-5kI"/>
-                <outlet property="addDeviceTopLayoutConstraint" destination="Nms-Ys-8BJ" id="Xvl-4c-Gkr"/>
                 <outlet property="availableRoutersView" destination="zqJ-mI-Yuc" id="Pop-Fb-cjB"/>
-                <outlet property="findingNetworksPopupTopLayoutConstraint" destination="jB5-n6-Woh" id="IVt-gm-dbA"/>
                 <outlet property="findingNetworksSpinnerView" destination="l3u-Xg-fdW" id="Qsz-82-LQG"/>
                 <outlet property="findingNetworksView" destination="Tlm-wX-PEf" id="6Ba-88-SEG"/>
-                <outlet property="passPhraseButton" destination="oWS-5U-5Ep" id="062-of-wah"/>
-                <outlet property="passphraseButtonTopLayoutConstraint" destination="hiQ-9B-Cu2" id="Rxw-nb-5uW"/>
-                <outlet property="popupView" destination="I7M-VR-hH9" id="nMs-b8-kYh"/>
+                <outlet property="popupView" destination="I7M-VR-hH9" id="n8D-Tl-MKe"/>
+                <outlet property="popupViewBottomConstraint" destination="0NF-Sk-pcX" id="FM7-mA-g3z"/>
                 <outlet property="routerSearchView" destination="5lN-Qt-CPc" id="43n-4n-OX4"/>
                 <outlet property="scannerView" destination="KzV-Dx-YPV" id="i3X-eX-hQq"/>
                 <outlet property="selectDeviceView" destination="tg2-Pu-Pyq" id="fwz-78-QBG"/>
@@ -41,8 +32,6 @@
                 <outlet property="successNetworkLabel" destination="TVh-1g-ar0" id="ynC-bn-Nex"/>
                 <outlet property="successView" destination="Kmq-1i-QMp" id="EJZ-1E-Dej"/>
                 <outlet property="tableView" destination="zWQ-k9-goJ" id="0bC-YU-1Ox"/>
-                <outlet property="tutorialDismissButton" destination="6HE-ty-DcE" id="Hnp-1c-xd6"/>
-                <outlet property="tutorialDismissTopLayoutConstraint" destination="HMj-nb-w1D" id="QqH-J9-HFn"/>
                 <outlet property="view" destination="iN0-l3-epB" id="FAM-Pj-0aO"/>
                 <outlet property="wifiSearchView" destination="5bh-tR-LN6" id="d2b-pM-jFk"/>
             </connections>
@@ -189,72 +178,11 @@
                         <constraint firstAttribute="centerX" secondItem="l3u-Xg-fdW" secondAttribute="centerX" id="cmo-xY-XEr"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7M-VR-hH9" userLabel="PopupView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7M-VR-hH9" userLabel="PopupView" customClass="TGPopupParentView">
                     <rect key="frame" x="0.0" y="544" width="600" height="56"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6HE-ty-DcE" userLabel="Tutorial Got It Button">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.28000000000000003" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
-                            <state key="normal" title="GOT IT">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="tutorialDismissButtonTapped:" destination="-1" eventType="touchUpInside" id="eer-2e-vxW"/>
-                            </connections>
-                        </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNG-UM-3Rz" userLabel="FindingNetworksPopUp" customClass="TGNetworkSearchingPopup">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="oWS-5U-5Ep">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.28000000000000003" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
-                            <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                            <state key="normal" title="ENTER CONNECT CODE MANUALLY" image="action_type_code">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="usePassphraseButtonPressed:" destination="-1" eventType="touchUpInside" id="3Wg-US-uNC"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-4u-pMO">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
-                            <color key="backgroundColor" red="0.90588235289999997" green="0.48627450979999998" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                            <state key="normal" title="ADD ANOTHER PRODUCT" image="action_add_device">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="addAnotherDeviceButtonPressed:" destination="-1" eventType="touchUpInside" id="GU5-KB-DgH"/>
-                            </connections>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="oWS-5U-5Ep" firstAttribute="leading" secondItem="I7M-VR-hH9" secondAttribute="leading" id="7k4-De-OAf"/>
-                        <constraint firstAttribute="width" secondItem="pNG-UM-3Rz" secondAttribute="width" id="F7E-Wq-GdA"/>
                         <constraint firstAttribute="height" constant="56" id="FOT-9V-J42"/>
-                        <constraint firstItem="6HE-ty-DcE" firstAttribute="top" secondItem="I7M-VR-hH9" secondAttribute="top" id="HMj-nb-w1D"/>
-                        <constraint firstAttribute="height" secondItem="oWS-5U-5Ep" secondAttribute="height" id="Hs1-md-VKc"/>
-                        <constraint firstItem="pNG-UM-3Rz" firstAttribute="leading" secondItem="I7M-VR-hH9" secondAttribute="leading" id="Jby-iw-wdz"/>
-                        <constraint firstItem="cqy-4u-pMO" firstAttribute="top" secondItem="I7M-VR-hH9" secondAttribute="top" id="Nms-Ys-8BJ"/>
-                        <constraint firstAttribute="height" secondItem="pNG-UM-3Rz" secondAttribute="height" id="ck1-nW-ao5"/>
-                        <constraint firstItem="oWS-5U-5Ep" firstAttribute="top" secondItem="I7M-VR-hH9" secondAttribute="top" id="hiQ-9B-Cu2"/>
-                        <constraint firstItem="cqy-4u-pMO" firstAttribute="leading" secondItem="I7M-VR-hH9" secondAttribute="leading" id="jAw-U1-dft"/>
-                        <constraint firstItem="pNG-UM-3Rz" firstAttribute="top" secondItem="I7M-VR-hH9" secondAttribute="top" id="jB5-n6-Woh"/>
-                        <constraint firstAttribute="width" secondItem="6HE-ty-DcE" secondAttribute="width" id="kfN-Y8-jBJ"/>
-                        <constraint firstAttribute="height" secondItem="cqy-4u-pMO" secondAttribute="height" id="lPh-Zs-IHq"/>
-                        <constraint firstAttribute="height" secondItem="6HE-ty-DcE" secondAttribute="height" id="pGE-zA-CLg"/>
-                        <constraint firstItem="6HE-ty-DcE" firstAttribute="leading" secondItem="I7M-VR-hH9" secondAttribute="leading" id="sEW-Ub-Po8"/>
-                        <constraint firstAttribute="width" secondItem="cqy-4u-pMO" secondAttribute="width" id="uPg-iC-c6C"/>
-                        <constraint firstItem="oWS-5U-5Ep" firstAttribute="width" secondItem="I7M-VR-hH9" secondAttribute="width" id="wqs-14-WEh"/>
                     </constraints>
                 </view>
             </subviews>
@@ -297,8 +225,6 @@
         </view>
     </objects>
     <resources>
-        <image name="action_add_device" width="24" height="24"/>
-        <image name="action_type_code" width="24" height="24"/>
         <image name="device_success" width="96" height="96"/>
     </resources>
 </document>

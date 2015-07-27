@@ -35,8 +35,6 @@
 		CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68371B2870800091B548 /* TGSpinnerView.xib */; };
 		CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C683A1B28804D0091B548 /* TGDeviceStepView.m */; };
 		CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */; };
-		CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */; };
-		CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */; };
 		CD8FFD741B39DCEA00481DE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */; };
 		CD8FFD771B39DCF300481DE7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD751B39DCF300481DE7 /* CoreMedia.framework */; };
 		CD8FFD781B39DCF300481DE7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD761B39DCF300481DE7 /* CoreVideo.framework */; };
@@ -54,6 +52,7 @@
 		CDFFFF081B5E9EA10011EA4B /* TGRouterServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFFFF071B5E9EA10011EA4B /* TGRouterServiceBrowser.m */; };
 		D917C4D91B558CF5000A5BE2 /* TGNetworkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */; };
 		D917C4DA1B558CF5000A5BE2 /* TGNetworkNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */; };
+		D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D93717791B617BDC00BE55DD /* TGPopup.m */; };
 		D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */; };
 		D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */; };
 		D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6831B43246E00271ED7 /* TGPopupContentViewController.m */; };
@@ -76,6 +75,15 @@
 		D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566F1B3C932400832112 /* TGAddProductViewController.m */; };
 		D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B456701B3C932400832112 /* TGAddProductViewController.xib */; };
 		D9B456761B3D999900832112 /* TGAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B456751B3D999900832112 /* TGAnimator.m */; };
+		D9E1A9D91B60327600B3DA2C /* TGNetworkSearchingPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9D71B60327600B3DA2C /* TGNetworkSearchingPopup.m */; };
+		D9E1A9DA1B60327600B3DA2C /* TGNetworkSearchingPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E1A9D81B60327600B3DA2C /* TGNetworkSearchingPopup.xib */; };
+		D9E1A9DD1B6032EB00B3DA2C /* TGPopupParentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9DC1B6032EB00B3DA2C /* TGPopupParentView.m */; };
+		D9E1A9E01B60351B00B3DA2C /* TGConnectCodePopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9DF1B60351B00B3DA2C /* TGConnectCodePopup.m */; };
+		D9E1A9E31B60353300B3DA2C /* TGTutorialPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9E21B60353300B3DA2C /* TGTutorialPopup.m */; };
+		D9E1A9E51B60371500B3DA2C /* TGConnectCodePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E1A9E41B60371500B3DA2C /* TGConnectCodePopup.xib */; };
+		D9E1A9E71B60372100B3DA2C /* TGTutorialPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E1A9E61B60372100B3DA2C /* TGTutorialPopup.xib */; };
+		D9E1A9EA1B60374000B3DA2C /* TGAddDevicePopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9E91B60374000B3DA2C /* TGAddDevicePopup.m */; };
+		D9E1A9EC1B60374F00B3DA2C /* TGAddDevicePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E1A9EB1B60374F00B3DA2C /* TGAddDevicePopup.xib */; };
 		D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */; };
 		D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E65C0A1B31FD8800A184AB /* TGTableViewCell.m */; };
 		D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E65C0B1B31FD8800A184AB /* TGTableViewCell.xib */; };
@@ -145,9 +153,6 @@
 		CD8C68391B28804D0091B548 /* TGDeviceStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGDeviceStepView.h; sourceTree = "<group>"; };
 		CD8C683A1B28804D0091B548 /* TGDeviceStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGDeviceStepView.m; sourceTree = "<group>"; };
 		CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGDeviceStepView.xib; sourceTree = "<group>"; };
-		CD8C683E1B289EDC0091B548 /* TGNetworkSearchingPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkSearchingPopup.h; sourceTree = "<group>"; };
-		CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkSearchingPopup.m; sourceTree = "<group>"; };
-		CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkSearchingPopup.xib; sourceTree = "<group>"; };
 		CD8D268B1B443D3E003B5610 /* libcoap.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoap.a; path = iotivity/out/ios/universal/libcoap.a; sourceTree = "<group>"; };
 		CD8D268C1B443D3E003B5610 /* libconnectivity_abstraction.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libconnectivity_abstraction.a; path = iotivity/out/ios/universal/libconnectivity_abstraction.a; sourceTree = "<group>"; };
 		CD8D268D1B443D3E003B5610 /* liboctbstack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liboctbstack.a; path = iotivity/out/ios/universal/liboctbstack.a; sourceTree = "<group>"; };
@@ -177,6 +182,8 @@
 		D917C4D61B558CF5000A5BE2 /* TGNetworkNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkNameViewController.h; sourceTree = "<group>"; };
 		D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkNameViewController.m; sourceTree = "<group>"; };
 		D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkNameViewController.xib; sourceTree = "<group>"; };
+		D93717781B617BDC00BE55DD /* TGPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPopup.h; sourceTree = "<group>"; };
+		D93717791B617BDC00BE55DD /* TGPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPopup.m; sourceTree = "<group>"; };
 		D93C81691B2F663000A86EE1 /* TGHomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHomeScreenViewController.h; sourceTree = "<group>"; };
 		D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHomeScreenViewController.m; sourceTree = "<group>"; };
 		D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeScreenViewController.xib; sourceTree = "<group>"; };
@@ -212,6 +219,20 @@
 		D9B456701B3C932400832112 /* TGAddProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGAddProductViewController.xib; sourceTree = "<group>"; };
 		D9B456741B3D999900832112 /* TGAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGAnimator.h; path = AnimatedTransitions/TGAnimator.h; sourceTree = "<group>"; };
 		D9B456751B3D999900832112 /* TGAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGAnimator.m; path = AnimatedTransitions/TGAnimator.m; sourceTree = "<group>"; };
+		D9E1A9D61B60327600B3DA2C /* TGNetworkSearchingPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkSearchingPopup.h; sourceTree = "<group>"; };
+		D9E1A9D71B60327600B3DA2C /* TGNetworkSearchingPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkSearchingPopup.m; sourceTree = "<group>"; };
+		D9E1A9D81B60327600B3DA2C /* TGNetworkSearchingPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkSearchingPopup.xib; sourceTree = "<group>"; };
+		D9E1A9DB1B6032EB00B3DA2C /* TGPopupParentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPopupParentView.h; sourceTree = "<group>"; };
+		D9E1A9DC1B6032EB00B3DA2C /* TGPopupParentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPopupParentView.m; sourceTree = "<group>"; };
+		D9E1A9DE1B60351B00B3DA2C /* TGConnectCodePopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGConnectCodePopup.h; sourceTree = "<group>"; };
+		D9E1A9DF1B60351B00B3DA2C /* TGConnectCodePopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGConnectCodePopup.m; sourceTree = "<group>"; };
+		D9E1A9E11B60353200B3DA2C /* TGTutorialPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGTutorialPopup.h; sourceTree = "<group>"; };
+		D9E1A9E21B60353300B3DA2C /* TGTutorialPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGTutorialPopup.m; sourceTree = "<group>"; };
+		D9E1A9E41B60371500B3DA2C /* TGConnectCodePopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGConnectCodePopup.xib; sourceTree = "<group>"; };
+		D9E1A9E61B60372100B3DA2C /* TGTutorialPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGTutorialPopup.xib; sourceTree = "<group>"; };
+		D9E1A9E81B60374000B3DA2C /* TGAddDevicePopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGAddDevicePopup.h; sourceTree = "<group>"; };
+		D9E1A9E91B60374000B3DA2C /* TGAddDevicePopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGAddDevicePopup.m; sourceTree = "<group>"; };
+		D9E1A9EB1B60374F00B3DA2C /* TGAddDevicePopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGAddDevicePopup.xib; sourceTree = "<group>"; };
 		D9E65C011B31AED800A184AB /* UIImage+ThreadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ThreadGroup.h"; sourceTree = "<group>"; };
 		D9E65C021B31AED800A184AB /* UIImage+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ThreadGroup.m"; sourceTree = "<group>"; };
 		D9E65C091B31FD8800A184AB /* TGTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGTableViewCell.h; path = TableViewCell/TGTableViewCell.h; sourceTree = "<group>"; };
@@ -438,6 +459,7 @@
 		CD8C68331B28703F0091B548 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D9E1A9D51B60327600B3DA2C /* PopupViews */,
 				D9E65C1B1B33362100A184AB /* TableView */,
 				D9E65C081B31FD6100A184AB /* TableViewCell */,
 				CD8C68341B2870730091B548 /* TGSpinnerView.h */,
@@ -446,9 +468,6 @@
 				CD8C68391B28804D0091B548 /* TGDeviceStepView.h */,
 				CD8C683A1B28804D0091B548 /* TGDeviceStepView.m */,
 				CD8C683C1B2881520091B548 /* TGDeviceStepView.xib */,
-				CD8C683E1B289EDC0091B548 /* TGNetworkSearchingPopup.h */,
-				CD8C683F1B289EDC0091B548 /* TGNetworkSearchingPopup.m */,
-				CD8C68411B289F0A0091B548 /* TGNetworkSearchingPopup.xib */,
 				CDDB18E81B29ED9F008A84FD /* TGSelectDeviceStepView.h */,
 				CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */,
 				CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */,
@@ -529,6 +548,29 @@
 				D95BC68E1B446D8900271ED7 /* TGPopupContentAnimator.m */,
 			);
 			name = AnimatedTransitions;
+			sourceTree = "<group>";
+		};
+		D9E1A9D51B60327600B3DA2C /* PopupViews */ = {
+			isa = PBXGroup;
+			children = (
+				D9E1A9D61B60327600B3DA2C /* TGNetworkSearchingPopup.h */,
+				D9E1A9D71B60327600B3DA2C /* TGNetworkSearchingPopup.m */,
+				D9E1A9D81B60327600B3DA2C /* TGNetworkSearchingPopup.xib */,
+				D9E1A9DB1B6032EB00B3DA2C /* TGPopupParentView.h */,
+				D9E1A9DC1B6032EB00B3DA2C /* TGPopupParentView.m */,
+				D9E1A9DE1B60351B00B3DA2C /* TGConnectCodePopup.h */,
+				D9E1A9DF1B60351B00B3DA2C /* TGConnectCodePopup.m */,
+				D9E1A9E41B60371500B3DA2C /* TGConnectCodePopup.xib */,
+				D9E1A9E11B60353200B3DA2C /* TGTutorialPopup.h */,
+				D9E1A9E21B60353300B3DA2C /* TGTutorialPopup.m */,
+				D9E1A9E61B60372100B3DA2C /* TGTutorialPopup.xib */,
+				D9E1A9E81B60374000B3DA2C /* TGAddDevicePopup.h */,
+				D9E1A9E91B60374000B3DA2C /* TGAddDevicePopup.m */,
+				D9E1A9EB1B60374F00B3DA2C /* TGAddDevicePopup.xib */,
+				D93717781B617BDC00BE55DD /* TGPopup.h */,
+				D93717791B617BDC00BE55DD /* TGPopup.m */,
+			);
+			path = PopupViews;
 			sourceTree = "<group>";
 		};
 		D9E65C081B31FD6100A184AB /* TableViewCell */ = {
@@ -656,15 +698,17 @@
 				D96C04B11B569D2F00B4DB1B /* TGNetworkPickerCell.xib in Resources */,
 				0946F3FD1B500DC300EDB5DE /* TGGeneralCell.xib in Resources */,
 				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
+				D9E1A9EC1B60374F00B3DA2C /* TGAddDevicePopup.xib in Resources */,
 				D95BC6861B43246E00271ED7 /* TGPopupContentViewController.xib in Resources */,
 				D96C04AB1B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib in Resources */,
+				D9E1A9E51B60371500B3DA2C /* TGConnectCodePopup.xib in Resources */,
 				D96C04D61B594DE400B4DB1B /* TGPasswordViewController.xib in Resources */,
 				D96C04B61B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib in Resources */,
 				CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */,
+				D9E1A9DA1B60327600B3DA2C /* TGNetworkSearchingPopup.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
 				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
-				CD8C68421B289F0A0091B548 /* TGNetworkSearchingPopup.xib in Resources */,
 				CD8C681F1B272A290091B548 /* Gotham-Light.otf in Resources */,
 				D917C4DA1B558CF5000A5BE2 /* TGNetworkNameViewController.xib in Resources */,
 				CD8C68201B272A290091B548 /* Gotham-Medium.otf in Resources */,
@@ -676,6 +720,7 @@
 				D9E65C0D1B31FD8800A184AB /* TGTableViewCell.xib in Resources */,
 				CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */,
 				D96C04BB1B56EDAE00B4DB1B /* TGNetworkSliderCell.xib in Resources */,
+				D9E1A9E71B60372100B3DA2C /* TGTutorialPopup.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,17 +786,20 @@
 				CDFFFF081B5E9EA10011EA4B /* TGRouterServiceBrowser.m in Sources */,
 				D95BC68F1B446D8900271ED7 /* TGPopupContentAnimator.m in Sources */,
 				CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */,
+				D9E1A9DD1B6032EB00B3DA2C /* TGPopupParentView.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,
-				CD8C68401B289EDC0091B548 /* TGNetworkSearchingPopup.m in Sources */,
+				D9E1A9D91B60327600B3DA2C /* TGNetworkSearchingPopup.m in Sources */,
 				CD7B60441B1F5469007FF820 /* main.mm in Sources */,
 				CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */,
 				CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */,
 				D95BC6921B45992400271ED7 /* TGLogManager.m in Sources */,
+				D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */,
 				D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */,
 				D9EA94FB1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m in Sources */,
 				D9EA94F81B55559F00A419D4 /* TGNetworkConfigModel.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
+				D9E1A9E01B60351B00B3DA2C /* TGConnectCodePopup.m in Sources */,
 				0946F4011B500DDC00EDB5DE /* TGNetworkInfoCell.m in Sources */,
 				D9EA94EE1B543D7B00A419D4 /* TGHeaderView.m in Sources */,
 				D9E65C1E1B33364600A184AB /* TGTableView.m in Sources */,
@@ -762,10 +810,12 @@
 				D96C04AA1B55ACAF00B4DB1B /* TGNetworkChannelViewController.m in Sources */,
 				D96C04BA1B56EDAE00B4DB1B /* TGNetworkSliderCell.m in Sources */,
 				CDDB18F41B2B2B24008A84FD /* TGSettingsManager.m in Sources */,
+				D9E1A9E31B60353300B3DA2C /* TGTutorialPopup.m in Sources */,
 				D95BC6891B43378400271ED7 /* TGButton.m in Sources */,
 				0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */,
 				D96C04B51B56CF8D00B4DB1B /* TGNetworkSecurityViewController.m in Sources */,
 				CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */,
+				D9E1A9EA1B60374000B3DA2C /* TGAddDevicePopup.m in Sources */,
 				CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */,
 				0946F3FC1B500DC300EDB5DE /* TGGeneralCell.m in Sources */,
 			);

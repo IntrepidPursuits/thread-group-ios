@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TGPopup.h"
 
-@interface TGNetworkSearchingPopup : UIView
+@interface TGNetworkSearchingPopup : TGPopup
 
 @end
