@@ -53,6 +53,7 @@
 		D917C4D91B558CF5000A5BE2 /* TGNetworkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */; };
 		D917C4DA1B558CF5000A5BE2 /* TGNetworkNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */; };
 		D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D93717791B617BDC00BE55DD /* TGPopup.m */; };
+		D937177D1B62831200BE55DD /* TGKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D937177C1B62831200BE55DD /* TGKeychainManager.m */; };
 		D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */; };
 		D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */; };
 		D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6831B43246E00271ED7 /* TGPopupContentViewController.m */; };
@@ -184,6 +185,8 @@
 		D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkNameViewController.xib; sourceTree = "<group>"; };
 		D93717781B617BDC00BE55DD /* TGPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPopup.h; sourceTree = "<group>"; };
 		D93717791B617BDC00BE55DD /* TGPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPopup.m; sourceTree = "<group>"; };
+		D937177B1B62831200BE55DD /* TGKeychainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGKeychainManager.h; sourceTree = "<group>"; };
+		D937177C1B62831200BE55DD /* TGKeychainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGKeychainManager.m; sourceTree = "<group>"; };
 		D93C81691B2F663000A86EE1 /* TGHomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHomeScreenViewController.h; sourceTree = "<group>"; };
 		D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHomeScreenViewController.m; sourceTree = "<group>"; };
 		D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeScreenViewController.xib; sourceTree = "<group>"; };
@@ -490,6 +493,8 @@
 				CD86393E1B4330140044B2BE /* TGMeshcopManager.mm */,
 				CDFFFF061B5E9EA10011EA4B /* TGRouterServiceBrowser.h */,
 				CDFFFF071B5E9EA10011EA4B /* TGRouterServiceBrowser.m */,
+				D937177B1B62831200BE55DD /* TGKeychainManager.h */,
+				D937177C1B62831200BE55DD /* TGKeychainManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -781,6 +786,7 @@
 				CDFFFF051B5E8AEA0011EA4B /* TGRouter.m in Sources */,
 				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
+				D937177D1B62831200BE55DD /* TGKeychainManager.m in Sources */,
 				0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */,
 				D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */,
 				CDFFFF081B5E9EA10011EA4B /* TGRouterServiceBrowser.m in Sources */,

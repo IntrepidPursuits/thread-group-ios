@@ -16,5 +16,6 @@
 @property (nonatomic, readonly) NSInteger port;
 
 - (instancetype)initWithService:(NSNetService *)service;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
 
 @end
