@@ -32,6 +32,7 @@
 #import "TGAddDevicePopup.h"
 
 static CGFloat const kTGPopupParentViewHeight = 56.0f;
+static CGFloat const kTGAnimationDurations = 0.5f;
 
 @interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate, TGPopupParentViewDelegate>
 
@@ -113,7 +114,7 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
     [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *__autoreleasing *error, BOOL stillSearching) {
-        [UIView animateWithDuration:1.5 animations:^{
+        [UIView animateWithDuration:kTGAnimationDurations animations:^{
             self.findingNetworksView.alpha = 0.0f;
         }];
         [self.tableView setNetworkItems:networks];
@@ -201,7 +202,7 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
-            [UIView animateWithDuration:0.4 animations:^{
+            [UIView animateWithDuration:kTGAnimationDurations animations:^{
                 self.selectDeviceView.alpha = 1.0f;
                 self.scannerView.alpha = 1.0f;
                 [self.view bringSubviewToFront:self.scannerView];
@@ -209,7 +210,7 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
         }
             break;
         case TGMainViewStateAddAnotherDevice: {
-            [UIView animateWithDuration:0.4 animations:^{
+            [UIView animateWithDuration:kTGAnimationDurations animations:^{
                 self.successView.alpha = 1.0f;
             }];
         }
@@ -244,7 +245,7 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
             break;
     }
     
-    [UIView animateWithDuration:(animated) ? 0.4 : 0 animations:^{
+    [UIView animateWithDuration:(animated) ? kTGAnimationDurations : 0 animations:^{
         [self.view layoutIfNeeded];
     }];
 }
@@ -318,7 +319,7 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
 
 - (void)routerAuthenticationSuccessful:(TGRouterAuthViewController *)routerAuthenticationView {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:kTGAnimationDurations animations:^{
         [self animateConnectedToRouterWithItem:routerAuthenticationView.item];
         self.viewState = TGMainViewStateConnectDeviceScanning;
     }];
@@ -367,7 +368,7 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
     [self setViewState:TGMainViewStateConnectDeviceScanning];
     [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:YES];
     
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:kTGAnimationDurations animations:^{
         TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
         self.selectDeviceView.contentMode = contentMode;
         self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
@@ -477,8 +478,8 @@ static CGFloat const kTGPopupParentViewHeight = 56.0f;
         self.viewState = TGMainViewStateConnectDeviceScanning;
     } else if (selectedView == self.connectCodePopup) {
         self.viewState = TGMainViewStateConnectDevicePassphrase;
-        [self setPopupNotificationForState:8 animated:NO];
-        [UIView animateWithDuration:0.4 animations:^{
+        [self setPopupNotificationForState:NSNotFound animated:NO];
+        [UIView animateWithDuration:0.5 animations:^{
             TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
             [self.selectDeviceView setContentMode:newMode];
             self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
