@@ -224,27 +224,26 @@ static CGFloat const kTGAnimationDurations = 0.5f;
 - (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated {
     switch (state) {
         case TGMainViewStateAddAnotherDevice:
-            [self.popupView bringChildPopupToFront:self.addDevicePopup];
+            [self.popupView bringChildPopupToFront:self.addDevicePopup animated:animated];
             self.popupViewBottomConstraint.constant = 0.0f;
             break;
         case TGMainViewStateLookingForRouters:
-            [self.popupView bringChildPopupToFront:self.networkPopup];
+            [self.popupView bringChildPopupToFront:self.networkPopup animated:animated];
             self.popupViewBottomConstraint.constant = 0.0f;
             break;
         case TGMainViewStateConnectDeviceScanning:
-            [self.popupView bringChildPopupToFront:self.connectCodePopup];
+            [self.popupView bringChildPopupToFront:self.connectCodePopup animated:animated];
             self.popupViewBottomConstraint.constant = 0.0f;
             break;
         case TGMainViewStateConnectDeviceTutorial:
-            [self.popupView bringChildPopupToFront:self.tutorialPopup];
+            [self.popupView bringChildPopupToFront:self.tutorialPopup animated:animated];
             self.popupViewBottomConstraint.constant = 0.0f;
             break;
         default:
             //This hides the popupView
-            self.popupViewBottomConstraint.constant = kTGPopupParentViewHeight;
+            self.popupViewBottomConstraint.constant = -kTGPopupParentViewHeight;
             break;
     }
-    
     [UIView animateWithDuration:(animated) ? kTGAnimationDurations : 0 animations:^{
         [self.view layoutIfNeeded];
     }];
@@ -366,7 +365,7 @@ static CGFloat const kTGAnimationDurations = 0.5f;
 
 - (void)TGSelectDeviceStepViewDidTapScanCodeButton:(TGSelectDeviceStepView *)stepView {
     [self setViewState:TGMainViewStateConnectDeviceScanning];
-    [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:YES];
+    [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:NO];
     
     [UIView animateWithDuration:kTGAnimationDurations animations:^{
         TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;

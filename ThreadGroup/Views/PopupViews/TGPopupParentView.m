@@ -44,8 +44,12 @@
     }
 }
 
-- (void)bringChildPopupToFront:(UIView *)childPopup {
-    [self bringSubviewToFront:childPopup];
+- (void)bringChildPopupToFront:(UIView *)childPopup animated:(BOOL)animated {
+    childPopup.transform = CGAffineTransformMakeTranslation(0.0f, CGRectGetHeight(childPopup.bounds));
+    [UIView animateWithDuration:(animated) ? 0.5f : 0.0f animations:^{
+        childPopup.transform = CGAffineTransformIdentity;
+        [self bringSubviewToFront:childPopup];
+    }];
     self.topChildPopup = childPopup;
 }
 
