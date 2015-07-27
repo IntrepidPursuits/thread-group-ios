@@ -39,12 +39,13 @@ static NSString * const KTGRouterObjectKey = @"kTGRouterObjectKey";
     }
 }
 
-- (void)getRouterItemWithCompletion:(void(^)(TGRouter *router, NSError *error))completion {
+- (TGRouter *)getRouterItem {
     NSError *getError;
     NSData *data = [self.keychain dataForKey:KTGRouterObjectKey error:&getError];
-    TGRouter *router = [self decodeRouterItem:data];
-    if (completion) {
-        completion(router, getError);
+    if (getError) {
+        return nil;
+    } else {
+        return [self decodeRouterItem:data];
     }
 }
 

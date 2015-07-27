@@ -14,6 +14,6 @@
 
 + (instancetype)sharedManager;
 - (void)saveRouterItem:(TGRouter *)router withCompletion:(void(^)(NSError *error))completion;
-- (void)getRouterItemWithCompletion:(void(^)(TGRouter *router, NSError *error))completion;
+- (TGRouter *)getRouterItem;
 
 @end
