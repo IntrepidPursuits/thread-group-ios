@@ -32,7 +32,8 @@
 #import "TGAddDevicePopup.h"
 
 static CGFloat const kTGPopupParentViewHeight = 56.0f;
-static CGFloat const kTGAnimationDurations = 0.5f;
+static CGFloat const kTGAnimationDuration = 0.5f;
+static CGFloat const KTGHidingMainSpinnerDuration = 0.8f;
 
 @interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate, TGPopupParentViewDelegate>
 
@@ -101,6 +102,7 @@ static CGFloat const kTGAnimationDurations = 0.5f;
     [self setupTableViewSource];
     self.scannerView.delegate = self;
     self.modalPresentationStyle = UIModalPresentationCustom;
+    [self setPopupNotificationForState:NSNotFound animated:NO];
 }
 
 - (void)commonInit {
@@ -114,8 +116,12 @@ static CGFloat const kTGAnimationDurations = 0.5f;
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
     [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *__autoreleasing *error, BOOL stillSearching) {
-        [UIView animateWithDuration:kTGAnimationDurations animations:^{
+        [UIView animateWithDuration:KTGHidingMainSpinnerDuration animations:^{
             self.findingNetworksView.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [self setPopupNotificationForState:self.viewState animated:NO];
+            }
         }];
         [self.tableView setNetworkItems:networks];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -135,8 +141,6 @@ static CGFloat const kTGAnimationDurations = 0.5f;
     if (isScanning && [[TGSettingsManager sharedManager] hasSeenScannerTutorial] == NO) {
         viewState = TGMainViewStateConnectDeviceTutorial;
     }
-    
-    [self setPopupNotificationForState:viewState animated:YES];
     [self.scannerView setContentMode:[self scannerModeForViewState:viewState]];
     
     switch (viewState) {
@@ -195,14 +199,11 @@ static CGFloat const kTGAnimationDurations = 0.5f;
 
 - (void)animateViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
-        case TGMainViewStateLookingForRouters: {
-            [self.findingNetworksSpinnerView startAnimating];
-        }
-            break;
+        case TGMainViewStateLookingForRouters:
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
-            [UIView animateWithDuration:kTGAnimationDurations animations:^{
+            [UIView animateWithDuration:kTGAnimationDuration animations:^{
                 self.selectDeviceView.alpha = 1.0f;
                 self.scannerView.alpha = 1.0f;
                 [self.view bringSubviewToFront:self.scannerView];
@@ -210,7 +211,7 @@ static CGFloat const kTGAnimationDurations = 0.5f;
         }
             break;
         case TGMainViewStateAddAnotherDevice: {
-            [UIView animateWithDuration:kTGAnimationDurations animations:^{
+            [UIView animateWithDuration:kTGAnimationDuration animations:^{
                 self.successView.alpha = 1.0f;
             }];
         }
@@ -244,7 +245,7 @@ static CGFloat const kTGAnimationDurations = 0.5f;
             self.popupViewBottomConstraint.constant = -kTGPopupParentViewHeight;
             break;
     }
-    [UIView animateWithDuration:(animated) ? kTGAnimationDurations : 0 animations:^{
+    [UIView animateWithDuration:kTGAnimationDuration animations:^{
         [self.view layoutIfNeeded];
     }];
 }
@@ -318,15 +319,17 @@ static CGFloat const kTGAnimationDurations = 0.5f;
 
 - (void)routerAuthenticationSuccessful:(TGRouterAuthViewController *)routerAuthenticationView {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [UIView animateWithDuration:kTGAnimationDurations animations:^{
+    [UIView animateWithDuration:kTGAnimationDuration animations:^{
         [self animateConnectedToRouterWithItem:routerAuthenticationView.item];
         self.viewState = TGMainViewStateConnectDeviceScanning;
+        [self setPopupNotificationForState:self.viewState animated:NO];
     }];
 }
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
     [self dismissViewControllerAnimated:YES completion:nil];
     self.viewState = TGMainViewStateLookingForRouters;
+    [self setPopupNotificationForState:self.viewState animated:YES];
 }
 
 #pragma mark - Select/Add Devices
@@ -351,6 +354,7 @@ static CGFloat const kTGAnimationDurations = 0.5f;
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     } else if (stepView == self.routerSearchView) {
         [self setViewState:TGMainViewStateLookingForRouters];
+        [self setPopupNotificationForState:self.viewState animated:YES];
     }
 }
 
@@ -367,7 +371,7 @@ static CGFloat const kTGAnimationDurations = 0.5f;
     [self setViewState:TGMainViewStateConnectDeviceScanning];
     [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:NO];
     
-    [UIView animateWithDuration:kTGAnimationDurations animations:^{
+    [UIView animateWithDuration:kTGAnimationDuration animations:^{
         TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
         self.selectDeviceView.contentMode = contentMode;
         self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
@@ -384,6 +388,7 @@ static CGFloat const kTGAnimationDurations = 0.5f;
             if (success) {
                 [self hideAddProductVC];
                 self.viewState = TGMainViewStateAddAnotherDevice;
+                [self setPopupNotificationForState:self.viewState animated:YES];
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             } else {
                 NSLog(@"Adding device failed!");
@@ -433,10 +438,12 @@ static CGFloat const kTGAnimationDurations = 0.5f;
             if (success) {
                 [self hideAddProductVC];
                 self.viewState = TGMainViewStateAddAnotherDevice;
+                [self setPopupNotificationForState:self.viewState animated:YES];
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             } else {
                 NSLog(@"Adding device failed!");
                 self.viewState = TGMainViewStateConnectDeviceScanning;
+                [self setPopupNotificationForState:self.viewState animated:YES];
                 [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
                 [self hideAddProductVC];
             }
@@ -450,6 +457,7 @@ static CGFloat const kTGAnimationDurations = 0.5f;
 
 - (void)TGScannerView:(UIView *)scannerView didTapInfoButton:(id)sender {
     [self setViewState:TGMainViewStateConnectDeviceTutorial];
+    [self setPopupNotificationForState:self.viewState animated:YES];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
@@ -473,12 +481,14 @@ static CGFloat const kTGAnimationDurations = 0.5f;
     if (selectedView == self.tutorialPopup) {
         [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
         [self setViewState:TGMainViewStateConnectDeviceScanning];
+        [self setPopupNotificationForState:self.viewState animated:YES];
     } else if (selectedView == self.addDevicePopup) {
         self.viewState = TGMainViewStateConnectDeviceScanning;
+        [self setPopupNotificationForState:self.viewState animated:YES];
     } else if (selectedView == self.connectCodePopup) {
         self.viewState = TGMainViewStateConnectDevicePassphrase;
-        [self setPopupNotificationForState:NSNotFound animated:NO];
-        [UIView animateWithDuration:0.5 animations:^{
+        [self setPopupNotificationForState:NSNotFound animated:YES];
+        [UIView animateWithDuration:kTGAnimationDuration animations:^{
             TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
             [self.selectDeviceView setContentMode:newMode];
             self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
