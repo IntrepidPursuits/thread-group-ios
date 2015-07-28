@@ -20,6 +20,7 @@
     self = [super init];
     if (self) {
         [self startAnimating];
+        [self registerForEnterForegroundNotification];
     }
     return self;
 }
@@ -27,6 +28,19 @@
 - (void)startAnimating {
     [self.clockwiseSpinnerImageView threadGroup_animateClockwise];
     [self.counterClockwiseSpinnerImageView threadGroup_animateCounterClockwise];
+}
+
+#pragma mark - Return from background notification
+
+- (void)registerForEnterForegroundNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(startAnimating)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:[UIApplication sharedApplication]];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
