@@ -15,8 +15,18 @@
 
 @property (nonatomic, strong) NSString *name;
 
+//As define by the QR code specification
+@property (nonatomic, readonly) NSUInteger qrCodeVersion; //uint8
+@property (nonatomic, strong, readonly) NSString *longAddress; //ASCII Hex
+@property (nonatomic, strong, readonly) NSString *connectCode; //base32-thread
+@property (nonatomic, strong, readonly) NSString *vendorName; //utf-8
+@property (nonatomic, strong, readonly) NSString *vendorModel; //utf-8
+@property (nonatomic, strong, readonly) NSString *vendorVersion; //utf-8
+@property (nonatomic, strong, readonly) NSString *vendorSerialNumber; //String
+
 - (instancetype)initWithPassphrase:(NSString *)passphrase;
 - (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion;
+- (instancetype)initWithParamaters:(NSArray *)parameters;
 
 @end
 
