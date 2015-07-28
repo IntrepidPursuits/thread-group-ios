@@ -61,6 +61,7 @@
 		D95BC6891B43378400271ED7 /* TGButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6881B43378400271ED7 /* TGButton.m */; };
 		D95BC68F1B446D8900271ED7 /* TGPopupContentAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC68E1B446D8900271ED7 /* TGPopupContentAnimator.m */; };
 		D95BC6921B45992400271ED7 /* TGLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6911B45992400271ED7 /* TGLogManager.m */; };
+		D96AF2BF1B67F9C0005F66E4 /* TGQRCodeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D96AF2BE1B67F9C0005F66E4 /* TGQRCodeParser.m */; };
 		D96C04AA1B55ACAF00B4DB1B /* TGNetworkChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96C04A81B55ACAF00B4DB1B /* TGNetworkChannelViewController.m */; };
 		D96C04AB1B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96C04A91B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib */; };
 		D96C04B01B569D2F00B4DB1B /* TGNetworkPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96C04AE1B569D2F00B4DB1B /* TGNetworkPickerCell.m */; };
@@ -199,6 +200,8 @@
 		D95BC68E1B446D8900271ED7 /* TGPopupContentAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGPopupContentAnimator.m; path = AnimatedTransitions/TGPopupContentAnimator.m; sourceTree = "<group>"; };
 		D95BC6901B45992400271ED7 /* TGLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGLogManager.h; sourceTree = "<group>"; };
 		D95BC6911B45992400271ED7 /* TGLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGLogManager.m; sourceTree = "<group>"; };
+		D96AF2BD1B67F9C0005F66E4 /* TGQRCodeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGQRCodeParser.h; sourceTree = "<group>"; };
+		D96AF2BE1B67F9C0005F66E4 /* TGQRCodeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGQRCodeParser.m; sourceTree = "<group>"; };
 		D96C04A71B55ACAF00B4DB1B /* TGNetworkChannelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkChannelViewController.h; sourceTree = "<group>"; };
 		D96C04A81B55ACAF00B4DB1B /* TGNetworkChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkChannelViewController.m; sourceTree = "<group>"; };
 		D96C04A91B55ACAF00B4DB1B /* TGNetworkChannelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkChannelViewController.xib; sourceTree = "<group>"; };
@@ -495,6 +498,8 @@
 				CDFFFF071B5E9EA10011EA4B /* TGRouterServiceBrowser.m */,
 				D937177B1B62831200BE55DD /* TGKeychainManager.h */,
 				D937177C1B62831200BE55DD /* TGKeychainManager.m */,
+				D96AF2BD1B67F9C0005F66E4 /* TGQRCodeParser.h */,
+				D96AF2BE1B67F9C0005F66E4 /* TGQRCodeParser.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -798,6 +803,7 @@
 				D9E1A9D91B60327600B3DA2C /* TGNetworkSearchingPopup.m in Sources */,
 				CD7B60441B1F5469007FF820 /* main.mm in Sources */,
 				CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */,
+				D96AF2BF1B67F9C0005F66E4 /* TGQRCodeParser.m in Sources */,
 				CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */,
 				D95BC6921B45992400271ED7 /* TGLogManager.m in Sources */,
 				D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */,
