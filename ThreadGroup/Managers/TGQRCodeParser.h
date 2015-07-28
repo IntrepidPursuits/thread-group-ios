@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TGQRCodeParser : NSObject
+@class TGQRCodeParser;
+@class TGDevice;
 
+@protocol TGQRCodeParserDelegate <NSObject>
+- (void)parser:(TGQRCodeParser *)parser didParseDevice:(TGDevice *)device;
+//need to refactor TGDevice to include all the information that the QR code has
+@end
+
+@interface TGQRCodeParser : NSObject
+@property (nonatomic, weak) id<TGQRCodeParserDelegate> delegate;
+- (void)parseDataFromString:(NSString *)dataString;
 @end
