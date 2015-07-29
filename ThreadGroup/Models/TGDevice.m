@@ -8,23 +8,13 @@
 
 #import "TGDevice.h"
 #import "TGNetworkManager.h"
+#import "TGQRCode.h"
 
 const NSUInteger TGDeviceConnectCodeMaximumCharacters = 16;
 const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
 
 @interface TGDevice()
-
 @property (nonatomic, strong) NSString *passphrase;
-
-//As define by the QR code specification
-@property (nonatomic) NSUInteger qrCodeVersion; //uint8
-@property (nonatomic, strong) NSString *longAddress; //ASCII Hex
-@property (nonatomic, strong) NSString *connectCode; //base32-thread
-@property (nonatomic, strong) NSString *vendorName; //utf-8
-@property (nonatomic, strong) NSString *vendorModel; //utf-8
-@property (nonatomic, strong) NSString *vendorVersion; //utf-8
-@property (nonatomic, strong) NSString *vendorSerialNumber; //String
-
 @end
 
 @implementation TGDevice
@@ -46,28 +36,12 @@ const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
                                          }];
 }
 
-- (instancetype)initWithParamaters:(NSArray *)parameters {
+- (instancetype)initWithQRCode:(TGQRCode *)qrCode {
     self = [super init];
     if (self) {
-        [self parseParameters:parameters];
+        _qrCode = qrCode;
     }
     return self;
-}
-
-#pragma mark - Helper methods
-
-- (void)parseParameters:(NSArray *)parameters {
-    self.qrCodeVersion = [[self parseItem:parameters[0]] integerValue];
-    self.longAddress = [self parseItem:parameters[1]];
-    self.connectCode = [self parseItem:parameters[2]];
-    self.vendorName = [self parseItem:parameters[3]];
-    self.vendorModel = [self parseItem:parameters[4]];
-    self.vendorVersion = [self parseItem:parameters[5]];
-    self.vendorSerialNumber = [self parseItem:parameters[6]];
-}
-
-- (NSString *)parseItem:(NSURLQueryItem *)item {
-    return item.value;
 }
 
 @end
