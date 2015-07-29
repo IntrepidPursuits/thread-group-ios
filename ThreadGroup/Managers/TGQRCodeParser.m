@@ -7,19 +7,16 @@
 //
 
 #import "TGQRCodeParser.h"
-#import "TGDevice.h"
+#import "TGQRCode.h"
 
 @implementation TGQRCodeParser
 
-- (void)parseDataFromString:(NSString *)dataString {
-    NSArray *parameters = [self parseQueryString:dataString];
-    TGDevice *device = [[TGDevice alloc] initWithParamaters:parameters];
-    if ([self.delegate respondsToSelector:@selector(parser:didParseDevice:)]) {
-        [self.delegate parser:self didParseDevice:device];
-    }
++ (TGQRCode *)parseDataFromString:(NSString *)dataString {
+    NSArray *parameters = [TGQRCodeParser parseQueryString:dataString];
+    return [[TGQRCode alloc] initWithParameters:parameters];
 }
 
-- (NSArray *)parseQueryString:(NSString *)string {
++ (NSArray *)parseQueryString:(NSString *)string {
     NSURLComponents *urlComponents = [NSURLComponents new];
     urlComponents.query = string;
     return urlComponents.queryItems;
