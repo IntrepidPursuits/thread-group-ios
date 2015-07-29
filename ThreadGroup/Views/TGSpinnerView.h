@@ -10,7 +10,4 @@
 
 @interface TGSpinnerView : UIView
 
-- (void)startAnimating;
-- (void)stopAnimating;
-
 @end

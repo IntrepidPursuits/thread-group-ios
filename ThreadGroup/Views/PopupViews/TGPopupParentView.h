@@ -16,7 +16,7 @@
 @interface TGPopupParentView : UIView
 @property (nonatomic) id<TGPopupParentViewDelegate> delegate;
 - (void)setPopups:(NSArray *)popups;
-- (void)bringChildPopupToFront:(UIView *)childPopup;
+- (void)bringChildPopupToFront:(UIView *)childPopup animated:(BOOL)animated;
 
 - (NSInteger)numberOfPopups;
 - (UIView *)popupAtIndex:(NSInteger)index;

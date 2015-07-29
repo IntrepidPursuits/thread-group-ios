@@ -13,6 +13,7 @@ typedef void (^TGNetworkManagerFindRoutersCompletionBlock)(NSArray *networks, NS
 @interface TGNetworkManager : NSObject
 
 + (instancetype)sharedManager;
++ (NSString *)currentWifiSSID;
 - (void)findLocalThreadNetworksCompletion:(TGNetworkManagerFindRoutersCompletionBlock)completion;
 - (void)connectToNetwork:(id)network completion:(void (^)(NSError **error))completion;
 - (void)connectDevice:(id)device completion:(void (^)(NSError **error))completion;

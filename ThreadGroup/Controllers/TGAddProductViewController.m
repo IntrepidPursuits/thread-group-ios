@@ -26,7 +26,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.spinnerView startAnimating];
     self.addingDeviceText.attributedText = [self createLabelFromDevice:self.device andRouter:self.router];
 }
 
