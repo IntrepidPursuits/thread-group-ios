@@ -8,15 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class TGQRCode;
 /**
  *  A representation of a thread enabled device. 
  */
 @interface TGDevice : NSObject
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong, readonly) TGQRCode *qrCode;
 
 - (instancetype)initWithPassphrase:(NSString *)passphrase;
 - (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion;
+- (instancetype)initWithQRCode:(TGQRCode *)qrCode;
 
 @end
 

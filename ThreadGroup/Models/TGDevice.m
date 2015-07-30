@@ -8,14 +8,13 @@
 
 #import "TGDevice.h"
 #import "TGNetworkManager.h"
+#import "TGQRCode.h"
 
 const NSUInteger TGDeviceConnectCodeMaximumCharacters = 16;
 const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
 
 @interface TGDevice()
-
 @property (nonatomic, strong) NSString *passphrase;
-
 @end
 
 @implementation TGDevice
@@ -35,6 +34,14 @@ const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
                                              BOOL successful = (BOOL)(arc4random() % 2);
                                              completion(successful);
                                          }];
+}
+
+- (instancetype)initWithQRCode:(TGQRCode *)qrCode {
+    self = [super init];
+    if (self) {
+        _qrCode = qrCode;
+    }
+    return self;
 }
 
 @end
