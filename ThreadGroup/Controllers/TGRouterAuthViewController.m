@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomBar;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerActivityIndicatorView;
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
 @end
 
 @implementation TGRouterAuthViewController
@@ -28,9 +30,9 @@
 
 - (void)resetView {
     self.errorLabel.hidden = YES;
+    [self setUserInteractionEnabled:YES];
     self.bottomBar.backgroundColor = [UIColor threadGroup_orange];
     self.passwordTextField.text = @"";
-    [self.passwordTextField becomeFirstResponder];
 
     self.routerLabel.attributedText = [self createLabelFromItem:self.item];
 }
@@ -38,6 +40,7 @@
 #pragma mark - IBActions
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
+    [self setUserInteractionEnabled:NO];
     [[TGNetworkManager sharedManager] connectToNetwork:self.passwordTextField.text completion:^(NSError *__autoreleasing *error) {
         BOOL successful = (BOOL)(arc4random() % 2);
         if (successful) {
@@ -46,6 +49,7 @@
         } else {
             [self authenticationFailure];
             NSLog(@"Router Authentication Failed!");
+            [self setUserInteractionEnabled:YES];
         }
     }];
 }
@@ -98,5 +102,20 @@
     return @{NSFontAttributeName : [UIFont threadGroup_bookFontWithSize:14.0], NSParagraphStyleAttributeName : style};
 }
 
+- (void)setUserInteractionEnabled:(BOOL)isEnabled {
+    self.okButton.enabled = isEnabled;
+    self.passwordTextField.enabled = isEnabled;
+    self.spinnerActivityIndicatorView.hidden = isEnabled;
+    
+    if (!self.spinnerActivityIndicatorView.hidden) {
+        [self.spinnerActivityIndicatorView startAnimating];
+    }
+    
+    if (isEnabled) {
+        [self.passwordTextField becomeFirstResponder];
+    } else {
+        [self.passwordTextField resignFirstResponder];
+    }
+}
 
 @end
