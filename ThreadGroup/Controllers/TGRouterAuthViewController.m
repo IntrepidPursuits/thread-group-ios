@@ -33,7 +33,6 @@
     [self okButtonEnabled:YES];
     self.bottomBar.backgroundColor = [UIColor threadGroup_orange];
     self.passwordTextField.text = @"";
-    [self.passwordTextField becomeFirstResponder];
 
     self.routerLabel.attributedText = [self createLabelFromItem:self.item];
 }
@@ -51,7 +50,6 @@
             [self authenticationFailure];
             NSLog(@"Router Authentication Failed!");
             [self okButtonEnabled:YES];
-            [self.passwordTextField becomeFirstResponder];
         }
     }];
 }
@@ -113,7 +111,9 @@
         [self.spinnerActivityIndicatorView startAnimating];
     }
     
-    if (!isEnabled) {
+    if (isEnabled) {
+        [self.passwordTextField becomeFirstResponder];
+    } else {
         [self.passwordTextField resignFirstResponder];
     }
 }
