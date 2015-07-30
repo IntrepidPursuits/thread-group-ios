@@ -20,6 +20,7 @@
             <connections>
                 <outlet property="bottomBar" destination="dup-kM-oTu" id="8Wx-dy-LVW"/>
                 <outlet property="errorLabel" destination="vrl-OX-oof" id="xUt-hG-Ewn"/>
+                <outlet property="okButton" destination="jXc-Dp-FXr" id="mZ1-gn-r2z"/>
                 <outlet property="passwordTextField" destination="VQi-Dd-VLn" id="qca-W7-1yS"/>
                 <outlet property="routerLabel" destination="bfg-lM-HgI" id="naa-Vu-JdX"/>
                 <outlet property="spinnerActivityIndicatorView" destination="Uz6-Ra-Yeh" id="od3-i7-s5h"/>
@@ -81,6 +82,12 @@
                     <state key="normal" title="OK">
                         <color key="titleColor" red="0.90588235289999997" green="0.48627450979999998" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="disabled">
+                        <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="okButtonPressed:" destination="-1" eventType="touchUpInside" id="3IW-Ic-GMR"/>
