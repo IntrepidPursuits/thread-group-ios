@@ -30,7 +30,7 @@
 
 - (void)resetView {
     self.errorLabel.hidden = YES;
-    [self okButtonEnabled:YES];
+    [self setUserInteractionEnabled:YES];
     self.bottomBar.backgroundColor = [UIColor threadGroup_orange];
     self.passwordTextField.text = @"";
 
@@ -40,7 +40,7 @@
 #pragma mark - IBActions
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
-    [self okButtonEnabled:NO];
+    [self setUserInteractionEnabled:NO];
     [[TGNetworkManager sharedManager] connectToNetwork:self.passwordTextField.text completion:^(NSError *__autoreleasing *error) {
         BOOL successful = (BOOL)(arc4random() % 2);
         if (successful) {
@@ -49,7 +49,7 @@
         } else {
             [self authenticationFailure];
             NSLog(@"Router Authentication Failed!");
-            [self okButtonEnabled:YES];
+            [self setUserInteractionEnabled:YES];
         }
     }];
 }
@@ -102,7 +102,7 @@
     return @{NSFontAttributeName : [UIFont threadGroup_bookFontWithSize:14.0], NSParagraphStyleAttributeName : style};
 }
 
-- (void)okButtonEnabled:(BOOL)isEnabled {
+- (void)setUserInteractionEnabled:(BOOL)isEnabled {
     self.okButton.enabled = isEnabled;
     self.passwordTextField.enabled = isEnabled;
     self.spinnerActivityIndicatorView.hidden = isEnabled;
