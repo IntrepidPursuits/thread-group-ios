@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomBar;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerActivityIndicatorView;
 @end
 
 @implementation TGRouterAuthViewController
@@ -28,6 +29,7 @@
 
 - (void)resetView {
     self.errorLabel.hidden = YES;
+    self.spinnerActivityIndicatorView.hidden = YES;
     self.bottomBar.backgroundColor = [UIColor threadGroup_orange];
     self.passwordTextField.text = @"";
     [self.passwordTextField becomeFirstResponder];
@@ -38,6 +40,9 @@
 #pragma mark - IBActions
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
+    self.view.userInteractionEnabled = NO;
+    self.spinnerActivityIndicatorView.hidden = NO;
+    [self.spinnerActivityIndicatorView startAnimating];
     [[TGNetworkManager sharedManager] connectToNetwork:self.passwordTextField.text completion:^(NSError *__autoreleasing *error) {
         BOOL successful = (BOOL)(arc4random() % 2);
         if (successful) {
@@ -46,6 +51,8 @@
         } else {
             [self authenticationFailure];
             NSLog(@"Router Authentication Failed!");
+            self.view.userInteractionEnabled = YES;
+            self.spinnerActivityIndicatorView.hidden = YES;
         }
     }];
 }
