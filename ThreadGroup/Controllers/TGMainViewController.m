@@ -423,7 +423,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     NSLog(@"Add Product Cancelled! Ignore API call return!");
     self.ignoreAddProduct = YES;
     [self hideAddProductVC];
-    [self.selectDeviceView becomeFirstResponder];
+    if (self.viewState == TGMainViewStateConnectDevicePassphrase) {
+        [self.selectDeviceView becomeFirstResponder];
+    } else if (self.viewState == TGMainViewStateConnectDeviceScanning) {
+        [self.scannerView setContentMode:TGScannerViewContentModeActiveScanning];
+    }
 }
 
 #pragma mark - TGTableView Delegate
