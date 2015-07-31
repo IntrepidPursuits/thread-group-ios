@@ -233,7 +233,7 @@
     NSMutableArray *buttons = [NSMutableArray new];
     switch (popupVC.popupType) {
         case TGPopupTypeLog: {
-            TGButton *shareButton = [[TGButton alloc] initWithTitle:@"SHARE" andImage:[UIImage tg_shareAction]];
+            TGButton *shareButton = [[TGButton alloc] initWithTitle:@"" andImage:[UIImage tg_shareAction]];
             TGButton *clearButton = [[TGButton alloc] initWithTitle:@"CLEAR" andImage:nil];
             TGButton *okButton = [[TGButton alloc] initWithTitle:@"OK" andImage:nil];
 
