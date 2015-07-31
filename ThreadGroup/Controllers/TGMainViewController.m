@@ -33,7 +33,8 @@
 
 static CGFloat const kTGPopupParentViewHeight = 56.0f;
 static CGFloat const kTGAnimationDuration = 0.5f;
-static CGFloat const KTGHidingMainSpinnerDuration = 0.8f;
+static CGFloat const kTGHidingMainSpinnerDuration = 0.8f;
+static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 @interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate, TGPopupParentViewDelegate>
 
@@ -116,7 +117,7 @@ static CGFloat const KTGHidingMainSpinnerDuration = 0.8f;
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
     [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *__autoreleasing *error, BOOL stillSearching) {
-        [UIView animateWithDuration:KTGHidingMainSpinnerDuration animations:^{
+        [UIView animateWithDuration:kTGHidingMainSpinnerDuration animations:^{
             self.findingNetworksView.alpha = 0.0f;
         } completion:^(BOOL finished) {
             if (finished) {
@@ -205,7 +206,9 @@ static CGFloat const KTGHidingMainSpinnerDuration = 0.8f;
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
-            [UIView animateWithDuration:kTGAnimationDuration animations:^{
+            self.selectDeviceView.alpha = 0.0f;
+            self.scannerView.alpha = 0.0f;
+            [UIView animateWithDuration:kTGScannerViewAnimationDuration animations:^{
                 self.selectDeviceView.alpha = 1.0f;
                 self.scannerView.alpha = 1.0f;
                 [self.view bringSubviewToFront:self.scannerView];
