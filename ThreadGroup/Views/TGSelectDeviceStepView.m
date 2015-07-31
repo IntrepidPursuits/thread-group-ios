@@ -216,4 +216,8 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     return [self.passphraseInputField becomeFirstResponder];
 }
 
+- (BOOL)resignFirstResponder {
+    return [self.passphraseInputField resignFirstResponder];
+}
+
 @end

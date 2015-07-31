@@ -97,6 +97,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    if (self.viewState == TGMainViewStateConnectDevicePassphrase) {
+        [self.selectDeviceView becomeFirstResponder];
+    }
 }
 
 - (void)configure {
@@ -357,6 +360,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (stepView == self.wifiSearchView) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     } else if (stepView == self.routerSearchView) {
+        [self.selectDeviceView resignFirstResponder];
         [self setViewState:TGMainViewStateLookingForRouters];
         [self setPopupNotificationForState:self.viewState animated:YES];
     }
@@ -419,7 +423,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     NSLog(@"Add Product Cancelled! Ignore API call return!");
     self.ignoreAddProduct = YES;
     [self hideAddProductVC];
-    [self.selectDeviceView becomeFirstResponder];
+    if (self.viewState == TGMainViewStateConnectDevicePassphrase) {
+        [self.selectDeviceView becomeFirstResponder];
+    } else if (self.viewState == TGMainViewStateConnectDeviceScanning) {
+        [self.scannerView setContentMode:TGScannerViewContentModeActiveScanning];
+    }
 }
 
 #pragma mark - TGTableView Delegate
