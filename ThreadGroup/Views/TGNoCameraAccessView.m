@@ -36,4 +36,8 @@
     self.settingsButton.backgroundColor = [UIColor threadGroup_darkGrey];
 }
 
+- (IBAction)settingsButtonPressed:(UIButton *)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+}
+
 @end

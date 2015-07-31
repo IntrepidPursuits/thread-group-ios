@@ -4,6 +4,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="Gotham-Book.otf">
+            <string>Gotham-Book</string>
+        </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
             <string>Gotham-Medium</string>
         </mutableArray>
@@ -32,12 +35,23 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="settingsButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="PyA-cT-bzY"/>
+                    </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="You must allow the Thread app to access your camera in order to scan a Connect QR Code. " translatesAutoresizingMaskIntoConstraints="NO" id="FhW-xA-qyb" userLabel="Info">
                     <rect key="frame" x="16" y="101" width="568" height="418"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="55A-Tc-f6h"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="55A-Tc-f6h"/>
+                        </mask>
+                    </variation>
                 </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hY3-Bp-JMK" userLabel="Separator">
                     <rect key="frame" x="16" y="599" width="568" height="1"/>
@@ -55,6 +69,7 @@
                 <constraint firstItem="hY3-Bp-JMK" firstAttribute="leading" secondItem="FhW-xA-qyb" secondAttribute="trailing" constant="-365" id="4Tc-Z1-ZYx"/>
                 <constraint firstItem="Of4-s8-jyg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E1x-CM-VeA"/>
                 <constraint firstAttribute="centerX" secondItem="FhW-xA-qyb" secondAttribute="centerX" id="FOp-Ny-Qs5"/>
+                <constraint firstItem="Of4-s8-jyg" firstAttribute="top" secondItem="FhW-xA-qyb" secondAttribute="bottom" constant="25" id="JP4-MR-Vjd"/>
                 <constraint firstItem="FhW-xA-qyb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="OgW-vf-w4u"/>
                 <constraint firstAttribute="trailing" secondItem="Of4-s8-jyg" secondAttribute="trailing" id="Q68-ql-kUE"/>
                 <constraint firstAttribute="bottom" secondItem="hY3-Bp-JMK" secondAttribute="bottom" id="c8u-hT-rNR"/>
@@ -65,9 +80,11 @@
                 <constraint firstItem="hY3-Bp-JMK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="uRj-4w-fEn"/>
                 <constraint firstItem="Of4-s8-jyg" firstAttribute="top" secondItem="FhW-xA-qyb" secondAttribute="bottom" constant="25" id="zql-6v-dKH"/>
             </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="FOp-Ny-Qs5"/>
+                    <exclude reference="zql-6v-dKH"/>
                     <exclude reference="3e4-em-Rec"/>
                     <exclude reference="4Tc-Z1-ZYx"/>
                 </mask>
@@ -75,6 +92,7 @@
             <connections>
                 <outlet property="settingsButton" destination="Of4-s8-jyg" id="x96-iv-LRa"/>
             </connections>
+            <point key="canvasLocation" x="315" y="222"/>
         </view>
     </objects>
     <resources>

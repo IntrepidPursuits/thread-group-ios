@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "UIFont+ThreadGroup.h"
 #import "UIImage+ThreadGroup.h"
+#import "TGNoCameraAccessView.h"
 
 static CGFloat const TGScannerViewOverlaySize = 199.0f;
 static CGFloat const TGScannerYOffset = 32.0f;
@@ -26,6 +27,7 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 @property (nonatomic, strong) UIImageView *cameraOverlay;
 @property (nonatomic, strong) UIView *maskView;
 @property (nonatomic, strong) UIView *tutorialView;
+@property (nonatomic, strong) TGNoCameraAccessView *noCameraAccessView;
 
 @property (nonatomic, strong) UIButton *tutorialButton;
 
@@ -45,6 +47,7 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     [self configureOverlay];
     [self configureMask];
     [self configureTutorialView];
+    [self configureNoCameraAccessView];
 }
 
 - (void)configureScanner {
@@ -145,6 +148,17 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     [self.tutorialView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.tutorialView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
     [self.tutorialView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-TextInset-[MessageLabel]-TextInset-|" options:0 metrics:metrics views:views]];
     [self.tutorialView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-VerticalInset-[ImageView]-VerticalInset-[MessageLabel]->=VerticalInset-|" options:0 metrics:metrics views:views]];
+}
+
+- (void)configureNoCameraAccessView {
+    self.noCameraAccessView = [[TGNoCameraAccessView alloc] init];
+    [self addSubview:self.noCameraAccessView];
+    
+    NSDictionary *views = @{@"View" : self.noCameraAccessView};
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[View]-0-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[View]-0-|" options:0 metrics:nil views:views]];
+    
 }
 
 #pragma mark - Public
