@@ -140,6 +140,7 @@ static CGFloat const KTGHidingMainSpinnerDuration = 0.8f;
     BOOL isScanning = (viewState == TGMainViewStateConnectDevicePassphrase || viewState == TGMainViewStateConnectDeviceScanning);
     if (isScanning && [[TGSettingsManager sharedManager] hasSeenScannerTutorial] == NO) {
         viewState = TGMainViewStateConnectDeviceTutorial;
+        [self setPopupNotificationForState:viewState animated:NO];
     }
     [self.scannerView setContentMode:[self scannerModeForViewState:viewState]];
     
@@ -151,6 +152,7 @@ static CGFloat const KTGHidingMainSpinnerDuration = 0.8f;
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning:
             [self resetSelectDeviceView];
+            [self setPopupNotificationForState:viewState animated:YES];
             break;
         case TGMainViewStateAddAnotherDevice: {
             TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
@@ -322,7 +324,6 @@ static CGFloat const KTGHidingMainSpinnerDuration = 0.8f;
     [UIView animateWithDuration:kTGAnimationDuration animations:^{
         [self animateConnectedToRouterWithItem:routerAuthenticationView.item];
         self.viewState = TGMainViewStateConnectDeviceScanning;
-        [self setPopupNotificationForState:self.viewState animated:NO];
     }];
 }
 
