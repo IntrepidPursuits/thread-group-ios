@@ -36,15 +36,15 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="settingsButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="PyA-cT-bzY"/>
+                        <action selector="settingsButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="s4d-Au-WEl"/>
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="You must allow the Thread app to access your camera in order to scan a Connect QR Code. " translatesAutoresizingMaskIntoConstraints="NO" id="FhW-xA-qyb" userLabel="Info">
                     <rect key="frame" x="16" y="101" width="568" height="418"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="46" id="55A-Tc-f6h"/>
                     </constraints>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <variation key="default">
@@ -90,7 +90,7 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="settingsButton" destination="Of4-s8-jyg" id="x96-iv-LRa"/>
+                <outlet property="settingsButton" destination="Of4-s8-jyg" id="scb-3E-hRq"/>
             </connections>
             <point key="canvasLocation" x="315" y="222"/>
         </view>

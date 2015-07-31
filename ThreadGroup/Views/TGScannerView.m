@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "UIFont+ThreadGroup.h"
 #import "UIImage+ThreadGroup.h"
+#import "UIColor+ThreadGroup.h"
 #import "TGNoCameraAccessView.h"
 
 static CGFloat const TGScannerViewOverlaySize = 199.0f;
@@ -151,14 +152,19 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 }
 
 - (void)configureNoCameraAccessView {
-    self.noCameraAccessView = [[TGNoCameraAccessView alloc] init];
-    [self addSubview:self.noCameraAccessView];
-    
-    NSDictionary *views = @{@"View" : self.noCameraAccessView};
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[View]-0-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[View]-0-|" options:0 metrics:nil views:views]];
-    
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus == AVAuthorizationStatusDenied) {
+        self.cameraOverlay.hidden = YES;
+        self.noCameraAccessView = [[TGNoCameraAccessView alloc] init];
+        [self.noCameraAccessView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.noCameraAccessView.backgroundColor = [UIColor threadGroup_darkGrey];
+        [self addSubview:self.noCameraAccessView];
+        
+        NSDictionary *views = @{@"View" : self.noCameraAccessView};
+        
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[View]-0-|" options:0 metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[View]-0-|" options:0 metrics:nil views:views]];
+    }
 }
 
 #pragma mark - Public

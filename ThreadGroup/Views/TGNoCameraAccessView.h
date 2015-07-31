@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TGNoCameraAccessView : UIView
+//@protocol TGNoCameraAccessViewDelegate;
 
+@interface TGNoCameraAccessView : UIView
+//@property (nonatomic, weak) id<TGNoCameraAccessViewDelegate> delegate;
 @end
+
+//@protocol TGNoCameraAccessViewDelegate <NSObject>
+//- (void)TGNoCameraAccessView:(TGNoCameraAccessView *)noCameraAccessView didTapSettingsIcon:(UIButton *)sender;
+//@end
