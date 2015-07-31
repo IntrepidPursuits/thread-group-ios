@@ -58,6 +58,7 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     
     if (error != nil) {
         NSLog(@"%@", [error localizedDescription]);
+        return;
     }
     
     self.captureSession = [AVCaptureSession new];

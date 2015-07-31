@@ -24,6 +24,7 @@
 #import "TGRouterAuthViewController.h"
 #import "TGAddProductViewController.h"
 #import "TGNetworkConfigViewController.h"
+#import "TGNoCameraAccessView.h"
 
 #import "TGPopupParentView.h"
 #import "TGNetworkSearchingPopup.h"
@@ -63,6 +64,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 //Mask View
 @property (strong, nonatomic) IBOutlet TGScannerView *scannerView;
+@property (weak, nonatomic) IBOutlet TGNoCameraAccessView *noCameraAccessView;
 
 //Popup Notification
 @property (weak, nonatomic) IBOutlet TGPopupParentView *popupView;
