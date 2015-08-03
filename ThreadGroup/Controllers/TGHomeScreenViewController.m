@@ -98,8 +98,8 @@
     if (self.mainViewController.view.hidden == YES) {
         self.mainViewController.view.hidden = NO;
 #warning change this
-//        [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
-        [self.mainViewController setViewState:TGMainViewStateConnectDeviceScanning];
+        [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
+//        [self.mainViewController setViewState:TGMainViewStateConnectDeviceScanning];
     }
 }
 
