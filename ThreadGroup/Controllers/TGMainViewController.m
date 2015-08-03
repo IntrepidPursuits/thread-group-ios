@@ -91,7 +91,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configure];
     [self commonInit];
 }
 
@@ -100,6 +99,19 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     if (self.viewState == TGMainViewStateConnectDevicePassphrase) {
         [self.selectDeviceView becomeFirstResponder];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self configure];
+
+    if (self.viewState == TGMainViewStateLookingForRouters) {
+        self.findingNetworksView.hidden = NO;
+        self.findingNetworksView.alpha = 0;
+        [UIView animateWithDuration:kTGScannerViewAnimationDuration animations:^{
+            self.findingNetworksView.alpha = 1;
+        }];
     }
 }
 
@@ -177,7 +189,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
             self.wifiSearchView.topSeperatorView.hidden = YES;
-            self.findingNetworksView.hidden = NO;
+            self.findingNetworksView.hidden = YES;
             self.availableRoutersView.hidden = NO;
 
             self.selectDeviceView.hidden = YES;
@@ -206,7 +218,14 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)animateViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
-        case TGMainViewStateLookingForRouters:
+        case TGMainViewStateLookingForRouters: {
+//            self.findingNetworksView.hidden = NO;
+//            self.findingNetworksView.alpha = 0;
+//            [UIView animateWithDuration:kTGScannerViewAnimationDuration animations:^{
+//                self.findingNetworksView.alpha = 1;
+//            }];
+        }
+            break;
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
