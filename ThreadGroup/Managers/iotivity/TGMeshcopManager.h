@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MeshCop.h>
+#import "TGNetworkCallback.h"
 
 @interface TGMeshcopManager : NSObject
 
@@ -19,5 +20,6 @@
 - (NSData *)petitionAsCommissioner:(NSString *)commissionerIdentifier;
 - (BOOL)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK;
 - (void)setPassphrase:(NSString *)passphrase;
+- (void)setCallback:(TGNetworkCallback *)callback;
 
 @end
