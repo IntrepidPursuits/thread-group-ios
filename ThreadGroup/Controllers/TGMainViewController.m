@@ -218,14 +218,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)animateViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
-        case TGMainViewStateLookingForRouters: {
-//            self.findingNetworksView.hidden = NO;
-//            self.findingNetworksView.alpha = 0;
-//            [UIView animateWithDuration:kTGScannerViewAnimationDuration animations:^{
-//                self.findingNetworksView.alpha = 1;
-//            }];
-        }
-            break;
+        case TGMainViewStateLookingForRouters:
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
