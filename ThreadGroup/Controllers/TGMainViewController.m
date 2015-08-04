@@ -105,14 +105,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self configure];
-
-    if (self.viewState == TGMainViewStateLookingForRouters) {
-        self.findingNetworksView.hidden = NO;
-        self.findingNetworksView.alpha = 0;
-        [UIView animateWithDuration:kTGScannerViewAnimationDuration animations:^{
-            self.findingNetworksView.alpha = 1;
-        }];
-    }
 }
 
 - (void)configure {
@@ -189,7 +181,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
             self.wifiSearchView.topSeperatorView.hidden = YES;
-            self.findingNetworksView.hidden = YES;
+            self.findingNetworksView.hidden = NO;
             self.availableRoutersView.hidden = NO;
 
             self.selectDeviceView.hidden = YES;
