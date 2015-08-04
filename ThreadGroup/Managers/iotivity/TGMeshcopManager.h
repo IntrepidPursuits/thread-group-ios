@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <MeshCop.h>
-#import "TGNetworkCallback.h"
+
+@class TGNetworkCallbackResult;
+@class TGNetworkCallback;
+@protocol TGMeshcopManagerDelegate;
 
 @interface TGMeshcopManager : NSObject
+@property (nonatomic, weak) id<TGMeshcopManagerDelegate> delegate;
 
 + (instancetype)sharedManager;
 - (void)setMeshCopEnabled:(BOOL)enabled;
@@ -20,6 +24,10 @@
 - (NSData *)petitionAsCommissioner:(NSString *)commissionerIdentifier;
 - (BOOL)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK;
 - (void)setPassphrase:(NSString *)passphrase;
-- (void)setCallback:(TGNetworkCallback *)callback;
+- (NSString *)sendJoinersSteeringDataWithShortForm:(BOOL)shortForm;
 
+@end
+
+@protocol TGMeshcopManagerDelegate <NSObject>
+- (void)meshcopManagerDidReceiveCallbackResponse:(MCCallback_t)responseType responseResult:(TGNetworkCallbackResult *)callbackResult;
 @end

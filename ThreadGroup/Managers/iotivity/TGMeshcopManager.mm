@@ -13,156 +13,59 @@
 #import <exception>
 #import <MCSecStorage.h>
 #import <malloc/malloc.h>
+#import "TGNetworkCallbackResult.h"
 
 #define LOG_TAG "MeshCop"
-
-static TGNetworkCallback *g_clientCallback = NULL;
-
-#pragma mark - Management
-
-static void handleMGMT_PARAM_GET(MCMgmtParamID_t paramID, va_list argsList) {
-    switch (paramID) {
-        case MGMT_CHANNEL:
-        case MGMT_PAN:
-        case MGMT_BORDER_ROUTER_LOC:
-        case MGMT_COMMISSIONER_SESSION_ID:
-        case MGMT_COMMISSIONER_PORT:
-        case MGMT_NETWORK_KEY_SEQ: {
-            // Numeric values.
-            NSInteger val = (NSInteger)va_arg(argsList, int);
-            [g_clientCallback onMgmtParamReceivedIntForMgmtID:paramID value:val];
-            //            g_clientCallback->onMgmtParamReceivedInt(paramID, va_arg(argsList, int));
-            break;
-        }
-        case MGMT_NETWORK_NAME:
-        case MGMT_COMMISSIONER_CREDENTIAL:
-        case MGMT_COMMISSIONER_ID: {
-            // String values.
-            NSString *val = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-            [g_clientCallback  onMgmtParamReceivedStrForMgmtID:paramID value:val];
-            //            g_clientCallback->onMgmtParamReceivedStr(paramID, va_arg(argsList, char*));
-            break;
-        }
-        case MGMT_SECURITY_POLICY: {
-            MCMgmtSecurityPolicy_t *securityPolicy = va_arg(argsList, MCMgmtSecurityPolicy_t *);
-            [g_clientCallback onMgmtParamReceivedObjForMgmtID:paramID policy:securityPolicy];
-            //            g_clientCallback->onMgmtParamReceivedObj(paramID, );
-            break;
-        }
-        case MGMT_XPANID:
-        case MGMT_NETWORK_MASTER_KEY:
-        case MGMT_NETWORK_ULA:
-        default: {
-            // Raw values.
-            char *rawCharVal = va_arg(argsList, char *);
-            NSString *val = [NSString stringWithUTF8String:rawCharVal];
-            NSInteger length = (NSInteger)va_arg(argsList, int);
-            [g_clientCallback onMgmtParamReceivedRawForMgmtID:paramID value:val length:length];
-            //            g_clientCallback->onMgmtParamReceivedRaw(paramID, rawVal, length);
-        }
-            break;
-    }
-}
 
 #pragma mark - Callback
 
 static void* _callback(const MCCallback_t callbackId, ...) {
-    if (!g_clientCallback) {
-        return NULL;
-    }
-    
     va_list argsList;
     va_start(argsList, callbackId);
     
-    try {
-        switch(callbackId) {
-                
-            case COMM_PET: {
-                CallbackResult_COMM_PET *commissionResult = [CallbackResult_COMM_PET new];
-                NSString *commissionerIdentifier = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                NSInteger commissionerSessionIdentifier = (NSInteger)va_arg(argsList, int);
-                BOOL authorizationFailed = (BOOL)va_arg(argsList, int);
-                
-                [commissionResult setCommissionerIdentifer:commissionerIdentifier];
-                [commissionResult setCommissionerSessionIdentifier:commissionerSessionIdentifier];
-                [commissionResult setHasAuthorizationFailed:authorizationFailed];
-                [g_clientCallback onPetitionResult:commissionResult];
-            }
-                break;
-                
-            case JOIN_URL: {
-                CallbackResult_JOIN_URL *joinURLResult = [CallbackResult_JOIN_URL new];
-                NSString *provisioningURL = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                [joinURLResult setProvisioningURL:provisioningURL];
-                [g_clientCallback onJoinUrlQueryResult:joinURLResult];
-            }
-                break;
-                
-            case JOIN_FIN: {
-                CallbackResult_JOIN_FIN *joinResult = [CallbackResult_JOIN_FIN new];
-                NSString *joinerIdentifier = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                MCState_t state = (MCState_t)va_arg(argsList, int);
-                NSString *provisioningURL = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                NSString *vendorName = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                NSString *vendorModel = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                NSString *vendorSoftwareVersion = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                
-                [joinResult setJoinerIdentifier:joinerIdentifier];
-                [joinResult setState:state];
-                [joinResult setProvisioningURL:provisioningURL];
-                [joinResult setVendorName:vendorName];
-                [joinResult setVendorModel:vendorModel];
-                [joinResult setVendorSoftwareVersion:vendorSoftwareVersion];
-                
-                NSString *vendorSV = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                NSInteger vendorSVLength = (NSInteger)va_arg(argsList, int);
-                NSString *vendorData = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                NSInteger vendorDataLength = (NSInteger)va_arg(argsList, int);
-                
-                [g_clientCallback onJoinFinishedResult:joinResult
-                                    venderStackVersion:(vendorSV.length > 0) ? vendorSV : @""
-                                             vsvLength:vendorSVLength
-                                            vendorData:(vendorData.length > 0) ? vendorData : @""
-                                              vdLength:vendorDataLength];
-            }
-                break;
-                
-            case ERROR_RESPONSE: {
-                NSInteger mcResult = (NSInteger)va_arg(argsList, int);
-                NSInteger caResponseResult = (NSInteger)va_arg(argsList, int);
-                NSString *token = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                NSInteger tokenLength = (NSInteger)va_arg(argsList, int);
-                [g_clientCallback onErrorResponseResult:mcResult
-                                       caResponseResult:caResponseResult
-                                                  token:token
-                                            tokenLength:tokenLength];
-            }
-                break;
-                
-            case MGMT_PARAM_GET: {
-                MCMgmtParamID_t paramID = (MCMgmtParamID_t)va_arg(argsList, int);
-                handleMGMT_PARAM_GET(paramID, argsList);
-            }
-                break;
-                
-            case MGMT_PARAM_SET: {
-                BOOL success = (BOOL)va_arg(argsList, int);
-                NSString *token = [NSString stringWithUTF8String:va_arg(argsList, char *)];
-                NSInteger tokenLength = (NSInteger)va_arg(argsList, int);
-                [g_clientCallback onMgmtParamsSetSuccess:success token:token tokenLength:tokenLength];
-            }
-                break;
-                
-        } // switch
-        
-    }
-    catch (std::exception& e) {
-        OICLogv(ERROR, LOG_TAG, "Callback exception: %s", e.what());
+    TGNetworkCallbackResult *callbackResult;
+    
+    switch(callbackId) {
+        case COMM_PET:
+            callbackResult = [[TGNetworkCallbackComissionerPetitionResult alloc] initWithArguments:argsList];
+            break;
+        case JOIN_URL:
+            callbackResult = [[TGNetworkCallbackJoinResult alloc] initWithArguments:argsList];
+            break;
+        case JOIN_FIN:
+            callbackResult = [[TGNetworkCallbackJoinerFinishedResult alloc] initWithArguments:argsList];
+            break;
+        case ERROR_RESPONSE:
+            callbackResult = [[TGNetworkCallbackErrorResult alloc] initWithArguments:argsList];
+            break;
+        case MGMT_PARAM_GET: {
+            callbackResult = [[TGNetworkCallbackErrorResult alloc] initWithArguments:argsList];
+        }
+            break;
+        case MGMT_PARAM_SET: {
+            BOOL success = (BOOL)va_arg(argsList, int);
+            NSString *token = [NSString stringWithUTF8String:va_arg(argsList, char *)];
+            NSLog(@"MGMT Parameter Set -- Success <%@> Token <%@>", success?@"Y":@"N",token);
+        }
+            break;
+        default: {
+            NSLog(@"Received Unknown Callback ID");
+            return NULL;
+        }
     }
     
     va_end(argsList);
+ 
+    id<TGMeshcopManagerDelegate> callbackDelegate = [TGMeshcopManager sharedManager].delegate;
+    
+    if ([callbackDelegate respondsToSelector:@selector(meshcopManagerDidReceiveCallbackResponse:responseResult:)]) {
+        [callbackDelegate meshcopManagerDidReceiveCallbackResponse:callbackId responseResult:callbackResult];
+    }
+
     return NULL;
 }
+
+#pragma mark - Implementation
 
 @implementation TGMeshcopManager
 
@@ -219,10 +122,6 @@ static void* _callback(const MCCallback_t callbackId, ...) {
     return [NSData dataWithBytes:(const void *)token length:tokenLength];
 }
 
-- (void)setCallback:(TGNetworkCallback *)callback {
-    g_clientCallback = callback;
-}
-
 - (BOOL)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK {
     CAResult_t result = MCSetCredentials([name UTF8String], [clientPSK UTF8String]);
     return (result == CA_STATUS_OK);
@@ -235,12 +134,8 @@ static void* _callback(const MCCallback_t callbackId, ...) {
 #pragma mark - Get/Set Storage
 
 static const MCSecStorage_t* _getStorageData(f_readStorageFromData fReadStorageFromData) {
-    if (!g_clientCallback) {
-        return NULL;
-    }
-    
 //    const void * storage = g_clientCallback->getSecureStorage();
-    NSData *storage = [g_clientCallback getSecureStorage];
+    NSData *storage = nil; //[g_clientCallback getSecureStorage];
     if (!storage) {
         return NULL;
     }
@@ -251,12 +146,8 @@ static const MCSecStorage_t* _getStorageData(f_readStorageFromData fReadStorageF
 }
 
 static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) {
-    if (!g_clientCallback) {
-        return;
-    }
-    
-    NSData *buffer = [NSData dataWithBytes:data length:dataLen];
-    [g_clientCallback setSecureStorage:buffer];
+    NSData *buffer = nil; //[NSData dataWithBytes:data length:dataLen];
+//    [g_clientCallback setSecureStorage:buffer];
 //    g_clientCallback->setSecureStorage((void *)[buffer bytes]);
 }
 

@@ -20,7 +20,7 @@
 		CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */; };
 		CD095A031B45CC6C007DACFA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD095A021B45CC6C007DACFA /* libc++.dylib */; };
 		CD4E72591B4C826C00DBA98D /* libMeshCop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4E72581B4C826C00DBA98D /* libMeshCop.a */; };
-		CD75D2881B6AAA3500C7972D /* TGNetworkCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = CD75D2871B6AAA3500C7972D /* TGNetworkCallback.m */; };
+		CD6422401B710E5C0010A0DE /* TGNetworkCallbackResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CD64223F1B710E5C0010A0DE /* TGNetworkCallbackResult.m */; };
 		CD7B60441B1F5469007FF820 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60431B1F5469007FF820 /* main.mm */; };
 		CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60461B1F5469007FF820 /* AppDelegate.m */; };
 		CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7B604E1B1F5469007FF820 /* Images.xcassets */; };
@@ -132,8 +132,8 @@
 		CD095A021B45CC6C007DACFA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CD095A0D1B45E09C007DACFA /* libc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libc_common.a; path = iotivity/out/ios/universal/libc_common.a; sourceTree = "<group>"; };
 		CD4E72581B4C826C00DBA98D /* libMeshCop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMeshCop.a; path = Pods/libMeshCop/ios/MeshCop/libMeshCop.a; sourceTree = "<group>"; };
-		CD75D2861B6AAA3500C7972D /* TGNetworkCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkCallback.h; sourceTree = "<group>"; };
-		CD75D2871B6AAA3500C7972D /* TGNetworkCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkCallback.m; sourceTree = "<group>"; };
+		CD64223E1B710E5C0010A0DE /* TGNetworkCallbackResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkCallbackResult.h; sourceTree = "<group>"; };
+		CD64223F1B710E5C0010A0DE /* TGNetworkCallbackResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkCallbackResult.m; sourceTree = "<group>"; };
 		CD7AE8081B4B0A35007A58E0 /* libocsrm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libocsrm.a; path = "../iotivity-private/out/ios/arm64/debug/libocsrm.a"; sourceTree = "<group>"; };
 		CD7B603E1B1F5469007FF820 /* ThreadGroup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreadGroup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7B60421B1F5469007FF820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -522,8 +522,8 @@
 				CDFFFF0B1B5EC6130011EA4B /* TGMeshcopManager.mm */,
 				CDFFFF0C1B5EC6130011EA4B /* TGRouterServiceBrowser.h */,
 				CDFFFF0D1B5EC6130011EA4B /* TGRouterServiceBrowser.m */,
-				CD75D2861B6AAA3500C7972D /* TGNetworkCallback.h */,
-				CD75D2871B6AAA3500C7972D /* TGNetworkCallback.m */,
+				CD64223E1B710E5C0010A0DE /* TGNetworkCallbackResult.h */,
+				CD64223F1B710E5C0010A0DE /* TGNetworkCallbackResult.m */,
 			);
 			path = iotivity;
 			sourceTree = "<group>";
@@ -824,11 +824,11 @@
 				D937177D1B62831200BE55DD /* TGKeychainManager.m in Sources */,
 				0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */,
 				D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */,
-				CD75D2881B6AAA3500C7972D /* TGNetworkCallback.m in Sources */,
 				D95BC68F1B446D8900271ED7 /* TGPopupContentAnimator.m in Sources */,
 				CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */,
 				D9E1A9DD1B6032EB00B3DA2C /* TGPopupParentView.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
+				CD6422401B710E5C0010A0DE /* TGNetworkCallbackResult.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,
 				D9E1A9D91B60327600B3DA2C /* TGNetworkSearchingPopup.m in Sources */,
 				CD7B60441B1F5469007FF820 /* main.mm in Sources */,
