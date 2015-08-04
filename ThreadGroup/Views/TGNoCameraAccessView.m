@@ -18,7 +18,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"TGNoCameraAccessView" owner:self options:nil];
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
         self = [subviewArray objectAtIndex:0];
     }
     return self;
@@ -28,13 +28,6 @@
     [super awakeFromNib];
     
     if (self) {
-//        self.nibView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-//                                                      owner:self
-//                                                    options:nil] lastObject];
-//        [self addSubview:self.nibView];
-//        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-//        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-//        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
         [self commonInit];
     }
 }
@@ -45,7 +38,6 @@
 }
 
 - (IBAction)settingsButtonPressed:(UIButton *)sender {
-    //TODO: When you change camera settings, it crashes the app
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 

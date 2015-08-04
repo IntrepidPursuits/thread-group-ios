@@ -165,7 +165,6 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[View]-0-|" options:0 metrics:nil views:views]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[View]-0-|" options:0 metrics:nil views:views]];
     }
-    //Once user goes to settings and accepts camera access, app will relaunch, and this view won't show anymore.
 }
 
 #pragma mark - Public
