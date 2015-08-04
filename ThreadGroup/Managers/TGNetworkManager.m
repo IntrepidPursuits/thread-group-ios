@@ -131,8 +131,4 @@ NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationK
     }
 }
 
-- (void)meshcopManagerDidReceiveErrorResponse:(TGNetworkCallbackResult *)callbackResult {
-    NSLog(@"Received Error Response: %@", callbackResult);
-}
-
 @end
