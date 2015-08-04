@@ -21,6 +21,8 @@ NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationK
 
 @property (nonatomic, strong) TGRouterServiceBrowser *routerServiceBrowser;
 @property (nonatomic, strong) TGNetworkManagerFindRoutersCompletionBlock findingNetworksCallback;
+@property (nonatomic, strong) TGNetworkManagerCommissionerPetitionCompletionBlock petitionCompletionBlock;
+
 @property (nonatomic, strong) NSMutableArray *threadServices;
 @property (nonatomic, strong) TGMeshcopManager *meshcopManager;
 
@@ -40,6 +42,7 @@ NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationK
 
 - (void)commonInit {
     self.meshcopManager = [TGMeshcopManager sharedManager];
+    [self.meshcopManager setDelegate:self];
     [self.meshcopManager setMeshCopEnabled:YES];
     
     self.routerServiceBrowser = [TGRouterServiceBrowser new];
@@ -54,7 +57,7 @@ NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationK
     [self.routerServiceBrowser startSearching];
 }
 
-- (void)connectToRouter:(TGRouter *)router completion:(void (^)(NSError *error))completion {
+- (void)connectToRouter:(TGRouter *)router completion:(TGNetworkManagerCommissionerPetitionCompletionBlock)completion {
     BOOL didChangeHost = [self.meshcopManager changeToHostAtAddress:router.ipAddress
                                                    commissionerPort:router.port
                                                         networkType:CA_ADAPTER_IP
@@ -63,26 +66,20 @@ NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationK
     
     if (didChangeHost == NO) {
         NSError *error = [NSError errorWithDomain:nil code:0 userInfo:@{NSUnderlyingErrorKey : TGNetworkErrorHostChangeKey}];
-        completion(error);
+        completion(nil, error);
         return;
     }
-    
-    
     
     NSLog(@"Changed to host <%@> at IP <%@> on port <%ld>", router.name, router.ipAddress, router.port);
     NSLog(@"Petitioning as commissioner to host <%@>", router.name);
     NSData *data = [self.meshcopManager petitionAsCommissioner:@"iphone"];
     NSLog(@"Data: %@", data);
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completion(nil);
-    });
 }
 
-- (void)connectDevice:(id)device completion:(void (^)(NSError *error))completion {
+- (void)connectDevice:(id)device completion:(void (^)(TGNetworkCallbackJoinerFinishedResult *result, NSError *error))completion {
     NSLog(@"Connecting to mock network ... waiting 3 seconds");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completion(nil);
+        completion(nil, nil);
     });
 }
 
@@ -110,6 +107,32 @@ NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationK
     if (self.findingNetworksCallback) {
         self.findingNetworksCallback(self.threadServices, nil, YES);
     }
+}
+
+#pragma mark - Meshcop Manager Delegate
+
+- (void)meshcopManagerDidReceiveCallbackResponse:(MCCallback_t)responseType responseResult:(TGNetworkCallbackResult *)callbackResult {
+    NSLog(@"Received Callback Response");
+    
+    switch (responseType) {
+        case COMM_PET:
+            self.petitionCompletionBlock((TGNetworkCallbackComissionerPetitionResult *)callbackResult, nil);
+            break;
+        case JOIN_URL:
+            break;
+        case JOIN_FIN:
+            break;
+        case ERROR_RESPONSE:
+            break;
+        case MGMT_PARAM_GET:
+        case MGMT_PARAM_SET:
+        default:
+            break;
+    }
+}
+
+- (void)meshcopManagerDidReceiveErrorResponse:(TGNetworkCallbackResult *)callbackResult {
+    NSLog(@"Received Error Response: %@", callbackResult);
 }
 
 @end
