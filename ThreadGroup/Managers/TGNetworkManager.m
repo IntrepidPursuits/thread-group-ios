@@ -13,10 +13,6 @@
 #import "TGMeshcopManager.h"
 #import "TGLogManager.h"
 
-NSString * const TGNetworkErrorKey = @"TGNetworkErrorKey";
-NSString * const TGNetworkErrorHostChangeKey = @"TGNetworkErrorHostChangeKey";
-NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationKey";
-
 @interface TGNetworkManager() <TGRouterServiceBrowserDelegate>
 
 @property (nonatomic, strong) TGRouterServiceBrowser *routerServiceBrowser;
@@ -65,8 +61,7 @@ NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationK
                                                             secured:YES];
     
     if (didChangeHost == NO) {
-        NSError *error = [NSError errorWithDomain:nil code:0 userInfo:@{NSUnderlyingErrorKey : TGNetworkErrorHostChangeKey}];
-        completion(nil, error);
+        completion(nil);
         return;
     }
     
@@ -76,10 +71,10 @@ NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationK
     NSLog(@"Data: %@", data);
 }
 
-- (void)connectDevice:(id)device completion:(void (^)(TGNetworkCallbackJoinerFinishedResult *result, NSError *error))completion {
+- (void)connectDevice:(id)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion {
     NSLog(@"Connecting to mock network ... waiting 3 seconds");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completion(nil, nil);
+        completion(nil);
     });
 }
 
@@ -116,7 +111,7 @@ NSString * const TGNetworkErrorAuthorizationKey = @"TGNetworkErrorAuthorizationK
     
     switch (responseType) {
         case COMM_PET:
-            self.petitionCompletionBlock((TGNetworkCallbackComissionerPetitionResult *)callbackResult, nil);
+            self.petitionCompletionBlock((TGNetworkCallbackComissionerPetitionResult *)callbackResult);
             break;
         case JOIN_URL:
             break;

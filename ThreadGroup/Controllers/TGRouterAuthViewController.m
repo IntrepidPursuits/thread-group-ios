@@ -40,8 +40,8 @@
 #pragma mark - IBActions
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
-    [[TGNetworkManager sharedManager] connectToRouter:self.item completion:^(TGNetworkCallbackComissionerPetitionResult *result, NSError *error) {
-        if (error) {
+    [[TGNetworkManager sharedManager] connectToRouter:self.item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
+        if (result.hasAuthorizationFailed == NO) {
             [self authenticationSuccess];
             NSLog(@"Router Authentication Successful!");
         } else {

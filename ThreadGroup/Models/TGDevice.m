@@ -30,7 +30,7 @@ const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
 
 - (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion {
     [[TGNetworkManager sharedManager] connectDevice:self.passphrase
-                                         completion:^(TGNetworkCallbackJoinerFinishedResult *result, NSError *error) {
+                                         completion:^(TGNetworkCallbackJoinerFinishedResult *result) {
                                              //a
                                          }];
 }
