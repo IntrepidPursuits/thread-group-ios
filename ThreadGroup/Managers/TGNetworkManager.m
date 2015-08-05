@@ -1,4 +1,4 @@
-//
+ //
 //  TGNetworkManager.m
 //  ThreadGroup
 //
@@ -10,12 +10,19 @@
 #import "TGNetworkManager.h"
 #import "TGRouter.h"
 #import "TGRouterServiceBrowser.h"
+#import "TGMeshcopManager.h"
+#import "TGLogManager.h"
+
+static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.threadgroup";
 
 @interface TGNetworkManager() <TGRouterServiceBrowserDelegate>
 
 @property (nonatomic, strong) TGRouterServiceBrowser *routerServiceBrowser;
 @property (nonatomic, strong) TGNetworkManagerFindRoutersCompletionBlock findingNetworksCallback;
+@property (nonatomic, strong) TGNetworkManagerCommissionerPetitionCompletionBlock petitionCompletionBlock;
+
 @property (nonatomic, strong) NSMutableArray *threadServices;
+@property (nonatomic, strong) TGMeshcopManager *meshcopManager;
 
 @end
 
@@ -26,8 +33,20 @@
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         _sharedInstance = [[self alloc] init];
+        [_sharedInstance commonInit];
     });
     return _sharedInstance;
+}
+
+- (void)commonInit {
+    self.meshcopManager = [TGMeshcopManager sharedManager];
+    [self.meshcopManager setDelegate:self];
+    [self.meshcopManager setMeshCopEnabled:YES];
+    
+    self.routerServiceBrowser = [TGRouterServiceBrowser new];
+    self.routerServiceBrowser.delegate = self;
+    
+    self.threadServices = [NSMutableArray new];
 }
 
 - (void)findLocalThreadNetworksCompletion:(TGNetworkManagerFindRoutersCompletionBlock)completion {
@@ -36,16 +55,36 @@
     [self.routerServiceBrowser startSearching];
 }
 
-- (void)connectToNetwork:(id)network completion:(void (^)(NSError **error))completion {
-    NSLog(@"Stopping border router discovery");
+- (void)connectToRouter:(TGRouter *)router completion:(TGNetworkManagerCommissionerPetitionCompletionBlock)completion {
+    BOOL didChangeHost = [self.meshcopManager changeToHostAtAddress:router.ipAddress
+                                                   commissionerPort:router.port
+                                                        networkType:CA_ADAPTER_IP
+                                                        networkName:router.networkName
+                                                            secured:YES];
     
-    NSLog(@"Connecting to mock network ... waiting 3 seconds");
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    if (didChangeHost == NO) {
         completion(nil);
+        return;
+    }
+    
+    NSLog(@"Changed to host <%@> at IP <%@> on port <%ld>", router.name, router.ipAddress, router.port);
+    NSLog(@"Petitioning as commissioner to host <%@>", router.name);
+
+    NSData *data = [self.meshcopManager petitionAsCommissioner:kTGNetworkManagerRouterCommissionerIdentifier];
+    NSLog(@"Data: %@", data);
+    
+    NSLog(@"Debug -- Constructing a commissioner petition result");
+    TGNetworkCallbackComissionerPetitionResult *result = [[TGNetworkCallbackComissionerPetitionResult alloc] init];
+    result.commissionerIdentifer = @"Debug-Identifier";
+    result.commissionerSessionIdentifier = 1000;
+    result.hasAuthorizationFailed = (BOOL)(arc4random() % 2);
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        completion(result);
     });
 }
 
-- (void)connectDevice:(id)device completion:(void (^)(NSError **error))completion {
+- (void)connectDevice:(id)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion {
     NSLog(@"Connecting to mock network ... waiting 3 seconds");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         completion(nil);
@@ -71,10 +110,6 @@
 #pragma mark - TGRouterServiceBrowserDelegate
 
 - (void)TGRouterServiceBrowser:(TGRouterServiceBrowser *)browser didResolveRouter:(TGRouter *)router {
-    if (self.threadServices == nil) {
-        self.threadServices = [NSMutableArray new];
-    }
-    
     [self.threadServices addObject:router];
     
     if (self.findingNetworksCallback) {
@@ -82,14 +117,26 @@
     }
 }
 
-#pragma mark - Lazy
+#pragma mark - Meshcop Manager Delegate
 
-- (TGRouterServiceBrowser *)routerServiceBrowser {
-    if (_routerServiceBrowser == nil) {
-        _routerServiceBrowser = [TGRouterServiceBrowser new];
-        [_routerServiceBrowser setDelegate:self];
+- (void)meshcopManagerDidReceiveCallbackResponse:(MCCallback_t)responseType responseResult:(TGNetworkCallbackResult *)callbackResult {
+    NSLog(@"Received Callback Response");
+    
+    switch (responseType) {
+        case COMM_PET:
+            self.petitionCompletionBlock((TGNetworkCallbackComissionerPetitionResult *)callbackResult);
+            break;
+        case JOIN_URL:
+            break;
+        case JOIN_FIN:
+            break;
+        case ERROR_RESPONSE:
+            break;
+        case MGMT_PARAM_GET:
+        case MGMT_PARAM_SET:
+        default:
+            break;
     }
-    return _routerServiceBrowser;
 }
 
 @end

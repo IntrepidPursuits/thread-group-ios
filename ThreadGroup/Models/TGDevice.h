@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class TGQRCode;
-/**
- *  A representation of a thread enabled device. 
- */
+
 @interface TGDevice : NSObject
 
 @property (nonatomic, strong) NSString *name;

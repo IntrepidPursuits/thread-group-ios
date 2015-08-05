@@ -120,7 +120,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
-    [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *__autoreleasing *error, BOOL stillSearching) {
+    [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *error, BOOL stillSearching) {
         [UIView animateWithDuration:kTGHidingMainSpinnerDuration animations:^{
             self.findingNetworksView.alpha = 0.0f;
         } completion:^(BOOL finished) {
