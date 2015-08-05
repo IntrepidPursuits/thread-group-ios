@@ -31,6 +31,7 @@
 - (void)resetView {
     self.errorLabel.hidden = YES;
     [self setUserInteractionEnabled:YES];
+
     self.bottomBar.backgroundColor = [UIColor threadGroup_orange];
     self.passwordTextField.text = @"";
 
@@ -40,14 +41,17 @@
 #pragma mark - IBActions
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
+    self.view.userInteractionEnabled = NO;
+    self.spinnerActivityIndicatorView.hidden = NO;
+    [self.spinnerActivityIndicatorView startAnimating];
+    
     [[TGNetworkManager sharedManager] connectToRouter:self.item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (result.hasAuthorizationFailed == NO) {
             [self authenticationSuccess];
             NSLog(@"Router Authentication Successful!");
         } else {
-            [self authenticationFailure];
             NSLog(@"Router Authentication Failed!");
-            [self setUserInteractionEnabled:YES];
+            [self authenticationFailure];
         }
     }];
 }
@@ -72,6 +76,7 @@
     //show error label and make bottom bar red
     self.errorLabel.hidden = NO;
     self.bottomBar.backgroundColor = [UIColor threadGroup_red];
+    [self setUserInteractionEnabled:YES];
 }
 
 #pragma mark - Helper Methods
