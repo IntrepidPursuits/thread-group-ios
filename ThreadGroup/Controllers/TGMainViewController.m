@@ -320,22 +320,37 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)connectToRouterWithItem:(TGRouter *)item {
-    self.routerAuthVC.item = item;
-    [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+    [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
+        if (result.hasAuthorizationFailed) {
+            if (!self.routerAuthVC) {
+                self.routerAuthVC = [[TGRouterAuthViewController alloc] initWithNibName:nil bundle:nil];
+                self.routerAuthVC.delegate = self;
+                self.routerAuthVC.transitioningDelegate = self;
+                self.routerAuthVC.item = item;
+                [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+            } else {
+                [self.routerAuthVC wrongPassword];
+            }
+        } else {
+            if (self.routerAuthVC) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+                self.routerAuthVC = nil;
+            }
+            [self animateConnectedToRouterWithItem:item];
+            self.viewState = TGMainViewStateConnectDeviceScanning;
+        }
+    }];
 }
 
 #pragma mark - TGRouterAuthViewControllerDelegate
 
-- (void)routerAuthenticationSuccessful:(TGRouterAuthViewController *)routerAuthenticationView {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [UIView animateWithDuration:kTGAnimationDuration animations:^{
-        [self animateConnectedToRouterWithItem:routerAuthenticationView.item];
-        self.viewState = TGMainViewStateConnectDeviceScanning;
-    }];
+- (void)okButtonWasPressedInRouterAuthentication:(TGRouterAuthViewController *)routerAuthenticationView {
+    [self connectToRouterWithItem:routerAuthenticationView.item];
 }
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
     [self dismissViewControllerAnimated:YES completion:nil];
+    self.routerAuthVC = nil;
     self.viewState = TGMainViewStateLookingForRouters;
     [self setPopupNotificationForState:self.viewState animated:YES];
 }
@@ -513,15 +528,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 #pragma mark - Lazy Load
-
-- (TGRouterAuthViewController *)routerAuthVC {
-    if (!_routerAuthVC) {
-        _routerAuthVC = [[TGRouterAuthViewController alloc] initWithNibName:nil bundle:nil];
-        _routerAuthVC.delegate = self;
-        _routerAuthVC.transitioningDelegate = self;
-    }
-    return _routerAuthVC;
-}
 
 - (TGAddProductViewController *)addProductVC {
     if (!_addProductVC) {
