@@ -131,6 +131,8 @@
                 break;
             }
         }
+        
+        self.value = returnValue;
     }
     return self;
 }

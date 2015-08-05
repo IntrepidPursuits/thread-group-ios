@@ -13,6 +13,8 @@
 #import "TGMeshcopManager.h"
 #import "TGLogManager.h"
 
+static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.threadgroup";
+
 @interface TGNetworkManager() <TGRouterServiceBrowserDelegate>
 
 @property (nonatomic, strong) TGRouterServiceBrowser *routerServiceBrowser;
@@ -68,8 +70,8 @@
     NSLog(@"Changed to host <%@> at IP <%@> on port <%ld>", router.name, router.ipAddress, router.port);
     NSLog(@"Petitioning as commissioner to host <%@>", router.name);
 
-    //NSData *data = [self.meshcopManager petitionAsCommissioner:@"iphone"];
-//    NSLog(@"Data: %@", data);
+    NSData *data = [self.meshcopManager petitionAsCommissioner:kTGNetworkManagerRouterCommissionerIdentifier];
+    NSLog(@"Data: %@", data);
     
     NSLog(@"Debug -- Constructing a commissioner petition result");
     TGNetworkCallbackComissionerPetitionResult *result = [[TGNetworkCallbackComissionerPetitionResult alloc] init];

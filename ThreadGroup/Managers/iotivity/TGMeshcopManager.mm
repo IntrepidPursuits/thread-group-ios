@@ -134,21 +134,12 @@ static void* _callback(const MCCallback_t callbackId, ...) {
 #pragma mark - Get/Set Storage
 
 static const MCSecStorage_t* _getStorageData(f_readStorageFromData fReadStorageFromData) {
-//    const void * storage = g_clientCallback->getSecureStorage();
-    NSData *storage = nil; //[g_clientCallback getSecureStorage];
-    if (!storage) {
-        return NULL;
-    }
-    
-    uint8_t *byteBuffer = (uint8_t *)[storage bytes];
-    const MCSecStorage_t* retVal = fReadStorageFromData(byteBuffer, (uint32_t)storage.length);
-    return retVal;
+    // TODO: Get secure storage from meshcop layer
+    return nil;
 }
 
 static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) {
-    NSData *buffer = nil; //[NSData dataWithBytes:data length:dataLen];
-//    [g_clientCallback setSecureStorage:buffer];
-//    g_clientCallback->setSecureStorage((void *)[buffer bytes]);
+    // TODO: Set secure storage in meshcop layer
 }
 
 #pragma mark - Management
@@ -172,9 +163,6 @@ static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) 
     CAToken_t token = MGMT_GET_request(paramBytes, arrayCount, (uint8_t)peek);
     return [NSString stringWithUTF8String:token];
 }
-
-// Implemented above with additional peek parameter
-//void MgmtParamsPeek(char *byteArray, int arrayLength)
 
 - (NSString *)mgmtParamSet:(MCMgmtParamID_t)paramIdentifier withInteger:(NSInteger)paramValue {
     CAToken_t token = MGMT_SET(paramIdentifier, paramValue);
