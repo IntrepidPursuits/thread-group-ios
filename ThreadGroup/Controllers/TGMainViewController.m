@@ -323,10 +323,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (result.hasAuthorizationFailed) {
             if (!self.routerAuthVC) {
-                self.routerAuthVC = [[TGRouterAuthViewController alloc] initWithNibName:nil bundle:nil];
-                self.routerAuthVC.delegate = self;
-                self.routerAuthVC.transitioningDelegate = self;
-                self.routerAuthVC.item = item;
+                [self resetRouterAuthVCWithItem:item];
                 [self presentViewController:self.routerAuthVC animated:YES completion:nil];
             } else {
                 [self.routerAuthVC wrongPassword];
@@ -334,12 +331,21 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         } else {
             if (self.routerAuthVC) {
                 [self dismissViewControllerAnimated:YES completion:nil];
-                self.routerAuthVC = nil;
+                [self dismissViewControllerAnimated:YES completion:^{
+                    self.routerAuthVC = nil;
+                }];
             }
             [self animateConnectedToRouterWithItem:item];
             self.viewState = TGMainViewStateConnectDeviceScanning;
         }
     }];
+}
+
+- (void)resetRouterAuthVCWithItem:(TGRouter *)item {
+    self.routerAuthVC = [[TGRouterAuthViewController alloc] initWithNibName:nil bundle:nil];
+    self.routerAuthVC.delegate = self;
+    self.routerAuthVC.transitioningDelegate = self;
+    self.routerAuthVC.item = item;
 }
 
 #pragma mark - TGRouterAuthViewControllerDelegate
@@ -349,8 +355,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    self.routerAuthVC = nil;
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.routerAuthVC = nil;
+    }];
     self.viewState = TGMainViewStateLookingForRouters;
     [self setPopupNotificationForState:self.viewState animated:YES];
 }
