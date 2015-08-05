@@ -67,8 +67,19 @@
     
     NSLog(@"Changed to host <%@> at IP <%@> on port <%ld>", router.name, router.ipAddress, router.port);
     NSLog(@"Petitioning as commissioner to host <%@>", router.name);
-    NSData *data = [self.meshcopManager petitionAsCommissioner:@"iphone"];
-    NSLog(@"Data: %@", data);
+
+    //NSData *data = [self.meshcopManager petitionAsCommissioner:@"iphone"];
+//    NSLog(@"Data: %@", data);
+    
+    NSLog(@"Debug -- Constructing a commissioner petition result");
+    TGNetworkCallbackComissionerPetitionResult *result = [[TGNetworkCallbackComissionerPetitionResult alloc] init];
+    result.commissionerIdentifer = @"Debug-Identifier";
+    result.commissionerSessionIdentifier = 1000;
+    result.hasAuthorizationFailed = (BOOL)(arc4random() % 2);
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        completion(result);
+    });
 }
 
 - (void)connectDevice:(id)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion {
