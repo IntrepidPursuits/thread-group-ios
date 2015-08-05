@@ -16,6 +16,8 @@
 		0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0946F4041B500DF300EDB5DE /* TGSelectableCell.m */; };
 		0946F4071B500DF300EDB5DE /* TGSelectableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */; };
 		0A7AD34DC5A3297901411D32 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
+		CC5BA3E11B6BE9E300898505 /* TGNoCameraAccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */; };
+		CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */; };
 		CD095A031B45CC6C007DACFA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD095A021B45CC6C007DACFA /* libc++.dylib */; };
 		CD4E72591B4C826C00DBA98D /* libMeshCop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4E72581B4C826C00DBA98D /* libMeshCop.a */; };
 		CD7B60441B1F5469007FF820 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60431B1F5469007FF820 /* main.mm */; };
@@ -123,6 +125,9 @@
 		0946F4041B500DF300EDB5DE /* TGSelectableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGSelectableCell.m; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.m; sourceTree = "<group>"; };
 		0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGSelectableCell.xib; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.xib; sourceTree = "<group>"; };
 		4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroup.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup.release.xcconfig"; sourceTree = "<group>"; };
+		CC5BA3DF1B6BE9E300898505 /* TGNoCameraAccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNoCameraAccessView.h; sourceTree = "<group>"; };
+		CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNoCameraAccessView.m; sourceTree = "<group>"; };
+		CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNoCameraAccessView.xib; sourceTree = "<group>"; };
 		CD095A021B45CC6C007DACFA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CD095A0D1B45E09C007DACFA /* libc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libc_common.a; path = iotivity/out/ios/universal/libc_common.a; sourceTree = "<group>"; };
 		CD4E72581B4C826C00DBA98D /* libMeshCop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMeshCop.a; path = Pods/libMeshCop/ios/MeshCop/libMeshCop.a; sourceTree = "<group>"; };
@@ -482,6 +487,9 @@
 				CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */,
 				CDC447601B39F5790037BAF5 /* TGScannerView.h */,
 				CDC447611B39F5790037BAF5 /* TGScannerView.m */,
+				CC5BA3DF1B6BE9E300898505 /* TGNoCameraAccessView.h */,
+				CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */,
+				CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -710,6 +718,7 @@
 				D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */,
 				D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */,
 				CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */,
+				CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */,
 				D96C04B11B569D2F00B4DB1B /* TGNetworkPickerCell.xib in Resources */,
 				0946F3FD1B500DC300EDB5DE /* TGGeneralCell.xib in Resources */,
 				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
@@ -824,6 +833,7 @@
 				CDC1742C1B5953F000FF70A2 /* TGMeshcopManager.mm in Sources */,
 				D9E65C0C1B31FD8800A184AB /* TGTableViewCell.m in Sources */,
 				D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */,
+				CC5BA3E11B6BE9E300898505 /* TGNoCameraAccessView.m in Sources */,
 				D9EA94F51B55528700A419D4 /* TGNetworkConfigRowModel.m in Sources */,
 				D96C04AA1B55ACAF00B4DB1B /* TGNetworkChannelViewController.m in Sources */,
 				D96C04BA1B56EDAE00B4DB1B /* TGNetworkSliderCell.m in Sources */,

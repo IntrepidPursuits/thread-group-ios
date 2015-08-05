@@ -24,6 +24,7 @@
 #import "TGRouterAuthViewController.h"
 #import "TGAddProductViewController.h"
 #import "TGNetworkConfigViewController.h"
+#import "TGNoCameraAccessView.h"
 
 #import "TGPopupParentView.h"
 #import "TGNetworkSearchingPopup.h"
