@@ -396,6 +396,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self showAddProductVC];
 
     [[TGNetworkManager sharedManager] connectDevice:device completion:^(TGNetworkCallbackJoinerFinishedResult *result) {
+        if (self.ignoreAddProduct) {
+            return;
+        }
+        
         if (result && result.state == ACCEPT) {
             [self hideAddProductVC];
             self.viewState = TGMainViewStateAddAnotherDevice;
