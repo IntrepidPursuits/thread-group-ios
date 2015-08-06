@@ -139,6 +139,7 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage tg_tutorialView]];
     [imageView setBackgroundColor:[UIColor clearColor]];
     [imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.tutorialView addSubview:imageView];
     
     NSDictionary *metrics = @{@"TextInset" : @16, @"VerticalInset" : @32};
