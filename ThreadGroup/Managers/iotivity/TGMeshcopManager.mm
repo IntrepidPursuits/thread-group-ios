@@ -164,24 +164,20 @@ static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) 
     return [NSString stringWithUTF8String:token];
 }
 
-- (NSString *)mgmtParamSet:(MCMgmtParamID_t)paramIdentifier withInteger:(NSInteger)paramValue {
-    CAToken_t token = MGMT_SET(paramIdentifier, paramValue);
-    return [NSString stringWithUTF8String:token];
+- (CAToken_t)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value {
+    CAToken_t token;
+    if ([value isKindOfClass:[NSNumber class]]) {
+        token = MGMT_SET(parameter, [value integerValue]);
+    } else if ([value isKindOfClass:[NSString class]]) {
+        token = MGMT_SET(parameter, [(NSString *)value UTF8String]);
+    }
+
+    return token;
 }
 
-- (NSString *)mgmtParamSet:(MCMgmtParamID_t)paramIdentifier withString:(NSString *)stringValue {
-    CAToken_t token = MGMT_SET(paramIdentifier, [stringValue UTF8String]);
-    return [NSString stringWithUTF8String:token];
-}
-
-- (NSString *)mgmtParamSetRawParameter:(MCMgmtParamID_t)paramIdentifier withParamValue:(NSString *)paramValue {
-    CAToken_t token = MGMT_SET(paramIdentifier, [paramValue UTF8String], (uint8_t)paramValue.length);
-    return [NSString stringWithUTF8String:token];
-}
-
-- (NSString *)mgmtParamSetObj:(MCMgmtParamID_t)paramIdentifier withSecurityPolicy:(MCMgmtSecurityPolicy_t *)securityPolicy {
-    CAToken_t token = MGMT_SET(paramIdentifier, securityPolicy);
-    return [NSString stringWithUTF8String:token];
+- (CAToken_t)setManagementSecurityPolicy:(MCMgmtSecurityPolicy_t *)securityPolicy {
+    CAToken_t token = MGMT_SET(MGMT_SECURITY_POLICY, securityPolicy);
+    return token;
 }
 
 @end
