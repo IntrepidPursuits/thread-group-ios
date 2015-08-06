@@ -14,9 +14,9 @@
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong, readonly) TGQRCode *qrCode;
+@property (nonatomic, strong, readonly) NSString *connectCode;
 
 - (instancetype)initWithPassphrase:(NSString *)passphrase;
-- (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion;
 - (instancetype)initWithQRCode:(TGQRCode *)qrCode;
 
 @end

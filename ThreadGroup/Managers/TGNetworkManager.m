@@ -16,6 +16,7 @@
 #import "TGLogManager.h"
 
 static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.threadgroup";
+static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup_device";
 
 @interface TGNetworkManager() <TGRouterServiceBrowserDelegate>
 
@@ -92,16 +93,20 @@ static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.th
 - (void)connectDevice:(TGDevice *)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion {
     self.joinFinishedCompletionBlock = completion;
     
-    TGQRCode *code = device.qrCode;
-    NSLog(@"Connecting to device %@ - %@. Connect Code <%@>", code.vendorName, code.vendorModel, code.connectCode);
-    [[TGMeshcopManager sharedManager] addJoinerWithIdentifier:code.vendorName credentials:code.connectCode];
+    NSString *joinerIdentifier = (device.qrCode) ? device.qrCode.vendorName : kTGNetworkManagerDefaultJoinerIdentifier;
+    NSString *credentials = device.connectCode;
+    NSString *vendorModel = (device.qrCode) ? device.qrCode.vendorModel : kTGNetworkManagerDefaultJoinerIdentifier;
+    NSString *vendorName = (device.qrCode) ? device.qrCode.vendorName : kTGNetworkManagerDefaultJoinerIdentifier;
+
+    NSLog(@"Connecting to device %@ - %@. Connect Code <%@>", vendorName, vendorModel, credentials);
+    // TODO: Set Joiner Identifier & Credentials in Meshcop
     
     TGNetworkCallbackJoinerFinishedResult *result = [TGNetworkCallbackJoinerFinishedResult new];
-    result.joinerIdentifier = code.vendorName;
+    result.joinerIdentifier = vendorName;
     result.state = ACCEPT;
-    result.vendorModel = code.vendorModel;
-    result.vendorName = code.vendorName;
-    result.vendorSoftwareVersion = code.vendorVersion;
+    result.vendorModel = vendorModel;
+    result.vendorName = vendorName;
+    result.vendorSoftwareVersion = 0;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         completion(result);

@@ -166,7 +166,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 - (IBAction)confirmButtonTapped:(id)sender {
     //TODO: would need to perform this same process with passphrase obtained from QR code
-    TGDevice *device = [self createDeviceWithPassphrase:self.passphraseInputField.text];
+    TGDevice *device = [[TGDevice alloc] initWithPassphrase:self.passphraseInputField.text];
 
     [self.passphraseInputField resignFirstResponder];
     [self resetConnectCodeTextField];
@@ -204,13 +204,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     return (range.location == NSNotFound);
 }
 
-#pragma mark - TGDevice
-
-- (TGDevice *)createDeviceWithPassphrase:(NSString *)passphrase {
-    return [[TGDevice alloc] initWithPassphrase:passphrase];
-}
-
-#pragma mark - 
+#pragma mark -
 
 - (BOOL)becomeFirstResponder {
     return [self.passphraseInputField becomeFirstResponder];
