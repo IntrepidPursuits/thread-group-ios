@@ -137,6 +137,17 @@
     return self;
 }
 
+@end
 
+@implementation TGNetworkCallbackSetSettingResult
+
+- (instancetype)initWithArguments:(va_list)args {
+    self = [super init];
+    if (self) {
+        self.success = (BOOL)va_arg(args, int);
+        self.token = [NSString stringWithUTF8String:va_arg(args, char *)];
+    }
+    return self;
+}
 
 @end

@@ -27,6 +27,8 @@ static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.th
 @property (nonatomic, strong) NSMutableArray *threadServices;
 @property (nonatomic, strong) TGMeshcopManager *meshcopManager;
 
+@property (nonatomic, strong) NSMutableDictionary *managementSetCompletionBlocks;
+
 @end
 
 @implementation TGNetworkManager
@@ -106,6 +108,16 @@ static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.th
     });
 }
 
+- (void)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value completion:(TGNetworkManagerManagementSetCompletionBlock)completion {
+    NSString *token = [[TGMeshcopManager sharedManager] setManagementParameter:parameter withValue:value];
+    [self.managementSetCompletionBlocks setObject:completion forKey:token];
+}
+
+- (void)setManagementSecurityPolicy:(MCMgmtSecurityPolicy_t *)policy completion:(TGNetworkManagerManagementSetCompletionBlock)completion {
+    NSString *token = [[TGMeshcopManager sharedManager] setManagementSecurityPolicy:policy];
+    [self.managementSetCompletionBlocks setObject:completion forKey:token];
+}
+
 #pragma mark - Wifi SSID
 
 + (NSString *)currentWifiSSID {
@@ -149,10 +161,29 @@ static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.th
         case ERROR_RESPONSE:
             break;
         case MGMT_PARAM_GET:
-        case MGMT_PARAM_SET:
+            break;
+        case MGMT_PARAM_SET: {
+            TGNetworkCallbackSetSettingResult *callback = (TGNetworkCallbackSetSettingResult *)callbackResult;
+            NSString *token = [callback token];
+            TGNetworkManagerManagementSetCompletionBlock completionBlock = [self.managementSetCompletionBlocks objectForKey:token];
+            if (completionBlock) {
+                completionBlock(callback);
+                [self.managementSetCompletionBlocks removeObjectForKey:token];
+            }
+            break;
+        }
         default:
             break;
     }
+}
+
+#pragma mark - Lazy
+
+- (NSMutableDictionary *)managementSetCompletionBlocks {
+    if (_managementSetCompletionBlocks == nil) {
+        _managementSetCompletionBlocks = [NSMutableDictionary new];
+    }
+    return _managementSetCompletionBlocks;
 }
 
 @end
