@@ -91,7 +91,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configure];
     [self commonInit];
 }
 
@@ -101,6 +100,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (self.viewState == TGMainViewStateConnectDevicePassphrase) {
         [self.selectDeviceView becomeFirstResponder];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self configure];
 }
 
 - (void)configure {
