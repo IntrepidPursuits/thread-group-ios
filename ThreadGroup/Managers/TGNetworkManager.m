@@ -8,7 +8,9 @@
 
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "TGNetworkManager.h"
+#import "TGDevice.h"
 #import "TGRouter.h"
+#import "TGQRCode.h"
 #import "TGRouterServiceBrowser.h"
 #import "TGMeshcopManager.h"
 #import "TGLogManager.h"
@@ -20,6 +22,7 @@ static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.th
 @property (nonatomic, strong) TGRouterServiceBrowser *routerServiceBrowser;
 @property (nonatomic, strong) TGNetworkManagerFindRoutersCompletionBlock findingNetworksCallback;
 @property (nonatomic, strong) TGNetworkManagerCommissionerPetitionCompletionBlock petitionCompletionBlock;
+@property (nonatomic, strong) TGNetworkManagerJoinDeviceCompletionBlock joinFinishedCompletionBlock;
 
 @property (nonatomic, strong) NSMutableArray *threadServices;
 @property (nonatomic, strong) TGMeshcopManager *meshcopManager;
@@ -84,10 +87,22 @@ static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.th
     });
 }
 
-- (void)connectDevice:(id)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion {
-    NSLog(@"Connecting to mock network ... waiting 3 seconds");
+- (void)connectDevice:(TGDevice *)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion {
+    self.joinFinishedCompletionBlock = completion;
+    
+    TGQRCode *code = device.qrCode;
+    NSLog(@"Connecting to device %@ - %@. Connect Code <%@>", code.vendorName, code.vendorModel, code.connectCode);
+    [[TGMeshcopManager sharedManager] addJoinerWithIdentifier:code.vendorName credentials:code.connectCode];
+    
+    TGNetworkCallbackJoinerFinishedResult *result = [TGNetworkCallbackJoinerFinishedResult new];
+    result.joinerIdentifier = code.vendorName;
+    result.state = ACCEPT;
+    result.vendorModel = code.vendorModel;
+    result.vendorName = code.vendorName;
+    result.vendorSoftwareVersion = code.vendorVersion;
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completion(nil);
+        completion(result);
     });
 }
 
@@ -129,6 +144,7 @@ static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.th
         case JOIN_URL:
             break;
         case JOIN_FIN:
+            self.joinFinishedCompletionBlock((TGNetworkCallbackJoinerFinishedResult *)callbackResult);
             break;
         case ERROR_RESPONSE:
             break;
