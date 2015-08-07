@@ -395,19 +395,21 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.addProductVC setDevice:device andRouter:self.routerAuthVC.item];
     [self showAddProductVC];
 
-    [device isPassphraseValidWithCompletion:^(BOOL success) {
-        if (!self.ignoreAddProduct) {
-            if (success) {
-                [self hideAddProductVC];
-                self.viewState = TGMainViewStateAddAnotherDevice;
-                [self setPopupNotificationForState:self.viewState animated:YES];
-                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-            } else {
-                NSLog(@"Adding device failed!");
-                [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModePassphraseInvalid];
-                [self.selectDeviceView becomeFirstResponder];
-                [self hideAddProductVC];
-            }
+    [[TGNetworkManager sharedManager] connectDevice:device completion:^(TGNetworkCallbackJoinerFinishedResult *result) {
+        if (self.ignoreAddProduct) {
+            return;
+        }
+        
+        if (result && result.state == ACCEPT) {
+            [self hideAddProductVC];
+            self.viewState = TGMainViewStateAddAnotherDevice;
+            [self setPopupNotificationForState:self.viewState animated:YES];
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        } else {
+            NSLog(@"Adding device failed!");
+            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModePassphraseInvalid];
+            [self.selectDeviceView becomeFirstResponder];
+            [self hideAddProductVC];
         }
     }];
 }
@@ -449,20 +451,22 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.addProductVC setDevice:device andRouter:self.routerAuthVC.item];
     [self showAddProductVC];
 
-    [device isPassphraseValidWithCompletion:^(BOOL success) {
-        if (!self.ignoreAddProduct) {
-            if (success) {
-                [self hideAddProductVC];
-                self.viewState = TGMainViewStateAddAnotherDevice;
-                [self setPopupNotificationForState:self.viewState animated:YES];
-                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-            } else {
-                NSLog(@"Adding device failed!");
-                self.viewState = TGMainViewStateConnectDeviceScanning;
-                [self setPopupNotificationForState:self.viewState animated:YES];
-                [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
-                [self hideAddProductVC];
-            }
+    [[TGNetworkManager sharedManager] connectDevice:device completion:^(TGNetworkCallbackJoinerFinishedResult *result) {
+        if (self.ignoreAddProduct) {
+            return;
+        }
+        
+        if (result && result.state == ACCEPT) {
+            [self hideAddProductVC];
+            self.viewState = TGMainViewStateAddAnotherDevice;
+            [self setPopupNotificationForState:self.viewState animated:YES];
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        } else {
+            NSLog(@"Adding device failed!");
+            self.viewState = TGMainViewStateConnectDeviceScanning;
+            [self setPopupNotificationForState:self.viewState animated:YES];
+            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
+            [self hideAddProductVC];
         }
     }];
 }

@@ -8,21 +8,27 @@
 
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "TGNetworkManager.h"
+#import "TGDevice.h"
 #import "TGRouter.h"
+#import "TGQRCode.h"
 #import "TGRouterServiceBrowser.h"
 #import "TGMeshcopManager.h"
 #import "TGLogManager.h"
 
 static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.threadgroup";
+static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup_device";
 
 @interface TGNetworkManager() <TGRouterServiceBrowserDelegate>
 
 @property (nonatomic, strong) TGRouterServiceBrowser *routerServiceBrowser;
 @property (nonatomic, strong) TGNetworkManagerFindRoutersCompletionBlock findingNetworksCallback;
 @property (nonatomic, strong) TGNetworkManagerCommissionerPetitionCompletionBlock petitionCompletionBlock;
+@property (nonatomic, strong) TGNetworkManagerJoinDeviceCompletionBlock joinFinishedCompletionBlock;
 
 @property (nonatomic, strong) NSMutableArray *threadServices;
 @property (nonatomic, strong) TGMeshcopManager *meshcopManager;
+
+@property (nonatomic, strong) NSMutableDictionary *managementSetCompletionBlocks;
 
 @end
 
@@ -84,11 +90,37 @@ static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.th
     });
 }
 
-- (void)connectDevice:(id)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion {
-    NSLog(@"Connecting to mock network ... waiting 3 seconds");
+- (void)connectDevice:(TGDevice *)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion {
+    self.joinFinishedCompletionBlock = completion;
+    
+    NSString *joinerIdentifier = (device.qrCode) ? device.qrCode.vendorName : kTGNetworkManagerDefaultJoinerIdentifier;
+    NSString *credentials = device.connectCode;
+    NSString *vendorModel = (device.qrCode) ? device.qrCode.vendorModel : kTGNetworkManagerDefaultJoinerIdentifier;
+    NSString *vendorName = (device.qrCode) ? device.qrCode.vendorName : kTGNetworkManagerDefaultJoinerIdentifier;
+
+    NSLog(@"Connecting to device %@ - %@. Connect Code <%@>", vendorName, vendorModel, credentials);
+    // TODO: Set Joiner Identifier & Credentials in Meshcop
+    
+    TGNetworkCallbackJoinerFinishedResult *result = [TGNetworkCallbackJoinerFinishedResult new];
+    result.joinerIdentifier = vendorName;
+    result.state = ACCEPT;
+    result.vendorModel = vendorModel;
+    result.vendorName = vendorName;
+    result.vendorSoftwareVersion = 0;
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completion(nil);
+        completion(result);
     });
+}
+
+- (void)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value completion:(TGNetworkManagerManagementSetCompletionBlock)completion {
+    NSString *token = [[TGMeshcopManager sharedManager] setManagementParameter:parameter withValue:value];
+    [self.managementSetCompletionBlocks setObject:completion forKey:token];
+}
+
+- (void)setManagementSecurityPolicy:(MCMgmtSecurityPolicy_t *)policy completion:(TGNetworkManagerManagementSetCompletionBlock)completion {
+    NSString *token = [[TGMeshcopManager sharedManager] setManagementSecurityPolicy:policy];
+    [self.managementSetCompletionBlocks setObject:completion forKey:token];
 }
 
 #pragma mark - Wifi SSID
@@ -129,14 +161,34 @@ static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.th
         case JOIN_URL:
             break;
         case JOIN_FIN:
+            self.joinFinishedCompletionBlock((TGNetworkCallbackJoinerFinishedResult *)callbackResult);
             break;
         case ERROR_RESPONSE:
             break;
         case MGMT_PARAM_GET:
-        case MGMT_PARAM_SET:
+            break;
+        case MGMT_PARAM_SET: {
+            TGNetworkCallbackSetSettingResult *callback = (TGNetworkCallbackSetSettingResult *)callbackResult;
+            NSString *token = [callback token];
+            TGNetworkManagerManagementSetCompletionBlock completionBlock = [self.managementSetCompletionBlocks objectForKey:token];
+            if (completionBlock) {
+                completionBlock(callback);
+                [self.managementSetCompletionBlocks removeObjectForKey:token];
+            }
+            break;
+        }
         default:
             break;
     }
+}
+
+#pragma mark - Lazy
+
+- (NSMutableDictionary *)managementSetCompletionBlocks {
+    if (_managementSetCompletionBlocks == nil) {
+        _managementSetCompletionBlocks = [NSMutableDictionary new];
+    }
+    return _managementSetCompletionBlocks;
 }
 
 @end

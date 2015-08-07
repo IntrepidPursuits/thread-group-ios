@@ -28,17 +28,16 @@ const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
     return self;
 }
 
-- (void)isPassphraseValidWithCompletion:(void(^)(BOOL success))completion {
-    [[TGNetworkManager sharedManager] connectDevice:self.passphrase
-                                         completion:nil];
-}
-
 - (instancetype)initWithQRCode:(TGQRCode *)qrCode {
     self = [super init];
     if (self) {
         _qrCode = qrCode;
     }
     return self;
+}
+
+- (NSString *)connectCode {
+    return (self.qrCode) ? self.qrCode.connectCode : self.passphrase;
 }
 
 @end

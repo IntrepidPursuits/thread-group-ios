@@ -41,9 +41,7 @@
 #pragma mark - IBActions
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
-    self.view.userInteractionEnabled = NO;
-    self.spinnerActivityIndicatorView.hidden = NO;
-    [self.spinnerActivityIndicatorView startAnimating];
+    [self setUserInteractionEnabled:NO];
     
     [[TGNetworkManager sharedManager] connectToRouter:self.item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (result.hasAuthorizationFailed == NO) {

@@ -25,6 +25,8 @@
 - (BOOL)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK;
 - (void)setPassphrase:(NSString *)passphrase;
 - (NSString *)sendJoinersSteeringDataWithShortForm:(BOOL)shortForm;
+- (NSString *)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value;
+- (NSString *)setManagementSecurityPolicy:(MCMgmtSecurityPolicy_t *)securityPolicy;
 
 @end
 

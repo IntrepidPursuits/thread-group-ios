@@ -11,9 +11,11 @@
 #import "TGNetworkCallbackResult.h"
 
 @class TGRouter;
+
 typedef void (^TGNetworkManagerFindRoutersCompletionBlock)(NSArray *networks, NSError *error, BOOL stillSearching);
 typedef void (^TGNetworkManagerCommissionerPetitionCompletionBlock)(TGNetworkCallbackComissionerPetitionResult *result);
 typedef void (^TGNetworkManagerJoinDeviceCompletionBlock)(TGNetworkCallbackJoinerFinishedResult *result);
+typedef void (^TGNetworkManagerManagementSetCompletionBlock)(TGNetworkCallbackSetSettingResult *result);
 
 @interface TGNetworkManager : NSObject <TGMeshcopManagerDelegate>
 
@@ -22,5 +24,6 @@ typedef void (^TGNetworkManagerJoinDeviceCompletionBlock)(TGNetworkCallbackJoine
 - (void)findLocalThreadNetworksCompletion:(TGNetworkManagerFindRoutersCompletionBlock)completion;
 - (void)connectToRouter:(TGRouter *)router completion:(TGNetworkManagerCommissionerPetitionCompletionBlock)completion;
 - (void)connectDevice:(id)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion;
+- (void)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value completion:(TGNetworkManagerManagementSetCompletionBlock)completion;
 
 @end

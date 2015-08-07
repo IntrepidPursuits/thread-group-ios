@@ -48,3 +48,8 @@
 @property (nonatomic, strong) id value;
 @property (nonatomic, assign) MCMgmtParamID_t parameterIdentifier;
 @end
+
+@interface TGNetworkCallbackSetSettingResult : TGNetworkCallbackResult
+@property (nonatomic, assign) BOOL success;
+@property (nonatomic, strong) NSString *token;
+@end
