@@ -20,6 +20,7 @@
 #import "TGDevice.h"
 #import "TGScannerView.h"
 #import "TGSettingsManager.h"
+#import "TGKeychainManager.h"
 #import "TGAnimator.h"
 #import "TGRouterAuthViewController.h"
 #import "TGAddProductViewController.h"
@@ -52,6 +53,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 //Finding Networks
 @property (weak, nonatomic) IBOutlet UIView *findingNetworksView;
 @property (weak, nonatomic) IBOutlet TGSpinnerView *findingNetworksSpinnerView;
+@property (strong, nonatomic) TGRouter *cachedRouter;
 
 //Select/Add Devices
 @property (weak, nonatomic) IBOutlet TGSelectDeviceStepView *selectDeviceView;
@@ -92,6 +94,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self commonInit];
+    [self getCachedRouter];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -135,6 +138,22 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
     }];
+}
+
+#pragma mark - Cache
+
+- (void)resetCachedRouterWithRouter:(TGRouter *)item {
+    [[TGKeychainManager sharedManager] saveRouterItem:item withCompletion:^(NSError *error) {
+        if (error) {
+            NSLog(@"Error saving router to keychain: %@", error);
+        }
+    }];
+    self.cachedRouter = item;
+    NSLog(@"New cached router: %@", self.cachedRouter.name);
+}
+
+- (void)getCachedRouter {
+    self.cachedRouter = [[TGKeychainManager sharedManager] getRouterItem];
 }
 
 #pragma mark - View States
