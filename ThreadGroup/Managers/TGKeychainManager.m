@@ -37,7 +37,6 @@ static NSString * const KTGRouterObjectKey = @"kTGRouterObjectKey";
     if (completion) {
         completion(saveError);
     }
-    NSLog(@"New Saved Router Item: %@", router);
 }
 
 - (TGRouter *)getRouterItem {
