@@ -98,6 +98,7 @@
     if (self.mainViewController.view.hidden == YES) {
         self.mainViewController.view.hidden = NO;
         [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
+        [self.mainViewController setPopupNotificationForState:NSNotFound animated:NO];
     }
 }
 
