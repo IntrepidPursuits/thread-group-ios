@@ -131,20 +131,25 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         for (TGRouter *item in networks) {
             if ([item isEqualToRouter:self.cachedRouter]) {
                 //TODO: UI problem -  how to show that we're automatically trying to connect to last cached router
-                [self tableView:self.tableView didSelectItem:item];
+                [self connectRouterForItem:item];
             }
         }
-        
-        [UIView animateWithDuration:kTGHidingMainSpinnerDuration animations:^{
-            self.findingNetworksView.alpha = 0.0f;
-        } completion:^(BOOL finished) {
-            if (finished) {
-                [self setPopupNotificationForState:self.viewState animated:NO];
-            }
-        }];
+        [self hideMainSpinner];
         [self.tableView setNetworkItems:networks];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
+    }];
+}
+
+#pragma mark - Main spinner
+
+- (void)hideMainSpinner {
+    [UIView animateWithDuration:kTGHidingMainSpinnerDuration animations:^{
+        self.findingNetworksView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self setPopupNotificationForState:self.viewState animated:NO];
+        }
     }];
 }
 
@@ -382,9 +387,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
-    [self dismissViewControllerAnimated:YES completion:^{
-        self.routerAuthVC = nil;
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
     self.viewState = TGMainViewStateLookingForRouters;
     [self setPopupNotificationForState:self.viewState animated:YES];
 }
