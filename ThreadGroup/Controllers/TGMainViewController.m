@@ -111,7 +111,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self setupTableViewSource];
     self.scannerView.delegate = self;
     self.modalPresentationStyle = UIModalPresentationCustom;
-    [self setPopupNotificationForState:NSNotFound animated:NO];
 }
 
 - (void)commonInit {
