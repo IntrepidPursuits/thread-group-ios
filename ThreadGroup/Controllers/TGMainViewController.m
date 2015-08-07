@@ -127,6 +127,14 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
     [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *error, BOOL stillSearching) {
+        
+        for (TGRouter *item in networks) {
+            if ([item isEqualToRouter:self.cachedRouter]) {
+                //TODO: UI problem -  how to show that we're automatically trying to connect to last cached router
+                [self tableView:self.tableView didSelectItem:item];
+            }
+        }
+        
         [UIView animateWithDuration:kTGHidingMainSpinnerDuration animations:^{
             self.findingNetworksView.alpha = 0.0f;
         } completion:^(BOOL finished) {
