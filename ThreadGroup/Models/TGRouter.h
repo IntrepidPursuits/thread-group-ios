@@ -18,5 +18,6 @@
 
 - (instancetype)initWithService:(NSNetService *)service;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder;
+- (BOOL)isEqualToRouter:(TGRouter *)router;
 
 @end

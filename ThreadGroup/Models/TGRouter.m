@@ -77,6 +77,7 @@ typedef union {
         self.networkName = [aDecoder decodeObjectForKey:@"networkName"];
         self.ipAddress = [aDecoder decodeObjectForKey:@"ipAddress"];
         self.port = [aDecoder decodeIntegerForKey:@"port"];
+        self.passphrase = [aDecoder decodeObjectForKey:@"passphrase"];
     }
     return self;
 }
@@ -86,12 +87,13 @@ typedef union {
     [aCoder encodeObject:self.networkName forKey:@"networkName"];
     [aCoder encodeObject:self.ipAddress forKey:@"ipAddress"];
     [aCoder encodeInteger:self.port forKey:@"port"];
+    [aCoder encodeObject:self.passphrase forKey:@"passphrase"];
 }
 
 #pragma mark - Overridden
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Router Name: <%@> Network: <%@> Address: <%@> Port: <%ld>", self.name, self.networkName, self.ipAddress, (long)self.port];
+    return [NSString stringWithFormat:@"Router Name: <%@> Network: <%@> Address: <%@> Port: <%ld> Passphrase: <%@>", self.name, self.networkName, self.ipAddress, (long)self.port, self.passphrase];
 }
 
 - (BOOL)isEqual:(id)object {
