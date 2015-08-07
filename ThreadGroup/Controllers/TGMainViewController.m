@@ -342,8 +342,29 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)connectToRouterWithItem:(TGRouter *)item {
-    self.routerAuthVC.item = item;
-    [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+    [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
+        if (result.hasAuthorizationFailed) {
+            if (![self routerViewIsBeingPresented]) {
+                self.routerAuthVC.item = item;
+                [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+            } else {
+                [self.routerAuthVC authenticationFailedState];
+            }
+        } else {
+            if ([self routerViewIsBeingPresented]) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            [self resetCachedRouterWithRouter:item];
+            [self animateConnectedToRouterWithItem:item];
+            self.viewState = TGMainViewStateConnectDeviceScanning;
+        }
+    }];
+}
+
+#pragma mark - TGRouterAuthViewController
+
+- (BOOL)routerViewIsBeingPresented {
+    return [self.childViewControllers containsObject:self.routerAuthVC];
 }
 
 #pragma mark - TGRouterAuthViewControllerDelegate
