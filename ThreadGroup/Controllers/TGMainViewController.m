@@ -377,7 +377,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 #pragma mark - TGRouterAuthViewController
 
 - (BOOL)routerViewIsBeingPresented {
-    return [self.childViewControllers containsObject:self.routerAuthVC];
+    return [self.presentedViewController isEqual:self.routerAuthVC];
 }
 
 #pragma mark - TGRouterAuthViewControllerDelegate
