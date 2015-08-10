@@ -22,6 +22,7 @@
                 <outlet property="availableRoutersView" destination="zqJ-mI-Yuc" id="Pop-Fb-cjB"/>
                 <outlet property="findingNetworksSpinnerView" destination="l3u-Xg-fdW" id="Qsz-82-LQG"/>
                 <outlet property="findingNetworksView" destination="Tlm-wX-PEf" id="6Ba-88-SEG"/>
+                <outlet property="findingNetworksViewLabel" destination="gwm-MU-uo2" id="cXB-Hn-882"/>
                 <outlet property="popupView" destination="I7M-VR-hH9" id="n8D-Tl-MKe"/>
                 <outlet property="popupViewBottomConstraint" destination="0NF-Sk-pcX" id="FM7-mA-g3z"/>
                 <outlet property="routerSearchView" destination="5lN-Qt-CPc" id="43n-4n-OX4"/>
