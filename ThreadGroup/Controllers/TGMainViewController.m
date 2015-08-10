@@ -94,7 +94,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self commonInit];
-    [self getCachedRouter];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -160,13 +159,12 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         if (error) {
             NSLog(@"Error saving router to keychain: %@", error);
         }
+        NSLog(@"New cached router: %@", self.cachedRouter.name);
     }];
-    self.cachedRouter = item;
-    NSLog(@"New cached router: %@", self.cachedRouter.name);
 }
 
-- (void)getCachedRouter {
-    self.cachedRouter = [[TGKeychainManager sharedManager] getRouterItem];
+- (TGRouter *)cachedRouter {
+    return [[TGKeychainManager sharedManager] getRouterItem];
 }
 
 #pragma mark - View States
