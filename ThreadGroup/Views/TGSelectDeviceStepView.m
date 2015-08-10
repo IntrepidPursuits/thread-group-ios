@@ -80,27 +80,32 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             self.titleLabel.text = @"Enter Connect Code";
             self.subTitleLabel.text = @"Read this off the product you're connecting";
             [self setPassphraseInputViewHidden:NO];
+            [self setTopBarHidden:YES];
         }
             break;
         case TGSelectDeviceStepViewContentModePassphraseInvalid: {
             self.titleLabel.text = @"Wrong Connect Code";
             self.subTitleLabel.text = @"Please check Connect Code and try again";
             [self setPassphraseInputViewHidden:NO];
+            [self setTopBarHidden:YES];
         }
             break;
         case TGSelectDeviceStepViewContentModeScanQRCode: {
             self.titleLabel.text = @"Scan Device QR Code";
             self.subTitleLabel.text = @"You can also enter the Connect Code manually";
+            [self setTopBarHidden:YES];
         }
             break;
         case TGSelectDeviceStepViewContentModeScanQRCodeInvalid: {
             self.titleLabel.text = @"Wrong Connect QR Code";
             self.subTitleLabel.text = @"Please check your product compatibility";
+            [self setTopBarHidden:YES];
         }
             break;
         case TGSelectDeviceStepViewContentModeComplete: {
             self.titleLabel.text = @"Smart Thermostat";
             self.subTitleLabel.text = @"Intrepid's Thread Network";
+            [self setTopBarHidden:NO];
         }
             break;
     }
