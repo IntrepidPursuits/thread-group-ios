@@ -53,6 +53,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 //Finding Networks
 @property (weak, nonatomic) IBOutlet UIView *findingNetworksView;
 @property (weak, nonatomic) IBOutlet TGSpinnerView *findingNetworksSpinnerView;
+@property (weak, nonatomic) IBOutlet UILabel *findingNetworksViewLabel;
 @property (strong, nonatomic) TGRouter *cachedRouter;
 
 //Select/Add Devices
@@ -130,9 +131,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         BOOL hasFoundCachedRouter = NO;
         for (TGRouter *item in networks) {
             if ([item isEqualToRouter:self.cachedRouter]) {
-                //TODO: UI problem -  how to show that we're automatically trying to connect to last cached router
                 hasFoundCachedRouter = YES;
-                [self connectRouterForItem:item];
+                [self connectRouterAutomaticallyForItem:item];
             }
         }
         if (!hasFoundCachedRouter) {
@@ -333,6 +333,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     self.routerSearchView.topSeperatorView.hidden = YES;
     [self.routerSearchView setThreadConfigHidden:YES];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
+}
+
+- (void)connectRouterAutomaticallyForItem:(TGRouter *)item {
+    self.findingNetworksViewLabel.text = [NSString stringWithFormat:@"Attempting to automatically connect to %@", item.name];
+    [self connectRouterForItem:item];
 }
 
 - (void)connectRouterForItem:(TGRouter *)item {
