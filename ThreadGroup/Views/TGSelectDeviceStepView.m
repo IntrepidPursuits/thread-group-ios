@@ -65,6 +65,10 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 #pragma mark - Public
 
+- (void)setTopBarHidden:(BOOL)hidden {
+    self.topBar.hidden = hidden;
+}
+
 - (void)setContentMode:(TGSelectDeviceStepViewContentMode)contentMode {
     if (_contentMode == TGSelectDeviceStepViewContentModePassphrase) {
         [self setPassphraseInputViewHidden:YES];
