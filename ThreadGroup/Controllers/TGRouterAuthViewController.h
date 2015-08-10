@@ -12,11 +12,13 @@
 @class TGRouterAuthViewController;
 
 @protocol TGRouterAuthViewControllerDelegate <NSObject>
-- (void)routerAuthenticationSuccessful:(TGRouterAuthViewController *)routerAuthenticationView;
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView;
+- (void)routerAuthenticationViewControllerDidPressOkButton:(TGRouterAuthViewController *)routerAuthenticationView;
 @end
 
 @interface TGRouterAuthViewController : UIViewController
 @property (nonatomic, weak) id<TGRouterAuthViewControllerDelegate> delegate;
 @property (nonatomic, strong) TGRouter *item;
+
+- (void)updateUIForFailedAuthentication;
 @end

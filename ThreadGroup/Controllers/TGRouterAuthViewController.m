@@ -42,16 +42,10 @@
 
 - (IBAction)okButtonPressed:(UIButton *)sender {
     [self setUserInteractionEnabled:NO];
-    
-    [[TGNetworkManager sharedManager] connectToRouter:self.item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
-        if (result.hasAuthorizationFailed == NO) {
-            [self authenticationSuccess];
-            NSLog(@"Router Authentication Successful!");
-        } else {
-            NSLog(@"Router Authentication Failed!");
-            [self authenticationFailure];
-        }
-    }];
+    self.item.passphrase = self.passwordTextField.text;
+    if ([self.delegate respondsToSelector:@selector(routerAuthenticationViewControllerDidPressOkButton:)]) {
+        [self.delegate routerAuthenticationViewControllerDidPressOkButton:self];
+    }
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender {
@@ -61,23 +55,14 @@
     }
 }
 
-#pragma mark - Delegate
+#pragma mark - Helper Methods
 
-- (void)authenticationSuccess {
-    [self.passwordTextField resignFirstResponder];
-    if ([self.delegate respondsToSelector:@selector(routerAuthenticationSuccessful:)]) {
-        [self.delegate routerAuthenticationSuccessful:self];
-    }
-}
-
-- (void)authenticationFailure {
-    //show error label and make bottom bar red
+- (void)updateUIForFailedAuthentication {
+    [self setUserInteractionEnabled:YES];
     self.errorLabel.hidden = NO;
     self.bottomBar.backgroundColor = [UIColor threadGroup_red];
     [self setUserInteractionEnabled:YES];
 }
-
-#pragma mark - Helper Methods
 
 - (NSAttributedString *)createLabelFromItem:(TGRouter *)item {
     NSAttributedString *enter = [[NSAttributedString alloc] initWithString:@"Enter password to connect to " attributes:[self bookFontAttributeDictionary]];

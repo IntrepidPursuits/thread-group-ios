@@ -20,6 +20,7 @@
 #import "TGDevice.h"
 #import "TGScannerView.h"
 #import "TGSettingsManager.h"
+#import "TGKeychainManager.h"
 #import "TGAnimator.h"
 #import "TGRouterAuthViewController.h"
 #import "TGAddProductViewController.h"
@@ -52,6 +53,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 //Finding Networks
 @property (weak, nonatomic) IBOutlet UIView *findingNetworksView;
 @property (weak, nonatomic) IBOutlet TGSpinnerView *findingNetworksSpinnerView;
+@property (strong, nonatomic) TGRouter *cachedRouter;
 
 //Select/Add Devices
 @property (weak, nonatomic) IBOutlet TGSelectDeviceStepView *selectDeviceView;
@@ -124,17 +126,45 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
     [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *error, BOOL stillSearching) {
-        [UIView animateWithDuration:kTGHidingMainSpinnerDuration animations:^{
-            self.findingNetworksView.alpha = 0.0f;
-        } completion:^(BOOL finished) {
-            if (finished) {
-                [self setPopupNotificationForState:self.viewState animated:NO];
+        
+        for (TGRouter *item in networks) {
+            if ([item isEqualToRouter:self.cachedRouter]) {
+                //TODO: UI problem -  how to show that we're automatically trying to connect to last cached router
+                [self connectRouterForItem:item];
             }
-        }];
+        }
+        [self hideMainSpinner];
         [self.tableView setNetworkItems:networks];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
     }];
+}
+
+#pragma mark - Main spinner
+
+- (void)hideMainSpinner {
+    [UIView animateWithDuration:kTGHidingMainSpinnerDuration animations:^{
+        self.findingNetworksView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self setPopupNotificationForState:self.viewState animated:NO];
+        }
+    }];
+}
+
+#pragma mark - Cache
+
+- (void)resetCachedRouterWithRouter:(TGRouter *)item {
+    [[TGKeychainManager sharedManager] saveRouterItem:item withCompletion:^(NSError *error) {
+        if (error) {
+            NSLog(@"Error saving router to keychain: %@", error);
+        }
+        NSLog(@"New cached router: %@", self.cachedRouter.name);
+    }];
+}
+
+- (TGRouter *)cachedRouter {
+    return [[TGKeychainManager sharedManager] getRouterItem];
 }
 
 #pragma mark - View States
@@ -323,18 +353,35 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)connectToRouterWithItem:(TGRouter *)item {
-    self.routerAuthVC.item = item;
-    [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+    [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
+        if (result.hasAuthorizationFailed) {
+            if (![self routerViewIsBeingPresented]) {
+                self.routerAuthVC.item = item;
+                [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+            } else {
+                [self.routerAuthVC updateUIForFailedAuthentication];
+            }
+        } else {
+            if ([self routerViewIsBeingPresented]) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            [self resetCachedRouterWithRouter:item];
+            [self animateConnectedToRouterWithItem:item];
+            self.viewState = TGMainViewStateConnectDeviceScanning;
+        }
+    }];
+}
+
+#pragma mark - TGRouterAuthViewController
+
+- (BOOL)routerViewIsBeingPresented {
+    return [self.presentedViewController isEqual:self.routerAuthVC];
 }
 
 #pragma mark - TGRouterAuthViewControllerDelegate
 
-- (void)routerAuthenticationSuccessful:(TGRouterAuthViewController *)routerAuthenticationView {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [UIView animateWithDuration:kTGAnimationDuration animations:^{
-        [self animateConnectedToRouterWithItem:routerAuthenticationView.item];
-        self.viewState = TGMainViewStateConnectDeviceScanning;
-    }];
+- (void)routerAuthenticationViewControllerDidPressOkButton:(TGRouterAuthViewController *)routerAuthenticationView {
+    [self connectToRouterWithItem:routerAuthenticationView.item];
 }
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
