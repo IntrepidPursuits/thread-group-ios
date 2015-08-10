@@ -360,6 +360,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)connectToRouterWithItem:(TGRouter *)item {
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (result.hasAuthorizationFailed) {
+            [self hideMainSpinner];
             if (![self routerViewIsBeingPresented]) {
                 self.routerAuthVC.item = item;
                 [self presentViewController:self.routerAuthVC animated:YES completion:nil];
@@ -370,6 +371,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             if ([self routerViewIsBeingPresented]) {
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
+            
             [self resetCachedRouterWithRouter:item];
             [self animateConnectedToRouterWithItem:item];
             self.viewState = TGMainViewStateConnectDeviceScanning;
