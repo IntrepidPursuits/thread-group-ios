@@ -359,7 +359,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
                 self.routerAuthVC.item = item;
                 [self presentViewController:self.routerAuthVC animated:YES completion:nil];
             } else {
-                [self.routerAuthVC authenticationFailedState];
+                [self.routerAuthVC updateUIForFailedAuthentication];
             }
         } else {
             if ([self routerViewIsBeingPresented]) {
@@ -380,7 +380,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 #pragma mark - TGRouterAuthViewControllerDelegate
 
-- (void)okButtonWasPressedInRouterAuthentication:(TGRouterAuthViewController *)routerAuthenticationView {
+- (void)routerAuthenticationViewControllerDidPressOkButton:(TGRouterAuthViewController *)routerAuthenticationView {
     [self connectToRouterWithItem:routerAuthenticationView.item];
 }
 

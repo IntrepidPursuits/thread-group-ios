@@ -44,7 +44,7 @@
     [self setUserInteractionEnabled:NO];
     self.item.passphrase = self.passwordTextField.text;
     if ([self.delegate respondsToSelector:@selector(okButtonWasPressedInRouterAuthentication:)]) {
-        [self.delegate okButtonWasPressedInRouterAuthentication:self];
+        [self.delegate routerAuthenticationViewControllerDidPressOkButton:self];
     }
 }
 
@@ -57,7 +57,7 @@
 
 #pragma mark - Helper Methods
 
-- (void)authenticationFailedState {
+- (void)updateUIForFailedAuthentication {
     [self setUserInteractionEnabled:YES];
     self.errorLabel.hidden = NO;
     self.bottomBar.backgroundColor = [UIColor threadGroup_red];
