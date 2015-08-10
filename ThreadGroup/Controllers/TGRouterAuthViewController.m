@@ -43,7 +43,7 @@
 - (IBAction)okButtonPressed:(UIButton *)sender {
     [self setUserInteractionEnabled:NO];
     self.item.passphrase = self.passwordTextField.text;
-    if ([self.delegate respondsToSelector:@selector(okButtonWasPressedInRouterAuthentication:)]) {
+    if ([self.delegate respondsToSelector:@selector(routerAuthenticationViewControllerDidPressOkButton:)]) {
         [self.delegate routerAuthenticationViewControllerDidPressOkButton:self];
     }
 }
