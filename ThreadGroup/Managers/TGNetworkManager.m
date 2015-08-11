@@ -78,6 +78,7 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     NSLog(@"Changed to host <%@> at IP <%@> on port <%ld>", router.name, router.ipAddress, router.port);
     NSLog(@"Petitioning as commissioner to host <%@>", router.name);
 
+    self.petitionCompletionBlock = completion;
     [self.meshcopManager petitionAsCommissioner:kTGNetworkManagerRouterCommissionerIdentifier];
 }
 
@@ -145,35 +146,37 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 - (void)meshcopManagerDidReceiveCallbackResponse:(MCCallback_t)responseType responseResult:(TGNetworkCallbackResult *)callbackResult {
     NSLog(@"Received Callback Response");
     
-    switch (responseType) {
-        case COMM_PET: {
-            TGNetworkCallbackComissionerPetitionResult *callback = (TGNetworkCallbackComissionerPetitionResult *)callbackResult;
-            _viewState = (callback.hasAuthorizationFailed) ? TGNetworkManagerCommissionerStateDisconnected : TGNetworkManagerCommissionerStateConnected;
-            self.petitionCompletionBlock(callback);
-            break;
-        }
-        case JOIN_URL:
-            break;
-        case JOIN_FIN:
-            self.joinFinishedCompletionBlock((TGNetworkCallbackJoinerFinishedResult *)callbackResult);
-            break;
-        case ERROR_RESPONSE:
-            break;
-        case MGMT_PARAM_GET:
-            break;
-        case MGMT_PARAM_SET: {
-            TGNetworkCallbackSetSettingResult *callback = (TGNetworkCallbackSetSettingResult *)callbackResult;
-            NSString *token = [callback token];
-            TGNetworkManagerManagementSetCompletionBlock completionBlock = [self.managementSetCompletionBlocks objectForKey:token];
-            if (completionBlock) {
-                completionBlock(callback);
-                [self.managementSetCompletionBlocks removeObjectForKey:token];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        switch (responseType) {
+            case COMM_PET: {
+                TGNetworkCallbackComissionerPetitionResult *callback = (TGNetworkCallbackComissionerPetitionResult *)callbackResult;
+                _viewState = (callback.hasAuthorizationFailed) ? TGNetworkManagerCommissionerStateDisconnected : TGNetworkManagerCommissionerStateConnected;
+                self.petitionCompletionBlock(callback);
+                break;
             }
-            break;
+            case JOIN_URL:
+                break;
+            case JOIN_FIN:
+                self.joinFinishedCompletionBlock((TGNetworkCallbackJoinerFinishedResult *)callbackResult);
+                break;
+            case ERROR_RESPONSE:
+                break;
+            case MGMT_PARAM_GET:
+                break;
+            case MGMT_PARAM_SET: {
+                TGNetworkCallbackSetSettingResult *callback = (TGNetworkCallbackSetSettingResult *)callbackResult;
+                NSString *token = [callback token];
+                TGNetworkManagerManagementSetCompletionBlock completionBlock = [self.managementSetCompletionBlocks objectForKey:token];
+                if (completionBlock) {
+                    completionBlock(callback);
+                    [self.managementSetCompletionBlocks removeObjectForKey:token];
+                }
+                break;
+            }
+            default:
+                break;
         }
-        default:
-            break;
-    }
+    });
 }
 
 #pragma mark - Lazy
