@@ -335,29 +335,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
 }
 
-- (void)connectRouterForItem:(TGRouter *)item {
-    //TODO: Will have to actually connect a real router
+- (void)connectRouter:(TGRouter *)item {
     [self animateConnectingToRouterWithItem:item];
-    [self connectToRouterWithItem:item];
-}
-
-- (void)animateConnectingToRouterWithItem:(TGRouter *)item {
-    [self.routerSearchView setSpinnerActive:YES];
-    [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
-    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@", item.name]];
-}
-
-- (void)animateConnectedToRouterWithItem:(TGRouter *)item {
-    [self.routerSearchView setSpinnerActive:NO];
-    [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
-    [self.routerSearchView setTitle:item.name subTitle:item.networkName];
-    [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
-    [self.routerSearchView setBottomBarHidden:NO];
-    [self.routerSearchView setThreadConfigHidden:NO];
-    self.routerSearchView.topSeperatorView.hidden = NO;
-}
-
-- (void)connectToRouterWithItem:(TGRouter *)item {
+    //TODO: Will have to actually connect a real router
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (result.hasAuthorizationFailed) {
             if (![self routerViewIsBeingPresented]) {
@@ -375,6 +355,22 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             self.viewState = TGMainViewStateConnectDeviceScanning;
         }
     }];
+}
+
+- (void)animateConnectingToRouterWithItem:(TGRouter *)item {
+    [self.routerSearchView setSpinnerActive:YES];
+    [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
+    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@", item.name]];
+}
+
+- (void)animateConnectedToRouterWithItem:(TGRouter *)item {
+    [self.routerSearchView setSpinnerActive:NO];
+    [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
+    [self.routerSearchView setTitle:item.name subTitle:item.networkName];
+    [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
+    [self.routerSearchView setBottomBarHidden:NO];
+    [self.routerSearchView setThreadConfigHidden:NO];
+    self.routerSearchView.topSeperatorView.hidden = NO;
 }
 
 #pragma mark - TGRouterAuthViewController
