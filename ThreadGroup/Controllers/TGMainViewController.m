@@ -76,7 +76,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 @property (strong, nonatomic) TGTutorialPopup *tutorialPopup;
 @property (strong, nonatomic) TGAddDevicePopup *addDevicePopup;
 
-
 //RouterAuthVC
 @property (strong, nonatomic) TGRouterAuthViewController *routerAuthVC;
 
@@ -126,18 +125,24 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
     [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *error, BOOL stillSearching) {
-        
+        [self.tableView setNetworkItems:networks];
+        [self reloadTableView];
         for (TGRouter *item in networks) {
-            if ([item isEqualToRouter:self.cachedRouter]) {
-                //TODO: UI problem -  how to show that we're automatically trying to connect to last cached router
-                [self connectRouterForItem:item];
+            if ([item isEqualToRouter:self.cachedRouter] && [TGNetworkManager sharedManager].viewState == TGNetworkManagerCommissionerStateDisconnected) {
+                [self connectRouter:item];
+                [self.tableView highlightRouter:item];
             }
         }
         [self hideMainSpinner];
-        [self.tableView setNetworkItems:networks];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
     }];
+    
+}
+
+- (void)reloadTableView {
+    NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 #pragma mark - Main spinner
@@ -330,29 +335,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
 }
 
-- (void)connectRouterForItem:(TGRouter *)item {
-    //TODO: Will have to actually connect a real router
+- (void)connectRouter:(TGRouter *)item {
     [self animateConnectingToRouterWithItem:item];
-    [self connectToRouterWithItem:item];
-}
-
-- (void)animateConnectingToRouterWithItem:(TGRouter *)item {
-    [self.routerSearchView setSpinnerActive:YES];
-    [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
-    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@", item.name]];
-}
-
-- (void)animateConnectedToRouterWithItem:(TGRouter *)item {
-    [self.routerSearchView setSpinnerActive:NO];
-    [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
-    [self.routerSearchView setTitle:item.name subTitle:item.networkName];
-    [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
-    [self.routerSearchView setBottomBarHidden:NO];
-    [self.routerSearchView setThreadConfigHidden:NO];
-    self.routerSearchView.topSeperatorView.hidden = NO;
-}
-
-- (void)connectToRouterWithItem:(TGRouter *)item {
+    //TODO: Will have to actually connect a real router
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (result.hasAuthorizationFailed) {
             if (![self routerViewIsBeingPresented]) {
@@ -372,6 +357,22 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     }];
 }
 
+- (void)animateConnectingToRouterWithItem:(TGRouter *)item {
+    [self.routerSearchView setSpinnerActive:YES];
+    [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
+    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@", item.name]];
+}
+
+- (void)animateConnectedToRouterWithItem:(TGRouter *)item {
+    [self.routerSearchView setSpinnerActive:NO];
+    [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
+    [self.routerSearchView setTitle:item.name subTitle:item.networkName];
+    [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
+    [self.routerSearchView setBottomBarHidden:NO];
+    [self.routerSearchView setThreadConfigHidden:NO];
+    self.routerSearchView.topSeperatorView.hidden = NO;
+}
+
 #pragma mark - TGRouterAuthViewController
 
 - (BOOL)routerViewIsBeingPresented {
@@ -381,7 +382,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 #pragma mark - TGRouterAuthViewControllerDelegate
 
 - (void)routerAuthenticationViewControllerDidPressOkButton:(TGRouterAuthViewController *)routerAuthenticationView {
-    [self connectToRouterWithItem:routerAuthenticationView.item];
+    [self connectRouter:routerAuthenticationView.item];
 }
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
@@ -486,7 +487,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 #pragma mark - TGTableView Delegate
 
 - (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouter *)item {
-    [self connectRouterForItem:item];
+    [self connectRouter:item];
 }
 
 #pragma mark - TGScannerView Delegate

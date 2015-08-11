@@ -10,6 +10,12 @@
 #import "TGMeshcopManager.h"
 #import "TGNetworkCallbackResult.h"
 
+typedef NS_ENUM(NSInteger, TGNetworkManagerCommissionerState) {
+    TGNetworkManagerCommissionerStateDisconnected,
+    TGNetworkManagerCommissionerStateConnecting,
+    TGNetworkManagerCommissionerStateConnected
+};
+
 @class TGRouter;
 
 typedef void (^TGNetworkManagerFindRoutersCompletionBlock)(NSArray *networks, NSError *error, BOOL stillSearching);
@@ -18,6 +24,8 @@ typedef void (^TGNetworkManagerJoinDeviceCompletionBlock)(TGNetworkCallbackJoine
 typedef void (^TGNetworkManagerManagementSetCompletionBlock)(TGNetworkCallbackSetSettingResult *result);
 
 @interface TGNetworkManager : NSObject <TGMeshcopManagerDelegate>
+
+@property (nonatomic, readonly) TGNetworkManagerCommissionerState viewState;
 
 + (instancetype)sharedManager;
 + (NSString *)currentWifiSSID;
