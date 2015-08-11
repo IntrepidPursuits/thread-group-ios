@@ -19,6 +19,7 @@
 + (UIImage *)tg_routerActive;
 + (UIImage *)tg_routerCompleted;
 + (UIImage *)tg_cancelButton;
++ (UIImage *)tg_routerSettings;
 
 + (UIImage *)tg_selectDeviceCompleted;
 + (UIImage *)tg_selectDeviceError;

@@ -8,6 +8,8 @@
 
 #import "UIImage+ThreadGroup.h"
 
+static CGSize const kTGRouterSettingsImageSize = {18.0f, 18.0f};
+
 @implementation UIImage (ThreadGroup)
 
 + (UIImage *)tg_navThreadLogo {
@@ -64,6 +66,21 @@
 
 + (UIImage *)tg_tutorialView {
     return [UIImage imageNamed:@"qr_tutorial"];
+}
+
++ (UIImage *)tg_routerSettings {
+    return [UIImage imageNamed:@"router_settings" scaledToSize:kTGRouterSettingsImageSize];
+}
+
+#pragma mark - helper
+
++ (UIImage *)imageNamed:(NSString *)name scaledToSize:(CGSize)size {
+    UIImage *originalImage = [UIImage imageNamed:name];
+    UIGraphicsBeginImageContext(size);
+    [originalImage drawInRect:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
 }
 
 @end

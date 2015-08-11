@@ -9,6 +9,7 @@
 #import "TGDeviceStepView.h"
 #import "UIColor+ThreadGroup.h"
 #import "UIView+Animations.h"
+#import "UIImage+ThreadGroup.h"
 
 @interface TGDeviceStepView()
 
@@ -44,6 +45,8 @@
 - (void)commonInit {
     self.backgroundColor = [UIColor threadGroup_grey];
     [self setSpinnerHidden:YES animated:NO];
+
+    self.threadConfig.image = [UIImage tg_routerSettings];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapIcon)];
     [self.iconImageView addGestureRecognizer:tapGesture];
