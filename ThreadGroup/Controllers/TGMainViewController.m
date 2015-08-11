@@ -76,7 +76,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 @property (strong, nonatomic) TGTutorialPopup *tutorialPopup;
 @property (strong, nonatomic) TGAddDevicePopup *addDevicePopup;
 
-
 //RouterAuthVC
 @property (strong, nonatomic) TGRouterAuthViewController *routerAuthVC;
 
@@ -126,7 +125,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
     [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *error, BOOL stillSearching) {
-        
+        [self.tableView setNetworkItems:networks];
+        [self reloadTableView];
         for (TGRouter *item in networks) {
             if ([item isEqualToRouter:self.cachedRouter]) {
                 //TODO: UI problem -  how to show that we're automatically trying to connect to last cached router
@@ -134,10 +134,15 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             }
         }
         [self hideMainSpinner];
-        [self.tableView setNetworkItems:networks];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
     }];
+    
+}
+
+- (void)reloadTableView {
+    NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView selectRowAtIndexPath:selectedCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 #pragma mark - Main spinner
