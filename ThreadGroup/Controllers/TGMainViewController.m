@@ -382,7 +382,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 #pragma mark - TGRouterAuthViewControllerDelegate
 
 - (void)routerAuthenticationViewControllerDidPressOkButton:(TGRouterAuthViewController *)routerAuthenticationView {
-    [self connectToRouterWithItem:routerAuthenticationView.item];
+    [self connectRouter:routerAuthenticationView.item];
 }
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
@@ -487,7 +487,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 #pragma mark - TGTableView Delegate
 
 - (void)tableView:(TGTableView *)tableView didSelectItem:(TGRouter *)item {
-    [self connectRouterForItem:item];
+    [self connectRouter:item];
 }
 
 #pragma mark - TGScannerView Delegate
