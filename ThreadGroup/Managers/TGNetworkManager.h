@@ -11,7 +11,7 @@
 #import "TGNetworkCallbackResult.h"
 
 typedef NS_ENUM(NSInteger, TGNetworkManagerCommissionerState) {
-    TGNetworkManagerCommissionerStateNotConnecting,
+    TGNetworkManagerCommissionerStateDisconnected,
     TGNetworkManagerCommissionerStateConnecting,
     TGNetworkManagerCommissionerStateConnected
 };

@@ -128,7 +128,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         [self.tableView setNetworkItems:networks];
         [self reloadTableView];
         for (TGRouter *item in networks) {
-            if ([item isEqualToRouter:self.cachedRouter] && [TGNetworkManager sharedManager].viewState == TGNetworkManagerCommissionerStateNotConnecting) {
+            if ([item isEqualToRouter:self.cachedRouter] && [TGNetworkManager sharedManager].viewState == TGNetworkManagerCommissionerStateDisconnected) {
                 [self connectRouter:item];
                 [self.tableView highlightRouter:item];
             }
