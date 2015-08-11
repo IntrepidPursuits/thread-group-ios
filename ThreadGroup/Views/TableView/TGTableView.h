@@ -20,4 +20,6 @@
 @property (nonatomic, strong) NSArray *networkItems;
 @property (nonatomic, weak) id<TGTableViewProtocol> tableViewDelegate;
 
+- (void)highlightRouter:(TGRouter *)item;
+
 @end

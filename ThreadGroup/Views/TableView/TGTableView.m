@@ -44,6 +44,13 @@ static NSString * const kTGTableViewCellReuseIdentifier = @"TGTableViewCell";
     return 50.0;
 }
 
+#pragma mark - Public
+
+- (void)highlightRouter:(TGRouter *)item {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.networkItems indexOfObject:item] inSection:0];
+    [self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
+
 #pragma mark - Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
