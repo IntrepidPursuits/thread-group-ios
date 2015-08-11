@@ -39,7 +39,7 @@
                         <action selector="settingsButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="s4d-Au-WEl"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="You must allow the Thread app to access your camera in order to scan a Connect QR Code. " translatesAutoresizingMaskIntoConstraints="NO" id="FhW-xA-qyb" userLabel="Info">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="You must allow the Thread app to access your camera in order to scan a Connect QR Code. " selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhW-xA-qyb" userLabel="Info">
                     <rect key="frame" x="16" y="101" width="568" height="418"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="46" id="55A-Tc-f6h"/>
