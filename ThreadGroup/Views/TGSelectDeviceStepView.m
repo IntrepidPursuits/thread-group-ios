@@ -104,6 +104,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     self.iconImageView.image = [self iconImageForContentMode:contentMode];
     self.nibView.backgroundColor = [self backgroundColorForContentMode:contentMode];
     self.topSeperatorBar.hidden = (contentMode != TGSelectDeviceStepViewContentModeComplete);
+    self.topBar.hidden = (contentMode != TGSelectDeviceStepViewContentModeComplete);
     [self.iconImageView threadGroup_animatePopup];
     [self setPassphraseInputViewHidden:(contentMode != TGSelectDeviceStepViewContentModePassphrase && contentMode != TGSelectDeviceStepViewContentModePassphraseInvalid)];
 }
