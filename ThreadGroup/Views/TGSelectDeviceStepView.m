@@ -65,10 +65,6 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 #pragma mark - Public
 
-- (void)setTopBarHidden:(BOOL)hidden {
-    self.topBar.hidden = hidden;
-}
-
 - (void)setContentMode:(TGSelectDeviceStepViewContentMode)contentMode {
     if (_contentMode == TGSelectDeviceStepViewContentModePassphrase) {
         [self setPassphraseInputViewHidden:YES];
@@ -80,32 +76,27 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
             self.titleLabel.text = @"Enter Connect Code";
             self.subTitleLabel.text = @"Read this off the product you're connecting";
             [self setPassphraseInputViewHidden:NO];
-            [self setTopBarHidden:YES];
         }
             break;
         case TGSelectDeviceStepViewContentModePassphraseInvalid: {
             self.titleLabel.text = @"Wrong Connect Code";
             self.subTitleLabel.text = @"Please check Connect Code and try again";
             [self setPassphraseInputViewHidden:NO];
-            [self setTopBarHidden:YES];
         }
             break;
         case TGSelectDeviceStepViewContentModeScanQRCode: {
             self.titleLabel.text = @"Scan Device QR Code";
             self.subTitleLabel.text = @"You can also enter the Connect Code manually";
-            [self setTopBarHidden:YES];
         }
             break;
         case TGSelectDeviceStepViewContentModeScanQRCodeInvalid: {
             self.titleLabel.text = @"Wrong Connect QR Code";
             self.subTitleLabel.text = @"Please check your product compatibility";
-            [self setTopBarHidden:YES];
         }
             break;
         case TGSelectDeviceStepViewContentModeComplete: {
             self.titleLabel.text = @"Smart Thermostat";
             self.subTitleLabel.text = @"Intrepid's Thread Network";
-            [self setTopBarHidden:NO];
         }
             break;
     }
@@ -113,6 +104,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     self.iconImageView.image = [self iconImageForContentMode:contentMode];
     self.nibView.backgroundColor = [self backgroundColorForContentMode:contentMode];
     self.topSeperatorBar.hidden = (contentMode != TGSelectDeviceStepViewContentModeComplete);
+    self.topBar.hidden = (contentMode != TGSelectDeviceStepViewContentModeComplete);
     [self.iconImageView threadGroup_animatePopup];
     [self setPassphraseInputViewHidden:(contentMode != TGSelectDeviceStepViewContentModePassphrase && contentMode != TGSelectDeviceStepViewContentModePassphraseInvalid)];
 }
