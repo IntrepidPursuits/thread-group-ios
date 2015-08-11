@@ -25,7 +25,7 @@ typedef void (^TGNetworkManagerManagementSetCompletionBlock)(TGNetworkCallbackSe
 
 @interface TGNetworkManager : NSObject <TGMeshcopManagerDelegate>
 
-@property (nonatomic) TGNetworkManagerCommissionerState viewState;
+@property (nonatomic, readonly) TGNetworkManagerCommissionerState viewState;
 
 + (instancetype)sharedManager;
 + (NSString *)currentWifiSSID;

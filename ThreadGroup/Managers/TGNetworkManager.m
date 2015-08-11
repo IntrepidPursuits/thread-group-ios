@@ -54,7 +54,7 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     
     self.threadServices = [NSMutableArray new];
     
-    [self setViewState:TGNetworkManagerCommissionerStateNotConnecting];
+    _viewState = TGNetworkManagerCommissionerStateDisconnected;
 }
 
 - (void)findLocalThreadNetworksCompletion:(TGNetworkManagerFindRoutersCompletionBlock)completion {
@@ -64,7 +64,7 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 }
 
 - (void)connectToRouter:(TGRouter *)router completion:(TGNetworkManagerCommissionerPetitionCompletionBlock)completion {
-    [self setViewState:TGNetworkManagerCommissionerStateConnecting];
+    _viewState = TGNetworkManagerCommissionerStateConnecting;
     BOOL didChangeHost = [self.meshcopManager changeToHostAtAddress:router.ipAddress
                                                    commissionerPort:router.port
                                                         networkType:CA_ADAPTER_IP
@@ -90,9 +90,9 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (result.hasAuthorizationFailed) {
-            [self setViewState:TGNetworkManagerCommissionerStateNotConnecting];
+            _viewState = TGNetworkManagerCommissionerStateDisconnected;
         } else {
-            [self setViewState:TGNetworkManagerCommissionerStateConnected];
+            _viewState = TGNetworkManagerCommissionerStateConnected;
         }
         completion(result);
     });
