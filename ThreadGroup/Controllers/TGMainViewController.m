@@ -128,9 +128,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         [self.tableView setNetworkItems:networks];
         [self reloadTableView];
         for (TGRouter *item in networks) {
-            if ([item isEqualToRouter:self.cachedRouter]) {
-                //TODO: UI problem -  how to show that we're automatically trying to connect to last cached router
-                [self connectRouterForItem:item];
+            if ([item isEqualToRouter:self.cachedRouter] && [TGNetworkManager sharedManager].viewState == TGNetworkManagerCommissionerStateNotConnecting) {
+                [self connectRouter:item];
+                [self.tableView highlightRouter:item];
             }
         }
         [self hideMainSpinner];
