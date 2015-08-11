@@ -176,7 +176,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)configureMainViewForViewState:(TGMainViewState)viewState {
     BOOL isScanning = (viewState == TGMainViewStateConnectDevicePassphrase || viewState == TGMainViewStateConnectDeviceScanning);
-    if (isScanning && [[TGSettingsManager sharedManager] hasSeenScannerTutorial] == NO) {
+    if (isScanning && [TGSettingsManager hasSeenScannerTutorial] == NO) {
         viewState = TGMainViewStateConnectDeviceTutorial;
         [self setPopupNotificationForState:viewState animated:NO];
     }
@@ -546,7 +546,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)parentPopup:(TGPopupParentView *)popupParent didReceiveTouchForChildPopupAtIndex:(NSInteger)index {
     UIView *selectedView = [self.popupView popupAtIndex:index];
     if (selectedView == self.tutorialPopup) {
-        [[TGSettingsManager sharedManager] setHasSeenScannerTutorial:YES];
+        [TGSettingsManager setHasSeenScannerTutorial:YES];
         [self setViewState:TGMainViewStateConnectDeviceScanning];
         [self setPopupNotificationForState:self.viewState animated:YES];
     } else if (selectedView == self.addDevicePopup) {

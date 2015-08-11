@@ -10,12 +10,10 @@
 
 @interface TGSettingsManager : NSObject
 
-+ (instancetype)sharedManager;
++ (BOOL)debugModeEnabled;
++ (void)setDebugModeEnabled:(BOOL)enabled;
 
-- (BOOL)debugModeEnabled;
-- (void)setDebugModeEnabled:(BOOL)enabled;
-
-- (BOOL)hasSeenScannerTutorial;
-- (void)setHasSeenScannerTutorial:(BOOL)hasSeen;
++ (BOOL)hasSeenScannerTutorial;
++ (void)setHasSeenScannerTutorial:(BOOL)hasSeen;
 
 @end

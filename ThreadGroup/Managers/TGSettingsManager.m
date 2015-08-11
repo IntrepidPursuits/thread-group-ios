@@ -13,31 +13,22 @@ static NSString * const TGSettingsManagerHasSeenScannerTutorial = @"TGSettingsMa
 
 @implementation TGSettingsManager
 
-+ (instancetype)sharedManager {
-    static id _sharedInstance = nil;
-    static dispatch_once_t oncePredicate;
-    dispatch_once(&oncePredicate, ^{
-        _sharedInstance = [[self alloc] init];
-    });
-    return _sharedInstance;
-}
-
 #pragma mark - Public Settings
 
-- (BOOL)debugModeEnabled {
++ (BOOL)debugModeEnabled {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:TGSettingsManagerDebugModeEnabled] boolValue];
 }
 
-- (void)setDebugModeEnabled:(BOOL)enabled {
++ (void)setDebugModeEnabled:(BOOL)enabled {
     [[NSUserDefaults standardUserDefaults] setObject:@(enabled) forKey:TGSettingsManagerDebugModeEnabled];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (BOOL)hasSeenScannerTutorial {
++ (BOOL)hasSeenScannerTutorial {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:TGSettingsManagerHasSeenScannerTutorial] boolValue];
 }
 
-- (void)setHasSeenScannerTutorial:(BOOL)hasSeen {
++ (void)setHasSeenScannerTutorial:(BOOL)hasSeen {
     [[NSUserDefaults standardUserDefaults] setObject:@(hasSeen) forKey:TGSettingsManagerHasSeenScannerTutorial];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
