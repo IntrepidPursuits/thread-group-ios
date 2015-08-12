@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -77,14 +78,14 @@
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" alpha="0.5499999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="device_success" translatesAutoresizingMaskIntoConstraints="NO" id="kQf-4e-14C">
-                            <rect key="frame" x="252" y="42" width="96" height="96"/>
+                            <rect key="frame" x="252" y="92" width="96" height="96"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="kQf-4e-14C" secondAttribute="height" multiplier="1:1" id="JfT-g2-sOO"/>
                                 <constraint firstAttribute="width" constant="96" id="SmE-Ra-sRd"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Device&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2PO-Je-wva">
-                            <rect key="frame" x="175" y="162" width="250" height="24"/>
+                            <rect key="frame" x="175" y="212" width="250" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="250" id="ol6-Sx-UzV"/>
                             </constraints>
@@ -93,7 +94,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="joined &quot;Network&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TVh-1g-ar0">
-                            <rect key="frame" x="150" y="190" width="300" height="16"/>
+                            <rect key="frame" x="150" y="240" width="300" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="mKb-Mo-9Cz"/>
                             </constraints>
@@ -111,8 +112,8 @@
                         <constraint firstItem="M5G-Hg-VUy" firstAttribute="leading" secondItem="Kmq-1i-QMp" secondAttribute="leading" id="QqB-qE-qgc"/>
                         <constraint firstItem="M5G-Hg-VUy" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="top" id="dEF-V6-6t3"/>
                         <constraint firstItem="TVh-1g-ar0" firstAttribute="centerX" secondItem="2PO-Je-wva" secondAttribute="centerX" id="jqO-vP-SVg"/>
-                        <constraint firstItem="kQf-4e-14C" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="top" constant="42" id="qJX-o0-9Aj"/>
                         <constraint firstAttribute="centerX" secondItem="kQf-4e-14C" secondAttribute="centerX" id="taY-FY-Oha"/>
+                        <constraint firstItem="kQf-4e-14C" firstAttribute="bottom" secondItem="Kmq-1i-QMp" secondAttribute="centerY" constant="12" id="wCT-dh-Cw2"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqJ-mI-Yuc" userLabel="AvailableRoutersView">
