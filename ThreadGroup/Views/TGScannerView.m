@@ -104,7 +104,7 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     [self.cameraOverlay setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.cameraContainer addSubview:self.cameraOverlay];
     
-    [self.cameraContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-topOffset-[overlayView]->=0-|" options:0 metrics:@{@"topOffset" : @(TGScannerYOffset), @"overlaySize" : @(TGScannerViewOverlaySize)} views:@{@"overlayView" : self.cameraOverlay}]];
+    [self.cameraContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.cameraContainer attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0]];
     [self.cameraContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.cameraContainer attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
 }
 

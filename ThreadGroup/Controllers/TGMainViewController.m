@@ -325,7 +325,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)resetRouterSearchView {
     self.routerSearchView.delegate = self;
     self.routerSearchView.backgroundColor = [UIColor threadGroup_orange];
-    [self.routerSearchView setTopBarHidden:NO];
+    [self.routerSearchView setTopBarHidden:YES];
     [self.routerSearchView setBottomBarHidden:YES];
     [self.routerSearchView setIcon:[UIImage tg_routerActive]];
     [self.routerSearchView setSpinnerActive:NO];
@@ -337,7 +337,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)connectRouter:(TGRouter *)item {
     [self animateConnectingToRouterWithItem:item];
-    //TODO: Will have to actually connect a real router
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (result.hasAuthorizationFailed) {
             if (![self routerViewIsBeingPresented]) {
@@ -368,6 +367,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
     [self.routerSearchView setTitle:item.name subTitle:item.networkName];
     [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
+    [self.routerSearchView setTopBarHidden:NO];
     [self.routerSearchView setBottomBarHidden:NO];
     [self.routerSearchView setThreadConfigHidden:NO];
     self.routerSearchView.topSeperatorView.hidden = NO;
