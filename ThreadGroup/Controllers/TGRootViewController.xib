@@ -14,7 +14,7 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGHomeScreenViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGRootViewController">
             <connections>
                 <outlet property="mainView" destination="j22-Fb-dwf" id="hl7-Lw-Wr0"/>
                 <outlet property="noWifiView" destination="Mor-43-yw1" id="jJK-Zb-tWM"/>

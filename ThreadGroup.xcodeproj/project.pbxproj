@@ -18,6 +18,7 @@
 		0A7AD34DC5A3297901411D32 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 		CC5BA3E11B6BE9E300898505 /* TGNoCameraAccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */; };
 		CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */; };
+		CCDB64BD1B7BDBD00098FD77 /* TGNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDB64BC1B7BDBD00098FD77 /* TGNavigationViewController.m */; };
 		CD095A031B45CC6C007DACFA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD095A021B45CC6C007DACFA /* libc++.dylib */; };
 		CD4E72591B4C826C00DBA98D /* libMeshCop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4E72581B4C826C00DBA98D /* libMeshCop.a */; };
 		CD6422401B710E5C0010A0DE /* TGNetworkCallbackResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CD64223F1B710E5C0010A0DE /* TGNetworkCallbackResult.m */; };
@@ -57,8 +58,8 @@
 		D917C4DA1B558CF5000A5BE2 /* TGNetworkNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D917C4D81B558CF5000A5BE2 /* TGNetworkNameViewController.xib */; };
 		D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D93717791B617BDC00BE55DD /* TGPopup.m */; };
 		D937177D1B62831200BE55DD /* TGKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D937177C1B62831200BE55DD /* TGKeychainManager.m */; };
-		D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */; };
-		D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */; };
+		D93C816C1B2F663000A86EE1 /* TGRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGRootViewController.m */; };
+		D93C816D1B2F663000A86EE1 /* TGRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGRootViewController.xib */; };
 		D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6831B43246E00271ED7 /* TGPopupContentViewController.m */; };
 		D95BC6861B43246E00271ED7 /* TGPopupContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D95BC6841B43246E00271ED7 /* TGPopupContentViewController.xib */; };
 		D95BC6891B43378400271ED7 /* TGButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6881B43378400271ED7 /* TGButton.m */; };
@@ -129,6 +130,8 @@
 		CC5BA3DF1B6BE9E300898505 /* TGNoCameraAccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNoCameraAccessView.h; sourceTree = "<group>"; };
 		CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNoCameraAccessView.m; sourceTree = "<group>"; };
 		CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNoCameraAccessView.xib; sourceTree = "<group>"; };
+		CCDB64BB1B7BDBD00098FD77 /* TGNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNavigationViewController.h; sourceTree = "<group>"; };
+		CCDB64BC1B7BDBD00098FD77 /* TGNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNavigationViewController.m; sourceTree = "<group>"; };
 		CD095A021B45CC6C007DACFA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CD095A0D1B45E09C007DACFA /* libc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libc_common.a; path = iotivity/out/ios/universal/libc_common.a; sourceTree = "<group>"; };
 		CD4E72581B4C826C00DBA98D /* libMeshCop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMeshCop.a; path = Pods/libMeshCop/ios/MeshCop/libMeshCop.a; sourceTree = "<group>"; };
@@ -197,9 +200,9 @@
 		D93717791B617BDC00BE55DD /* TGPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPopup.m; sourceTree = "<group>"; };
 		D937177B1B62831200BE55DD /* TGKeychainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGKeychainManager.h; sourceTree = "<group>"; };
 		D937177C1B62831200BE55DD /* TGKeychainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGKeychainManager.m; sourceTree = "<group>"; };
-		D93C81691B2F663000A86EE1 /* TGHomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHomeScreenViewController.h; sourceTree = "<group>"; };
-		D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHomeScreenViewController.m; sourceTree = "<group>"; };
-		D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGHomeScreenViewController.xib; sourceTree = "<group>"; };
+		D93C81691B2F663000A86EE1 /* TGRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRootViewController.h; sourceTree = "<group>"; };
+		D93C816A1B2F663000A86EE1 /* TGRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRootViewController.m; sourceTree = "<group>"; };
+		D93C816B1B2F663000A86EE1 /* TGRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRootViewController.xib; sourceTree = "<group>"; };
 		D95BC6821B43246E00271ED7 /* TGPopupContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPopupContentViewController.h; sourceTree = "<group>"; };
 		D95BC6831B43246E00271ED7 /* TGPopupContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPopupContentViewController.m; sourceTree = "<group>"; };
 		D95BC6841B43246E00271ED7 /* TGPopupContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGPopupContentViewController.xib; sourceTree = "<group>"; };
@@ -457,9 +460,9 @@
 				CD8639391B4183300044B2BE /* TGMainViewController.m */,
 				CD86393A1B4183300044B2BE /* TGMainViewController.xib */,
 				D9B456731B3D997400832112 /* AnimatedTransitions */,
-				D93C81691B2F663000A86EE1 /* TGHomeScreenViewController.h */,
-				D93C816A1B2F663000A86EE1 /* TGHomeScreenViewController.m */,
-				D93C816B1B2F663000A86EE1 /* TGHomeScreenViewController.xib */,
+				D93C81691B2F663000A86EE1 /* TGRootViewController.h */,
+				D93C816A1B2F663000A86EE1 /* TGRootViewController.m */,
+				D93C816B1B2F663000A86EE1 /* TGRootViewController.xib */,
 				D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */,
 				D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */,
 				D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */,
@@ -469,6 +472,8 @@
 				D95BC6821B43246E00271ED7 /* TGPopupContentViewController.h */,
 				D95BC6831B43246E00271ED7 /* TGPopupContentViewController.m */,
 				D95BC6841B43246E00271ED7 /* TGPopupContentViewController.xib */,
+				CCDB64BB1B7BDBD00098FD77 /* TGNavigationViewController.h */,
+				CCDB64BC1B7BDBD00098FD77 /* TGNavigationViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -728,7 +733,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D93C816D1B2F663000A86EE1 /* TGHomeScreenViewController.xib in Resources */,
+				D93C816D1B2F663000A86EE1 /* TGRootViewController.xib in Resources */,
 				D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */,
 				CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */,
 				CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */,
@@ -837,7 +842,8 @@
 				CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */,
 				D95BC6921B45992400271ED7 /* TGLogManager.m in Sources */,
 				D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */,
-				D93C816C1B2F663000A86EE1 /* TGHomeScreenViewController.m in Sources */,
+				CCDB64BD1B7BDBD00098FD77 /* TGNavigationViewController.m in Sources */,
+				D93C816C1B2F663000A86EE1 /* TGRootViewController.m in Sources */,
 				D9EA94FB1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m in Sources */,
 				D9EA94F81B55559F00A419D4 /* TGNetworkConfigModel.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,

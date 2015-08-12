@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "TGHomeScreenViewController.h"
+#import "TGRootViewController.h"
 #import "UIColor+ThreadGroup.h"
 #import "UIImage+ThreadGroup.h"
 #import "TGMeshcopManager.h"
@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self navigationAppearanceSetup];
-    TGHomeScreenViewController *homeController = [[TGHomeScreenViewController alloc] initWithNibName:nil bundle:nil];
+    TGRootViewController *homeController = [[TGRootViewController alloc] initWithNibName:nil bundle:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeController];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = nav;

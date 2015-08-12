@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TGHomeScreenViewController : UIViewController
+@interface TGRootViewController : UIViewController
 
 @end
