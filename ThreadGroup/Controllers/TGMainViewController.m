@@ -97,7 +97,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     if (self.viewState == TGMainViewStateConnectDevicePassphrase) {
         [self.selectDeviceView becomeFirstResponder];
     }
