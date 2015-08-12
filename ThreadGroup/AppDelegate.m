@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "TGHomeScreenViewController.h"
 #import "UIColor+ThreadGroup.h"
+#import "UIImage+ThreadGroup.h"
 #import "TGMeshcopManager.h"
 #import "UIFont+ThreadGroup.h"
 
@@ -28,7 +29,7 @@
 - (void)navigationAppearanceSetup {
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor] , NSFontAttributeName : [UIFont threadGroup_mediumFontWithSize:17.0f]}];
     [[UINavigationBar appearance] setTranslucent:NO];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor threadGroup_orange]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor threadGroup_grey]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 }
 
