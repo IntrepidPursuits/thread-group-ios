@@ -28,6 +28,7 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 @property (nonatomic, strong) TGMeshcopManager *meshcopManager;
 
 @property (nonatomic, strong) NSMutableDictionary *managementSetCompletionBlocks;
+@property (nonatomic, strong) NSMutableDictionary *managementGetCompletionBlocks;
 
 @end
 
@@ -52,9 +53,13 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     self.routerServiceBrowser.delegate = self;
     
     self.threadServices = [NSMutableArray new];
+    self.managementGetCompletionBlocks = [NSMutableDictionary new];
+    self.managementSetCompletionBlocks = [NSMutableDictionary new];
     
     _viewState = TGNetworkManagerCommissionerStateDisconnected;
 }
+
+#pragma mark - Networking Calls
 
 - (void)findLocalThreadNetworksCompletion:(TGNetworkManagerFindRoutersCompletionBlock)completion {
     NSLog(@"Searching For Border Routers");
@@ -105,14 +110,40 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     });
 }
 
+#pragma mark - Management Settings Get/Set
+
 - (void)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value completion:(TGNetworkManagerManagementSetCompletionBlock)completion {
     NSString *token = [[TGMeshcopManager sharedManager] setManagementParameter:parameter withValue:value];
-    [self.managementSetCompletionBlocks setObject:completion forKey:token];
+    
+    if (token) {
+        [self.managementSetCompletionBlocks setObject:completion forKey:token];
+    } else if (completion) {
+        completion(nil);
+    }
 }
 
 - (void)setManagementSecurityPolicy:(MCMgmtSecurityPolicy_t *)policy completion:(TGNetworkManagerManagementSetCompletionBlock)completion {
     NSString *token = [[TGMeshcopManager sharedManager] setManagementSecurityPolicy:policy];
-    [self.managementSetCompletionBlocks setObject:completion forKey:token];
+    if (token) {
+        [self.managementSetCompletionBlocks setObject:completion forKey:token];
+    } else if (completion) {
+        completion(nil);
+    }
+}
+
+- (void)fetchManagementParameter:(MCMgmtParamID_t)parameter completion:(TGNetworkManagerManagementGetCompletionBlock)completion {
+    NSString *token = [[TGMeshcopManager sharedManager] fetchManagementParameters:@[@(parameter)] peekOnly:NO];
+    
+    if (token) {
+        NSString *key = [self fetchManagementParameterCompletionKeyForParameter:parameter];
+        [self.managementGetCompletionBlocks setObject:completion forKey:key];
+    } else if (completion) {
+        completion(nil);
+    }
+}
+
+- (NSString *)fetchManagementParameterCompletionKeyForParameter:(MCMgmtParamID_t)parameter {
+    return [@(parameter) stringValue];
 }
 
 #pragma mark - Wifi SSID
@@ -161,15 +192,23 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
                 break;
             case ERROR_RESPONSE:
                 break;
-            case MGMT_PARAM_GET:
-                break;
-            case MGMT_PARAM_SET: {
-                TGNetworkCallbackSetSettingResult *callback = (TGNetworkCallbackSetSettingResult *)callbackResult;
-                NSString *token = [callback token];
-                TGNetworkManagerManagementSetCompletionBlock completionBlock = [self.managementSetCompletionBlocks objectForKey:token];
+            case MGMT_PARAM_GET: {
+                TGNetworkCallbackFetchSettingResult *callback = (TGNetworkCallbackFetchSettingResult *)callbackResult;
+                NSString *key = [self fetchManagementParameterCompletionKeyForParameter:callback.parameterIdentifier];
+                TGNetworkManagerManagementGetCompletionBlock completionBlock = [self.managementGetCompletionBlocks objectForKey:key];
                 if (completionBlock) {
                     completionBlock(callback);
-                    [self.managementSetCompletionBlocks removeObjectForKey:token];
+                    [self.managementGetCompletionBlocks removeObjectForKey:key];
+                }
+                break;
+            }
+            case MGMT_PARAM_SET: {
+                TGNetworkCallbackSetSettingResult *callback = (TGNetworkCallbackSetSettingResult *)callbackResult;
+                NSString *key = [callback token];
+                TGNetworkManagerManagementSetCompletionBlock completionBlock = [self.managementSetCompletionBlocks objectForKey:key];
+                if (completionBlock) {
+                    completionBlock(callback);
+                    [self.managementSetCompletionBlocks removeObjectForKey:key];
                 }
                 break;
             }
@@ -177,15 +216,6 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
                 break;
         }
     });
-}
-
-#pragma mark - Lazy
-
-- (NSMutableDictionary *)managementSetCompletionBlocks {
-    if (_managementSetCompletionBlocks == nil) {
-        _managementSetCompletionBlocks = [NSMutableDictionary new];
-    }
-    return _managementSetCompletionBlocks;
 }
 
 @end

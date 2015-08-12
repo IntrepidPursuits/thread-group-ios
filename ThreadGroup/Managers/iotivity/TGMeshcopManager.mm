@@ -146,18 +146,14 @@ static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) 
     return [NSString stringWithUTF8String:token];
 }
 
-- (NSString *)mgmtParamsGetArray:(NSArray *)paramsArray peekOnly:(BOOL)peek{
+- (NSString *)fetchManagementParameters:(NSArray *)paramsArray peekOnly:(BOOL)peek {
     NSMutableData *params = [NSMutableData new];
     for (NSNumber *num in paramsArray) {
-        NSInteger integer = [num integerValue];
-        NSData *data = [NSData dataWithBytes:&integer length:sizeof(integer)];
-        [params appendData:data];
+        Byte tlvByte = (Byte)[num integerValue];
+        [params appendBytes:&tlvByte length:1];
     }
     
-    uint8_t arrayCount = (uint8_t)paramsArray.count;
-    uint8_t *paramBytes = (uint8_t *) malloc(sizeof(*paramBytes) * arrayCount);
-    memcpy(paramBytes, [params bytes], arrayCount);
-    CAToken_t token = MGMT_GET_request(paramBytes, arrayCount, (uint8_t)peek);
+    CAToken_t token = MGMT_GET_request((uint8_t *)[params bytes], (uint8_t)paramsArray.count, (uint8_t)peek);
     return [NSString stringWithUTF8String:token];
 }
 
