@@ -19,6 +19,8 @@
 		CC5BA3E11B6BE9E300898505 /* TGNoCameraAccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */; };
 		CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */; };
 		CCDB64BD1B7BDBD00098FD77 /* TGNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDB64BC1B7BDBD00098FD77 /* TGNavigationViewController.m */; };
+		CCDB64C11B7BE2AF0098FD77 /* TGNoWifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDB64BF1B7BE2AF0098FD77 /* TGNoWifiViewController.m */; };
+		CCDB64C21B7BE2AF0098FD77 /* TGNoWifiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCDB64C01B7BE2AF0098FD77 /* TGNoWifiViewController.xib */; };
 		CD095A031B45CC6C007DACFA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD095A021B45CC6C007DACFA /* libc++.dylib */; };
 		CD4E72591B4C826C00DBA98D /* libMeshCop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4E72581B4C826C00DBA98D /* libMeshCop.a */; };
 		CD6422401B710E5C0010A0DE /* TGNetworkCallbackResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CD64223F1B710E5C0010A0DE /* TGNetworkCallbackResult.m */; };
@@ -132,6 +134,9 @@
 		CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNoCameraAccessView.xib; sourceTree = "<group>"; };
 		CCDB64BB1B7BDBD00098FD77 /* TGNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNavigationViewController.h; sourceTree = "<group>"; };
 		CCDB64BC1B7BDBD00098FD77 /* TGNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNavigationViewController.m; sourceTree = "<group>"; };
+		CCDB64BE1B7BE2AF0098FD77 /* TGNoWifiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNoWifiViewController.h; sourceTree = "<group>"; };
+		CCDB64BF1B7BE2AF0098FD77 /* TGNoWifiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNoWifiViewController.m; sourceTree = "<group>"; };
+		CCDB64C01B7BE2AF0098FD77 /* TGNoWifiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNoWifiViewController.xib; sourceTree = "<group>"; };
 		CD095A021B45CC6C007DACFA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CD095A0D1B45E09C007DACFA /* libc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libc_common.a; path = iotivity/out/ios/universal/libc_common.a; sourceTree = "<group>"; };
 		CD4E72581B4C826C00DBA98D /* libMeshCop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMeshCop.a; path = Pods/libMeshCop/ios/MeshCop/libMeshCop.a; sourceTree = "<group>"; };
@@ -463,6 +468,9 @@
 				D93C81691B2F663000A86EE1 /* TGRootViewController.h */,
 				D93C816A1B2F663000A86EE1 /* TGRootViewController.m */,
 				D93C816B1B2F663000A86EE1 /* TGRootViewController.xib */,
+				CCDB64BE1B7BE2AF0098FD77 /* TGNoWifiViewController.h */,
+				CCDB64BF1B7BE2AF0098FD77 /* TGNoWifiViewController.m */,
+				CCDB64C01B7BE2AF0098FD77 /* TGNoWifiViewController.xib */,
 				D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */,
 				D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */,
 				D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */,
@@ -748,6 +756,7 @@
 				D96C04B61B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib in Resources */,
 				CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */,
 				D9E1A9DA1B60327600B3DA2C /* TGNetworkSearchingPopup.xib in Resources */,
+				CCDB64C21B7BE2AF0098FD77 /* TGNoWifiViewController.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
 				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
 				CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */,
@@ -824,6 +833,7 @@
 				D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */,
 				CDFFFF051B5E8AEA0011EA4B /* TGRouter.m in Sources */,
 				D9E65C031B31AED800A184AB /* UIImage+ThreadGroup.m in Sources */,
+				CCDB64C11B7BE2AF0098FD77 /* TGNoWifiViewController.m in Sources */,
 				CD8C68241B2730050091B548 /* UIFont+ThreadGroup.m in Sources */,
 				D97ADBDD1B69675E00243D60 /* TGQRCode.m in Sources */,
 				D937177D1B62831200BE55DD /* TGKeychainManager.m in Sources */,
