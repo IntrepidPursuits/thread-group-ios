@@ -55,6 +55,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self resetMainView];
+    [self setupNavBar];
+}
+
+- (void)setupNavBar {
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage tg_navThreadLogo]];
+    [self.navigationItem.titleView setContentMode:UIViewContentModeScaleAspectFit];
+    UIBarButtonItem *logButton = [[UIBarButtonItem alloc] initWithImage:[UIImage tg_navLogInfo] style:UIBarButtonItemStylePlain target:self action:@selector(logButtonPressed:)];
+    UIBarButtonItem *moreInfoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage tg_navMoreMenu] style:UIBarButtonItemStylePlain target:self action:@selector(moreButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = logButton;
+    self.navigationItem.rightBarButtonItem = moreInfoButton;
 }
 
 #pragma mark - Reachability
