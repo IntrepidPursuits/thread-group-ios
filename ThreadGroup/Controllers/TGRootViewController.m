@@ -10,26 +10,18 @@
 #import <Reachability/Reachability.h>
 #import "TGRootViewController.h"
 #import "TGMainViewController.h"
+#import "TGNoWifiViewController.h"
 #import "TGPopupContentAnimator.h"
 #import "TGLogManager.h"
 
 @interface TGRootViewController () <UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) Reachability *reachability;
-
-//No Wifi View
-@property (weak, nonatomic) IBOutlet UIView *noWifiView;
-@property (weak, nonatomic) IBOutlet UIView *mainView;
-
-//Main View
 @property (strong, nonatomic) TGMainViewController *mainViewController;
+
 @end
 
 @implementation TGRootViewController
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 
 #pragma mark - ViewController Lifecycle
 
@@ -37,8 +29,6 @@
     [super viewDidLoad];
     [self configureReachability];
     [self registerForReturnFromBackgroundNotification];
-    [self setupMainView];
-    [self hideAllViews];
     self.modalPresentationStyle = UIModalPresentationCustom;
     [[TGLogManager sharedManager] logMessage:@"HomeScreenVC viewDidLoad"];
 }
@@ -69,12 +59,6 @@
 
 #pragma mark - Configuring Views
 
-- (void)hideAllViews {
-    self.mainViewController.view.hidden = YES;
-    self.noWifiView.hidden = YES;
-    [[TGLogManager sharedManager] logMessage:@"HomeScreenVC hideAllViews"];
-}
-
 - (void)resetMainView {
     if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi) {
         [self configureUIForReachableState];
@@ -84,35 +68,18 @@
 }
 
 - (void)configureUIForReachableState {
-    // If wifiView is already not hidden, I do not want to reset the state
-    self.noWifiView.hidden = YES;
-    if (self.mainViewController.view.hidden == YES) {
-        self.mainViewController.view.hidden = NO;
+    if (![self.navigationController.viewControllers containsObject:self.mainViewController]) {
         [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
         [self.mainViewController setPopupNotificationForState:NSNotFound animated:NO];
+        [self.navigationController pushViewController:self.mainViewController animated:NO];
+    } else {
+        [self.navigationController popToViewController:self.mainViewController animated:NO];
     }
 }
 
 - (void)configureUIForUnreachableState {
-    self.mainViewController.view.hidden = YES;
-    self.noWifiView.hidden = NO;
-}
-
-#pragma mark - Main View
-
-- (void)setupMainView {
-    self.mainViewController = [TGMainViewController new];
-    [self.mainViewController willMoveToParentViewController:self];
-    [self.mainViewController.view setFrame:self.mainView.bounds];
-    [self.mainView addSubview:self.mainViewController.view];
-    [self addChildViewController:self.mainViewController];
-    [self.mainViewController didMoveToParentViewController:self];
-}
-
-#pragma mark - No Wifi View
-
-- (IBAction)findWifiButtonPressed:(UIButton *)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    TGNoWifiViewController *noWifiVC = [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:noWifiVC animated:NO];
 }
 
 #pragma mark - Notifications
@@ -136,6 +103,21 @@
     TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
     animator.type = TGTransitionTypeDismiss;
     return animator;
+}
+
+#pragma mark - Lazy load
+
+- (TGMainViewController *)mainViewController {
+    if (!_mainViewController) {
+        _mainViewController = [[TGMainViewController alloc] initWithNibName:nil bundle:nil];
+    }
+    return _mainViewController;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
