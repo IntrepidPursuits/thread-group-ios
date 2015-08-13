@@ -246,6 +246,7 @@
 		D98651611B7E61E200357E6C /* UIDevice+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+ThreadGroup.m"; sourceTree = "<group>"; };
 		D98651631B7E633100357E6C /* TGAddProductAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGAddProductAnimator.h; path = AnimatedTransitions/TGAddProductAnimator.h; sourceTree = "<group>"; };
 		D98651641B7E633100357E6C /* TGAddProductAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGAddProductAnimator.m; path = AnimatedTransitions/TGAddProductAnimator.m; sourceTree = "<group>"; };
+		D98651591B7CFAA700357E6C /* ThreadGroup-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ThreadGroup-Prefix.pch"; path = "Supporting Files/ThreadGroup-Prefix.pch"; sourceTree = "<group>"; };
 		D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterAuthViewController.h; sourceTree = "<group>"; };
 		D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterAuthViewController.m; sourceTree = "<group>"; };
 		D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRouterAuthViewController.xib; sourceTree = "<group>"; };
@@ -419,6 +420,7 @@
 				CD8C68181B2724E00091B548 /* Fonts */,
 				CD7B60421B1F5469007FF820 /* Info.plist */,
 				CD7B60431B1F5469007FF820 /* main.mm */,
+				D98651591B7CFAA700357E6C /* ThreadGroup-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1010,6 +1012,7 @@
 			baseConfigurationReference = 003FB1823A20615E43F8CCC8 /* Pods-ThreadGroup.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "ThreadGroup/Supporting Files/ThreadGroup-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1031,6 +1034,7 @@
 			baseConfigurationReference = 4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "ThreadGroup/Supporting Files/ThreadGroup-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
