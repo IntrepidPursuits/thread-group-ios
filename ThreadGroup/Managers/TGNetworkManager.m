@@ -13,7 +13,6 @@
 #import "TGQRCode.h"
 #import "TGRouterServiceBrowser.h"
 #import "TGMeshcopManager.h"
-#import "TGLogManager.h"
 
 static NSString * const kTGNetworkManagerRouterCommissionerIdentifier = @"ios.threadgroup";
 static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup_device";
