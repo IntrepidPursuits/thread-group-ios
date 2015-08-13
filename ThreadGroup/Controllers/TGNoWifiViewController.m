@@ -7,12 +7,18 @@
 //
 
 #import "TGNoWifiViewController.h"
+#import "UIColor+ThreadGroup.h"
 
 @interface TGNoWifiViewController ()
 
 @end
 
 @implementation TGNoWifiViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor threadGroup_grey];
+}
 
 #pragma mark - IBAction
 

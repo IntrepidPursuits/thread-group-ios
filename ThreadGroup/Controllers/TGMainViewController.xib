@@ -120,7 +120,7 @@
                     <rect key="frame" x="0.0" y="128" width="600" height="416"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE BORDER ROUTERS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bcr-rv-Vbl">
-                            <rect key="frame" x="16" y="16" width="192" height="12"/>
+                            <rect key="frame" x="16" y="16" width="191.5" height="12"/>
                             <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                             <color key="textColor" red="0.53333333329999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -186,6 +186,13 @@
                         <constraint firstAttribute="height" constant="56" id="FOT-9V-J42"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CwY-3s-0l5" userLabel="Separator">
+                    <rect key="frame" x="16" y="0.0" width="568" height="1"/>
+                    <color key="backgroundColor" red="0.53333333329999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="aeT-gI-Iaj"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -196,6 +203,7 @@
                 <constraint firstItem="KzV-Dx-YPV" firstAttribute="top" secondItem="tg2-Pu-Pyq" secondAttribute="bottom" id="3Gx-zS-ZJy"/>
                 <constraint firstAttribute="trailing" secondItem="I7M-VR-hH9" secondAttribute="trailing" id="5ec-ir-u9J"/>
                 <constraint firstItem="tg2-Pu-Pyq" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="6ik-TJ-hvW"/>
+                <constraint firstItem="CwY-3s-0l5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="AEh-Rb-Wnb"/>
                 <constraint firstAttribute="trailing" secondItem="Kmq-1i-QMp" secondAttribute="trailing" id="DDD-Pc-5Ux"/>
                 <constraint firstItem="I7M-VR-hH9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FwB-HV-xhl"/>
                 <constraint firstItem="Kmq-1i-QMp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KLT-aH-hxF"/>
@@ -214,8 +222,10 @@
                 <constraint firstItem="Tlm-wX-PEf" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="q32-wq-32w"/>
                 <constraint firstAttribute="bottom" secondItem="Tlm-wX-PEf" secondAttribute="bottom" id="qGD-w9-NGv"/>
                 <constraint firstItem="zqJ-mI-Yuc" firstAttribute="top" secondItem="5lN-Qt-CPc" secondAttribute="bottom" id="qSK-EA-HF0"/>
+                <constraint firstAttribute="trailing" secondItem="CwY-3s-0l5" secondAttribute="trailing" constant="16" id="tUO-qP-jZ4"/>
                 <constraint firstAttribute="trailing" secondItem="Tlm-wX-PEf" secondAttribute="trailing" id="ugC-Lm-kok"/>
                 <constraint firstAttribute="trailing" secondItem="KzV-Dx-YPV" secondAttribute="trailing" id="uqd-CU-t70"/>
+                <constraint firstItem="CwY-3s-0l5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="vcf-Nk-Xkf"/>
                 <constraint firstAttribute="trailing" secondItem="zqJ-mI-Yuc" secondAttribute="trailing" id="yTI-ye-Dj6"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
