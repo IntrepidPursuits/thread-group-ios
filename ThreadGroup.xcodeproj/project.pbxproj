@@ -61,7 +61,6 @@
 		D937177A1B617BDC00BE55DD /* TGPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D93717791B617BDC00BE55DD /* TGPopup.m */; };
 		D937177D1B62831200BE55DD /* TGKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D937177C1B62831200BE55DD /* TGKeychainManager.m */; };
 		D93C816C1B2F663000A86EE1 /* TGRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C816A1B2F663000A86EE1 /* TGRootViewController.m */; };
-		D93C816D1B2F663000A86EE1 /* TGRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C816B1B2F663000A86EE1 /* TGRootViewController.xib */; };
 		D95BC6851B43246E00271ED7 /* TGPopupContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6831B43246E00271ED7 /* TGPopupContentViewController.m */; };
 		D95BC6861B43246E00271ED7 /* TGPopupContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D95BC6841B43246E00271ED7 /* TGPopupContentViewController.xib */; };
 		D95BC6891B43378400271ED7 /* TGButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D95BC6881B43378400271ED7 /* TGButton.m */; };
@@ -207,7 +206,6 @@
 		D937177C1B62831200BE55DD /* TGKeychainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGKeychainManager.m; sourceTree = "<group>"; };
 		D93C81691B2F663000A86EE1 /* TGRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRootViewController.h; sourceTree = "<group>"; };
 		D93C816A1B2F663000A86EE1 /* TGRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRootViewController.m; sourceTree = "<group>"; };
-		D93C816B1B2F663000A86EE1 /* TGRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRootViewController.xib; sourceTree = "<group>"; };
 		D95BC6821B43246E00271ED7 /* TGPopupContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPopupContentViewController.h; sourceTree = "<group>"; };
 		D95BC6831B43246E00271ED7 /* TGPopupContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPopupContentViewController.m; sourceTree = "<group>"; };
 		D95BC6841B43246E00271ED7 /* TGPopupContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGPopupContentViewController.xib; sourceTree = "<group>"; };
@@ -467,7 +465,6 @@
 				D9B456731B3D997400832112 /* AnimatedTransitions */,
 				D93C81691B2F663000A86EE1 /* TGRootViewController.h */,
 				D93C816A1B2F663000A86EE1 /* TGRootViewController.m */,
-				D93C816B1B2F663000A86EE1 /* TGRootViewController.xib */,
 				CCDB64BE1B7BE2AF0098FD77 /* TGNoWifiViewController.h */,
 				CCDB64BF1B7BE2AF0098FD77 /* TGNoWifiViewController.m */,
 				CCDB64C01B7BE2AF0098FD77 /* TGNoWifiViewController.xib */,
@@ -741,7 +738,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D93C816D1B2F663000A86EE1 /* TGRootViewController.xib in Resources */,
 				D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */,
 				CD8C68381B2870800091B548 /* TGSpinnerView.xib in Resources */,
 				CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */,

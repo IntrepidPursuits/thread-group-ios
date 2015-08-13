@@ -16,8 +16,9 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self navigationAppearanceSetup];
-    TGRootViewController *homeController = [[TGRootViewController alloc] initWithNibName:nil bundle:nil];
+    TGRootViewController *homeController = [[TGRootViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeController];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = nav;
@@ -31,6 +32,7 @@
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setBarTintColor:[UIColor threadGroup_grey]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
 }
 
 @end
