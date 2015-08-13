@@ -48,6 +48,7 @@
 		CD8FFD7C1B39DD0B00481DE7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8FFD7B1B39DD0B00481DE7 /* libiconv.dylib */; };
 		CDC447621B39F5790037BAF5 /* TGScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC447611B39F5790037BAF5 /* TGScannerView.m */; };
 		CDC447681B3A53290037BAF5 /* UIView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC447671B3A53290037BAF5 /* UIView+Animations.m */; };
+		CDCBA0141B7CE7160012159E /* TGMeshcopManager+Logging.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCBA0131B7CE7160012159E /* TGMeshcopManager+Logging.m */; };
 		CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */; };
 		CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */; };
 		CDDB18F01B2B27B9008A84FD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDB18EF1B2B27B9008A84FD /* SystemConfiguration.framework */; };
@@ -190,6 +191,8 @@
 		CDC447611B39F5790037BAF5 /* TGScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGScannerView.m; sourceTree = "<group>"; };
 		CDC447661B3A53290037BAF5 /* UIView+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Animations.h"; sourceTree = "<group>"; };
 		CDC447671B3A53290037BAF5 /* UIView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animations.m"; sourceTree = "<group>"; };
+		CDCBA0121B7CE7160012159E /* TGMeshcopManager+Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TGMeshcopManager+Logging.h"; sourceTree = "<group>"; };
+		CDCBA0131B7CE7160012159E /* TGMeshcopManager+Logging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TGMeshcopManager+Logging.m"; sourceTree = "<group>"; };
 		CDDB18E81B29ED9F008A84FD /* TGSelectDeviceStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSelectDeviceStepView.h; sourceTree = "<group>"; };
 		CDDB18E91B29ED9F008A84FD /* TGSelectDeviceStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSelectDeviceStepView.m; sourceTree = "<group>"; };
 		CDDB18EB1B29EDAA008A84FD /* TGSelectDeviceStepView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSelectDeviceStepView.xib; sourceTree = "<group>"; };
@@ -478,6 +481,8 @@
 				D98651611B7E61E200357E6C /* UIDevice+ThreadGroup.m */,
 				D986515A1B7E240300357E6C /* NSDate+ThreadGroup.h */,
 				D986515B1B7E240300357E6C /* NSDate+ThreadGroup.m */,
+				CDCBA0121B7CE7160012159E /* TGMeshcopManager+Logging.h */,
+				CDCBA0131B7CE7160012159E /* TGMeshcopManager+Logging.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -886,6 +891,7 @@
 				D9E1A9DD1B6032EB00B3DA2C /* TGPopupParentView.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
 				CCE0F68E1B7E64B90022AA46 /* TGNavigationAnimator.m in Sources */,
+				CDCBA0141B7CE7160012159E /* TGMeshcopManager+Logging.m in Sources */,
 				CD6422401B710E5C0010A0DE /* TGNetworkCallbackResult.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,
 				D9E1A9D91B60327600B3DA2C /* TGNetworkPopup.m in Sources */,

@@ -175,7 +175,6 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 #pragma mark - Meshcop Manager Delegate
 
 - (void)meshcopManagerDidReceiveCallbackResponse:(MCCallback_t)responseType responseResult:(TGNetworkCallbackResult *)callbackResult {
-    NSLog(@"Received Callback Response");
     
     dispatch_async(dispatch_get_main_queue(), ^{
         switch (responseType) {
