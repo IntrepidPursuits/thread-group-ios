@@ -147,9 +147,10 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[Container]-0-|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[Container]-0-|" options:0 metrics:nil views:views]];
-    [self.tutorialView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.tutorialView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
+    [self.tutorialView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.tutorialView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
+    [self.tutorialView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.tutorialView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:16.0f]];
     [self.tutorialView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-TextInset-[MessageLabel]-TextInset-|" options:0 metrics:metrics views:views]];
-    [self.tutorialView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-VerticalInset-[ImageView]-VerticalInset-[MessageLabel]->=VerticalInset-|" options:0 metrics:metrics views:views]];
+    [self.tutorialView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=VerticalInset-[ImageView]-VerticalInset-[MessageLabel]->=VerticalInset-|" options:0 metrics:metrics views:views]];
 }
 
 - (void)configureNoCameraAccessView {
