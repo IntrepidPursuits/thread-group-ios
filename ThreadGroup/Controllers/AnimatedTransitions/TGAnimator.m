@@ -8,11 +8,9 @@
 
 #import "TGAnimator.h"
 #import "UIImage+ThreadGroup.h"
-#import <UIDeviceIdentifier/UIDeviceHardware.h>
+#import "UIDevice+ThreadGroup.h"
 
 static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
-static NSString * const kUIDeviceHardwareiPhone6PlusString = @"iPhone 6 Plus";
-static NSString * const kUIDeviceHardwareiPhone6String = @"iPhone 6";
 
 @interface TGAnimator()
 @property (nonatomic, strong) id<UIViewControllerContextTransitioning> transitionContext;
@@ -144,9 +142,8 @@ static NSString * const kUIDeviceHardwareiPhone6String = @"iPhone 6";
 }
 
 - (NSArray *)verticalConstraintsForView:(UIView *)view {
-    NSString *deviceString = [UIDeviceHardware platformString];
     NSString *visualFormatString;
-    if ([deviceString isEqualToString:kUIDeviceHardwareiPhone6PlusString] || [deviceString isEqualToString:kUIDeviceHardwareiPhone6String]) {
+    if ([[UIDevice currentDeviceModel] isEqualToString:kUIDeviceHardwareiPhone6PlusString] || [[UIDevice currentDeviceModel] isEqualToString:kUIDeviceHardwareiPhone6String]) {
         visualFormatString = @"V:|-80-[bar]-(>=100)-|";
 
     } else {
