@@ -33,12 +33,14 @@
 #import "TGTutorialPopup.h"
 #import "TGAddDevicePopup.h"
 
+#import "TGTransitioningDelegate.h"
+
 static CGFloat const kTGPopupParentViewHeight = 56.0f;
 static CGFloat const kTGAnimationDuration = 0.5f;
 static CGFloat const kTGHidingMainSpinnerDuration = 0.8f;
 static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
-@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, UIViewControllerTransitioningDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate, TGPopupParentViewDelegate>
+@interface TGMainViewController() <TGDeviceStepViewDelegate, TGSelectDeviceStepViewDelegate, TGTableViewProtocol, TGScannerViewDelegate, TGRouterAuthViewControllerDelegate, TGAddProductViewControllerDelegate, TGPopupParentViewDelegate>
 
 //Wifi
 @property (weak, nonatomic) IBOutlet TGDeviceStepView *wifiSearchView;
@@ -85,6 +87,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 //Thread Network Config
 @property (strong, nonatomic) TGNetworkConfigViewController *threadConfig;
+
+//TransitioningDelegate
+@property (strong, nonatomic) TGTransitioningDelegate *transitionDelegate;
 
 @end
 
@@ -528,20 +533,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self setPopupNotificationForState:self.viewState animated:YES];
 }
 
-#pragma mark - UIViewControllerTransitioningDelegate
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    TGAnimator *animator = [[TGAnimator alloc] init];
-    animator.type = TGTransitionTypePresent;
-    return animator;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    TGAnimator *animator = [[TGAnimator alloc] init];
-    animator.type = TGTransitionTypeDismiss;
-    return animator;
-}
-
 #pragma mark - TGPopupParentDelegate
 
 - (void)parentPopup:(TGPopupParentView *)popupParent didReceiveTouchForChildPopupAtIndex:(NSInteger)index {
@@ -573,7 +564,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (!_routerAuthVC) {
         _routerAuthVC = [[TGRouterAuthViewController alloc] initWithNibName:nil bundle:nil];
         _routerAuthVC.delegate = self;
-        _routerAuthVC.transitioningDelegate = self;
+        _routerAuthVC.transitioningDelegate = self.transitionDelegate;
     }
     return _routerAuthVC;
 }
@@ -582,9 +573,16 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (!_addProductVC) {
         _addProductVC = [[TGAddProductViewController alloc] initWithNibName:nil bundle:nil];
         _addProductVC.delegate = self;
-        _addProductVC.transitioningDelegate = self;
+        _addProductVC.transitioningDelegate = self.transitionDelegate;
     }
     return _addProductVC;
+}
+
+- (TGTransitioningDelegate *)transitionDelegate {
+    if (!_transitionDelegate) {
+        _transitionDelegate = [TGTransitioningDelegate new];
+    }
+    return _transitionDelegate;
 }
 
 - (NSArray *)popups {
