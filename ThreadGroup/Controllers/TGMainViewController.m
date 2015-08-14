@@ -94,10 +94,12 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self commonInit];
+    [self configureMainViewForViewState:self.viewState];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self setPopupNotificationForState:NSNotFound animated:NO];
     if (self.viewState == TGMainViewStateConnectDevicePassphrase) {
         [self.selectDeviceView becomeFirstResponder];
     }
@@ -176,7 +178,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)setViewState:(TGMainViewState)viewState {
     _viewState = viewState;
-    [self configureMainViewForViewState:viewState];
+    if (self.isViewLoaded) {
+        [self configureMainViewForViewState:viewState];
+    }
 }
 
 - (void)configureMainViewForViewState:(TGMainViewState)viewState {
@@ -253,6 +257,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [UIView animateWithDuration:kTGScannerViewAnimationDuration animations:^{
                 self.selectDeviceView.alpha = 1.0f;
                 self.scannerView.alpha = 1.0f;
+            } completion:^(BOOL finished) {
                 [self.view bringSubviewToFront:self.scannerView];
             }];
         }
@@ -292,9 +297,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             self.popupViewBottomConstraint.constant = -kTGPopupParentViewHeight;
             break;
     }
-    [UIView animateWithDuration:kTGAnimationDuration animations:^{
+    [UIView animateWithDuration:(animated) ? kTGAnimationDuration : 0.0 animations:^{
         [self.view layoutIfNeeded];
     }];
+
 }
 
 - (TGScannerViewContentMode)scannerModeForViewState:(TGMainViewState)state {

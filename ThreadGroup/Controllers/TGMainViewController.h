@@ -23,7 +23,6 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
 
 @property (nonatomic) TGMainViewState viewState;
 @property (strong, nonatomic) TGTableView *tableViewSource;
-- (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated;
 
 //Wifi
 - (void)resetWifiSearchView;

@@ -19,10 +19,10 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self navigationAppearanceSetup];
 
-    TGRootViewController *homeController = [[TGRootViewController alloc] init];
+    TGRootViewController *rootController = [[TGRootViewController alloc] init];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = homeController;
+    self.window.rootViewController = rootController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
