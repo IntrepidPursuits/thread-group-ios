@@ -83,7 +83,7 @@
 }
 
 - (void)resetTextAlignment {
-    self.textViewAlignment = NSTextAlignmentJustified;
+    self.textViewAlignment = NSTextAlignmentLeft;
 }
 
 - (void)buttonPressed:(id)sender {
