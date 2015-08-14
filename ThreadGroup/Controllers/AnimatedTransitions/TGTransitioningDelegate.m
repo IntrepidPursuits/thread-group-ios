@@ -14,12 +14,17 @@
 
 #import "TGAnimator.h"
 #import "TGPopupContentAnimator.h"
+#import "TGAddProductAnimator.h"
 
 @implementation TGTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
     if ([presented isKindOfClass:[TGRouterAuthViewController class]] || [presented isKindOfClass:[TGPasswordViewController class]]) {
         TGAnimator *animator = [TGAnimator new];
+        animator.type = TGTransitionTypePresent;
+        return animator;
+    } else if ([presented isKindOfClass:[TGAddProductViewController class]]){
+        TGAnimator *animator = [TGAddProductAnimator new];
         animator.type = TGTransitionTypePresent;
         return animator;
     } else {
@@ -34,7 +39,11 @@
         TGAnimator *animator = [TGAnimator new];
         animator.type = TGTransitionTypeDismiss;
         return animator;
-    } else {
+    } else if ([dismissed isKindOfClass:[TGAddProductViewController class]]){
+        TGAnimator *animator = [TGAddProductAnimator new];
+        animator.type = TGTransitionTypeDismiss;
+        return animator;
+    }  else {
         TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
         animator.type = TGTransitionTypeDismiss;
         return animator;
