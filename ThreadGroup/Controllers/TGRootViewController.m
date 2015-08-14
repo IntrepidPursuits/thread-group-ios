@@ -13,12 +13,15 @@
 #import "TGNoWifiViewController.h"
 #import "TGPopupContentAnimator.h"
 #import "TGLogManager.h"
+#import "TGNavigationAnimator.h"
 
-@interface TGRootViewController () <UIViewControllerTransitioningDelegate>
+@interface TGRootViewController () <UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) Reachability *reachability;
 @property (nonatomic, strong) UINavigationController *childNavigationController;
 @property (strong, nonatomic) TGMainViewController *mainViewController;
+@property (strong, nonatomic) TGNavigationAnimator *animator;
+@property (strong, nonatomic) UIPercentDrivenInteractiveTransition *interactionController;
 
 @end
 
@@ -33,6 +36,7 @@
     self.modalPresentationStyle = UIModalPresentationCustom;
     [[TGLogManager sharedManager] logMessage:@"HomeScreenVC viewDidLoad"];
     [self setupChildNavigationController];
+    self.animator = [[TGNavigationAnimator alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,14 +77,13 @@
     TGMainViewController *mainVC = [[TGMainViewController alloc] initWithNibName:nil bundle:nil];
     mainVC.viewState = TGMainViewStateLookingForRouters;
     [self.childNavigationController setViewControllers:@[
-                                   mainVC
+                                   [[TGNoWifiViewController alloc] init],
+                                   mainVC,
                                    ]];
 }
 
 - (void)configureUIForUnreachableState {
-    [self.childNavigationController setViewControllers:@[
-                                   [[TGNoWifiViewController alloc] init],
-                                   ]];
+    [self.childNavigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Notifications
@@ -94,16 +97,11 @@
 
 #pragma mark - UIViewControllerTransitioningDelegate
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
-    animator.type = TGTransitionTypePresent;
-    return animator;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
-    animator.type = TGTransitionTypeDismiss;
-    return animator;
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    if (operation == UINavigationControllerOperationPop) {
+        return self.animator;
+    }
+    return nil;
 }
 
 #pragma mark - Lazy load
@@ -125,7 +123,7 @@
 
 - (void)setupChildNavigationController {
     self.childNavigationController = [[UINavigationController alloc] init];
-
+    self.childNavigationController.delegate = self;
     [self addChildViewController:self.childNavigationController];
     self.childNavigationController.view.frame = self.view.bounds;
     [self.view addSubview:self.childNavigationController.view];

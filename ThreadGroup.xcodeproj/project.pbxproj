@@ -16,6 +16,7 @@
 		0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0946F4041B500DF300EDB5DE /* TGSelectableCell.m */; };
 		0946F4071B500DF300EDB5DE /* TGSelectableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */; };
 		0A7AD34DC5A3297901411D32 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
+		4930B62D1B7E885D00826B77 /* TGNavigationAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4930B62A1B7E885D00826B77 /* TGNavigationAnimator.m */; };
 		CC5BA3E11B6BE9E300898505 /* TGNoCameraAccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */; };
 		CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */; };
 		CCDB64BD1B7BDBD00098FD77 /* TGNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDB64BC1B7BDBD00098FD77 /* TGNavigationViewController.m */; };
@@ -127,6 +128,8 @@
 		0946F4031B500DF300EDB5DE /* TGSelectableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGSelectableCell.h; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.h; sourceTree = "<group>"; };
 		0946F4041B500DF300EDB5DE /* TGSelectableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGSelectableCell.m; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.m; sourceTree = "<group>"; };
 		0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGSelectableCell.xib; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.xib; sourceTree = "<group>"; };
+		4930B6291B7E885D00826B77 /* TGNavigationAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNavigationAnimator.h; path = AnimatedTransitions/TGNavigationAnimator.h; sourceTree = "<group>"; };
+		4930B62A1B7E885D00826B77 /* TGNavigationAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNavigationAnimator.m; path = AnimatedTransitions/TGNavigationAnimator.m; sourceTree = "<group>"; };
 		4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroup.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup.release.xcconfig"; sourceTree = "<group>"; };
 		CC5BA3DF1B6BE9E300898505 /* TGNoCameraAccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNoCameraAccessView.h; sourceTree = "<group>"; };
 		CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNoCameraAccessView.m; sourceTree = "<group>"; };
@@ -588,6 +591,8 @@
 		D9B456731B3D997400832112 /* AnimatedTransitions */ = {
 			isa = PBXGroup;
 			children = (
+				4930B6291B7E885D00826B77 /* TGNavigationAnimator.h */,
+				4930B62A1B7E885D00826B77 /* TGNavigationAnimator.m */,
 				D9B456741B3D999900832112 /* TGAnimator.h */,
 				D9B456751B3D999900832112 /* TGAnimator.m */,
 				D95BC68D1B446D8900271ED7 /* TGPopupContentAnimator.h */,
@@ -839,6 +844,7 @@
 				CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */,
 				D9E1A9DD1B6032EB00B3DA2C /* TGPopupParentView.m in Sources */,
 				CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */,
+				4930B62D1B7E885D00826B77 /* TGNavigationAnimator.m in Sources */,
 				CD6422401B710E5C0010A0DE /* TGNetworkCallbackResult.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,
 				D9E1A9D91B60327600B3DA2C /* TGNetworkSearchingPopup.m in Sources */,
