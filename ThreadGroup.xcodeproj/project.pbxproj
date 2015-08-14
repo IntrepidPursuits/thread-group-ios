@@ -81,6 +81,7 @@
 		D97ADBDD1B69675E00243D60 /* TGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = D97ADBDC1B69675E00243D60 /* TGQRCode.m */; };
 		D98651531B7BDD3600357E6C /* TGTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D98651521B7BDD3600357E6C /* TGTransitioningDelegate.m */; };
 		D98651621B7E61E200357E6C /* UIDevice+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D98651611B7E61E200357E6C /* UIDevice+ThreadGroup.m */; };
+		D98651651B7E633100357E6C /* TGAddProductAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D98651641B7E633100357E6C /* TGAddProductAnimator.m */; };
 		D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */; };
 		D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */; };
 		D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566F1B3C932400832112 /* TGAddProductViewController.m */; };
@@ -243,6 +244,8 @@
 		D98651521B7BDD3600357E6C /* TGTransitioningDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGTransitioningDelegate.m; path = AnimatedTransitions/TGTransitioningDelegate.m; sourceTree = "<group>"; };
 		D98651601B7E61E200357E6C /* UIDevice+ThreadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+ThreadGroup.h"; sourceTree = "<group>"; };
 		D98651611B7E61E200357E6C /* UIDevice+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+ThreadGroup.m"; sourceTree = "<group>"; };
+		D98651631B7E633100357E6C /* TGAddProductAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGAddProductAnimator.h; path = AnimatedTransitions/TGAddProductAnimator.h; sourceTree = "<group>"; };
+		D98651641B7E633100357E6C /* TGAddProductAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGAddProductAnimator.m; path = AnimatedTransitions/TGAddProductAnimator.m; sourceTree = "<group>"; };
 		D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterAuthViewController.h; sourceTree = "<group>"; };
 		D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterAuthViewController.m; sourceTree = "<group>"; };
 		D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRouterAuthViewController.xib; sourceTree = "<group>"; };
@@ -607,6 +610,8 @@
 				D95BC68E1B446D8900271ED7 /* TGPopupContentAnimator.m */,
 				CCE0F68C1B7E64B90022AA46 /* TGNavigationAnimator.h */,
 				CCE0F68D1B7E64B90022AA46 /* TGNavigationAnimator.m */,
+				D98651631B7E633100357E6C /* TGAddProductAnimator.h */,
+				D98651641B7E633100357E6C /* TGAddProductAnimator.m */,
 			);
 			name = AnimatedTransitions;
 			sourceTree = "<group>";
@@ -887,6 +892,7 @@
 				0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */,
 				D96C04B51B56CF8D00B4DB1B /* TGNetworkSecurityViewController.m in Sources */,
 				CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */,
+				D98651651B7E633100357E6C /* TGAddProductAnimator.m in Sources */,
 				D9E1A9EA1B60374000B3DA2C /* TGAddDevicePopup.m in Sources */,
 				CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */,
 				0946F3FC1B500DC300EDB5DE /* TGGeneralCell.m in Sources */,
