@@ -13,8 +13,9 @@
 #import "TGNoWifiViewController.h"
 #import "TGPopupContentAnimator.h"
 #import "TGLogManager.h"
+#import "TGNavigationAnimator.h"
 
-@interface TGRootViewController () <UIViewControllerTransitioningDelegate>
+@interface TGRootViewController () <UINavigationControllerDelegate>
 
 @property (nonatomic, strong) Reachability *reachability;
 @property (nonatomic, strong) UINavigationController *childNavigationController;
@@ -90,20 +91,6 @@
                                              selector:@selector(resetMainView)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:[UIApplication sharedApplication]];
-}
-
-#pragma mark - UIViewControllerTransitioningDelegate
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
-    animator.type = TGTransitionTypePresent;
-    return animator;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
-    animator.type = TGTransitionTypeDismiss;
-    return animator;
 }
 
 #pragma mark - Lazy load

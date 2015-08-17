@@ -13,8 +13,9 @@
 #import "TGLogManager.h"
 #import "UIImage+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
+#import "TGNavigationAnimator.h"
 
-@interface TGNavigationViewController () <TGPopupContentViewControllerDelegate>
+@interface TGNavigationViewController () <TGPopupContentViewControllerDelegate, UINavigationControllerDelegate>
 
 //PopupContentViewController
 @property (strong, nonatomic) TGPopupContentViewController *popupContentVC;
@@ -233,6 +234,13 @@
         [_moreMenu addAction:help];
     }
     return _moreMenu;
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    TGNavigationAnimator *animator = [TGNavigationAnimator new];
+    return animator;
 }
 
 @end
