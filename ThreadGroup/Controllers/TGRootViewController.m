@@ -17,6 +17,7 @@
 @interface TGRootViewController () <UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) Reachability *reachability;
+@property (nonatomic, strong) UINavigationController *childNavigationController;
 @property (strong, nonatomic) TGMainViewController *mainViewController;
 
 @end
@@ -31,6 +32,7 @@
     [self registerForReturnFromBackgroundNotification];
     self.modalPresentationStyle = UIModalPresentationCustom;
     [[TGLogManager sharedManager] logMessage:@"HomeScreenVC viewDidLoad"];
+    [self setupChildNavigationController];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,18 +70,16 @@
 }
 
 - (void)configureUIForReachableState {
-    if (![self.navigationController.viewControllers containsObject:self.mainViewController]) {
-        [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
-        [self.mainViewController setPopupNotificationForState:NSNotFound animated:NO];
-        [self.navigationController pushViewController:self.mainViewController animated:NO];
-    } else {
-        [self.navigationController popToViewController:self.mainViewController animated:NO];
-    }
+    [self.childNavigationController setViewControllers:@[
+                                                         [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil],
+                                                         self.mainViewController
+                                                         ]];
 }
 
 - (void)configureUIForUnreachableState {
-    TGNoWifiViewController *noWifiVC = [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:noWifiVC animated:NO];
+    [self.childNavigationController setViewControllers:@[
+                                                         [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil]
+                                                         ]];
 }
 
 #pragma mark - Notifications
@@ -112,6 +112,16 @@
         _mainViewController = [[TGMainViewController alloc] initWithNibName:nil bundle:nil];
     }
     return _mainViewController;
+}
+
+#pragma mark - Helpers
+
+- (void)setupChildNavigationController {
+    self.childNavigationController = [[UINavigationController alloc] init];
+    [self addChildViewController:self.childNavigationController];
+    self.childNavigationController.view.frame = self.view.bounds;
+    [self.view addSubview:self.childNavigationController.view];
+    [self.childNavigationController didMoveToParentViewController:self];
 }
 
 #pragma mark - Dealloc
