@@ -22,7 +22,6 @@
 		CCDB64C11B7BE2AF0098FD77 /* TGNoWifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDB64BF1B7BE2AF0098FD77 /* TGNoWifiViewController.m */; };
 		CCDB64C21B7BE2AF0098FD77 /* TGNoWifiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCDB64C01B7BE2AF0098FD77 /* TGNoWifiViewController.xib */; };
 		CCE0F68E1B7E64B90022AA46 /* TGNavigationAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE0F68D1B7E64B90022AA46 /* TGNavigationAnimator.m */; };
-		CCE0F6911B7E70570022AA46 /* TGNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE0F6901B7E70570022AA46 /* TGNavigationControllerDelegate.m */; };
 		CD095A031B45CC6C007DACFA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD095A021B45CC6C007DACFA /* libc++.dylib */; };
 		CD4E72591B4C826C00DBA98D /* libMeshCop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4E72581B4C826C00DBA98D /* libMeshCop.a */; };
 		CD6422401B710E5C0010A0DE /* TGNetworkCallbackResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CD64223F1B710E5C0010A0DE /* TGNetworkCallbackResult.m */; };
@@ -140,8 +139,6 @@
 		CCDB64C01B7BE2AF0098FD77 /* TGNoWifiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNoWifiViewController.xib; sourceTree = "<group>"; };
 		CCE0F68C1B7E64B90022AA46 /* TGNavigationAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNavigationAnimator.h; path = AnimatedTransitions/TGNavigationAnimator.h; sourceTree = "<group>"; };
 		CCE0F68D1B7E64B90022AA46 /* TGNavigationAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNavigationAnimator.m; path = AnimatedTransitions/TGNavigationAnimator.m; sourceTree = "<group>"; };
-		CCE0F68F1B7E70570022AA46 /* TGNavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGNavigationControllerDelegate.h; path = AnimatedTransitions/TGNavigationControllerDelegate.h; sourceTree = "<group>"; };
-		CCE0F6901B7E70570022AA46 /* TGNavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNavigationControllerDelegate.m; path = AnimatedTransitions/TGNavigationControllerDelegate.m; sourceTree = "<group>"; };
 		CD095A021B45CC6C007DACFA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CD095A0D1B45E09C007DACFA /* libc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libc_common.a; path = iotivity/out/ios/universal/libc_common.a; sourceTree = "<group>"; };
 		CD4E72581B4C826C00DBA98D /* libMeshCop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMeshCop.a; path = Pods/libMeshCop/ios/MeshCop/libMeshCop.a; sourceTree = "<group>"; };
@@ -600,8 +597,6 @@
 				D95BC68E1B446D8900271ED7 /* TGPopupContentAnimator.m */,
 				CCE0F68C1B7E64B90022AA46 /* TGNavigationAnimator.h */,
 				CCE0F68D1B7E64B90022AA46 /* TGNavigationAnimator.m */,
-				CCE0F68F1B7E70570022AA46 /* TGNavigationControllerDelegate.h */,
-				CCE0F6901B7E70570022AA46 /* TGNavigationControllerDelegate.m */,
 			);
 			name = AnimatedTransitions;
 			sourceTree = "<group>";
@@ -862,7 +857,6 @@
 				CCDB64BD1B7BDBD00098FD77 /* TGNavigationViewController.m in Sources */,
 				D93C816C1B2F663000A86EE1 /* TGRootViewController.m in Sources */,
 				D9EA94FB1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m in Sources */,
-				CCE0F6911B7E70570022AA46 /* TGNavigationControllerDelegate.m in Sources */,
 				D9EA94F81B55559F00A419D4 /* TGNetworkConfigModel.m in Sources */,
 				CDDB18EA1B29ED9F008A84FD /* TGSelectDeviceStepView.m in Sources */,
 				D9E1A9E01B60351B00B3DA2C /* TGConnectCodePopup.m in Sources */,

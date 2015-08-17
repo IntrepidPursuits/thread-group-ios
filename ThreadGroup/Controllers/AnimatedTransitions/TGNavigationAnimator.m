@@ -19,8 +19,6 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {    
-    //Capture state from the transitionContext
-    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
     UIView *containerView = [transitionContext containerView];
@@ -28,10 +26,8 @@ static NSTimeInterval const kTGAnimatorTransitionAnimationDuration = 0.5;
     toViewController.view.alpha = 0;
     
     [UIView animateWithDuration:kTGAnimatorTransitionAnimationDuration animations:^{
-        fromViewController.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
         toViewController.view.alpha = 1;
     } completion:^(BOOL finished) {
-        fromViewController.view.transform = CGAffineTransformIdentity;
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
 }
