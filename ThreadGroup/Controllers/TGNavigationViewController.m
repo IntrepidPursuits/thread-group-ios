@@ -64,12 +64,12 @@
 
 #pragma mark - Header View
 
-- (IBAction)moreButtonPressed:(UIButton *)sender {
+- (void)moreButtonPressed:(UIButton *)sender {
     [[TGLogManager sharedManager] logMessage:@"Show drop down menu"];
     [self presentViewController:self.moreMenu animated:YES completion:nil];
 }
 
-- (IBAction)logButtonPressed:(UIButton *)sender {
+- (void)logButtonPressed:(UIButton *)sender {
     [[TGLogManager sharedManager] logMessage:@"Show App Log"];
     self.popupContentVC.popupType = TGPopupTypeLog;
     self.buttons = [self createButtonsFor:self.popupContentVC];
@@ -231,7 +231,6 @@
         UIAlertAction *help =  [UIAlertAction actionWithTitle:@"Help" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self showHelp];
         }];
-        
         
         [_moreMenu addAction:defaultAction];
         [_moreMenu addAction:tos];
