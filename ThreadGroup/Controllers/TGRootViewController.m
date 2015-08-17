@@ -31,8 +31,6 @@
     [super viewDidLoad];
     [self configureReachability];
     [self registerForReturnFromBackgroundNotification];
-    self.modalPresentationStyle = UIModalPresentationCustom;
-    [[TGLogManager sharedManager] logMessage:@"HomeScreenVC viewDidLoad"];
     [self setupChildNavigationController];
 }
 
