@@ -8,7 +8,6 @@
 
 @import AudioToolbox;
 
-#import "TGNavigationViewController.h"
 #import "TGMainViewController.h"
 #import "TGDeviceStepView.h"
 #import "TGSpinnerView.h"
