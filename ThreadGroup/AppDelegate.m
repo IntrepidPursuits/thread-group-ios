@@ -7,19 +7,20 @@
 //
 
 #import "AppDelegate.h"
-#import "TGHomeScreenViewController.h"
+#import "TGRootViewController.h"
 #import "UIColor+ThreadGroup.h"
+#import "UIImage+ThreadGroup.h"
 #import "TGMeshcopManager.h"
 #import "UIFont+ThreadGroup.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self navigationAppearanceSetup];
-    TGHomeScreenViewController *homeController = [[TGHomeScreenViewController alloc] initWithNibName:nil bundle:nil];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeController];
+    TGRootViewController *rootController = [[TGRootViewController alloc] init];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = nav;
+    self.window.rootViewController = rootController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -28,8 +29,9 @@
 - (void)navigationAppearanceSetup {
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor] , NSFontAttributeName : [UIFont threadGroup_mediumFontWithSize:17.0f]}];
     [[UINavigationBar appearance] setTranslucent:NO];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor threadGroup_orange]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor threadGroup_grey]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
 }
 
 @end

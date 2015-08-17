@@ -1,110 +1,59 @@
 //
-//  TGHomeScreenViewController.m
+//  TGNavigationViewController.m
 //  ThreadGroup
 //
-//  Created by LuQuan Intrepid on 6/15/15.
+//  Created by Anbita Siregar on 8/12/15.
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import <SystemConfiguration/CaptiveNetwork.h>
-#import <Reachability/Reachability.h>
-#import "TGHomeScreenViewController.h"
-#import "TGMainViewController.h"
+#import "TGNavigationViewController.h"
 #import "TGPopupContentViewController.h"
 #import "TGPopupContentAnimator.h"
 #import "TGButton.h"
-#import "UIImage+ThreadGroup.h"
 #import "TGLogManager.h"
+#import "UIImage+ThreadGroup.h"
+#import "UIColor+ThreadGroup.h"
 
-@interface TGHomeScreenViewController () <UIViewControllerTransitioningDelegate, TGPopupContentViewControllerDelegate>
-
-@property (nonatomic, strong) Reachability *reachability;
-
-//No Wifi View
-@property (weak, nonatomic) IBOutlet UIView *noWifiView;
-@property (weak, nonatomic) IBOutlet UIView *mainView;
-
-//Main View
-@property (strong, nonatomic) TGMainViewController *mainViewController;
+@interface TGNavigationViewController () <TGPopupContentViewControllerDelegate>
 
 //PopupContentViewController
 @property (strong, nonatomic) TGPopupContentViewController *popupContentVC;
 
 @property (strong, nonatomic) NSArray *buttons;
 @property (strong, nonatomic) UIAlertController *moreMenu;
+
 @end
 
-@implementation TGHomeScreenViewController
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
-#pragma mark - ViewController Lifecycle
+@implementation TGNavigationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureReachability];
-    [self registerForReturnFromBackgroundNotification];
-    [self setupMainView];
-    [self hideAllViews];
-    self.modalPresentationStyle = UIModalPresentationCustom;
-    [[TGLogManager sharedManager] logMessage:@"HomeScreenVC viewDidLoad"];
+    [self setupNavBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self resetMainView];
+    self.navigationController.navigationBar.barTintColor = [UIColor threadGroup_grey];
 }
 
-#pragma mark - Reachability
-
-- (void)configureReachability {
-    self.reachability = [Reachability reachabilityForLocalWiFi];
-    self.reachability.reachableOnWWAN = NO;
-    __weak __typeof(self)weakSelf = self;
-    self.reachability.reachableBlock = ^(Reachability *reach) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf configureUIForReachableState];
-        });
-    };
-    self.reachability.unreachableBlock = ^(Reachability *reach) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf configureUIForUnreachableState];
-        });
-    };
-    [self.reachability startNotifier];
+- (void)setupNavBar {
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage tg_navThreadLogo]];
+    [self.navigationItem.titleView setContentMode:UIViewContentModeScaleAspectFit];
+    UIBarButtonItem *logButton = [[UIBarButtonItem alloc] initWithImage:[UIImage tg_navLogInfo] style:UIBarButtonItemStylePlain target:self action:@selector(logButtonPressed:)];
+    UIBarButtonItem *moreInfoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage tg_navMoreMenu] style:UIBarButtonItemStylePlain target:self action:@selector(moreButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = logButton;
+    self.navigationItem.rightBarButtonItem = moreInfoButton;
 }
 
-#pragma mark - Configuring Views
+#pragma mark - Lazy load
 
-- (void)hideAllViews {
-    self.mainViewController.view.hidden = YES;
-    self.noWifiView.hidden = YES;
-    [[TGLogManager sharedManager] logMessage:@"HomeScreenVC hideAllViews"];
-}
-
-- (void)resetMainView {
-    if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi) {
-        [self configureUIForReachableState];
-    } else {
-        [self configureUIForUnreachableState];
+- (TGPopupContentViewController *)popupContentVC {
+    if (!_popupContentVC) {
+        _popupContentVC = [[TGPopupContentViewController alloc] initWithNibName:nil bundle:nil];
+        _popupContentVC.transitioningDelegate = self;
+        _popupContentVC.delegate = self;
     }
-}
-
-- (void)configureUIForReachableState {
-    // If wifiView is already not hidden, I do not want to reset the state
-    self.noWifiView.hidden = YES;
-    if (self.mainViewController.view.hidden == YES) {
-        self.mainViewController.view.hidden = NO;
-        [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
-        [self.mainViewController setPopupNotificationForState:NSNotFound animated:NO];
-    }
-}
-
-- (void)configureUIForUnreachableState {
-    self.mainViewController.view.hidden = YES;
-    self.noWifiView.hidden = NO;
+    return _popupContentVC;
 }
 
 #pragma mark - Header View
@@ -177,57 +126,6 @@
     }
 }
 
-#pragma mark - Main View
-
-- (void)setupMainView {
-    self.mainViewController = [TGMainViewController new];
-    [self.mainViewController willMoveToParentViewController:self];
-    [self.mainViewController.view setFrame:self.mainView.bounds];
-    [self.mainView addSubview:self.mainViewController.view];
-    [self addChildViewController:self.mainViewController];
-    [self.mainViewController didMoveToParentViewController:self];
-}
-
-#pragma mark - No Wifi View
-
-- (IBAction)findWifiButtonPressed:(UIButton *)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-}
-
-#pragma mark - Notifications
-
-- (void)registerForReturnFromBackgroundNotification {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(resetMainView)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:[UIApplication sharedApplication]];
-}
-
-#pragma mark - UIViewControllerTransitioningDelegate
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
-    animator.type = TGTransitionTypePresent;
-    return animator;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    TGPopupContentAnimator *animator = [TGPopupContentAnimator new];
-    animator.type = TGTransitionTypeDismiss;
-    return animator;
-}
-
-#pragma mark - Lazy load
-
-- (TGPopupContentViewController *)popupContentVC {
-    if (!_popupContentVC) {
-        _popupContentVC = [[TGPopupContentViewController alloc] initWithNibName:nil bundle:nil];
-        _popupContentVC.transitioningDelegate = self;
-        _popupContentVC.delegate = self;
-    }
-    return _popupContentVC;
-}
-
 #pragma mark - Button creation
 
 - (NSArray *)createButtonsFor:(TGPopupContentViewController *)popupVC {
@@ -237,11 +135,11 @@
             TGButton *shareButton = [[TGButton alloc] initWithTitle:@"" andImage:[UIImage tg_shareAction]];
             TGButton *clearButton = [[TGButton alloc] initWithTitle:@"CLEAR" andImage:nil];
             TGButton *okButton = [[TGButton alloc] initWithTitle:@"OK" andImage:nil];
-
+            
             [buttons addObject:shareButton];
             [buttons addObject:clearButton];
             [buttons addObject:okButton];
-
+            
             break;
         }
         case TGPopupTypeTOS:
@@ -307,7 +205,7 @@
     [string appendFormat:@"%@\n\n",additionalInfo];
     [string appendFormat:@"%@\n\n",intrepid];
     [string appendFormat:@"%@",thread];
-
+    
     return string;
 }
 
@@ -316,31 +214,25 @@
 - (UIAlertController *)moreMenu {
     if (!_moreMenu) {
         _moreMenu = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-
+        
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *tos = [UIAlertAction actionWithTitle:@"Terms of Service" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self showTermsOfService];
         }];
         UIAlertAction *about =  [UIAlertAction actionWithTitle:@"About" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self showAbout];
-            }];
+        }];
         UIAlertAction *help =  [UIAlertAction actionWithTitle:@"Help" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self showHelp];
         }];
-
-
+        
+        
         [_moreMenu addAction:defaultAction];
         [_moreMenu addAction:tos];
         [_moreMenu addAction:about];
         [_moreMenu addAction:help];
     }
     return _moreMenu;
-}
-
-#pragma mark - Dealloc
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

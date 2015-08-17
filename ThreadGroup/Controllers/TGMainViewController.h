@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TGNavigationViewController.h"
 
 @class TGTableView;
 
@@ -18,11 +19,10 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
     TGMainViewStateAddAnotherDevice
 };
 
-@interface TGMainViewController : UIViewController
+@interface TGMainViewController : TGNavigationViewController
 
 @property (nonatomic) TGMainViewState viewState;
 @property (strong, nonatomic) TGTableView *tableViewSource;
-- (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated;
 
 //Wifi
 - (void)resetWifiSearchView;

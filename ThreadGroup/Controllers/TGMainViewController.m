@@ -93,11 +93,12 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self commonInit];
+    [self configureMainViewForViewState:self.viewState];
+    [self setPopupNotificationForState:NSNotFound animated:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     if (self.viewState == TGMainViewStateConnectDevicePassphrase) {
         [self.selectDeviceView becomeFirstResponder];
     }
@@ -152,7 +153,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         self.findingNetworksView.alpha = 0.0f;
     } completion:^(BOOL finished) {
         if (finished) {
-            [self setPopupNotificationForState:self.viewState animated:NO];
+            [self setPopupNotificationForState:self.viewState animated:YES];
         }
     }];
 }
@@ -176,7 +177,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)setViewState:(TGMainViewState)viewState {
     _viewState = viewState;
-    [self configureMainViewForViewState:viewState];
+    if (self.isViewLoaded) {
+        [self configureMainViewForViewState:viewState];
+    }
 }
 
 - (void)configureMainViewForViewState:(TGMainViewState)viewState {
@@ -292,9 +295,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             self.popupViewBottomConstraint.constant = -kTGPopupParentViewHeight;
             break;
     }
-    [UIView animateWithDuration:kTGAnimationDuration animations:^{
-        [self.view layoutIfNeeded];
-    }];
 }
 
 - (TGScannerViewContentMode)scannerModeForViewState:(TGMainViewState)state {

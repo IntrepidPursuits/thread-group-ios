@@ -56,7 +56,7 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-
+    self.navigationController.navigationBar.barTintColor = [UIColor threadGroup_orange];
     self.navigationController.navigationBar.backItem.title = @"";
     [self.navigationItem setTitle:@"Network Settings"];
 }
