@@ -236,11 +236,4 @@
     return _moreMenu;
 }
 
-#pragma mark - UINavigationControllerDelegate
-
-- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
-    TGNavigationAnimator *animator = [TGNavigationAnimator new];
-    return animator;
-}
-
 @end
