@@ -70,16 +70,17 @@
 }
 
 - (void)configureUIForReachableState {
-    self.mainViewController.viewState = TGMainViewStateLookingForRouters;
-    [self.childNavigationController setViewControllers:@[
-                                                         self.mainViewController
-                                                         ]];
+    if (![self.childNavigationController.viewControllers containsObject:self.mainViewController]) {
+        [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
+        [self.childNavigationController pushViewController:self.mainViewController animated:YES];
+    } else {
+        [self.childNavigationController popToViewController:self.mainViewController animated:YES];
+    }
 }
 
 - (void)configureUIForUnreachableState {
-    [self.childNavigationController setViewControllers:@[
-                                                         [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil]
-                                                         ]];
+    TGNoWifiViewController *noWifiVC = [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil];
+    [self.childNavigationController pushViewController:noWifiVC animated:YES];
 }
 
 #pragma mark - Notifications
