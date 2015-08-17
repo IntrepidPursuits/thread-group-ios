@@ -113,7 +113,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)configure {
     [self setupTableViewSource];
     self.scannerView.delegate = self;
-    self.modalPresentationStyle = UIModalPresentationCustom;
 }
 
 - (void)commonInit {
