@@ -61,11 +61,6 @@ static CGFloat const kTGSectionHeaderHeight = 36.0f;
     [self.navigationItem setTitle:@"Network Settings"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.barTintColor = [UIColor threadGroup_grey];
-}
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

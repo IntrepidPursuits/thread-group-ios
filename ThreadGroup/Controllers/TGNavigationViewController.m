@@ -12,6 +12,7 @@
 #import "TGButton.h"
 #import "TGLogManager.h"
 #import "UIImage+ThreadGroup.h"
+#import "UIColor+ThreadGroup.h"
 
 @interface TGNavigationViewController () <TGPopupContentViewControllerDelegate>
 
@@ -28,6 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavBar];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.barTintColor = [UIColor threadGroup_grey];
 }
 
 - (void)setupNavBar {
