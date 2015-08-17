@@ -18,10 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self navigationAppearanceSetup];
-    TGRootViewController *homeController = [[TGRootViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeController];
+    TGRootViewController *rootController = [[TGRootViewController alloc] init];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = nav;
+    self.window.rootViewController = rootController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
