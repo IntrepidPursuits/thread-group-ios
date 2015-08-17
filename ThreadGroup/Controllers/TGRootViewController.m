@@ -20,7 +20,6 @@
 @property (nonatomic, strong) Reachability *reachability;
 @property (nonatomic, strong) UINavigationController *childNavigationController;
 @property (strong, nonatomic) TGMainViewController *mainViewController;
-@property (strong, nonatomic) TGNavigationAnimator *animator;
 
 @end
 
@@ -35,7 +34,6 @@
     self.modalPresentationStyle = UIModalPresentationCustom;
     [[TGLogManager sharedManager] logMessage:@"HomeScreenVC viewDidLoad"];
     [self setupChildNavigationController];
-    self.animator = [[TGNavigationAnimator alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -98,7 +96,8 @@
 #pragma mark - UINavigationControllerDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
-    return self.animator;
+    TGNavigationAnimator *animator = [TGNavigationAnimator new];
+    return animator;
 }
 
 #pragma mark - Lazy load
