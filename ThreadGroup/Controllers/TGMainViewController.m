@@ -26,14 +26,13 @@
 #import "TGAddProductViewController.h"
 #import "TGNetworkConfigViewController.h"
 #import "TGNoCameraAccessView.h"
+#import "TGTransitioningDelegate.h"
 
 #import "TGPopupParentView.h"
 #import "TGNetworkSearchingPopup.h"
 #import "TGConnectCodePopup.h"
 #import "TGTutorialPopup.h"
 #import "TGAddDevicePopup.h"
-
-#import "TGTransitioningDelegate.h"
 
 static CGFloat const kTGPopupParentViewHeight = 56.0f;
 static CGFloat const kTGAnimationDuration = 0.5f;
@@ -87,9 +86,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 //Thread Network Config
 @property (strong, nonatomic) TGNetworkConfigViewController *threadConfig;
-
-//TransitioningDelegate
-@property (strong, nonatomic) TGTransitioningDelegate *transitionDelegate;
 
 @end
 
@@ -576,13 +572,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         _addProductVC.transitioningDelegate = self.transitionDelegate;
     }
     return _addProductVC;
-}
-
-- (TGTransitioningDelegate *)transitionDelegate {
-    if (!_transitionDelegate) {
-        _transitionDelegate = [TGTransitioningDelegate new];
-    }
-    return _transitionDelegate;
 }
 
 - (NSArray *)popups {

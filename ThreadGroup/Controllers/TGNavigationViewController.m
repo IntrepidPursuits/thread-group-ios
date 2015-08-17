@@ -14,6 +14,7 @@
 #import "UIImage+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 #import "TGNavigationAnimator.h"
+#import "TGTransitioningDelegate.h"
 
 @interface TGNavigationViewController () <TGPopupContentViewControllerDelegate, UINavigationControllerDelegate>
 
@@ -30,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavBar];
+    self.modalPresentationStyle = UIModalPresentationCustom;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,7 +56,7 @@
 - (TGPopupContentViewController *)popupContentVC {
     if (!_popupContentVC) {
         _popupContentVC = [[TGPopupContentViewController alloc] initWithNibName:nil bundle:nil];
-        _popupContentVC.transitioningDelegate = self;
+        _popupContentVC.transitioningDelegate = self.transitionDelegate;
         _popupContentVC.delegate = self;
     }
     return _popupContentVC;
@@ -237,6 +239,15 @@
         [_moreMenu addAction:help];
     }
     return _moreMenu;
+}
+
+#pragma mark - Lazy
+
+- (TGTransitioningDelegate *)transitionDelegate {
+    if (!_transitionDelegate) {
+        _transitionDelegate = [TGTransitioningDelegate new];
+    }
+    return _transitionDelegate;
 }
 
 @end
