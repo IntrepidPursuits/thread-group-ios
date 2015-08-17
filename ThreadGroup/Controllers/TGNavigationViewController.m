@@ -13,8 +13,9 @@
 #import "TGLogManager.h"
 #import "UIImage+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
+#import "TGNavigationAnimator.h"
 
-@interface TGNavigationViewController () <TGPopupContentViewControllerDelegate>
+@interface TGNavigationViewController () <TGPopupContentViewControllerDelegate, UINavigationControllerDelegate>
 
 //PopupContentViewController
 @property (strong, nonatomic) TGPopupContentViewController *popupContentVC;
