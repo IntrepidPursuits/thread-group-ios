@@ -11,6 +11,7 @@
 #import "TGRootViewController.h"
 #import "TGMainViewController.h"
 #import "TGNoWifiViewController.h"
+#import "TGNetworkConfigViewController.h"
 #import "TGPopupContentAnimator.h"
 #import "TGLogManager.h"
 #import "TGNavigationAnimator.h"
@@ -96,6 +97,9 @@
 #pragma mark - UINavigationControllerDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    if ([fromVC isKindOfClass:[TGNetworkConfigViewController class]] || [toVC isKindOfClass:[TGNetworkConfigViewController class]]) {
+        return nil;
+    }
     TGNavigationAnimator *animator = [TGNavigationAnimator new];
     return animator;
 }
