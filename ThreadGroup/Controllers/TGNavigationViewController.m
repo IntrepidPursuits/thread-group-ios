@@ -38,7 +38,6 @@
 
 - (void)setupNavBar {
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor threadGroup_grey]];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage tg_navThreadLogo]];
