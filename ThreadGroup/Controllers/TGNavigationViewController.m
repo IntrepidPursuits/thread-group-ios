@@ -38,6 +38,9 @@
 }
 
 - (void)setupNavBar {
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage tg_navThreadLogo]];
     [self.navigationItem.titleView setContentMode:UIViewContentModeScaleAspectFit];
     UIBarButtonItem *logButton = [[UIBarButtonItem alloc] initWithImage:[UIImage tg_navLogInfo] style:UIBarButtonItemStylePlain target:self action:@selector(logButtonPressed:)];
