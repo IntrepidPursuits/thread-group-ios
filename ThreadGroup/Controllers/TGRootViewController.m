@@ -70,8 +70,8 @@
 }
 
 - (void)configureUIForReachableState {
+    self.mainViewController.viewState = TGMainViewStateLookingForRouters;
     [self.childNavigationController setViewControllers:@[
-                                                         [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil],
                                                          self.mainViewController
                                                          ]];
 }
