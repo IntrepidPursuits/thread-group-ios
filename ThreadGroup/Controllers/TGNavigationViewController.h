@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TGTransitioningDelegate;
+
 @interface TGNavigationViewController : UIViewController
+
+@property (strong, nonatomic) TGTransitioningDelegate *transitionDelegate;
 
 @end

@@ -14,6 +14,7 @@
 #import "UIImage+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 #import "TGNavigationAnimator.h"
+#import "TGTransitioningDelegate.h"
 
 @interface TGNavigationViewController () <TGPopupContentViewControllerDelegate, UINavigationControllerDelegate>
 
@@ -30,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavBar];
+    self.modalPresentationStyle = UIModalPresentationCustom;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,7 +56,7 @@
 - (TGPopupContentViewController *)popupContentVC {
     if (!_popupContentVC) {
         _popupContentVC = [[TGPopupContentViewController alloc] initWithNibName:nil bundle:nil];
-        _popupContentVC.transitioningDelegate = self;
+        _popupContentVC.transitioningDelegate = self.transitionDelegate;
         _popupContentVC.delegate = self;
     }
     return _popupContentVC;
@@ -62,12 +64,12 @@
 
 #pragma mark - Header View
 
-- (IBAction)moreButtonPressed:(UIButton *)sender {
+- (void)moreButtonPressed:(UIButton *)sender {
     [[TGLogManager sharedManager] logMessage:@"Show drop down menu"];
     [self presentViewController:self.moreMenu animated:YES completion:nil];
 }
 
-- (IBAction)logButtonPressed:(UIButton *)sender {
+- (void)logButtonPressed:(UIButton *)sender {
     [[TGLogManager sharedManager] logMessage:@"Show App Log"];
     self.popupContentVC.popupType = TGPopupTypeLog;
     self.buttons = [self createButtonsFor:self.popupContentVC];
@@ -230,13 +232,21 @@
             [self showHelp];
         }];
         
-        
         [_moreMenu addAction:defaultAction];
         [_moreMenu addAction:tos];
         [_moreMenu addAction:about];
         [_moreMenu addAction:help];
     }
     return _moreMenu;
+}
+
+#pragma mark - Lazy
+
+- (TGTransitioningDelegate *)transitionDelegate {
+    if (!_transitionDelegate) {
+        _transitionDelegate = [TGTransitioningDelegate new];
+    }
+    return _transitionDelegate;
 }
 
 @end
