@@ -336,32 +336,32 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     self.routerSearchView.topSeperatorView.hidden = YES;
     [self.routerSearchView setThreadConfigHidden:YES];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
+    self.shouldCancelRouterConnection = NO;
 }
 
 - (void)connectRouter:(TGRouter *)item {
     [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
-        [self.tableView setUserInteractionEnabled:YES];
-        if (self.shouldCancelRouterConnection) {
-            self.shouldCancelRouterConnection = NO;
-            return;
-        }
-        if (result.hasAuthorizationFailed) {
-            if (![self routerViewIsBeingPresented]) {
-                self.routerAuthVC.item = item;
-                [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+        if (!self.shouldCancelRouterConnection) {
+            if (result.hasAuthorizationFailed) {
+                if (![self routerViewIsBeingPresented]) {
+                    self.routerAuthVC.item = item;
+                    [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+                } else {
+                    [self.routerAuthVC updateUIForFailedAuthentication];
+                }
             } else {
-                [self.routerAuthVC updateUIForFailedAuthentication];
+                if ([self routerViewIsBeingPresented]) {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+                [self resetCachedRouterWithRouter:item];
+                [self animateConnectedToRouterWithItem:item];
+                self.viewState = TGMainViewStateConnectDeviceScanning;
             }
-        } else {
-            if ([self routerViewIsBeingPresented]) {
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-            [self resetCachedRouterWithRouter:item];
-            [self animateConnectedToRouterWithItem:item];
-            self.viewState = TGMainViewStateConnectDeviceScanning;
         }
+        [self.tableView setUserInteractionEnabled:YES];
+        self.shouldCancelRouterConnection = NO;
     }];
 }
 
