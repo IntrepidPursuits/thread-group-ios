@@ -24,10 +24,7 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
 @property (nonatomic) TGMainViewState viewState;
 @property (strong, nonatomic) TGTableView *tableViewSource;
 
-//Wifi
-- (void)resetWifiSearchView;
-
-//Border Router
-- (void)resetRouterSearchView;
+//Cancelling Router Connections
+@property (nonatomic) BOOL shouldIgnoreRouterConnection;
 
 @end
