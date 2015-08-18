@@ -87,6 +87,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 //Thread Network Config
 @property (strong, nonatomic) TGNetworkConfigViewController *threadConfig;
 
+//Cancelling Router Connections
+@property (nonatomic) BOOL shouldCancelRouterConnection;
+
 @end
 
 @implementation TGMainViewController
@@ -339,6 +342,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
+        [self.tableView setUserInteractionEnabled:YES];
+        if (self.shouldCancelRouterConnection) {
+            self.shouldCancelRouterConnection = NO;
+            return;
+        }
         if (result.hasAuthorizationFailed) {
             if (![self routerViewIsBeingPresented]) {
                 self.routerAuthVC.item = item;
@@ -354,7 +362,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self animateConnectedToRouterWithItem:item];
             self.viewState = TGMainViewStateConnectDeviceScanning;
         }
-        [self.tableView setUserInteractionEnabled:YES];
     }];
 }
 
@@ -414,6 +421,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (stepView == self.wifiSearchView) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     } else if (stepView == self.routerSearchView) {
+        self.shouldCancelRouterConnection = YES;
         [self.selectDeviceView resignFirstResponder];
         [self setViewState:TGMainViewStateLookingForRouters];
         [self setPopupNotificationForState:self.viewState animated:YES];
