@@ -82,6 +82,7 @@
 		D98651531B7BDD3600357E6C /* TGTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D98651521B7BDD3600357E6C /* TGTransitioningDelegate.m */; };
 		D98651621B7E61E200357E6C /* UIDevice+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D98651611B7E61E200357E6C /* UIDevice+ThreadGroup.m */; };
 		D98651651B7E633100357E6C /* TGAddProductAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D98651641B7E633100357E6C /* TGAddProductAnimator.m */; };
+		D986515C1B7E240300357E6C /* NSDate+ThreadGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D986515B1B7E240300357E6C /* NSDate+ThreadGroup.m */; };
 		D9B4566C1B3C8D3A00832112 /* TGRouterAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */; };
 		D9B4566D1B3C8D3A00832112 /* TGRouterAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */; };
 		D9B456711B3C932400832112 /* TGAddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B4566F1B3C932400832112 /* TGAddProductViewController.m */; };
@@ -246,6 +247,9 @@
 		D98651611B7E61E200357E6C /* UIDevice+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+ThreadGroup.m"; sourceTree = "<group>"; };
 		D98651631B7E633100357E6C /* TGAddProductAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGAddProductAnimator.h; path = AnimatedTransitions/TGAddProductAnimator.h; sourceTree = "<group>"; };
 		D98651641B7E633100357E6C /* TGAddProductAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGAddProductAnimator.m; path = AnimatedTransitions/TGAddProductAnimator.m; sourceTree = "<group>"; };
+		D98651591B7CFAA700357E6C /* ThreadGroup-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ThreadGroup-Prefix.pch"; path = "Supporting Files/ThreadGroup-Prefix.pch"; sourceTree = "<group>"; };
+		D986515A1B7E240300357E6C /* NSDate+ThreadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ThreadGroup.h"; sourceTree = "<group>"; };
+		D986515B1B7E240300357E6C /* NSDate+ThreadGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ThreadGroup.m"; sourceTree = "<group>"; };
 		D9B456691B3C8D3A00832112 /* TGRouterAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterAuthViewController.h; sourceTree = "<group>"; };
 		D9B4566A1B3C8D3A00832112 /* TGRouterAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterAuthViewController.m; sourceTree = "<group>"; };
 		D9B4566B1B3C8D3A00832112 /* TGRouterAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGRouterAuthViewController.xib; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 				CD8C68181B2724E00091B548 /* Fonts */,
 				CD7B60421B1F5469007FF820 /* Info.plist */,
 				CD7B60431B1F5469007FF820 /* main.mm */,
+				D98651591B7CFAA700357E6C /* ThreadGroup-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -465,6 +470,8 @@
 				CDC447671B3A53290037BAF5 /* UIView+Animations.m */,
 				D98651601B7E61E200357E6C /* UIDevice+ThreadGroup.h */,
 				D98651611B7E61E200357E6C /* UIDevice+ThreadGroup.m */,
+				D986515A1B7E240300357E6C /* NSDate+ThreadGroup.h */,
+				D986515B1B7E240300357E6C /* NSDate+ThreadGroup.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -893,6 +900,7 @@
 				D96C04B51B56CF8D00B4DB1B /* TGNetworkSecurityViewController.m in Sources */,
 				CD8C68361B2870730091B548 /* TGSpinnerView.m in Sources */,
 				D98651651B7E633100357E6C /* TGAddProductAnimator.m in Sources */,
+				D986515C1B7E240300357E6C /* NSDate+ThreadGroup.m in Sources */,
 				D9E1A9EA1B60374000B3DA2C /* TGAddDevicePopup.m in Sources */,
 				CD8C683B1B28804D0091B548 /* TGDeviceStepView.m in Sources */,
 				0946F3FC1B500DC300EDB5DE /* TGGeneralCell.m in Sources */,
@@ -1010,6 +1018,7 @@
 			baseConfigurationReference = 003FB1823A20615E43F8CCC8 /* Pods-ThreadGroup.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "ThreadGroup/Supporting Files/ThreadGroup-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1031,6 +1040,7 @@
 			baseConfigurationReference = 4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "ThreadGroup/Supporting Files/ThreadGroup-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

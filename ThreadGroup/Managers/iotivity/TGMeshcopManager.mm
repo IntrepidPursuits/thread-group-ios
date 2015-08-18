@@ -47,7 +47,6 @@ static void* _callback(const MCCallback_t callbackId, ...) {
         }
             break;
         default: {
-            NSLog(@"Received Unknown Callback ID");
             return NULL;
         }
     }

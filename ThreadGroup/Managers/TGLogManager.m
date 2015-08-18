@@ -6,18 +6,16 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import <asl.h>
 #import "TGLogManager.h"
+#import "NSDate+ThreadGroup.h"
 
-static const char* kTGLogFacilityConstant = "com.threadgroup.log";
+static NSString * const kTGLogFacilityString = @"com.threadgroup.log";
 
 @interface TGLogManager()
 
-@property (nonatomic) aslclient client;
-@property (nonatomic) aslmsg queryMessage;
-@property (nonatomic) aslmsg recordMessage;
-
+@property (strong, nonatomic) NSString *filePath;
 @end
+
 @implementation TGLogManager
 
 + (instancetype)sharedManager {
@@ -30,70 +28,61 @@ static const char* kTGLogFacilityConstant = "com.threadgroup.log";
     return shared;
 }
 
-- (void)logMessage:(NSString *)message {
-    const char *msg = [message UTF8String];
-    //We will set all app logs to ASL_LEVEL_NOTICE
-    asl_log(self.client, self.recordMessage, ASL_LEVEL_NOTICE, "%s", msg);
+void _Log(NSString *prefix, const char *file, int lineNumber, const char *funcName, NSString *format,...) {
+    NSString *currentDateAndTime = [NSDate currentDateAndTimeString];
+    va_list ap;
+    va_start (ap, format);
+    format = [format stringByAppendingString:@"\n"];
+    NSString *msg = [[NSString alloc] initWithFormat:[NSString stringWithFormat:@"%@%@\n\n", format, currentDateAndTime] arguments:ap];
+    va_end (ap);
+    //Print log to console with more information
+    fprintf(stderr,"%s %s %50s: %3d - %s", [currentDateAndTime UTF8String], [prefix UTF8String], funcName, lineNumber, [format UTF8String]);
+    append(msg);
+}
+
+void append(NSString *msg) {
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:kTGLogFacilityString];
+
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]){
+        BOOL isFileCreationSuccessful= [[NSFileManager defaultManager] createFileAtPath:path
+                                                                               contents:nil
+                                                                             attributes:nil];
+        fprintf(stderr, "file creation %s", isFileCreationSuccessful ? "successful" :"failed");
+    }
+    // append
+    NSFileHandle *handle = [NSFileHandle fileHandleForWritingAtPath:path];
+    [handle truncateFileAtOffset:[handle seekToEndOfFile]];
+    [handle writeData:[msg dataUsingEncoding:NSUTF8StringEncoding]];
+    [handle closeFile];
 }
 
 - (NSString *)getLog {
-    NSMutableArray *consoleLog = [NSMutableArray array];
-
-    aslresponse response = asl_search(self.client, self.queryMessage);
-
-    aslmsg message;
-    while((message = asl_next(response)))
-    {
-        const char *msg = asl_get(message, ASL_KEY_MSG);
-        const char *time = asl_get(message, ASL_KEY_TIME);
-        NSDate *dateFromTime = [NSDate dateWithTimeIntervalSince1970:(strtod(time, NULL))];
-
-        NSString *timeString = [self convertDateToLocalTimeZone:dateFromTime];
-        NSString *msgString = [NSString stringWithCString:msg encoding:NSUTF8StringEncoding];
-
-        [consoleLog addObject:[NSString stringWithFormat:@"%@\n%@", timeString, msgString]];
+    NSError *error = nil;
+    NSString *log = [NSString stringWithContentsOfFile:self.filePath encoding:NSUTF8StringEncoding error:&error];
+    if (error) {
+        //NOTE: After reseting the log, we call getLog. We will receive an error. Expected because there is no log!
+        fprintf(stderr, "Log fetch failed with error: %s", [error.description UTF8String]);
+        return nil;
     }
-
-    asl_release(response);
-
-    //Two newline characters are needed to actually make a newline between the items.
-    NSString *logs = [consoleLog componentsJoinedByString:@"\n\n"];
-
-    return logs;
+    return log;
 }
 
 - (void)resetLog {
-    //The way I "clear" the log is to change the time key on the query to now 
-    //I will get an empty log back
-    NSTimeInterval timeInterval = [NSDate date].timeIntervalSince1970;
-    NSString *timeFilter = [NSString stringWithFormat:@"%f", timeInterval];
-    const char * timeFilterStr = [timeFilter cStringUsingEncoding:NSUTF8StringEncoding];
-    asl_set_query(self.queryMessage, ASL_KEY_TIME, timeFilterStr, ASL_QUERY_OP_GREATER);
+    NSError *error = nil;
+    [[NSFileManager defaultManager] removeItemAtPath:self.filePath error:&error];
+    if (error) {
+        fprintf(stderr, "Log deletion failed with error: %s", [error.description UTF8String]);
+    }
+
 }
 
 #pragma mark - Setup
 
 - (void)setup {
-    //Set a unique facility so we can target our log queries and entries
-    self.client = asl_open(NULL, kTGLogFacilityConstant, ASL_OPT_STDERR);
-
-    self.queryMessage = asl_new(ASL_TYPE_QUERY);
-    self.recordMessage = asl_new(ASL_TYPE_MSG);
-
-    //Get log who has the unique ASL_KEY_FACILITY
-    asl_set_query(self.queryMessage, ASL_KEY_FACILITY, kTGLogFacilityConstant, ASL_QUERY_OP_EQUAL);
-
-    //On device, log entries are only visible to root by default.
-    //We need to set the ASL_KEY_READ_UID to -1 in order for the calling process to see its log entries
-    asl_set(self.recordMessage, ASL_KEY_READ_UID, "-1");
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:kTGLogFacilityString];
+    _filePath = path;
 }
 
-#pragma mark - Helper
-
-- (NSString *)convertDateToLocalTimeZone:(NSDate *)date {
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
-    dateFormatter.timeZone = [NSTimeZone localTimeZone];
-    return [dateFormatter stringFromDate:date];
-}
 @end

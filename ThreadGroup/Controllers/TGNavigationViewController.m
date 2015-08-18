@@ -10,11 +10,10 @@
 #import "TGPopupContentViewController.h"
 #import "TGPopupContentAnimator.h"
 #import "TGButton.h"
-#import "TGLogManager.h"
-#import "UIImage+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 #import "TGNavigationAnimator.h"
 #import "TGTransitioningDelegate.h"
+#import "UIImage+ThreadGroup.h"
 
 @interface TGNavigationViewController () <TGPopupContentViewControllerDelegate, UINavigationControllerDelegate>
 
@@ -65,12 +64,12 @@
 #pragma mark - Header View
 
 - (void)moreButtonPressed:(UIButton *)sender {
-    [[TGLogManager sharedManager] logMessage:@"Show drop down menu"];
+    NSLog(@"Show drop down menu");
     [self presentViewController:self.moreMenu animated:YES completion:nil];
 }
 
 - (void)logButtonPressed:(UIButton *)sender {
-    [[TGLogManager sharedManager] logMessage:@"Show App Log"];
+    NSLog(@"Show App Log");
     self.popupContentVC.popupType = TGPopupTypeLog;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Application Debug Log" andButtons:self.buttons];
@@ -81,7 +80,7 @@
 #pragma mark - MoreMenu
 
 - (void)showTermsOfService {
-    [[TGLogManager sharedManager] logMessage:@"Show Terms of Service"];
+    NSLog(@"Show Terms of Service");
     self.popupContentVC.popupType = TGPopupTypeTOS;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Terms of Service" andButtons:self.buttons];
@@ -91,7 +90,7 @@
 }
 
 - (void)showAbout {
-    [[TGLogManager sharedManager] logMessage:@"Show About"];
+    NSLog(@"Show About");
     self.popupContentVC.popupType = TGPopupTypeAbout;
     self.popupContentVC.textViewAlignment = NSTextAlignmentCenter; //Text alignment is reset back to justified in popup's controller
     self.buttons = [self createButtonsFor:self.popupContentVC];
@@ -101,7 +100,7 @@
 }
 
 - (void)showHelp {
-    [[TGLogManager sharedManager] logMessage:@"Show Help"];
+    NSLog(@"Show Help");
     self.popupContentVC.popupType = TGPopupTypeAbout;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Help" andButtons:self.buttons];
