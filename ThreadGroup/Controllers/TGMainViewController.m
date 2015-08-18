@@ -336,6 +336,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)connectRouter:(TGRouter *)item {
+    [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (result.hasAuthorizationFailed) {
@@ -353,6 +354,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self animateConnectedToRouterWithItem:item];
             self.viewState = TGMainViewStateConnectDeviceScanning;
         }
+        [self.tableView setUserInteractionEnabled:YES];
     }];
 }
 
