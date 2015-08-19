@@ -378,10 +378,14 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     self.routerSearchView.topSeperatorView.hidden = NO;
 }
 
-#pragma mark - TGRouterAuthViewController
+#pragma mark - Presented View Controllers
 
 - (BOOL)routerViewIsBeingPresented {
     return [self.presentedViewController isEqual:self.routerAuthVC];
+}
+
+- (BOOL)mainViewControllerIsBeingPresented {
+    return [self.navigationController.visibleViewController isEqual:self];
 }
 
 #pragma mark - TGRouterAuthViewControllerDelegate
