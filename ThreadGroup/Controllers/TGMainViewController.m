@@ -87,9 +87,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 //Thread Network Config
 @property (strong, nonatomic) TGNetworkConfigViewController *threadConfig;
 
-//Cancelling Router Connections
-@property (nonatomic) BOOL shouldIgnoreRouterConnection;
-
 @end
 
 @implementation TGMainViewController
@@ -99,6 +96,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self commonInit];
     [self configureMainViewForViewState:self.viewState];
     [self setPopupNotificationForState:NSNotFound animated:NO];
+    self.shouldIgnoreRouterConnection = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -207,6 +205,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
             self.selectDeviceView.contentMode = completedMode;
             self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:completedMode];
+            [self.selectDeviceView resignFirstResponder];
         }
             break;
         default:
@@ -343,6 +342,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (!self.shouldIgnoreRouterConnection) {
+            NSLog(@"%@ connection was ignored", item.name);
             if (result.hasAuthorizationFailed) {
                 if (![self routerViewIsBeingPresented]) {
                     self.routerAuthVC.item = item;

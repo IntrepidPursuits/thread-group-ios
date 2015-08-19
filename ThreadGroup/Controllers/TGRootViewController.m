@@ -74,11 +74,16 @@
         [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
         [self.childNavigationController pushViewController:self.mainViewController animated:YES];
     } else {
+        [self.mainViewController setViewState:self.mainViewController.viewState];
         [self.childNavigationController popToViewController:self.mainViewController animated:YES];
     }
 }
 
 - (void)configureUIForUnreachableState {
+    if (![self.presentedViewController isEqual:self.mainViewController]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    self.mainViewController.shouldIgnoreRouterConnection = YES;
     TGNoWifiViewController *noWifiVC = [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil];
     [self.childNavigationController pushViewController:noWifiVC animated:YES];
 }
