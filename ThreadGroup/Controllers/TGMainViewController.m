@@ -87,9 +87,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 //Thread Network Config
 @property (strong, nonatomic) TGNetworkConfigViewController *threadConfig;
 
-//Cancelling Router Connections
-@property (nonatomic) BOOL shouldIgnoreRouterConnection;
-
 @end
 
 @implementation TGMainViewController
@@ -99,6 +96,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self commonInit];
     [self configureMainViewForViewState:self.viewState];
     [self setPopupNotificationForState:NSNotFound animated:NO];
+    self.shouldIgnoreRouterConnection = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

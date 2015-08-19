@@ -83,7 +83,7 @@
     if ([self.mainViewController routerViewIsBeingPresented]) {
         [self.mainViewController dismissViewControllerAnimated:YES completion:nil];
     }
-    self.mainViewController.shouldCancelRouterConnection = YES;
+    self.mainViewController.shouldIgnoreRouterConnection = YES;
     TGNoWifiViewController *noWifiVC = [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil];
     [self.childNavigationController pushViewController:noWifiVC animated:YES];
 }
