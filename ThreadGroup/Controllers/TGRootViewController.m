@@ -74,7 +74,9 @@
         [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
         [self.childNavigationController pushViewController:self.mainViewController animated:YES];
     } else {
-        [self.mainViewController setViewState:self.mainViewController.viewState];
+        if (!(self.mainViewController.viewState == TGMainViewStateConnectDevicePassphrase)) {
+            [self.mainViewController setViewState:self.mainViewController.viewState];
+        }
         [self.childNavigationController popToViewController:self.mainViewController animated:YES];
     }
 }
