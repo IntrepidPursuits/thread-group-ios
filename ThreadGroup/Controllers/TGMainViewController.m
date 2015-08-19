@@ -97,7 +97,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self configureMainViewForViewState:self.viewState];
     [self setPopupNotificationForState:NSNotFound animated:NO];
     [self.routerSearchView setUserInteractionEnabled:NO];
-    self.shouldIgnoreRouterConnection = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -343,26 +342,22 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
-        if (!self.shouldIgnoreRouterConnection) {
-            NSLog(@"%@ connection was ignored", item.name);
-            if (result.hasAuthorizationFailed) {
-                if (![self routerViewIsBeingPresented]) {
-                    self.routerAuthVC.item = item;
-                    [self presentViewController:self.routerAuthVC animated:YES completion:nil];
-                } else {
-                    [self.routerAuthVC updateUIForFailedAuthentication];
-                }
+        if (result.hasAuthorizationFailed) {
+            if (![self routerViewIsBeingPresented] && [self mainViewControllerIsBeingPresented]) {
+                self.routerAuthVC.item = item;
+                [self presentViewController:self.routerAuthVC animated:YES completion:nil];
             } else {
-                if ([self routerViewIsBeingPresented]) {
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                }
-                [self resetCachedRouterWithRouter:item];
-                [self animateConnectedToRouterWithItem:item];
-                self.viewState = TGMainViewStateConnectDeviceScanning;
+                [self.routerAuthVC updateUIForFailedAuthentication];
             }
+        } else {
+            if ([self routerViewIsBeingPresented]) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            [self resetCachedRouterWithRouter:item];
+            [self animateConnectedToRouterWithItem:item];
+            self.viewState = TGMainViewStateConnectDeviceScanning;
         }
         [self.tableView setUserInteractionEnabled:YES];
-        self.shouldIgnoreRouterConnection = NO;
     }];
 }
 
@@ -396,7 +391,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
-    self.shouldIgnoreRouterConnection = YES;
     [self dismissViewControllerAnimated:YES completion:nil];
     [self setViewState:TGMainViewStateLookingForRouters];
     [self setPopupNotificationForState:self.viewState animated:YES];
@@ -423,9 +417,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (stepView == self.wifiSearchView) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     } else if (stepView == self.routerSearchView) {
-        if (self.viewState == TGMainViewStateLookingForRouters) {
-            self.shouldIgnoreRouterConnection = YES;
-        }
         [self.selectDeviceView resignFirstResponder];
         [self setViewState:TGMainViewStateLookingForRouters];
         [self setPopupNotificationForState:self.viewState animated:YES];
