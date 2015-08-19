@@ -394,8 +394,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
+    self.shouldIgnoreRouterConnection = YES;
     [self dismissViewControllerAnimated:YES completion:nil];
-    self.viewState = TGMainViewStateLookingForRouters;
+    [self setViewState:TGMainViewStateLookingForRouters];
     [self setPopupNotificationForState:self.viewState animated:YES];
 }
 
