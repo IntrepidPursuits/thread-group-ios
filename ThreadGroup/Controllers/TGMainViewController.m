@@ -96,6 +96,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self commonInit];
     [self configureMainViewForViewState:self.viewState];
     [self setPopupNotificationForState:NSNotFound animated:NO];
+    [self.routerSearchView setUserInteractionEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -149,6 +150,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 #pragma mark - Main spinner
 
 - (void)hideMainSpinner {
+    [self.routerSearchView setUserInteractionEnabled:YES];
     [UIView animateWithDuration:kTGHidingMainSpinnerDuration animations:^{
         self.findingNetworksView.alpha = 0.0f;
     } completion:^(BOOL finished) {
