@@ -80,8 +80,8 @@
 }
 
 - (void)configureUIForUnreachableState {
-    if ([self.mainViewController routerViewIsBeingPresented]) {
-        [self.mainViewController dismissViewControllerAnimated:YES completion:nil];
+    if (![self.presentedViewController isEqual:self.mainViewController]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     self.mainViewController.shouldIgnoreRouterConnection = YES;
     TGNoWifiViewController *noWifiVC = [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil];
