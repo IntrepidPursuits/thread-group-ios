@@ -88,7 +88,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 @property (strong, nonatomic) TGNetworkConfigViewController *threadConfig;
 
 //Cancelling Router Connections
-@property (nonatomic) BOOL shouldCancelRouterConnection;
+@property (nonatomic) BOOL shouldIgnoreRouterConnection;
 
 @end
 
@@ -336,14 +336,13 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     self.routerSearchView.topSeperatorView.hidden = YES;
     [self.routerSearchView setThreadConfigHidden:YES];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
-    self.shouldCancelRouterConnection = NO;
 }
 
 - (void)connectRouter:(TGRouter *)item {
     [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
-        if (!self.shouldCancelRouterConnection) {
+        if (!self.shouldIgnoreRouterConnection) {
             if (result.hasAuthorizationFailed) {
                 if (![self routerViewIsBeingPresented]) {
                     self.routerAuthVC.item = item;
@@ -361,7 +360,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             }
         }
         [self.tableView setUserInteractionEnabled:YES];
-        self.shouldCancelRouterConnection = NO;
+        self.shouldIgnoreRouterConnection = NO;
     }];
 }
 
@@ -421,7 +420,9 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (stepView == self.wifiSearchView) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     } else if (stepView == self.routerSearchView) {
-        self.shouldCancelRouterConnection = YES;
+        if (self.viewState == TGMainViewStateLookingForRouters) {
+            self.shouldIgnoreRouterConnection = YES;
+        }
         [self.selectDeviceView resignFirstResponder];
         [self setViewState:TGMainViewStateLookingForRouters];
         [self setPopupNotificationForState:self.viewState animated:YES];
