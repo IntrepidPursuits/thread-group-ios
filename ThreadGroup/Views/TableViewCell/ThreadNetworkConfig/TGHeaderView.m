@@ -32,7 +32,7 @@ static CGFloat const kTGHeaderViewFontSize = 12.0f;
                                                                toItem:self.contentView
                                                             attribute:NSLayoutAttributeCenterY
                                                            multiplier:1.0f
-                                                             constant:0.0f]];
+                                                             constant:8.0f]];
         [constraints addObject:[NSLayoutConstraint constraintWithItem:self.headerLabel
                                                             attribute:NSLayoutAttributeLeft
                                                             relatedBy:NSLayoutRelationEqual
