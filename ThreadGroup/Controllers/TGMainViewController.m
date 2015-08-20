@@ -432,10 +432,12 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     self.scannerView.alpha = 0.0f;
     self.successView.alpha = 0.0f;
 
-    TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
-    self.selectDeviceView.contentMode = contentMode;
-    self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
-    [self.view layoutIfNeeded];
+    [UIView animateWithDuration:kTGAnimationDuration animations:^{
+        TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
+        self.selectDeviceView.contentMode = contentMode;
+        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark - TGDeviceStepViewDelegate
@@ -463,13 +465,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)TGSelectDeviceStepViewDidTapScanCodeButton:(TGSelectDeviceStepView *)stepView {
     [self setViewState:TGMainViewStateConnectDeviceScanning];
     [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:NO];
-    
-    [UIView animateWithDuration:kTGAnimationDuration animations:^{
-        TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
-        self.selectDeviceView.contentMode = contentMode;
-        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
-        [self.view layoutIfNeeded];
-    }];
 }
 
 - (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device {
