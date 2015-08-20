@@ -44,14 +44,21 @@
     }
 }
 
-- (void)bringChildPopupToFront:(UIView *)childPopup animated:(BOOL)animated {
+- (void)bringChildPopupToFront:(UIView *)childPopup animated:(BOOL)animated withCompletion:(void (^)(void))completion {
     if (childPopup == self.topChildPopup) {
+        if (completion) {
+            completion();
+        }
         return;
     }
     childPopup.transform = CGAffineTransformMakeTranslation(0.0f, CGRectGetHeight(childPopup.bounds));
     [UIView animateWithDuration:(animated) ? 0.5f : 0.0f animations:^{
         childPopup.transform = CGAffineTransformIdentity;
         [self bringSubviewToFront:childPopup];
+    } completion:^(BOOL finished) {
+        if (completion) {
+            completion();
+        }
     }];
     self.topChildPopup = childPopup;
 }
