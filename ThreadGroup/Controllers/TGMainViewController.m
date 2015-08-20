@@ -284,21 +284,29 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated {
     switch (state) {
-        case TGMainViewStateAddAnotherDevice:
-            [self.popupView bringChildPopupToFront:self.addDevicePopup animated:animated];
-            self.popupViewBottomConstraint.constant = 0.0f;
+        case TGMainViewStateAddAnotherDevice: {
+            [self.popupView bringChildPopupToFront:self.addDevicePopup animated:animated withCompletion:^{
+                [self expandPopupView];
+            }];
+        }
             break;
-        case TGMainViewStateLookingForRouters:
-            [self.popupView bringChildPopupToFront:self.networkPopup animated:animated];
-            self.popupViewBottomConstraint.constant = 0.0f;
+        case TGMainViewStateLookingForRouters: {
+            [self.popupView bringChildPopupToFront:self.networkPopup animated:animated withCompletion:^{
+                [self expandPopupView];
+            }];
+        }
             break;
-        case TGMainViewStateConnectDeviceScanning:
-            [self.popupView bringChildPopupToFront:self.connectCodePopup animated:animated];
-            self.popupViewBottomConstraint.constant = 0.0f;
+        case TGMainViewStateConnectDeviceScanning: {
+            [self.popupView bringChildPopupToFront:self.connectCodePopup animated:animated withCompletion:^{
+                [self expandPopupView];
+            }];
+        }
             break;
-        case TGMainViewStateConnectDeviceTutorial:
-            [self.popupView bringChildPopupToFront:self.tutorialPopup animated:animated];
-            self.popupViewBottomConstraint.constant = 0.0f;
+        case TGMainViewStateConnectDeviceTutorial: {
+            [self.popupView bringChildPopupToFront:self.tutorialPopup animated:animated withCompletion:^{
+                [self expandPopupView];
+            }];
+        }
             break;
         default:
             self.popupViewBottomConstraint.constant = -kTGPopupParentViewHeight;
