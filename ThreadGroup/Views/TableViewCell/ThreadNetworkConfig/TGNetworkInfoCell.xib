@@ -6,6 +6,7 @@
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -26,7 +27,7 @@
                     </label>
                     <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BVo-H5-ahn">
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
