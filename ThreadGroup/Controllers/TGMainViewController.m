@@ -275,6 +275,13 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     }
 }
 
+- (void)expandPopupView {
+    self.popupViewBottomConstraint.constant = 0.0f;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.popupView layoutIfNeeded];
+    }];
+}
+
 - (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated {
     switch (state) {
         case TGMainViewStateAddAnotherDevice:
@@ -294,7 +301,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             self.popupViewBottomConstraint.constant = 0.0f;
             break;
         default:
-            //This hides the popupView
             self.popupViewBottomConstraint.constant = -kTGPopupParentViewHeight;
             break;
     }
