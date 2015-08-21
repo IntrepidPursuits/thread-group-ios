@@ -283,29 +283,22 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated {
+    void (^completion)(void) = ^void(void) { [self expandPopupView]; };
     switch (state) {
         case TGMainViewStateAddAnotherDevice: {
-            [self.popupView bringChildPopupToFront:self.addDevicePopup animated:animated withCompletion:^{
-                [self expandPopupView];
-            }];
+            [self.popupView bringChildPopupToFront:self.addDevicePopup animated:animated withCompletion:completion];
         }
             break;
         case TGMainViewStateLookingForRouters: {
-            [self.popupView bringChildPopupToFront:self.networkPopup animated:animated withCompletion:^{
-                [self expandPopupView];
-            }];
+            [self.popupView bringChildPopupToFront:self.networkPopup animated:animated withCompletion:completion];
         }
             break;
         case TGMainViewStateConnectDeviceScanning: {
-            [self.popupView bringChildPopupToFront:self.connectCodePopup animated:animated withCompletion:^{
-                [self expandPopupView];
-            }];
+            [self.popupView bringChildPopupToFront:self.connectCodePopup animated:animated withCompletion:completion];
         }
             break;
         case TGMainViewStateConnectDeviceTutorial: {
-            [self.popupView bringChildPopupToFront:self.tutorialPopup animated:animated withCompletion:^{
-                [self expandPopupView];
-            }];
+            [self.popupView bringChildPopupToFront:self.tutorialPopup animated:animated withCompletion:completion];
         }
             break;
         default:
