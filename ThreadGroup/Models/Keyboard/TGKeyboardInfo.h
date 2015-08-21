@@ -11,6 +11,5 @@
 
 @interface TGKeyboardInfo : NSObject
 @property (nonatomic, strong) NSNumber *animationDuration;
-@property (nonatomic) UIViewAnimationCurve animationCurve;
 @property (nonatomic) CGRect endframe;
 @end
