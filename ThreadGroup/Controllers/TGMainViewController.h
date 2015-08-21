@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, TGMainViewState) {
     TGMainViewStateConnectDeviceScanning,
     TGMainViewStateConnectDevicePassphrase,
     TGMainViewStateConnectDeviceTutorial,
+    TGMainViewStateConnectDeviceNoCameraAccess,
     TGMainViewStateAddAnotherDevice
 };
 

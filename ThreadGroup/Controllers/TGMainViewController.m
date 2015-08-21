@@ -186,7 +186,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)configureMainViewForViewState:(TGMainViewState)viewState {
     BOOL isScanning = (viewState == TGMainViewStateConnectDevicePassphrase || viewState == TGMainViewStateConnectDeviceScanning);
-    if (isScanning && [TGSettingsManager hasSeenScannerTutorial] == NO) {
+    if (viewState == TGMainViewStateConnectDeviceScanning && !self.scannerView.hasCameraAccess) {
+        viewState = TGMainViewStateConnectDeviceNoCameraAccess;
+        [self setPopupNotificationForState:viewState animated:NO];
+    } else if (isScanning && [TGSettingsManager hasSeenScannerTutorial] == NO) {
         viewState = TGMainViewStateConnectDeviceTutorial;
         [self setPopupNotificationForState:viewState animated:NO];
     }
@@ -197,6 +200,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self resetWifiSearchView];
             [self resetRouterSearchView];
             break;
+        case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning:
             [self resetSelectDeviceView];
@@ -228,6 +232,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             self.successView.hidden = YES;
             self.scannerView.hidden = YES;
             break;
+        case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDeviceScanning:
         case TGMainViewStateConnectDevicePassphrase:
@@ -251,6 +256,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)animateViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
+        case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
@@ -293,6 +299,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self.popupView bringChildPopupToFront:self.networkPopup animated:animated withCompletion:completion];
         }
             break;
+        case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectDeviceScanning: {
             [self.popupView bringChildPopupToFront:self.connectCodePopup animated:animated withCompletion:completion];
         }
@@ -313,6 +320,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             return TGScannerViewContentModeActiveScanning;
         case TGMainViewStateConnectDeviceTutorial:
             return TGScannerViewContentModeTutorial;
+        case TGMainViewStateConnectDeviceNoCameraAccess:
+            return TGScannerViewContentModeNoCameraAccess;
         default:
             return TGScannerViewContentModeInactive;
     }
