@@ -275,26 +275,33 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     }
 }
 
+- (void)expandPopupView {
+    self.popupViewBottomConstraint.constant = 0.0f;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.popupView layoutIfNeeded];
+    }];
+}
+
 - (void)setPopupNotificationForState:(TGMainViewState)state animated:(BOOL)animated {
+    void (^completion)(void) = ^void(void) { [self expandPopupView]; };
     switch (state) {
-        case TGMainViewStateAddAnotherDevice:
-            [self.popupView bringChildPopupToFront:self.addDevicePopup animated:animated];
-            self.popupViewBottomConstraint.constant = 0.0f;
+        case TGMainViewStateAddAnotherDevice: {
+            [self.popupView bringChildPopupToFront:self.addDevicePopup animated:animated withCompletion:completion];
+        }
             break;
-        case TGMainViewStateLookingForRouters:
-            [self.popupView bringChildPopupToFront:self.networkPopup animated:animated];
-            self.popupViewBottomConstraint.constant = 0.0f;
+        case TGMainViewStateLookingForRouters: {
+            [self.popupView bringChildPopupToFront:self.networkPopup animated:animated withCompletion:completion];
+        }
             break;
-        case TGMainViewStateConnectDeviceScanning:
-            [self.popupView bringChildPopupToFront:self.connectCodePopup animated:animated];
-            self.popupViewBottomConstraint.constant = 0.0f;
+        case TGMainViewStateConnectDeviceScanning: {
+            [self.popupView bringChildPopupToFront:self.connectCodePopup animated:animated withCompletion:completion];
+        }
             break;
-        case TGMainViewStateConnectDeviceTutorial:
-            [self.popupView bringChildPopupToFront:self.tutorialPopup animated:animated];
-            self.popupViewBottomConstraint.constant = 0.0f;
+        case TGMainViewStateConnectDeviceTutorial: {
+            [self.popupView bringChildPopupToFront:self.tutorialPopup animated:animated withCompletion:completion];
+        }
             break;
         default:
-            //This hides the popupView
             self.popupViewBottomConstraint.constant = -kTGPopupParentViewHeight;
             break;
     }
