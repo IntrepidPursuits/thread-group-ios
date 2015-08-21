@@ -11,6 +11,7 @@
 #import "UIColor+ThreadGroup.h"
 
 static CGFloat const kTGHeaderViewFontSize = 12.0f;
+static CGFloat const kTGHeaderLabelCenterOffset = 8.0f;
 
 @interface TGHeaderView()
 
@@ -32,7 +33,7 @@ static CGFloat const kTGHeaderViewFontSize = 12.0f;
                                                                toItem:self.contentView
                                                             attribute:NSLayoutAttributeCenterY
                                                            multiplier:1.0f
-                                                             constant:0.0f]];
+                                                             constant:kTGHeaderLabelCenterOffset]];
         [constraints addObject:[NSLayoutConstraint constraintWithItem:self.headerLabel
                                                             attribute:NSLayoutAttributeLeft
                                                             relatedBy:NSLayoutRelationEqual

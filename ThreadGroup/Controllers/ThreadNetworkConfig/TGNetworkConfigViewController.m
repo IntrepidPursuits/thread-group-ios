@@ -25,7 +25,7 @@ static NSString * const kTGGeneralCellReuseIdentifier = @"TGGeneralCellReuseIden
 static NSString * const kTGNetworkInfoCellReuseIdentifier = @"TGNetworkInfoCellReuseIdentifier";
 static NSString * const kTGSelectableCellReuseIdentifier = @"TGSelectableCellReuseIdentifier";
 static NSString * const KTGHeaderViewReuseIdentifier = @"TGHeaderViewReuseIdentifier";
-static CGFloat const kTGSectionHeaderHeight = 36.0f;
+static CGFloat const kTGSectionHeaderHeight = 43.0f;
 
 @interface TGNetworkConfigViewController () <UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
