@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, TGScannerViewContentMode) {
     TGScannerViewContentModeActiveScanning,
     TGScannerViewContentModeInactive,
     TGScannerViewContentModeTutorial,
+    TGScannerViewContentModeNoCameraAccess,
 };
 
 @interface TGScannerView : UIView

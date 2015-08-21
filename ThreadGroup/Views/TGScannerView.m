@@ -47,8 +47,8 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     [self configureContainer];
     [self configureOverlay];
     [self configureNoCameraAccessView];
-    [self configureMask];
     [self configureTutorialView];
+    [self configureMask];
 }
 
 - (void)configureScanner {
@@ -186,6 +186,10 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
             [self.captureSession stopRunning];
             [self setTutorialViewHidden:YES animated:animated];
             [self setMaskViewHidden:NO animated:animated];
+            break;
+        case TGScannerViewContentModeNoCameraAccess:
+            [self.captureSession stopRunning];
+            [self setTutorialViewHidden:YES animated:animated];
             break;
         case TGScannerViewContentModeTutorial:
             [self.captureSession stopRunning];
