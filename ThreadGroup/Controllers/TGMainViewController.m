@@ -206,6 +206,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
             self.selectDeviceView.contentMode = completedMode;
             self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:completedMode];
+            [self.selectDeviceView resignFirstResponder];
         }
             break;
         default:
@@ -338,10 +339,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)connectRouter:(TGRouter *)item {
+    [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (result.hasAuthorizationFailed) {
-            if (![self routerViewIsBeingPresented]) {
+            if (![self routerViewIsBeingPresented] && [self mainViewControllerIsBeingPresented]) {
                 self.routerAuthVC.item = item;
                 [self presentViewController:self.routerAuthVC animated:YES completion:nil];
             } else {
@@ -355,6 +357,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self animateConnectedToRouterWithItem:item];
             self.viewState = TGMainViewStateConnectDeviceScanning;
         }
+        [self.tableView setUserInteractionEnabled:YES];
     }];
 }
 
@@ -375,10 +378,14 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     self.routerSearchView.topSeperatorView.hidden = NO;
 }
 
-#pragma mark - TGRouterAuthViewController
+#pragma mark - Presented View Controllers
 
 - (BOOL)routerViewIsBeingPresented {
     return [self.presentedViewController isEqual:self.routerAuthVC];
+}
+
+- (BOOL)mainViewControllerIsBeingPresented {
+    return [self.navigationController.visibleViewController isEqual:self];
 }
 
 #pragma mark - TGRouterAuthViewControllerDelegate
@@ -389,7 +396,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)routerAuthenticationCanceled:(TGRouterAuthViewController *)routerAuthenticationView {
     [self dismissViewControllerAnimated:YES completion:nil];
-    self.viewState = TGMainViewStateLookingForRouters;
+    [self setViewState:TGMainViewStateLookingForRouters];
     [self setPopupNotificationForState:self.viewState animated:YES];
 }
 
