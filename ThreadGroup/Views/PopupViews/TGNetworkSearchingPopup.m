@@ -8,10 +8,11 @@
 
 #import "TGNetworkSearchingPopup.h"
 #import "UIView+Animations.h"
+#import "UIImage+ThreadGroup.h"
+#import "TGSpinnerView.h"
 
 @interface TGNetworkSearchingPopup()
-@property (weak, nonatomic) IBOutlet UIImageView *clockwiseSpinnerImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *counterClockwiseSpinnerImageView;
+@property (weak, nonatomic) IBOutlet UIView *spinnerViewContainer;
 @end
 
 @implementation TGNetworkSearchingPopup
@@ -19,32 +20,13 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self startAnimating];
-        [self registerForEnterForegroundNotification];
+        TGSpinnerView *spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_popupSpinnerClockwise] counterClockwiseImage:[UIImage tg_popupSpinnerCounterClockwise]];
+        [self.spinnerViewContainer addSubview:spinnerView];
+        [self.spinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
+        [self.spinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
+        spinnerView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
-}
-
-- (void)startAnimating {
-    [self.clockwiseSpinnerImageView threadGroup_animateClockwise];
-    [self.counterClockwiseSpinnerImageView threadGroup_animateCounterClockwise];
-}
-
-- (void)willMoveToWindow:(UIWindow *)newWindow {
-    [self startAnimating];
-}
-
-#pragma mark - Return from background notification
-
-- (void)registerForEnterForegroundNotification {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(startAnimating)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:[UIApplication sharedApplication]];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
