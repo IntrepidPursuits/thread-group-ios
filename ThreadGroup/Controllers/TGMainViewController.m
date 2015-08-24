@@ -437,6 +437,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     self.selectDeviceView.alpha = 0.0f;
     self.scannerView.alpha = 0.0f;
     self.successView.alpha = 0.0f;
+    TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModeScanQRCode;
+    [self.selectDeviceView setContentMode:newMode];
 }
 
 #pragma mark - TGDeviceStepViewDelegate
