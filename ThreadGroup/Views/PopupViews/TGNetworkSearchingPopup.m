@@ -30,6 +30,10 @@
     [self.counterClockwiseSpinnerImageView threadGroup_animateCounterClockwise];
 }
 
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [self startAnimating];
+}
+
 #pragma mark - Return from background notification
 
 - (void)registerForEnterForegroundNotification {
