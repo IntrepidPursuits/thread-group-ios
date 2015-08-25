@@ -185,11 +185,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)configureMainViewForViewState:(TGMainViewState)viewState {
-    BOOL isScanning = (viewState == TGMainViewStateConnectDevicePassphrase || viewState == TGMainViewStateConnectDeviceScanning);
     if (viewState == TGMainViewStateConnectDeviceScanning && !self.scannerView.hasCameraAccess) {
         viewState = TGMainViewStateConnectDeviceNoCameraAccess;
         [self setPopupNotificationForState:viewState animated:NO];
-    } else if (isScanning && [TGSettingsManager hasSeenScannerTutorial] == NO) {
+    } else if (viewState == TGMainViewStateConnectDeviceScanning && [TGSettingsManager hasSeenScannerTutorial] == NO) {
         viewState = TGMainViewStateConnectDeviceTutorial;
         [self setPopupNotificationForState:viewState animated:NO];
     }
