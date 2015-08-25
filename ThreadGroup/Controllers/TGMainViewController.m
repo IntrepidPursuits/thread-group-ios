@@ -124,11 +124,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)setupMainSpinner {
-    TGSpinnerView *spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_mainSpinnerClockwise] counterClockwiseImage:[UIImage tg_mainSpinnerCounterClockwise]];
+    TGSpinnerView *spinnerView = [[TGSpinnerView alloc] initWithFrame:self.findingNetworksSpinnerViewContainer.frame clockwiseImage:[UIImage tg_mainSpinnerClockwise] counterClockwiseImage:[UIImage tg_mainSpinnerCounterClockwise]];
     [self.findingNetworksSpinnerViewContainer addSubview:spinnerView];
+        spinnerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.findingNetworksSpinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
     [self.findingNetworksSpinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
-    spinnerView.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 #pragma mark - Table View
