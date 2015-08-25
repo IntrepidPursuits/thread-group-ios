@@ -15,7 +15,6 @@
 #import "TGNoCameraAccessView.h"
 
 static CGFloat const TGScannerTutorialButtonInset = 18.0f;
-static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 
 @interface TGScannerView() <AVCaptureMetadataOutputObjectsDelegate>
 
@@ -113,10 +112,9 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     [self addSubview:self.maskView];
     [self.maskView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    NSDictionary *metrics = @{@"BottomOffset" : @(TGScannerViewOverlayOffset)};
     NSDictionary *views = @{@"maskView" : self.maskView};
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[maskView]-BottomOffset-|" options:0 metrics:metrics views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[maskView]-BottomOffset-|" options:0 metrics:metrics views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[maskView]-0-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[maskView]-0-|" options:0 metrics:nil views:views]];
 }
 
 - (void)configureTutorialView {
