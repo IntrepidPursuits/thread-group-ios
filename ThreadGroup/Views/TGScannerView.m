@@ -14,8 +14,6 @@
 #import "UIColor+ThreadGroup.h"
 #import "TGNoCameraAccessView.h"
 
-static CGFloat const TGScannerViewOverlaySize = 199.0f;
-static CGFloat const TGScannerYOffset = 32.0f;
 static CGFloat const TGScannerTutorialButtonInset = 18.0f;
 static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 
@@ -47,8 +45,8 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     [self configureContainer];
     [self configureOverlay];
     [self configureNoCameraAccessView];
-    [self configureTutorialView];
     [self configureMask];
+    [self configureTutorialView];
 }
 
 - (void)configureScanner {
