@@ -13,6 +13,6 @@
 @property (strong, nonatomic) UIImageView *clockwiseSpinnerImageView;
 @property (strong, nonatomic) UIImageView *counterClockwiseSpinnerImageView;
 
-- (id)initWithClockwiseImage:(UIImage *)clockwiseView counterClockwiseImage:(UIImage *)counterClockwiseView;
+- (instancetype)initWithFrame:(CGRect)frame clockwiseImage:(UIImage *)clockwiseImage counterClockwiseImage:(UIImage *)counterClockwiseImage;
 
 @end

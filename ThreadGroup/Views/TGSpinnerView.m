@@ -11,10 +11,22 @@
 
 @implementation TGSpinnerView
 
-- (id)initWithClockwiseImage:(UIImage *)clockwiseImage counterClockwiseImage:(UIImage *)counterClockwiseImage {
-    if (self = [super init]) {
+- (instancetype)initWithFrame:(CGRect)frame clockwiseImage:(UIImage *)clockwiseImage counterClockwiseImage:(UIImage *)counterClockwiseImage {
+    self = [super initWithFrame:frame];
+    if (self) {
         self.clockwiseSpinnerImageView = [[UIImageView alloc] initWithImage:clockwiseImage];
         self.counterClockwiseSpinnerImageView = [[UIImageView alloc] initWithImage:counterClockwiseImage];
+        
+        [self addSubview:self.clockwiseSpinnerImageView];
+        [self addSubview:self.counterClockwiseSpinnerImageView];
+        
+        self.clockwiseSpinnerImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.clockwiseSpinnerImageView}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.clockwiseSpinnerImageView}]];
+        
+        self.counterClockwiseSpinnerImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.counterClockwiseSpinnerImageView}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.counterClockwiseSpinnerImageView}]];
         
         [self registerForEnterForegroundNotification];
         [self startAnimating];
