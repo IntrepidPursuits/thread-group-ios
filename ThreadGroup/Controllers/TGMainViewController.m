@@ -278,7 +278,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)expandPopupView {
     self.popupViewBottomConstraint.constant = 0.0f;
     [UIView animateWithDuration:0.5 animations:^{
-        [self.popupView layoutIfNeeded];
+        [self.view layoutIfNeeded];
     }];
 }
 
