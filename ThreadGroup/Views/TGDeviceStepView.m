@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic) UIView *nibView;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *spinnerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomBarView;
@@ -44,8 +43,6 @@
 
 - (void)commonInit {
     self.backgroundColor = [UIColor threadGroup_grey];
-    [self setSpinnerHidden:YES animated:NO];
-
     self.threadConfig.image = [UIImage tg_routerSettings];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapIcon)];
@@ -70,14 +67,6 @@
     [self.iconImageView threadGroup_animatePopup];
 }
 
-- (void)setSpinnerActive:(BOOL)spinnerActive {
-    if (_spinnerActive == spinnerActive) {
-        return;
-    }
-    _spinnerActive = spinnerActive;
-    [self setSpinnerHidden:!spinnerActive animated:YES];
-}
-
 - (void)setTitle:(NSString *)title subTitle:(NSString *)subTitle {
     [self.titleLabel setText:title];
     [self.subTitleLabel setText:subTitle];
@@ -89,21 +78,6 @@
 
 - (void)setThreadConfigHidden:(BOOL)hidden {
     self.threadConfig.hidden = hidden;
-}
-
-#pragma mark - Animations
-
-- (void)setSpinnerHidden:(BOOL)hidden animated:(BOOL)animated{
-    [UIView animateWithDuration:(animated) ? 0.3f : 0
-                     animations:^{
-                         self.spinnerImageView.alpha = (hidden) ? 0 : 1.0f;
-                         if (hidden) {
-                             [self.spinnerImageView.layer removeAllAnimations];
-                         } else {
-                             [self.spinnerImageView threadGroup_animateClockwise];
-                         }
-                         [self layoutIfNeeded];
-                     }];
 }
 
 #pragma mark - Button Events
