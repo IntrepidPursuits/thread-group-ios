@@ -334,7 +334,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.wifiSearchView setTopBarHidden:YES];
     [self.wifiSearchView setBottomBarHidden:NO];
     [self.wifiSearchView setIcon:[UIImage tg_wifiCompleted]];
-    [self.wifiSearchView setSpinnerActive:NO];
     [self.wifiSearchView setTitle:@"Connected to Wi-Fi" subTitle:[TGNetworkManager currentWifiSSID]];
     [self.wifiSearchView setThreadConfigHidden:YES];
 }
@@ -347,7 +346,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.routerSearchView setTopBarHidden:YES];
     [self.routerSearchView setBottomBarHidden:YES];
     [self.routerSearchView setIcon:[UIImage tg_routerActive]];
-    [self.routerSearchView setSpinnerActive:NO];
     [self.routerSearchView setTitle:@"Select a Border Router" subTitle:@"Thread networks in your home"];
     self.routerSearchView.topSeperatorView.hidden = YES;
     [self.routerSearchView setThreadConfigHidden:YES];
@@ -378,13 +376,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)animateConnectingToRouterWithItem:(TGRouter *)item {
-    [self.routerSearchView setSpinnerActive:YES];
-    [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
-    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@", item.name]];
+    //TODO: connecting popup
 }
 
 - (void)animateConnectedToRouterWithItem:(TGRouter *)item {
-    [self.routerSearchView setSpinnerActive:NO];
     [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
     [self.routerSearchView setTitle:item.name subTitle:item.networkName];
     [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
