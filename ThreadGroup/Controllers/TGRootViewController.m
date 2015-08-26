@@ -70,13 +70,10 @@
 }
 
 - (void)configureUIForReachableState {
+    [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
     if (![self.childNavigationController.viewControllers containsObject:self.mainViewController]) {
-        [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
         [self.childNavigationController pushViewController:self.mainViewController animated:YES];
     } else {
-        if (!(self.mainViewController.viewState == TGMainViewStateConnectDevicePassphrase)) {
-            [self.mainViewController setViewState:self.mainViewController.viewState];
-        }
         [self.childNavigationController popToViewController:self.mainViewController animated:YES];
     }
 }
