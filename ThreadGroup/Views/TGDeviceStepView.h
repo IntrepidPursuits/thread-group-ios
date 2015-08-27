@@ -13,7 +13,6 @@
 @interface TGDeviceStepView : UIView
 
 @property (nonatomic, weak) id<TGDeviceStepViewDelegate> delegate;
-@property (nonatomic, assign) BOOL spinnerActive;
 @property (weak, nonatomic) IBOutlet UIView *topSeperatorView;
 
 - (void)setBottomBarHidden:(BOOL)hidden;

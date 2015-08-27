@@ -9,9 +9,10 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGNetworkSearchingPopup">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGNetworkPopup">
             <connections>
                 <outlet property="spinnerViewContainer" destination="TgO-yL-Zwo" id="Yll-M3-hVP"/>
+                <outlet property="titleLabel" destination="ezP-rW-AfI" id="TmF-QG-hOp"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -25,7 +26,7 @@
                     <color key="textColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgO-yL-Zwo">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgO-yL-Zwo" userLabel="spinnerView">
                     <rect key="frame" x="16" y="12" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="TV2-cs-1zz"/>

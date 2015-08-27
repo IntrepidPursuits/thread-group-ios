@@ -29,7 +29,7 @@
 #import "TGTransitioningDelegate.h"
 
 #import "TGPopupParentView.h"
-#import "TGNetworkSearchingPopup.h"
+#import "TGNetworkPopup.h"
 #import "TGConnectCodePopup.h"
 #import "TGTutorialPopup.h"
 #import "TGAddDevicePopup.h"
@@ -72,7 +72,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 @property (weak, nonatomic) IBOutlet TGPopupParentView *popupView;
 @property (strong, nonatomic) NSArray *popups;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *popupViewBottomConstraint;
-@property (strong, nonatomic) TGNetworkSearchingPopup *networkPopup;
+@property (strong, nonatomic) TGNetworkPopup *networkSearchingPopup;
+@property (strong, nonatomic) TGNetworkPopup *connectingNetworkPopup;
 @property (strong, nonatomic) TGConnectCodePopup *connectCodePopup;
 @property (strong, nonatomic) TGTutorialPopup *tutorialPopup;
 @property (strong, nonatomic) TGAddDevicePopup *addDevicePopup;
@@ -229,6 +230,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)hideAndShowViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
+        case TGMainViewStateConnectingToRouter:
             self.wifiSearchView.topSeperatorView.hidden = YES;
             self.findingNetworksView.hidden = NO;
             self.availableRoutersView.hidden = NO;
@@ -260,6 +262,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)animateViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
+        case TGMainViewStateConnectingToRouter:
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
@@ -299,7 +302,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         }
             break;
         case TGMainViewStateLookingForRouters: {
-            [self.popupView bringChildPopupToFront:self.networkPopup animated:animated withCompletion:completion];
+            [self.popupView bringChildPopupToFront:self.networkSearchingPopup animated:animated withCompletion:completion];
+        }
+            break;
+        case TGMainViewStateConnectingToRouter: {
+            [self.popupView bringChildPopupToFront:self.connectingNetworkPopup animated:animated withCompletion:completion];
         }
             break;
         case TGMainViewStateConnectDeviceScanning: {
@@ -334,7 +341,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.wifiSearchView setTopBarHidden:YES];
     [self.wifiSearchView setBottomBarHidden:NO];
     [self.wifiSearchView setIcon:[UIImage tg_wifiCompleted]];
-    [self.wifiSearchView setSpinnerActive:NO];
     [self.wifiSearchView setTitle:@"Connected to Wi-Fi" subTitle:[TGNetworkManager currentWifiSSID]];
     [self.wifiSearchView setThreadConfigHidden:YES];
 }
@@ -347,7 +353,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.routerSearchView setTopBarHidden:YES];
     [self.routerSearchView setBottomBarHidden:YES];
     [self.routerSearchView setIcon:[UIImage tg_routerActive]];
-    [self.routerSearchView setSpinnerActive:NO];
     [self.routerSearchView setTitle:@"Select a Border Router" subTitle:@"Thread networks in your home"];
     self.routerSearchView.topSeperatorView.hidden = YES;
     [self.routerSearchView setThreadConfigHidden:YES];
@@ -378,13 +383,12 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)animateConnectingToRouterWithItem:(TGRouter *)item {
-    [self.routerSearchView setSpinnerActive:YES];
-    [self.routerSearchView setIcon:[UIImage tg_cancelButton]];
-    [self.routerSearchView setTitle:@"Connecting..." subTitle:[NSString stringWithFormat:@"%@", item.name]];
+    [self.connectingNetworkPopup resetTitleLabel:[NSString stringWithFormat:@"Connecting to %@...", item.name]];
+    [self setViewState:TGMainViewStateConnectingToRouter];
+    [self setPopupNotificationForState:TGMainViewStateConnectingToRouter animated:YES];
 }
 
 - (void)animateConnectedToRouterWithItem:(TGRouter *)item {
-    [self.routerSearchView setSpinnerActive:NO];
     [self.routerSearchView setBackgroundColor:[UIColor threadGroup_grey]];
     [self.routerSearchView setTitle:item.name subTitle:item.networkName];
     [self.routerSearchView setIcon:[UIImage tg_routerCompleted]];
@@ -600,11 +604,12 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (NSArray *)popups {
     if (!_popups) {
-        self.networkPopup = [TGNetworkSearchingPopup new];
+        self.networkSearchingPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeSearching];
+        self.connectingNetworkPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeConnecting];
         self.connectCodePopup = [TGConnectCodePopup new];
         self.tutorialPopup = [TGTutorialPopup new];
         self.addDevicePopup = [TGAddDevicePopup new];
-        _popups = @[self.networkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
+        _popups = @[self.networkSearchingPopup, self.connectingNetworkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
     }
     return _popups;
 }
