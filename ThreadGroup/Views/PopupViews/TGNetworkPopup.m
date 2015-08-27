@@ -26,6 +26,7 @@ static NSString * const kConnectingTitleLabelText = @"Connecting to...";
 - (instancetype)initWithContentMode:(TGNetworkPopupContentMode)contentMode {
     self = [super init];
     if (self) {
+        self.titleLabel.adjustsFontSizeToFitWidth = YES;
         [self setContentMode:contentMode];
     }
     return self;
