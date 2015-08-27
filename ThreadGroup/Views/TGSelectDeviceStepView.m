@@ -11,6 +11,7 @@
 #import "UIImage+ThreadGroup.h"
 #import "UIView+Animations.h"
 #import "TGDevice.h"
+#import "TGKeyboardInfo.h"
 
 static CGFloat TGSelectDeviceStepViewMinimumHeight = 64.0f;
 static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
@@ -49,6 +50,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
         self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
         [self commonInit];
     }
+    [self registerForKeyboardNotifications];
 }
 
 - (void)commonInit {
@@ -159,10 +161,6 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 - (IBAction)scanCodeButtonTapped:(id)sender {
     [self.passphraseInputField resignFirstResponder];
     [self resetConnectCodeTextField];
-
-    if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewDidTapScanCodeButton:)]) {
-        [self.delegate TGSelectDeviceStepViewDidTapScanCodeButton:self];
-    }
 }
 
 - (IBAction)confirmButtonTapped:(id)sender {
@@ -205,6 +203,45 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
     return (range.location == NSNotFound);
 }
 
+#pragma mark - Keyboard Notification
+
+- (void)registerForKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    if (self.passphraseInputField.isFirstResponder) {
+        NSNumber *animationDuration = notification.userInfo[UIKeyboardAnimationDurationUserInfoKey];
+        CGRect endFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        TGKeyboardInfo *info = [TGKeyboardInfo new];
+        info.animationDuration = animationDuration;
+        info.endframe = endFrame;
+        if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewKeyboardWillHide:withKeyboardInfo:)]) {
+            [self.delegate TGSelectDeviceStepViewKeyboardWillHide:self withKeyboardInfo:info];
+        }
+    }
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    if (self.passphraseInputField.isFirstResponder) {
+        NSNumber *animationDuration = notification.userInfo[UIKeyboardAnimationDurationUserInfoKey];
+        CGRect endFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        TGKeyboardInfo *info = [TGKeyboardInfo new];
+        info.animationDuration = animationDuration;
+        info.endframe = endFrame;
+        if ([self.delegate respondsToSelector:@selector(TGSelectDeviceStepViewKeyboardWillShow:withKeyboardInfo:)]) {
+            [self.delegate TGSelectDeviceStepViewKeyboardWillShow:self withKeyboardInfo:info];
+        }
+    }
+}
+
 #pragma mark -
 
 - (BOOL)becomeFirstResponder {
@@ -213,6 +250,10 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
 
 - (BOOL)resignFirstResponder {
     return [self.passphraseInputField resignFirstResponder];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

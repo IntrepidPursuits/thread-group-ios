@@ -33,6 +33,7 @@
 #import "TGConnectCodePopup.h"
 #import "TGTutorialPopup.h"
 #import "TGAddDevicePopup.h"
+#import "TGKeyboardInfo.h"
 
 static CGFloat const kTGPopupParentViewHeight = 56.0f;
 static CGFloat const kTGAnimationDuration = 0.5f;
@@ -86,6 +87,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 //Thread Network Config
 @property (strong, nonatomic) TGNetworkConfigViewController *threadConfig;
+
+@property (nonatomic) TGMainViewState previousViewState;
 
 @end
 
@@ -187,6 +190,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 #pragma mark - View States
 
 - (void)setViewState:(TGMainViewState)viewState {
+    self.previousViewState = _viewState;
     _viewState = viewState;
     if (self.isViewLoaded) {
         [self configureMainViewForViewState:viewState];
@@ -211,9 +215,13 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning:
-            [self resetSelectDeviceView];
-            [self setPopupNotificationForState:viewState animated:YES];
-            break;
+            if ([self isTogglingBetweenScanningAndPassphraseViewStates]) {
+                break;
+            } else {
+                [self resetSelectDeviceView];
+                [self setPopupNotificationForState:viewState animated:YES];
+                break;
+            }
         case TGMainViewStateAddAnotherDevice: {
             TGSelectDeviceStepViewContentMode completedMode = TGSelectDeviceStepViewContentModeComplete;
             self.selectDeviceView.contentMode = completedMode;
@@ -268,8 +276,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
-            self.selectDeviceView.alpha = 0.0f;
-            self.scannerView.alpha = 0.0f;
             [UIView animateWithDuration:kTGScannerViewAnimationDuration animations:^{
                 self.selectDeviceView.alpha = 1.0f;
                 self.scannerView.alpha = 1.0f;
@@ -431,11 +437,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     self.selectDeviceView.alpha = 0.0f;
     self.scannerView.alpha = 0.0f;
     self.successView.alpha = 0.0f;
-
-    TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
-    self.selectDeviceView.contentMode = contentMode;
-    self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
-    [self.view layoutIfNeeded];
+    TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModeScanQRCode;
+    [self.selectDeviceView setContentMode:newMode];
 }
 
 #pragma mark - TGDeviceStepViewDelegate
@@ -460,18 +463,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 #pragma mark - TGSelectDeviceStepViewDelegate
 
-- (void)TGSelectDeviceStepViewDidTapScanCodeButton:(TGSelectDeviceStepView *)stepView {
-    [self setViewState:TGMainViewStateConnectDeviceScanning];
-    [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:NO];
-    
-    [UIView animateWithDuration:kTGAnimationDuration animations:^{
-        TGSelectDeviceStepViewContentMode contentMode = TGSelectDeviceStepViewContentModeScanQRCode;
-        self.selectDeviceView.contentMode = contentMode;
-        self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:contentMode];
-        [self.view layoutIfNeeded];
-    }];
-}
-
 - (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device {
     [self.addProductVC setDevice:device andRouter:self.routerAuthVC.item];
     [self showAddProductVC];
@@ -493,6 +484,33 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self hideAddProductVC];
         }
     }];
+}
+
+- (void)TGSelectDeviceStepViewKeyboardWillHide:(TGSelectDeviceStepView *)stepView withKeyboardInfo:(TGKeyboardInfo *)keyboardInfo {
+    [self setViewState:TGMainViewStateConnectDeviceScanning];
+    [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:YES];
+    [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
+    self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
+
+    [UIView animateWithDuration:[keyboardInfo.animationDuration doubleValue]
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.view layoutIfNeeded];
+                     } completion:nil];
+}
+
+- (void)TGSelectDeviceStepViewKeyboardWillShow:(TGSelectDeviceStepView *)stepView withKeyboardInfo:(TGKeyboardInfo *)keyboardInfo {
+    TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
+    [self.selectDeviceView setContentMode:newMode];
+    self.selectDeviceViewHeightLayoutConstraint.constant = CGRectGetHeight(self.view.frame) - self.selectDeviceView.frame.origin.y - CGRectGetHeight(keyboardInfo.endframe);
+    
+    [UIView animateWithDuration:[keyboardInfo.animationDuration doubleValue]
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.view layoutIfNeeded];
+                     } completion:nil];
 }
 
 #pragma mark - TGAddProductViewController
@@ -566,24 +584,28 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)parentPopup:(TGPopupParentView *)popupParent didReceiveTouchForChildPopupAtIndex:(NSInteger)index {
     UIView *selectedView = [self.popupView popupAtIndex:index];
     if (selectedView == self.tutorialPopup) {
-        [TGSettingsManager setHasSeenScannerTutorial:YES];
-        [self setViewState:TGMainViewStateConnectDeviceScanning];
-        [self setPopupNotificationForState:self.viewState animated:YES];
+        [self tutorialPopupSelected];
     } else if (selectedView == self.addDevicePopup) {
-        self.viewState = TGMainViewStateConnectDeviceScanning;
-        [self setPopupNotificationForState:self.viewState animated:YES];
+        [self addDevicePopupSelected];
     } else if (selectedView == self.connectCodePopup) {
-        self.viewState = TGMainViewStateConnectDevicePassphrase;
-        [self setPopupNotificationForState:NSNotFound animated:YES];
-        [UIView animateWithDuration:kTGAnimationDuration animations:^{
-            TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
-            [self.selectDeviceView setContentMode:newMode];
-            self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:newMode];
-            [self.view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            [self.selectDeviceView becomeFirstResponder];
-        }];
+        [self connectCodePopupSelected];
     }
+}
+
+- (void)tutorialPopupSelected {
+    [TGSettingsManager setHasSeenScannerTutorial:YES];
+    [self setViewState:TGMainViewStateConnectDeviceScanning];
+    [self setPopupNotificationForState:self.viewState animated:YES];
+}
+
+- (void)addDevicePopupSelected {
+    self.viewState = TGMainViewStateConnectDeviceScanning;
+    [self setPopupNotificationForState:self.viewState animated:YES];
+}
+
+- (void)connectCodePopupSelected {
+    self.viewState = TGMainViewStateConnectDevicePassphrase;
+    [self.selectDeviceView becomeFirstResponder];
 }
 
 #pragma mark - Lazy Load
@@ -615,6 +637,13 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         _popups = @[self.networkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
     }
     return _popups;
+}
+
+#pragma mark - Helper
+
+- (BOOL)isTogglingBetweenScanningAndPassphraseViewStates {
+    //Check if self.viewState is toggling in between scanning QR code and entering Connect Code manually view states
+    return (self.previousViewState == self.viewState || (self.previousViewState == TGMainViewStateConnectDeviceScanning && self.viewState == TGMainViewStateConnectDevicePassphrase) || (self.previousViewState == TGMainViewStateConnectDevicePassphrase && self.viewState == TGMainViewStateConnectDeviceScanning));
 }
 
 @end

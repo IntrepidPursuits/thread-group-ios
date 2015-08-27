@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class TGDevice;
+@class TGKeyboardInfo;
 
 typedef NS_ENUM(NSUInteger, TGSelectDeviceStepViewContentMode) {
     TGSelectDeviceStepViewContentModeScanQRCodeInvalid,
@@ -21,17 +22,16 @@ typedef NS_ENUM(NSUInteger, TGSelectDeviceStepViewContentMode) {
 @protocol TGSelectDeviceStepViewDelegate;
 
 @interface TGSelectDeviceStepView : UIView
-
 @property (nonatomic, weak) id<TGSelectDeviceStepViewDelegate> delegate;
 @property (nonatomic, assign) TGSelectDeviceStepViewContentMode contentMode;
-
 + (CGFloat)heightForContentMode:(TGSelectDeviceStepViewContentMode)contentMode;
-
 @end
 
 @protocol TGSelectDeviceStepViewDelegate <NSObject>
 
 - (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device;
-- (void)TGSelectDeviceStepViewDidTapScanCodeButton:(TGSelectDeviceStepView *)stepView;
+
+- (void)TGSelectDeviceStepViewKeyboardWillHide:(TGSelectDeviceStepView *)stepView withKeyboardInfo:(TGKeyboardInfo *)keyboardInfo;
+- (void)TGSelectDeviceStepViewKeyboardWillShow:(TGSelectDeviceStepView *)stepView withKeyboardInfo:(TGKeyboardInfo *)keyboardInfo;
 
 @end
