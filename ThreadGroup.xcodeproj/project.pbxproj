@@ -88,8 +88,8 @@
 		D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B456701B3C932400832112 /* TGAddProductViewController.xib */; };
 		D9B456761B3D999900832112 /* TGAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B456751B3D999900832112 /* TGAnimator.m */; };
 		D9DA7C1B1B87638A00969A19 /* TGKeyboardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DA7C1A1B87638A00969A19 /* TGKeyboardInfo.m */; };
-		D9E1A9D91B60327600B3DA2C /* TGNetworkSearchingPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9D71B60327600B3DA2C /* TGNetworkSearchingPopup.m */; };
-		D9E1A9DA1B60327600B3DA2C /* TGNetworkSearchingPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E1A9D81B60327600B3DA2C /* TGNetworkSearchingPopup.xib */; };
+		D9E1A9D91B60327600B3DA2C /* TGNetworkPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9D71B60327600B3DA2C /* TGNetworkPopup.m */; };
+		D9E1A9DA1B60327600B3DA2C /* TGNetworkPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E1A9D81B60327600B3DA2C /* TGNetworkPopup.xib */; };
 		D9E1A9DD1B6032EB00B3DA2C /* TGPopupParentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9DC1B6032EB00B3DA2C /* TGPopupParentView.m */; };
 		D9E1A9E01B60351B00B3DA2C /* TGConnectCodePopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9DF1B60351B00B3DA2C /* TGConnectCodePopup.m */; };
 		D9E1A9E31B60353300B3DA2C /* TGTutorialPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E1A9E21B60353300B3DA2C /* TGTutorialPopup.m */; };
@@ -259,9 +259,9 @@
 		D9B456751B3D999900832112 /* TGAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGAnimator.m; path = AnimatedTransitions/TGAnimator.m; sourceTree = "<group>"; };
 		D9DA7C191B87638A00969A19 /* TGKeyboardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGKeyboardInfo.h; path = Models/Keyboard/TGKeyboardInfo.h; sourceTree = "<group>"; };
 		D9DA7C1A1B87638A00969A19 /* TGKeyboardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGKeyboardInfo.m; path = Models/Keyboard/TGKeyboardInfo.m; sourceTree = "<group>"; };
-		D9E1A9D61B60327600B3DA2C /* TGNetworkSearchingPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkSearchingPopup.h; sourceTree = "<group>"; };
-		D9E1A9D71B60327600B3DA2C /* TGNetworkSearchingPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkSearchingPopup.m; sourceTree = "<group>"; };
-		D9E1A9D81B60327600B3DA2C /* TGNetworkSearchingPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkSearchingPopup.xib; sourceTree = "<group>"; };
+		D9E1A9D61B60327600B3DA2C /* TGNetworkPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNetworkPopup.h; sourceTree = "<group>"; };
+		D9E1A9D71B60327600B3DA2C /* TGNetworkPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkPopup.m; sourceTree = "<group>"; };
+		D9E1A9D81B60327600B3DA2C /* TGNetworkPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNetworkPopup.xib; sourceTree = "<group>"; };
 		D9E1A9DB1B6032EB00B3DA2C /* TGPopupParentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPopupParentView.h; sourceTree = "<group>"; };
 		D9E1A9DC1B6032EB00B3DA2C /* TGPopupParentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPopupParentView.m; sourceTree = "<group>"; };
 		D9E1A9DE1B60351B00B3DA2C /* TGConnectCodePopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGConnectCodePopup.h; sourceTree = "<group>"; };
@@ -636,9 +636,9 @@
 		D9E1A9D51B60327600B3DA2C /* PopupViews */ = {
 			isa = PBXGroup;
 			children = (
-				D9E1A9D61B60327600B3DA2C /* TGNetworkSearchingPopup.h */,
-				D9E1A9D71B60327600B3DA2C /* TGNetworkSearchingPopup.m */,
-				D9E1A9D81B60327600B3DA2C /* TGNetworkSearchingPopup.xib */,
+				D9E1A9D61B60327600B3DA2C /* TGNetworkPopup.h */,
+				D9E1A9D71B60327600B3DA2C /* TGNetworkPopup.m */,
+				D9E1A9D81B60327600B3DA2C /* TGNetworkPopup.xib */,
 				D9E1A9DB1B6032EB00B3DA2C /* TGPopupParentView.h */,
 				D9E1A9DC1B6032EB00B3DA2C /* TGPopupParentView.m */,
 				D9E1A9DE1B60351B00B3DA2C /* TGConnectCodePopup.h */,
@@ -787,7 +787,7 @@
 				D96C04D61B594DE400B4DB1B /* TGPasswordViewController.xib in Resources */,
 				D96C04B61B56CF8D00B4DB1B /* TGNetworkSecurityViewController.xib in Resources */,
 				CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */,
-				D9E1A9DA1B60327600B3DA2C /* TGNetworkSearchingPopup.xib in Resources */,
+				D9E1A9DA1B60327600B3DA2C /* TGNetworkPopup.xib in Resources */,
 				CCDB64C21B7BE2AF0098FD77 /* TGNoWifiViewController.xib in Resources */,
 				CDDB18EC1B29EDAA008A84FD /* TGSelectDeviceStepView.xib in Resources */,
 				CD8C683D1B2881520091B548 /* TGDeviceStepView.xib in Resources */,
@@ -878,7 +878,7 @@
 				CCE0F68E1B7E64B90022AA46 /* TGNavigationAnimator.m in Sources */,
 				CD6422401B710E5C0010A0DE /* TGNetworkCallbackResult.m in Sources */,
 				D9FB30231B398C8D002B6ED4 /* TGDevice.m in Sources */,
-				D9E1A9D91B60327600B3DA2C /* TGNetworkSearchingPopup.m in Sources */,
+				D9E1A9D91B60327600B3DA2C /* TGNetworkPopup.m in Sources */,
 				CD7B60441B1F5469007FF820 /* main.mm in Sources */,
 				CD8C68271B273A8B0091B548 /* UIColor+ThreadGroup.m in Sources */,
 				D9DA7C1B1B87638A00969A19 /* TGKeyboardInfo.m in Sources */,

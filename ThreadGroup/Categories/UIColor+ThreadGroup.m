@@ -10,6 +10,10 @@
 
 @implementation UIColor (ThreadGroup)
 
++ (UIColor *)threadGroup_whiteGrey {
+    return [UIColor colorWithRed:(237.0f / 255.0f) green:(237.0f / 255.0f) blue:(237.0f / 255.0f) alpha:1.0f];
+}
+
 + (UIColor *)threadGroup_lightGrey {
     return [UIColor colorWithRed:(88.0f/255.0f) green:(87.0f/255.0f) blue:(87.0f/255.0f) alpha:1.0f];
 }
