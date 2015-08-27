@@ -29,7 +29,7 @@
 #import "TGTransitioningDelegate.h"
 
 #import "TGPopupParentView.h"
-#import "TGNetworkSearchingPopup.h"
+#import "TGNetworkPopup.h"
 #import "TGConnectCodePopup.h"
 #import "TGTutorialPopup.h"
 #import "TGAddDevicePopup.h"
@@ -72,7 +72,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 @property (weak, nonatomic) IBOutlet TGPopupParentView *popupView;
 @property (strong, nonatomic) NSArray *popups;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *popupViewBottomConstraint;
-@property (strong, nonatomic) TGNetworkSearchingPopup *networkPopup;
+@property (strong, nonatomic) TGNetworkPopup *networkSearchingPopup;
+@property (strong, nonatomic) TGNetworkPopup *connectingNetworkPopup;
 @property (strong, nonatomic) TGConnectCodePopup *connectCodePopup;
 @property (strong, nonatomic) TGTutorialPopup *tutorialPopup;
 @property (strong, nonatomic) TGAddDevicePopup *addDevicePopup;
@@ -299,7 +300,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         }
             break;
         case TGMainViewStateLookingForRouters: {
-            [self.popupView bringChildPopupToFront:self.networkPopup animated:animated withCompletion:completion];
+            [self.popupView bringChildPopupToFront:self.networkSearchingPopup animated:animated withCompletion:completion];
         }
             break;
         case TGMainViewStateConnectDeviceScanning: {
@@ -595,11 +596,12 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (NSArray *)popups {
     if (!_popups) {
-        self.networkPopup = [TGNetworkSearchingPopup new];
+        self.networkSearchingPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeSearching];
+        self.connectingNetworkPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeConnecting];
         self.connectCodePopup = [TGConnectCodePopup new];
         self.tutorialPopup = [TGTutorialPopup new];
         self.addDevicePopup = [TGAddDevicePopup new];
-        _popups = @[self.networkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
+        _popups = @[self.networkSearchingPopup, self.connectingNetworkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
     }
     return _popups;
 }
