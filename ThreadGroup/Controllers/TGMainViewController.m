@@ -274,8 +274,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)animateViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
-        case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectingToRouter:
+        case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
@@ -316,11 +316,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self.popupView bringChildPopupToFront:self.networkSearchingPopup animated:animated withCompletion:completion];
         }
             break;
-        case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectingToRouter: {
             [self.popupView bringChildPopupToFront:self.connectingNetworkPopup animated:animated withCompletion:completion];
         }
             break;
+        case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectDeviceScanning: {
             [self.popupView bringChildPopupToFront:self.connectCodePopup animated:animated withCompletion:completion];
         }
