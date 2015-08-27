@@ -11,8 +11,8 @@
 
 @implementation TGSpinnerView
 
-- (instancetype)initWithFrame:(CGRect)frame clockwiseImage:(UIImage *)clockwiseImage counterClockwiseImage:(UIImage *)counterClockwiseImage {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithClockwiseImage:(UIImage *)clockwiseImage counterClockwiseImage:(UIImage *)counterClockwiseImage {
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         self.clockwiseSpinnerImageView = [[UIImageView alloc] initWithImage:clockwiseImage];
         self.counterClockwiseSpinnerImageView = [[UIImageView alloc] initWithImage:counterClockwiseImage];
