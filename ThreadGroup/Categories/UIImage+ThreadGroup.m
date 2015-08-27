@@ -88,6 +88,14 @@ static CGSize const kTGRouterSettingsImageSize = {18.0f, 18.0f};
     return [UIImage imageNamed:@"spinner_small_counter_clockwise"];
 }
 
++ (UIImage *)tg_popupWhiteSpinnerClockwise {
+    return [UIImage imageNamed:@"spinner_small_white_clockwise"];
+}
+
++ (UIImage *)tg_popupWhiteSpinnerCounterClockwise {
+    return [UIImage imageNamed:@"spinner_small_white_counter_clockwise"];
+}
+
 #pragma mark - helper
 
 + (UIImage *)imageNamed:(NSString *)name scaledToSize:(CGSize)size {

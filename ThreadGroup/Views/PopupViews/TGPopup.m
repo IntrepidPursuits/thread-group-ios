@@ -8,20 +8,30 @@
 
 #import "TGPopup.h"
 
+@interface TGPopup()
+
+@property (strong, nonatomic) UIView *nibView;
+
+@end
+
 @implementation TGPopup
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        UIView *nibView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
+        self.nibView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
                                                       owner:self
                                                     options:nil] lastObject];
-        [self addSubview:nibView];
-        nibView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : nibView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : nibView}]];
+        [self addSubview:self.nibView];
+        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
     }
     return self;
+}
+
+- (void)setNibViewBackgroundColor:(UIColor *)nibViewBackgroundColor {
+        [self.nibView setBackgroundColor:nibViewBackgroundColor];
 }
 
 @end

@@ -33,5 +33,7 @@
 + (UIImage *)tg_mainSpinnerCounterClockwise;
 + (UIImage *)tg_popupSpinnerClockwise;
 + (UIImage *)tg_popupSpinnerCounterClockwise;
++ (UIImage *)tg_popupWhiteSpinnerClockwise;
++ (UIImage *)tg_popupWhiteSpinnerCounterClockwise;
 
 @end
