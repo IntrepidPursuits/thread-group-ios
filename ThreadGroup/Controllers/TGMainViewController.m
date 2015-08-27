@@ -75,6 +75,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *popupViewBottomConstraint;
 @property (strong, nonatomic) TGNetworkPopup *networkSearchingPopup;
 @property (strong, nonatomic) TGNetworkPopup *connectingNetworkPopup;
+@property (strong, nonatomic) TGNetworkPopup *failedConnectionPopup;
 @property (strong, nonatomic) TGConnectCodePopup *connectCodePopup;
 @property (strong, nonatomic) TGTutorialPopup *tutorialPopup;
 @property (strong, nonatomic) TGAddDevicePopup *addDevicePopup;
@@ -636,10 +637,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (!_popups) {
         self.networkSearchingPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeSearching];
         self.connectingNetworkPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeConnecting];
+        self.failedConnectionPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeFailedConnection];
         self.connectCodePopup = [TGConnectCodePopup new];
         self.tutorialPopup = [TGTutorialPopup new];
         self.addDevicePopup = [TGAddDevicePopup new];
-        _popups = @[self.networkSearchingPopup, self.connectingNetworkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
+        _popups = @[self.networkSearchingPopup, self.connectingNetworkPopup, self.failedConnectionPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
     }
     return _popups;
 }
