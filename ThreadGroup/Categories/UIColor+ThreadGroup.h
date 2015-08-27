@@ -10,6 +10,7 @@
 
 @interface UIColor (ThreadGroup)
 
++ (UIColor *)threadGroup_whiteGrey;
 + (UIColor *)threadGroup_lightGrey;
 + (UIColor *)threadGroup_grey;
 + (UIColor *)threadGroup_warmGrey;
