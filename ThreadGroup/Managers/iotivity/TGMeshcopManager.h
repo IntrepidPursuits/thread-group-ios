@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MeshCop.h>
+#import "MeshCop.h"
 
 @class TGNetworkCallbackResult;
 @class TGNetworkCallback;

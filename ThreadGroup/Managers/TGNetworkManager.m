@@ -69,6 +69,8 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 
 - (void)connectToRouter:(TGRouter *)router completion:(TGNetworkManagerCommissionerPetitionCompletionBlock)completion {
     _viewState = TGNetworkManagerCommissionerStateConnecting;
+    self.petitionCompletionBlock = completion;
+    
     BOOL didChangeHost = [self.meshcopManager changeToHostAtAddress:router.ipAddress
                                                    commissionerPort:router.port
                                                         networkType:CA_ADAPTER_IP
@@ -175,6 +177,8 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 #pragma mark - Meshcop Manager Delegate
 
 - (void)meshcopManagerDidReceiveCallbackResponse:(MCCallback_t)responseType responseResult:(TGNetworkCallbackResult *)callbackResult {
+
+    NSLog(@"Received Callback Response");
     
     dispatch_async(dispatch_get_main_queue(), ^{
         switch (responseType) {
@@ -215,6 +219,15 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
                 break;
         }
     });
+}
+
+#pragma mark - Lazy
+
+- (NSMutableDictionary *)managementSetCompletionBlocks {
+    if (_managementSetCompletionBlocks == nil) {
+        _managementSetCompletionBlocks = [NSMutableDictionary new];
+    }
+    return _managementSetCompletionBlocks;
 }
 
 @end
