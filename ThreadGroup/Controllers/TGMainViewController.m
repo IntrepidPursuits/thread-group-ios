@@ -235,6 +235,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
         case TGMainViewStateConnectingToRouter:
+        case TGMainViewStateFailedRouterConnection:
             self.wifiSearchView.topSeperatorView.hidden = YES;
             self.findingNetworksView.hidden = NO;
             self.availableRoutersView.hidden = NO;
@@ -268,6 +269,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
         case TGMainViewStateConnectingToRouter:
+        case TGMainViewStateFailedRouterConnection:
         case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
@@ -313,6 +315,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             break;
         case TGMainViewStateConnectingToRouter: {
             [self.popupView bringChildPopupToFront:self.connectingNetworkPopup animated:animated withCompletion:completion];
+        }
+            break;
+        case TGMainViewStateFailedRouterConnection: {
+            [self.popupView bringChildPopupToFront:self.failedConnectionPopup animated:animated withCompletion:completion];
         }
             break;
         case TGMainViewStateConnectDeviceNoCameraAccess:
@@ -372,6 +378,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
+        if (!result) {
+            self.viewState = TGMainViewStateFailedRouterConnection;
+            [self setPopupNotificationForState:TGMainViewStateFailedRouterConnection animated:YES];
+            return;
+        }
         if (result.hasAuthorizationFailed) {
             if (![self routerViewIsBeingPresented] && [self mainViewControllerIsBeingPresented]) {
                 self.routerAuthVC.item = item;
