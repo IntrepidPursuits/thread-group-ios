@@ -53,7 +53,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 //Finding Networks
 @property (weak, nonatomic) IBOutlet UIView *findingNetworksView;
-@property (weak, nonatomic) IBOutlet TGSpinnerView *findingNetworksSpinnerView;
+@property (weak, nonatomic) IBOutlet UIView *findingNetworksSpinnerViewContainer;
 @property (strong, nonatomic) TGRouter *cachedRouter;
 
 //Select/Add Devices
@@ -120,6 +120,15 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     self.threadConfig = [[TGNetworkConfigViewController alloc] initWithNibName:nil bundle:nil];
     [self.popupView setPopups:self.popups];
     self.popupView.delegate = self;
+    [self setupMainSpinner];
+}
+
+- (void)setupMainSpinner {
+    TGSpinnerView *spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_mainSpinnerClockwise] counterClockwiseImage:[UIImage tg_mainSpinnerCounterClockwise]];
+    [self.findingNetworksSpinnerViewContainer addSubview:spinnerView];
+        spinnerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.findingNetworksSpinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
+    [self.findingNetworksSpinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
 }
 
 #pragma mark - Table View

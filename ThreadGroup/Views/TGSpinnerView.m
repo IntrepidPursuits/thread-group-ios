@@ -2,39 +2,41 @@
 //  TGSpinnerView.m
 //  ThreadGroup
 //
-//  Created by Patrick Butkiewicz on 6/10/15.
+//  Created by Anbita Siregar on 8/24/15.
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
 #import "TGSpinnerView.h"
 #import "UIView+Animations.h"
 
-@interface TGSpinnerView()
-
-@property (nonatomic, strong) UIView *nibView;
-@property (weak, nonatomic) IBOutlet UIImageView *spinnerLargeCounterClockwiseImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *spinnerLargeClockwiseImageView;
-@end
-
 @implementation TGSpinnerView
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
+- (instancetype)initWithClockwiseImage:(UIImage *)clockwiseImage counterClockwiseImage:(UIImage *)counterClockwiseImage {
+    self = [super initWithFrame:CGRectZero];
     if (self) {
-        self.nibView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-                                                      owner:self
-                                                    options:nil] lastObject];
-        [self addSubview:self.nibView];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.clockwiseSpinnerImageView = [[UIImageView alloc] initWithImage:clockwiseImage];
+        self.counterClockwiseSpinnerImageView = [[UIImageView alloc] initWithImage:counterClockwiseImage];
+        
+        [self addSubview:self.clockwiseSpinnerImageView];
+        [self addSubview:self.counterClockwiseSpinnerImageView];
+        
+        self.clockwiseSpinnerImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.clockwiseSpinnerImageView}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.clockwiseSpinnerImageView}]];
+        
+        self.counterClockwiseSpinnerImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.counterClockwiseSpinnerImageView}]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.counterClockwiseSpinnerImageView}]];
+        
+        [self registerForEnterForegroundNotification];
+        [self startAnimating];
     }
-    [self startAnimating];
+    return self;
 }
 
 - (void)startAnimating {
-    [self.spinnerLargeClockwiseImageView threadGroup_animateClockwise];
-    [self.spinnerLargeCounterClockwiseImageView threadGroup_animateCounterClockwise];
+    [self.clockwiseSpinnerImageView threadGroup_animateClockwise];
+    [self.counterClockwiseSpinnerImageView threadGroup_animateCounterClockwise];
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
@@ -53,6 +55,5 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 @end

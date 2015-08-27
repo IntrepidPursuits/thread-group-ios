@@ -29,4 +29,9 @@
 + (UIImage *)tg_spinner;
 + (UIImage *)tg_tutorialView;
 
++ (UIImage *)tg_mainSpinnerClockwise;
++ (UIImage *)tg_mainSpinnerCounterClockwise;
++ (UIImage *)tg_popupSpinnerClockwise;
++ (UIImage *)tg_popupSpinnerCounterClockwise;
+
 @end

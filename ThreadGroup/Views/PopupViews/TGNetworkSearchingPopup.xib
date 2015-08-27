@@ -11,8 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGNetworkSearchingPopup">
             <connections>
-                <outlet property="clockwiseSpinnerImageView" destination="LfT-xR-QAk" id="C6b-PV-R7D"/>
-                <outlet property="counterClockwiseSpinnerImageView" destination="9Bk-Qx-PtZ" id="Ljk-UX-cry"/>
+                <outlet property="spinnerViewContainer" destination="TgO-yL-Zwo" id="Yll-M3-hVP"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -20,37 +19,26 @@
             <rect key="frame" x="0.0" y="0.0" width="382" height="48"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner_small_clockwise" translatesAutoresizingMaskIntoConstraints="NO" id="LfT-xR-QAk" userLabel="Spinner Clockwise">
-                    <rect key="frame" x="16" y="12" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="24" id="GVU-5G-rHV"/>
-                        <constraint firstAttribute="width" constant="24" id="knJ-Zn-grR"/>
-                    </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spinner_small_counter_clockwise" translatesAutoresizingMaskIntoConstraints="NO" id="9Bk-Qx-PtZ">
-                    <rect key="frame" x="16" y="12" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="24" id="kGM-ws-0LL"/>
-                        <constraint firstAttribute="height" constant="24" id="mtR-ia-oog"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Still looking for Thread Networks..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezP-rW-AfI">
-                    <rect key="frame" x="56" y="17" width="318" height="15"/>
+                    <rect key="frame" x="56" y="17" width="318" height="14.5"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                     <color key="textColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgO-yL-Zwo">
+                    <rect key="frame" x="16" y="12" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="TV2-cs-1zz"/>
+                        <constraint firstAttribute="width" constant="24" id="u64-sx-kiM"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ezP-rW-AfI" firstAttribute="centerY" secondItem="9Bk-Qx-PtZ" secondAttribute="centerY" id="IjA-s2-2gE"/>
-                <constraint firstItem="9Bk-Qx-PtZ" firstAttribute="centerY" secondItem="LfT-xR-QAk" secondAttribute="centerY" id="JOA-qX-K6p"/>
-                <constraint firstAttribute="centerY" secondItem="9Bk-Qx-PtZ" secondAttribute="centerY" id="SmW-lb-iGd"/>
-                <constraint firstItem="9Bk-Qx-PtZ" firstAttribute="centerX" secondItem="LfT-xR-QAk" secondAttribute="centerX" id="TQu-8l-VFo"/>
-                <constraint firstItem="9Bk-Qx-PtZ" firstAttribute="height" secondItem="LfT-xR-QAk" secondAttribute="height" id="Xaw-fq-uSo"/>
-                <constraint firstItem="LfT-xR-QAk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="lbr-GD-Jco"/>
-                <constraint firstItem="9Bk-Qx-PtZ" firstAttribute="width" secondItem="LfT-xR-QAk" secondAttribute="width" id="srZ-8B-6EN"/>
-                <constraint firstItem="ezP-rW-AfI" firstAttribute="leading" secondItem="9Bk-Qx-PtZ" secondAttribute="trailing" constant="16" id="w9Q-ip-LDT"/>
+                <constraint firstItem="ezP-rW-AfI" firstAttribute="leading" secondItem="TgO-yL-Zwo" secondAttribute="trailing" constant="16" id="E7B-uN-2b9"/>
+                <constraint firstItem="TgO-yL-Zwo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="FBz-H2-fzA"/>
+                <constraint firstItem="ezP-rW-AfI" firstAttribute="centerY" secondItem="TgO-yL-Zwo" secondAttribute="centerY" id="K1s-gI-PPC"/>
+                <constraint firstAttribute="centerY" secondItem="TgO-yL-Zwo" secondAttribute="centerY" id="vyQ-BU-Kvp"/>
                 <constraint firstAttribute="trailing" secondItem="ezP-rW-AfI" secondAttribute="trailing" constant="8" id="y4Q-ck-BHF"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -59,8 +47,4 @@
             <point key="canvasLocation" x="311" y="-54"/>
         </view>
     </objects>
-    <resources>
-        <image name="spinner_small_clockwise" width="24" height="24"/>
-        <image name="spinner_small_counter_clockwise" width="24" height="24"/>
-    </resources>
 </document>
