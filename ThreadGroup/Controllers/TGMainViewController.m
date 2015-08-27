@@ -391,7 +391,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)animateConnectingToRouterWithItem:(TGRouter *)item {
-    //TODO: connecting popup
+    [self.connectingNetworkPopup resetTitleLabel:[NSString stringWithFormat:@"Connecting to %@...", item.name]];
+    [self.popupView bringChildPopupToFront:self.connectingNetworkPopup animated:YES withCompletion:^{
+        [self expandPopupView];
+    }];
 }
 
 - (void)animateConnectedToRouterWithItem:(TGRouter *)item {
