@@ -24,19 +24,6 @@
     return self;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    if (self) {
-        [self commonInit];
-    }
-}
-
-- (void)commonInit {
-    self.backgroundColor = [UIColor threadGroup_grey];
-    self.settingsButton.backgroundColor = [UIColor threadGroup_darkGrey];
-}
-
 - (IBAction)settingsButtonPressed:(UIButton *)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }

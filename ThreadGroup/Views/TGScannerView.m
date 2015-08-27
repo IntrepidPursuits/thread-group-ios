@@ -14,8 +14,6 @@
 #import "UIColor+ThreadGroup.h"
 #import "TGNoCameraAccessView.h"
 
-static CGFloat const TGScannerViewOverlaySize = 199.0f;
-static CGFloat const TGScannerYOffset = 32.0f;
 static CGFloat const TGScannerTutorialButtonInset = 18.0f;
 static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 
@@ -46,9 +44,9 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     [self configureScanner];
     [self configureContainer];
     [self configureOverlay];
+    [self configureNoCameraAccessView];
     [self configureMask];
     [self configureTutorialView];
-    [self configureNoCameraAccessView];
 }
 
 - (void)configureScanner {
@@ -115,10 +113,9 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     [self addSubview:self.maskView];
     [self.maskView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    NSDictionary *metrics = @{@"BottomOffset" : @(TGScannerViewOverlayOffset)};
     NSDictionary *views = @{@"maskView" : self.maskView};
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[maskView]-BottomOffset-|" options:0 metrics:metrics views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[maskView]-BottomOffset-|" options:0 metrics:metrics views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[maskView]-0-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[maskView]-0-|" options:0 metrics:nil views:views]];
 }
 
 - (void)configureTutorialView {
@@ -154,18 +151,18 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 }
 
 - (void)configureNoCameraAccessView {
+    self.hasCameraAccess = YES;
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusDenied) {
-        self.cameraOverlay.hidden = YES;
         self.noCameraAccessView = [[TGNoCameraAccessView alloc] init];
         [self.noCameraAccessView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        self.noCameraAccessView.backgroundColor = [UIColor threadGroup_darkGrey];
         [self addSubview:self.noCameraAccessView];
         
         NSDictionary *views = @{@"View" : self.noCameraAccessView};
         
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[View]-0-|" options:0 metrics:nil views:views]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[View]-0-|" options:0 metrics:nil views:views]];
+        self.hasCameraAccess = NO;
     }
 }
 
@@ -186,6 +183,10 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
             [self.captureSession stopRunning];
             [self setTutorialViewHidden:YES animated:animated];
             [self setMaskViewHidden:NO animated:animated];
+            break;
+        case TGScannerViewContentModeNoCameraAccess:
+            [self.captureSession stopRunning];
+            [self setTutorialViewHidden:YES animated:animated];
             break;
         case TGScannerViewContentModeTutorial:
             [self.captureSession stopRunning];
