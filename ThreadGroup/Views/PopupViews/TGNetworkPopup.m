@@ -16,9 +16,8 @@ static NSString * const kSearchingTitleLabelText = @"Still looking for Thread Ne
 static NSString * const kConnectingTitleLabelText = @"Connecting to...";
 
 @interface TGNetworkPopup()
-@property (weak, nonatomic) IBOutlet UIView *spinnerViewContainer;
+@property (weak, nonatomic) IBOutlet UIView *imageViewContainer;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (strong, nonatomic) TGSpinnerView *spinnerView;
 @end
 
 @implementation TGNetworkPopup
@@ -36,8 +35,8 @@ static NSString * const kConnectingTitleLabelText = @"Connecting to...";
         [self setNibViewBackgroundColor:[UIColor threadGroup_whiteGrey]];
         self.titleLabel.text = kSearchingTitleLabelText;
         self.titleLabel.textColor = [UIColor threadGroup_grey];
-        self.spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_popupSpinnerClockwise] counterClockwiseImage:[UIImage tg_popupSpinnerCounterClockwise]];
-        [self constrainSpinnerViewToContainer];
+        TGSpinnerView *spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_popupSpinnerClockwise] counterClockwiseImage:[UIImage tg_popupSpinnerCounterClockwise]];
+        [self constrainImageViewToContainer:spinnerView];
     } else if (contentMode == TGNetworkPopupContentModeConnecting) {
         [self setNibViewBackgroundColor:[UIColor threadGroup_orange]];
         self.titleLabel.text = kConnectingTitleLabelText;
@@ -47,11 +46,11 @@ static NSString * const kConnectingTitleLabelText = @"Connecting to...";
     }
 }
 
-- (void)constrainSpinnerViewToContainer {
-    [self.spinnerViewContainer addSubview:self.spinnerView];
-    self.spinnerView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.spinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.spinnerView}]];
-    [self.spinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.spinnerView}]];
+- (void)constrainImageViewToContainer:(UIView *)imageView {
+    [self.imageViewContainer addSubview:imageView];
+    imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.imageViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : imageView}]];
+    [self.imageViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : imageView}]];
 }
 
 - (void)resetTitleLabel:(NSString *)title {
