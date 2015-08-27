@@ -12,6 +12,7 @@
 typedef NS_ENUM(NSUInteger, TGNetworkPopupContentMode) {
     TGNetworkPopupContentModeSearching,
     TGNetworkPopupContentModeConnecting,
+    TGNetworkPopupContentModeFailedConnection,
 };
 
 @interface TGNetworkPopup : TGPopup
