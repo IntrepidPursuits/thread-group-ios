@@ -15,6 +15,7 @@
 #import "TGNoCameraAccessView.h"
 
 static CGFloat const TGScannerTutorialButtonInset = 18.0f;
+static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 
 @interface TGScannerView() <AVCaptureMetadataOutputObjectsDelegate>
 
