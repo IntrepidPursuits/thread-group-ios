@@ -36,13 +36,13 @@ static NSString * const kConnectingTitleLabelText = @"Connecting to...";
         [self setNibViewBackgroundColor:[UIColor threadGroup_whiteGrey]];
         self.titleLabel.text = kSearchingTitleLabelText;
         self.titleLabel.textColor = [UIColor threadGroup_grey];
-        self.spinnerView = [[TGSpinnerView alloc] initWithFrame:CGRectZero clockwiseImage:[UIImage tg_popupSpinnerClockwise] counterClockwiseImage:[UIImage tg_popupSpinnerCounterClockwise]];
+        self.spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_popupSpinnerClockwise] counterClockwiseImage:[UIImage tg_popupSpinnerCounterClockwise]];
         [self constrainSpinnerViewToContainer];
     } else if (contentMode == TGNetworkPopupContentModeConnecting) {
         [self setNibViewBackgroundColor:[UIColor threadGroup_orange]];
         self.titleLabel.text = kConnectingTitleLabelText;
         self.titleLabel.textColor = [UIColor whiteColor];
-        self.spinnerView = [[TGSpinnerView alloc] initWithFrame:CGRectZero clockwiseImage:[UIImage tg_popupWhiteSpinnerClockwise] counterClockwiseImage:[UIImage tg_popupWhiteSpinnerCounterClockwise]];
+        self.spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_popupWhiteSpinnerClockwise] counterClockwiseImage:[UIImage tg_popupWhiteSpinnerCounterClockwise]];
         [self constrainSpinnerViewToContainer];
     }
 }
