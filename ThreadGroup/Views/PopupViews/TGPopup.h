@@ -10,4 +10,5 @@
 
 @interface TGPopup : UIView
 - (instancetype)init;
+- (void)setNibViewBackgroundColor:(UIColor *)nibViewBackgroundColor;
 @end
