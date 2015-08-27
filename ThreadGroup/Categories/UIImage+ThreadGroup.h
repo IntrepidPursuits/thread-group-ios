@@ -28,6 +28,7 @@
 
 + (UIImage *)tg_spinner;
 + (UIImage *)tg_tutorialView;
++ (UIImage *)tg_connectionFailedAlert;
 
 + (UIImage *)tg_mainSpinnerClockwise;
 + (UIImage *)tg_mainSpinnerCounterClockwise;

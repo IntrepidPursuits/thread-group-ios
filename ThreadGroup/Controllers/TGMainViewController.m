@@ -74,6 +74,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *popupViewBottomConstraint;
 @property (strong, nonatomic) TGNetworkPopup *networkSearchingPopup;
 @property (strong, nonatomic) TGNetworkPopup *connectingNetworkPopup;
+@property (strong, nonatomic) TGNetworkPopup *failedConnectionPopup;
 @property (strong, nonatomic) TGConnectCodePopup *connectCodePopup;
 @property (strong, nonatomic) TGTutorialPopup *tutorialPopup;
 @property (strong, nonatomic) TGAddDevicePopup *addDevicePopup;
@@ -234,6 +235,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
         case TGMainViewStateConnectingToRouter:
+        case TGMainViewStateFailedRouterConnection:
             self.wifiSearchView.topSeperatorView.hidden = YES;
             self.findingNetworksView.hidden = NO;
             self.availableRoutersView.hidden = NO;
@@ -267,6 +269,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
         case TGMainViewStateConnectingToRouter:
+        case TGMainViewStateFailedRouterConnection:
         case TGMainViewStateConnectDeviceNoCameraAccess:
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
@@ -312,6 +315,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             break;
         case TGMainViewStateConnectingToRouter: {
             [self.popupView bringChildPopupToFront:self.connectingNetworkPopup animated:animated withCompletion:completion];
+        }
+            break;
+        case TGMainViewStateFailedRouterConnection: {
+            [self.popupView bringChildPopupToFront:self.failedConnectionPopup animated:animated withCompletion:completion];
         }
             break;
         case TGMainViewStateConnectDeviceNoCameraAccess:
@@ -371,6 +378,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
+        if (!result) {
+            self.viewState = TGMainViewStateFailedRouterConnection;
+            [self setPopupNotificationForState:TGMainViewStateFailedRouterConnection animated:YES];
+            return;
+        }
         if (result.hasAuthorizationFailed) {
             if (![self routerViewIsBeingPresented] && [self mainViewControllerIsBeingPresented]) {
                 self.routerAuthVC.item = item;
@@ -614,10 +626,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (!_popups) {
         self.networkSearchingPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeSearching];
         self.connectingNetworkPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeConnecting];
+        self.failedConnectionPopup = [[TGNetworkPopup alloc] initWithContentMode:TGNetworkPopupContentModeFailedConnection];
         self.connectCodePopup = [TGConnectCodePopup new];
         self.tutorialPopup = [TGTutorialPopup new];
         self.addDevicePopup = [TGAddDevicePopup new];
-        _popups = @[self.networkSearchingPopup, self.connectingNetworkPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
+        _popups = @[self.networkSearchingPopup, self.connectingNetworkPopup, self.failedConnectionPopup, self.connectCodePopup, self.tutorialPopup, self.addDevicePopup];
     }
     return _popups;
 }
