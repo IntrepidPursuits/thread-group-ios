@@ -230,6 +230,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)hideAndShowViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
+        case TGMainViewStateConnectingToRouter:
             self.wifiSearchView.topSeperatorView.hidden = YES;
             self.findingNetworksView.hidden = NO;
             self.availableRoutersView.hidden = NO;
@@ -261,6 +262,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)animateViewsForState:(TGMainViewState)viewState {
     switch (viewState) {
         case TGMainViewStateLookingForRouters:
+        case TGMainViewStateConnectingToRouter:
         case TGMainViewStateConnectDeviceTutorial:
         case TGMainViewStateConnectDevicePassphrase:
         case TGMainViewStateConnectDeviceScanning: {
@@ -301,6 +303,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             break;
         case TGMainViewStateLookingForRouters: {
             [self.popupView bringChildPopupToFront:self.networkSearchingPopup animated:animated withCompletion:completion];
+        }
+            break;
+        case TGMainViewStateConnectingToRouter: {
+            [self.popupView bringChildPopupToFront:self.connectingNetworkPopup animated:animated withCompletion:completion];
         }
             break;
         case TGMainViewStateConnectDeviceScanning: {
@@ -378,9 +384,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)animateConnectingToRouterWithItem:(TGRouter *)item {
     [self.connectingNetworkPopup resetTitleLabel:[NSString stringWithFormat:@"Connecting to %@...", item.name]];
-    [self.popupView bringChildPopupToFront:self.connectingNetworkPopup animated:YES withCompletion:^{
-        [self expandPopupView];
-    }];
+    [self setViewState:TGMainViewStateConnectingToRouter];
+    [self setPopupNotificationForState:TGMainViewStateConnectingToRouter animated:YES];
 }
 
 - (void)animateConnectedToRouterWithItem:(TGRouter *)item {
