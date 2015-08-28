@@ -19,7 +19,6 @@
 @interface TGRootViewController () <UINavigationControllerDelegate>
 
 @property (nonatomic, strong) Reachability *reachability;
-@property (nonatomic, strong) UINavigationController *childNavigationController;
 @property (strong, nonatomic) TGMainViewController *mainViewController;
 
 @end
@@ -32,7 +31,7 @@
     [super viewDidLoad];
     [self configureReachability];
     [self registerForReturnFromBackgroundNotification];
-    [self setupChildNavigationController];
+    [self setupNavigationControllerDelegate];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -71,10 +70,10 @@
 
 - (void)configureUIForReachableState {
     [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
-    if (![self.childNavigationController.viewControllers containsObject:self.mainViewController]) {
-        [self.childNavigationController pushViewController:self.mainViewController animated:YES];
+    if (![self.navigationController.viewControllers containsObject:self.mainViewController]) {
+        [self.navigationController pushViewController:self.mainViewController animated:NO];
     } else {
-        [self.childNavigationController popToViewController:self.mainViewController animated:YES];
+        [self.navigationController popToViewController:self.mainViewController animated:YES];
     }
 }
 
@@ -83,7 +82,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     TGNoWifiViewController *noWifiVC = [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil];
-    [self.childNavigationController pushViewController:noWifiVC animated:YES];
+    [self.navigationController pushViewController:noWifiVC animated:YES];
 }
 
 #pragma mark - Notifications
@@ -116,13 +115,8 @@
 
 #pragma mark - Helpers
 
-- (void)setupChildNavigationController {
-    self.childNavigationController = [[UINavigationController alloc] init];
-    self.childNavigationController.delegate = self;
-    [self addChildViewController:self.childNavigationController];
-    self.childNavigationController.view.frame = self.view.bounds;
-    [self.view addSubview:self.childNavigationController.view];
-    [self.childNavigationController didMoveToParentViewController:self];
+- (void)setupNavigationControllerDelegate {
+    self.navigationController.delegate = self;
 }
 
 #pragma mark - Dealloc
