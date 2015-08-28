@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TGNotificationView : UIView
+typedef NS_ENUM(NSInteger, TGBadgeViewState) {
+    TGBadgeViewStateCount,
+    TGBadgeViewStateFailed,
+};
 
-- (void)setBackgroundColor:(UIColor *)color;
+@interface TGBadgeView : UIView
+
+@property (nonatomic) TGBadgeViewState viewState;
 - (void)setCount:(NSInteger)count;
 
 @end
