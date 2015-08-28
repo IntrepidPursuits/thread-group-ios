@@ -9,9 +9,14 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGBadgeView">
+            <connections>
+                <outlet property="containerView" destination="Zf3-WE-kI3" id="aZe-80-GPZ"/>
+                <outlet property="countLabel" destination="kH4-GX-k8M" id="sun-vQ-FZj"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TGNotificationView">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="14" height="15"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -21,12 +26,18 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zf3-WE-kI3" userLabel="contentView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zf3-WE-kI3" userLabel="content">
                     <rect key="frame" x="0.0" y="0.0" width="14" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="TzH-nq-bm8"/>
                         <constraint firstAttribute="width" constant="14" id="wzh-qP-PTO"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="TzH-nq-bm8"/>
+                            <exclude reference="wzh-qP-PTO"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -41,10 +52,6 @@
                 <constraint firstAttribute="bottom" secondItem="Zf3-WE-kI3" secondAttribute="bottom" id="x0t-Pn-atK"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="contentView" destination="Zf3-WE-kI3" id="iXk-Zo-WPx"/>
-                <outlet property="countLabel" destination="kH4-GX-k8M" id="1qx-Wo-P0b"/>
-            </connections>
             <point key="canvasLocation" x="407" y="359.5"/>
         </view>
     </objects>
