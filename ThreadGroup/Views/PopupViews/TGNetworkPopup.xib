@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGNetworkPopup">
             <connections>
-                <outlet property="spinnerViewContainer" destination="TgO-yL-Zwo" id="Yll-M3-hVP"/>
+                <outlet property="imageViewContainer" destination="TgO-yL-Zwo" id="rZp-sM-Ev9"/>
                 <outlet property="titleLabel" destination="ezP-rW-AfI" id="TmF-QG-hOp"/>
             </connections>
         </placeholder>

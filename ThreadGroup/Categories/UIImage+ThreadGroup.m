@@ -96,6 +96,10 @@ static CGSize const kTGRouterSettingsImageSize = {18.0f, 18.0f};
     return [UIImage imageNamed:@"spinner_small_white_counter_clockwise"];
 }
 
++ (UIImage *)tg_connectionFailedAlert {
+    return [UIImage imageNamed:@"alert_icon"];
+}
+
 #pragma mark - helper
 
 + (UIImage *)imageNamed:(NSString *)name scaledToSize:(CGSize)size {
