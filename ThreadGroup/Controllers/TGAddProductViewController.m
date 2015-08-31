@@ -26,10 +26,14 @@
 
 #pragma mark - ViewController Lifecycle
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupSpinnerView];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.addingDeviceText.attributedText = [self createLabelFromDevice:self.device andRouter:self.router];
-    [self setupSpinnerView];
 }
 
 - (void)setupSpinnerView {
