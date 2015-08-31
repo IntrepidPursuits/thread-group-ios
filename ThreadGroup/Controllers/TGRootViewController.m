@@ -19,7 +19,8 @@
 @interface TGRootViewController () <UINavigationControllerDelegate>
 
 @property (nonatomic, strong) Reachability *reachability;
-@property (strong, nonatomic) TGMainViewController *mainViewController;
+@property (nonatomic, strong) TGMainViewController *mainViewController;
+@property (nonatomic, strong) TGNoWifiViewController *noWifiViewController;
 
 @end
 
@@ -29,14 +30,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureReachability];
     [self registerForReturnFromBackgroundNotification];
     [self setupNavigationControllerDelegate];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self resetMainView];
+    [self configureReachability];
+    [self resetMainView:NO];
 }
 
 #pragma mark - Reachability
@@ -47,12 +44,12 @@
     __weak __typeof(self)weakSelf = self;
     self.reachability.reachableBlock = ^(Reachability *reach) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf configureUIForReachableState];
+            [weakSelf configureUIForReachableState:YES];
         });
     };
     self.reachability.unreachableBlock = ^(Reachability *reach) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf configureUIForUnreachableState];
+            [weakSelf configureUIForUnreachableState:YES];
         });
     };
     [self.reachability startNotifier];
@@ -60,38 +57,46 @@
 
 #pragma mark - Configuring Views
 
-- (void)resetMainView {
+- (void)resetMainView:(BOOL)animated {
     if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi) {
-        [self configureUIForReachableState];
+        [self configureUIForReachableState:animated];
     } else {
-        [self configureUIForUnreachableState];
+        [self configureUIForUnreachableState:animated];
     }
 }
 
-- (void)configureUIForReachableState {
+- (void)configureUIForReachableState:(BOOL)animated {
     [self.mainViewController setViewState:TGMainViewStateLookingForRouters];
     if (![self.navigationController.viewControllers containsObject:self.mainViewController]) {
-        [self.navigationController pushViewController:self.mainViewController animated:NO];
+        [self.navigationController pushViewController:self.mainViewController animated:animated];
     } else {
-        [self.navigationController popToViewController:self.mainViewController animated:YES];
+        [self.navigationController popToViewController:self.mainViewController animated:animated];
     }
 }
 
-- (void)configureUIForUnreachableState {
-    if (![self.presentedViewController isEqual:self.mainViewController]) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+- (void)configureUIForUnreachableState:(BOOL)animated {
+    if ([self.navigationController.viewControllers containsObject:self.mainViewController]) {
+        [self.mainViewController dismissViewControllerAnimated:YES completion:nil];
     }
-    TGNoWifiViewController *noWifiVC = [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:noWifiVC animated:YES];
+    if (![self.navigationController.viewControllers containsObject:self.noWifiViewController]) {
+        [self.navigationController pushViewController:self.noWifiViewController animated:animated];
+    } else {
+        [self.navigationController popToViewController:self.noWifiViewController animated:animated];
+    }
+
 }
 
 #pragma mark - Notifications
 
 - (void)registerForReturnFromBackgroundNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(resetMainView)
+                                             selector:@selector(appWillEnterForeground)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:[UIApplication sharedApplication]];
+}
+
+- (void)appWillEnterForeground {
+    [self resetMainView:YES];
 }
 
 #pragma mark - UINavigationControllerDelegate
@@ -111,6 +116,13 @@
         _mainViewController = [[TGMainViewController alloc] initWithNibName:nil bundle:nil];
     }
     return _mainViewController;
+}
+
+- (TGNoWifiViewController *)noWifiViewController {
+    if (!_noWifiViewController) {
+        _noWifiViewController = [[TGNoWifiViewController alloc] initWithNibName:nil bundle:nil];
+    }
+    return _noWifiViewController;
 }
 
 #pragma mark - Helpers
