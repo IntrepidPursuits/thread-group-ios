@@ -9,11 +9,13 @@
 #import "TGAddProductViewController.h"
 #import "TGSpinnerView.h"
 #import "UIFont+ThreadGroup.h"
+#import "UIImage+ThreadGroup.h"
 #import "TGDevice.h"
 #import "TGRouter.h"
 
 @interface TGAddProductViewController ()
-@property (weak, nonatomic) IBOutlet TGSpinnerView *spinnerView;
+
+@property (weak, nonatomic) IBOutlet UIView *spinnerViewContainer;
 @property (weak, nonatomic) IBOutlet UILabel *addingDeviceText;
 
 @property (strong, nonatomic) TGDevice *device;
@@ -24,9 +26,22 @@
 
 #pragma mark - ViewController Lifecycle
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupSpinnerView];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.addingDeviceText.attributedText = [self createLabelFromDevice:self.device andRouter:self.router];
+}
+
+- (void)setupSpinnerView {
+    TGSpinnerView *spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_mainSpinnerClockwise] counterClockwiseImage:[UIImage tg_mainSpinnerCounterClockwise]];
+    [self.spinnerViewContainer addSubview:spinnerView];
+    spinnerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.spinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
+    [self.spinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
 }
 
 #pragma mark -
