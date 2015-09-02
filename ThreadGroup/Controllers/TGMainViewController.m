@@ -34,6 +34,7 @@
 #import "TGTutorialPopup.h"
 #import "TGAddDevicePopup.h"
 #import "TGKeyboardInfo.h"
+#import "TGSuccessView.h"
 
 static CGFloat const kTGPopupParentViewHeight = 56.0f;
 static CGFloat const kTGAnimationDuration = 0.5f;
@@ -62,9 +63,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectDeviceViewHeightLayoutConstraint;
 
 //Success View
-@property (weak, nonatomic) IBOutlet UIView *successView;
-@property (weak, nonatomic) IBOutlet UILabel *successDeviceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *successNetworkLabel;
+@property (weak, nonatomic) IBOutlet TGSuccessView *successView;
 
 //Mask View
 @property (strong, nonatomic) IBOutlet TGScannerView *scannerView;
