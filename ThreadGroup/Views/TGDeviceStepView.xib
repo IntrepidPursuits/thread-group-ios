@@ -15,6 +15,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGDeviceStepView">
             <connections>
+                <outlet property="badgeView" destination="gZk-pd-FtA" id="hq7-5K-iRC"/>
                 <outlet property="bottomBarView" destination="WlN-nY-N3E" id="Xaf-o0-qb7"/>
                 <outlet property="iconImageView" destination="5E1-rV-mgT" id="JHr-tx-x0Z"/>
                 <outlet property="subTitleLabel" destination="q4i-9g-eJJ" id="Hss-bo-Z9z"/>
@@ -53,7 +54,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected to Wifi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="afr-k4-fow">
-                    <rect key="frame" x="72" y="16" width="243" height="15"/>
+                    <rect key="frame" x="72" y="16.5" width="243" height="14.5"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -78,6 +79,13 @@
                         <constraint firstAttribute="width" constant="44" id="pFM-tb-Ye4"/>
                     </constraints>
                 </imageView>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZk-pd-FtA" userLabel="BadgeView" customClass="TGBadgeView">
+                    <rect key="frame" x="319" y="15" width="14" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="EFh-1l-2yk"/>
+                        <constraint firstAttribute="width" constant="14" id="dMD-oK-cNp"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.27843135595321655" green="0.28235286474227905" blue="0.25490197539329529" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
@@ -87,6 +95,7 @@
                 <constraint firstItem="WlN-nY-N3E" firstAttribute="top" secondItem="5E1-rV-mgT" secondAttribute="bottom" id="D2o-B0-HHe"/>
                 <constraint firstItem="5E1-rV-mgT" firstAttribute="centerY" secondItem="8EH-dj-ykJ" secondAttribute="centerY" id="DrC-Cd-kYm"/>
                 <constraint firstItem="5E1-rV-mgT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="Ix4-SM-yv4"/>
+                <constraint firstItem="gZk-pd-FtA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="N2e-yj-7r8"/>
                 <constraint firstItem="5E1-rV-mgT" firstAttribute="centerX" secondItem="Eh8-fe-dCS" secondAttribute="centerX" id="P90-qo-GVh"/>
                 <constraint firstItem="5E1-rV-mgT" firstAttribute="top" secondItem="Eh8-fe-dCS" secondAttribute="bottom" id="WeZ-nS-yz0"/>
                 <constraint firstAttribute="trailing" secondItem="FeY-pR-sWQ" secondAttribute="trailing" constant="16" id="d1P-Db-gq3"/>
@@ -95,6 +104,7 @@
                 <constraint firstItem="afr-k4-fow" firstAttribute="bottom" secondItem="5E1-rV-mgT" secondAttribute="centerY" constant="-1" id="iTY-Ce-yu4"/>
                 <constraint firstItem="8EH-dj-ykJ" firstAttribute="leading" secondItem="afr-k4-fow" secondAttribute="trailing" constant="8" id="kpZ-Zw-w1r"/>
                 <constraint firstItem="q4i-9g-eJJ" firstAttribute="top" secondItem="5E1-rV-mgT" secondAttribute="centerY" constant="1" id="kzz-Zc-Idj"/>
+                <constraint firstAttribute="trailing" secondItem="gZk-pd-FtA" secondAttribute="trailing" constant="53" id="lQF-K8-7jJ"/>
                 <constraint firstAttribute="bottom" secondItem="WlN-nY-N3E" secondAttribute="bottom" id="pa5-yc-Fkp"/>
                 <constraint firstItem="8EH-dj-ykJ" firstAttribute="leading" secondItem="q4i-9g-eJJ" secondAttribute="trailing" constant="8" id="rVd-kO-JDe"/>
                 <constraint firstItem="FeY-pR-sWQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="u2O-DX-CJN"/>

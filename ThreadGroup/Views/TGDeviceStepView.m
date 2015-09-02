@@ -10,6 +10,7 @@
 #import "UIColor+ThreadGroup.h"
 #import "UIView+Animations.h"
 #import "UIImage+ThreadGroup.h"
+#import "TGBadgeView.h"
 
 @interface TGDeviceStepView()
 
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomBarView;
 @property (weak, nonatomic) IBOutlet UIView *topBarView;
 @property (weak, nonatomic) IBOutlet UIImageView *threadConfig;
+@property (weak, nonatomic) IBOutlet TGBadgeView *badgeView;
 
 @end
 
@@ -50,6 +52,9 @@
 
     UITapGestureRecognizer *threadConfigTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapThreadConfig)];
     [self.threadConfig addGestureRecognizer:threadConfigTap];
+    
+    [self.badgeView setViewState:TGBadgeViewStateFailed];
+    self.badgeView.hidden = YES;
 }
 
 #pragma mark - Public

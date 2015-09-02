@@ -18,6 +18,8 @@
 		0A7AD34DC5A3297901411D32 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
 		CC5BA3E11B6BE9E300898505 /* TGNoCameraAccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */; };
 		CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */; };
+		CCB358A41B8F935800D62CA6 /* TGBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB358A31B8F935800D62CA6 /* TGBadgeView.m */; };
+		CCB358A61B8F93B700D62CA6 /* TGBadgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCB358A51B8F93B700D62CA6 /* TGBadgeView.xib */; };
 		CCC2EC921B8BA38E00399E35 /* TGSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC2EC911B8BA38E00399E35 /* TGSpinnerView.m */; };
 		CCDB64BD1B7BDBD00098FD77 /* TGNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDB64BC1B7BDBD00098FD77 /* TGNavigationViewController.m */; };
 		CCDB64C11B7BE2AF0098FD77 /* TGNoWifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDB64BF1B7BE2AF0098FD77 /* TGNoWifiViewController.m */; };
@@ -136,6 +138,9 @@
 		CC5BA3DF1B6BE9E300898505 /* TGNoCameraAccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNoCameraAccessView.h; sourceTree = "<group>"; };
 		CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNoCameraAccessView.m; sourceTree = "<group>"; };
 		CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGNoCameraAccessView.xib; sourceTree = "<group>"; };
+		CCB358A21B8F935800D62CA6 /* TGBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGBadgeView.h; sourceTree = "<group>"; };
+		CCB358A31B8F935800D62CA6 /* TGBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGBadgeView.m; sourceTree = "<group>"; };
+		CCB358A51B8F93B700D62CA6 /* TGBadgeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGBadgeView.xib; sourceTree = "<group>"; };
 		CCC2EC901B8BA38E00399E35 /* TGSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGSpinnerView.h; path = ThreadGroup/Views/TGSpinnerView.h; sourceTree = SOURCE_ROOT; };
 		CCC2EC911B8BA38E00399E35 /* TGSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGSpinnerView.m; path = ThreadGroup/Views/TGSpinnerView.m; sourceTree = SOURCE_ROOT; };
 		CCDB64BB1B7BDBD00098FD77 /* TGNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNavigationViewController.h; sourceTree = "<group>"; };
@@ -524,6 +529,9 @@
 				CC5BA3DF1B6BE9E300898505 /* TGNoCameraAccessView.h */,
 				CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */,
 				CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */,
+				CCB358A21B8F935800D62CA6 /* TGBadgeView.h */,
+				CCB358A31B8F935800D62CA6 /* TGBadgeView.m */,
+				CCB358A51B8F93B700D62CA6 /* TGBadgeView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -779,6 +787,7 @@
 				CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */,
 				D96C04B11B569D2F00B4DB1B /* TGNetworkPickerCell.xib in Resources */,
 				0946F3FD1B500DC300EDB5DE /* TGGeneralCell.xib in Resources */,
+				CCB358A61B8F93B700D62CA6 /* TGBadgeView.xib in Resources */,
 				D9B456721B3C932400832112 /* TGAddProductViewController.xib in Resources */,
 				D9E1A9EC1B60374F00B3DA2C /* TGAddDevicePopup.xib in Resources */,
 				D95BC6861B43246E00271ED7 /* TGPopupContentViewController.xib in Resources */,
@@ -909,6 +918,7 @@
 				D95BC6891B43378400271ED7 /* TGButton.m in Sources */,
 				0946F3F61B500AEB00EDB5DE /* TGNetworkConfigViewController.m in Sources */,
 				D96C04B51B56CF8D00B4DB1B /* TGNetworkSecurityViewController.m in Sources */,
+				CCB358A41B8F935800D62CA6 /* TGBadgeView.m in Sources */,
 				D98651651B7E633100357E6C /* TGAddProductAnimator.m in Sources */,
 				D986515C1B7E240300357E6C /* NSDate+ThreadGroup.m in Sources */,
 				D9E1A9EA1B60374000B3DA2C /* TGAddDevicePopup.m in Sources */,
