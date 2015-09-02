@@ -36,8 +36,14 @@ const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
     return self;
 }
 
+#pragma mark - Getters
+
 - (NSString *)connectCode {
     return (self.qrCode) ? self.qrCode.connectCode : self.passphrase;
+}
+
+- (NSString *)name {
+    return (self.qrCode) ? self.qrCode.vendorModel : self.name;
 }
 
 @end
