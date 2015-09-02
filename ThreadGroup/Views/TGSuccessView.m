@@ -10,6 +10,8 @@
 
 @interface TGSuccessView()
 @property (nonatomic, strong) UIView *nibView;
+@property (weak, nonatomic) IBOutlet UILabel *deviceNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *networkNameLabel;
 @end
 
 @implementation TGSuccessView
@@ -27,5 +29,17 @@
     }
 }
 
+#pragma mark - Setters/Getters
+
+- (void)setDeviceName:(NSString *)deviceName {
+    _deviceName = deviceName;
+    self.deviceNameLabel.text = deviceName;
+}
+
+- (void)setNetworkName:(NSString *)networkName {
+    _networkName = networkName;
+    NSString *networkNameText = [NSString stringWithFormat:@"to %@", networkName];
+    self.networkNameLabel.text = networkNameText;
+}
 
 @end

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TGSuccessView : UIView
-
+@property (nonatomic, strong) NSString *deviceName;
+@property (nonatomic, strong) NSString *networkName;
 @end
