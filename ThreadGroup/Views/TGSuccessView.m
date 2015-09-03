@@ -7,6 +7,8 @@
 //
 
 #import "TGSuccessView.h"
+#import "TGDevice.h"
+#import "TGRouter.h"
 
 @interface TGSuccessView()
 @property (nonatomic, strong) UIView *nibView;
@@ -31,15 +33,14 @@
 
 #pragma mark - Setters/Getters
 
-- (void)setDeviceName:(NSString *)deviceName {
-    _deviceName = deviceName;
-    self.deviceNameLabel.text = deviceName;
+- (void)setDevice:(TGDevice *)device {
+    _device= device;
+    self.deviceNameLabel.text = device.name;
 }
 
-- (void)setNetworkName:(NSString *)networkName {
-    _networkName = networkName;
-    NSString *networkNameText = [NSString stringWithFormat:@"to %@", networkName];
-    self.networkNameLabel.text = networkNameText;
+- (void)setRouter:(TGRouter *)router {
+    _router = router;
+    self.networkNameLabel.text = [NSString stringWithFormat:@"to %@", router.name];
 }
 
 @end

@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TGDevice;
+@class TGRouter;
+
 @interface TGSuccessView : UIView
-@property (nonatomic, strong) NSString *deviceName;
-@property (nonatomic, strong) NSString *networkName;
+@property (nonatomic, strong) TGDevice *device;
+@property (nonatomic, strong) TGRouter *router;
 @end
