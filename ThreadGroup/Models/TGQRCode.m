@@ -89,23 +89,21 @@ static NSString * const kVendorProductSerialNumberKey = @"vs";
 }
 
 - (BOOL)hasRequiredParameterKeys {
-    BOOL containsKeys = NO;
     for (NSString *key in self.requiredKeys) {
         if (![self.parameterKeys containsObject:key]) {
-            containsKeys = YES;
+            return NO;
         }
     }
-    return containsKeys;
+    return YES;
 }
 
 - (BOOL)hasCorrectVerisonNumber {
-    BOOL hasCorrectVersion = NO;
     for (NSURLQueryItem *item in self.parameters) {
         if ([item.name isEqualToString:kQRCodeVersionKey] && [item.value isEqualToString:kCurrentQRCodeVersion]) {
-            hasCorrectVersion = YES;
+            return YES;
         }
     }
-    return hasCorrectVersion;
+    return NO;
 }
 
 #pragma mark - Helpers
