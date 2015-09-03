@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
-            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Light.otf">
             <string>Gotham-Light</string>
-        </mutableArray>
-        <mutableArray key="Gotham-Medium.otf">
-            <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -29,9 +24,7 @@
                 <outlet property="scannerView" destination="KzV-Dx-YPV" id="i3X-eX-hQq"/>
                 <outlet property="selectDeviceView" destination="tg2-Pu-Pyq" id="fwz-78-QBG"/>
                 <outlet property="selectDeviceViewHeightLayoutConstraint" destination="QBT-uX-fns" id="xcI-oi-oRA"/>
-                <outlet property="successDeviceLabel" destination="2PO-Je-wva" id="UcJ-dD-k4e"/>
-                <outlet property="successNetworkLabel" destination="TVh-1g-ar0" id="ynC-bn-Nex"/>
-                <outlet property="successView" destination="Kmq-1i-QMp" id="EJZ-1E-Dej"/>
+                <outlet property="successView" destination="Kmq-1i-QMp" id="04t-tP-LIy"/>
                 <outlet property="tableView" destination="zWQ-k9-goJ" id="0bC-YU-1Ox"/>
                 <outlet property="view" destination="iN0-l3-epB" id="FAM-Pj-0aO"/>
                 <outlet property="wifiSearchView" destination="5bh-tR-LN6" id="d2b-pM-jFk"/>
@@ -67,60 +60,15 @@
                     <rect key="frame" x="0.0" y="192" width="600" height="352"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmq-1i-QMp" userLabel="SuccessView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmq-1i-QMp" userLabel="SuccessView" customClass="TGSuccessView">
                     <rect key="frame" x="0.0" y="192" width="600" height="352"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M5G-Hg-VUy" userLabel="Top Seperator">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
-                            <color key="backgroundColor" red="0.53333333329999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="uXv-t5-15L"/>
-                            </constraints>
-                        </view>
-                        <imageView userInteractionEnabled="NO" alpha="0.5499999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="device_success" translatesAutoresizingMaskIntoConstraints="NO" id="kQf-4e-14C">
-                            <rect key="frame" x="252" y="92" width="96" height="96"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="kQf-4e-14C" secondAttribute="height" multiplier="1:1" id="JfT-g2-sOO"/>
-                                <constraint firstAttribute="width" constant="96" id="SmE-Ra-sRd"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Device&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2PO-Je-wva">
-                            <rect key="frame" x="175" y="212" width="250" height="24"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="250" id="ol6-Sx-UzV"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="24"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="joined &quot;Network&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TVh-1g-ar0">
-                            <rect key="frame" x="150" y="240" width="300" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="300" id="mKb-Mo-9Cz"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="16"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
                     <color key="backgroundColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="kQf-4e-14C" firstAttribute="centerX" secondItem="2PO-Je-wva" secondAttribute="centerX" id="6C5-mb-Jm0"/>
-                        <constraint firstItem="TVh-1g-ar0" firstAttribute="top" secondItem="2PO-Je-wva" secondAttribute="bottom" constant="4" id="Big-D0-oh6"/>
-                        <constraint firstAttribute="trailing" secondItem="M5G-Hg-VUy" secondAttribute="trailing" id="DNu-8a-voe"/>
-                        <constraint firstItem="2PO-Je-wva" firstAttribute="top" secondItem="kQf-4e-14C" secondAttribute="bottom" constant="24" id="Mja-cq-uhi"/>
-                        <constraint firstItem="M5G-Hg-VUy" firstAttribute="leading" secondItem="Kmq-1i-QMp" secondAttribute="leading" id="QqB-qE-qgc"/>
-                        <constraint firstItem="M5G-Hg-VUy" firstAttribute="top" secondItem="Kmq-1i-QMp" secondAttribute="top" id="dEF-V6-6t3"/>
-                        <constraint firstItem="TVh-1g-ar0" firstAttribute="centerX" secondItem="2PO-Je-wva" secondAttribute="centerX" id="jqO-vP-SVg"/>
-                        <constraint firstAttribute="centerX" secondItem="kQf-4e-14C" secondAttribute="centerX" id="taY-FY-Oha"/>
-                        <constraint firstItem="kQf-4e-14C" firstAttribute="bottom" secondItem="Kmq-1i-QMp" secondAttribute="centerY" constant="12" id="wCT-dh-Cw2"/>
-                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqJ-mI-Yuc" userLabel="AvailableRoutersView">
                     <rect key="frame" x="0.0" y="128" width="600" height="416"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE BORDER ROUTERS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bcr-rv-Vbl">
-                            <rect key="frame" x="16" y="16" width="191.5" height="12"/>
+                            <rect key="frame" x="16" y="16" width="192" height="12"/>
                             <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                             <color key="textColor" red="0.53333333329999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -235,7 +183,4 @@
             <point key="canvasLocation" x="30" y="613"/>
         </view>
     </objects>
-    <resources>
-        <image name="device_success" width="96" height="96"/>
-    </resources>
 </document>
