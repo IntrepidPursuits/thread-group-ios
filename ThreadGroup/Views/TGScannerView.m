@@ -13,6 +13,7 @@
 #import "UIImage+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 #import "TGNoCameraAccessView.h"
+#import "TGQRCodeParser.h"
 
 static CGFloat const TGScannerTutorialButtonInset = 18.0f;
 static CGFloat const TGScannerViewOverlayOffset = -65.0f;
@@ -234,12 +235,11 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     if (metadataObjects != nil && [metadataObjects count] > 0) {
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
-            TGDevice *device = [TGDevice new];
-            device.name = [metadataObj stringValue];
-            
+            TGQRCode *qrCode = [TGQRCodeParser parseDataFromString:[metadataObj stringValue]];
+            TGDevice *device = [[TGDevice alloc] initWithQRCode:qrCode];
             dispatch_async(dispatch_get_main_queue(), ^{
                 BOOL debugSuccess = (arc4random() % 2);
-                if (debugSuccess) {
+                if (debugSuccess && (device.qrCode != nil)) {
                     if ([self.delegate respondsToSelector:@selector(TGScannerView:didParseDeviceFromCode:)]) {
                         [self.delegate TGScannerView:self didParseDeviceFromCode:device];
                     }

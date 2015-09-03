@@ -12,11 +12,11 @@
 
 @interface TGDevice : NSObject
 
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) TGQRCode *qrCode;
 @property (nonatomic, strong, readonly) NSString *connectCode;
 
-- (instancetype)initWithPassphrase:(NSString *)passphrase;
+- (instancetype)initWithConnectCode:(NSString *)connectCode;
 - (instancetype)initWithQRCode:(TGQRCode *)qrCode;
 
 @end
