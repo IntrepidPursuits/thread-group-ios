@@ -239,7 +239,7 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
             TGDevice *device = [[TGDevice alloc] initWithQRCode:qrCode];
             dispatch_async(dispatch_get_main_queue(), ^{
                 BOOL debugSuccess = (arc4random() % 2);
-                if (debugSuccess) {
+                if (debugSuccess && (device.qrCode != nil)) {
                     if ([self.delegate respondsToSelector:@selector(TGScannerView:didParseDeviceFromCode:)]) {
                         [self.delegate TGScannerView:self didParseDeviceFromCode:device];
                     }
