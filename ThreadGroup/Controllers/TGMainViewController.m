@@ -491,8 +491,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self hideAddProductVC];
             self.viewState = TGMainViewStateAddAnotherDevice;
             [self setPopupNotificationForState:self.viewState animated:YES];
-            self.successView.deviceName = device.name;
-            self.successView.networkName = self.cachedRouter.name;
+            self.successView.device = device;
+            self.successView.router = self.cachedRouter;
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         } else {
             NSLog(@"Adding device failed!");
@@ -576,8 +576,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self hideAddProductVC];
             self.viewState = TGMainViewStateAddAnotherDevice;
             [self setPopupNotificationForState:self.viewState animated:YES];
-            self.successView.deviceName = device.name;
-            self.successView.networkName = self.cachedRouter.name;
+            self.successView.device = device;
+            self.successView.router = self.cachedRouter;
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         } else {
             NSLog(@"Adding device failed!");
