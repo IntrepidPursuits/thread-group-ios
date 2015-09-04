@@ -221,6 +221,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             } else {
                 [self resetSelectDeviceView];
                 [self setPopupNotificationForState:viewState animated:YES];
+                [self.scannerView startDetection];
                 break;
             }
         case TGMainViewStateAddAnotherDevice: {
