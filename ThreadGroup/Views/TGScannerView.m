@@ -177,20 +177,20 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     _contentMode = contentMode;
     switch (contentMode) {
         case TGScannerViewContentModeActiveScanning:
-            [self.captureSession startRunning];
+            [self startDetection];
             [self setTutorialViewHidden:YES animated:animated];
             break;
         case TGScannerViewContentModeInactive:
-            [self.captureSession stopRunning];
+            [self stopDetection];
             [self setTutorialViewHidden:YES animated:animated];
             [self setMaskViewHidden:NO animated:animated];
             break;
         case TGScannerViewContentModeNoCameraAccess:
-            [self.captureSession stopRunning];
+            [self stopDetection];
             [self setTutorialViewHidden:YES animated:animated];
             break;
         case TGScannerViewContentModeTutorial:
-            [self.captureSession stopRunning];
+            [self stopDetection];
             [self setTutorialViewHidden:NO animated:animated];
             break;
     }
