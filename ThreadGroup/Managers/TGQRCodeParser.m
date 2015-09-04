@@ -13,7 +13,7 @@
 
 + (TGQRCode *)parseDataFromString:(NSString *)dataString {
     NSArray *parameters = [TGQRCodeParser parseQueryString:dataString];
-    return [[TGQRCode alloc] initWithParameters:parameters];
+    return [TGQRCode qrCodeWithParameters:parameters];
 }
 
 + (NSArray *)parseQueryString:(NSString *)string {
