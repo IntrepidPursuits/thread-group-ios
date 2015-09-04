@@ -235,15 +235,16 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     if (metadataObjects != nil && [metadataObjects count] > 0) {
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
+            [self stopDetection];
             TGQRCode *qrCode = [TGQRCodeParser parseDataFromString:[metadataObj stringValue]];
             TGDevice *device = [[TGDevice alloc] initWithQRCode:qrCode];
             dispatch_async(dispatch_get_main_queue(), ^{
-                BOOL debugSuccess = (arc4random() % 2);
-                if (debugSuccess && (device.qrCode != nil)) {
+                if (device.qrCode) {
                     if ([self.delegate respondsToSelector:@selector(TGScannerView:didParseDeviceFromCode:)]) {
                         [self.delegate TGScannerView:self didParseDeviceFromCode:device];
                     }
                 } else {
+                    [self startDetection];
                     if ([self.delegate respondsToSelector:@selector(TGScannerViewDidFailParsingDevice:)]) {
                         [self.delegate TGScannerViewDidFailParsingDevice:self];
                     }
@@ -251,6 +252,16 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
             });
         }
     }
+}
+
+#pragma mark - Start/Stop Detection
+
+- (void)startDetection {
+    [self.captureSession startRunning];
+}
+
+- (void)stopDetection {
+    [self.captureSession stopRunning];
 }
 
 #pragma mark - Lazy

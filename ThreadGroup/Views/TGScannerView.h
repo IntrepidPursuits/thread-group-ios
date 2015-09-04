@@ -24,6 +24,9 @@ typedef NS_ENUM(NSUInteger, TGScannerViewContentMode) {
 @property (nonatomic) TGScannerViewContentMode contentMode;
 @property (nonatomic) BOOL hasCameraAccess;
 
+- (void)startDetection;
+- (void)stopDetection;
+
 @end
 
 @protocol TGScannerViewDelegate <NSObject>
