@@ -31,6 +31,5 @@ typedef NS_ENUM(NSUInteger, TGScannerViewContentMode) {
 
 @protocol TGScannerViewDelegate <NSObject>
 - (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device;
-- (void)TGScannerViewDidFailParsingDevice:(UIView *)scannerView;
 - (void)TGScannerView:(UIView *)scannerView didTapInfoButton:(id)sender;
 @end
