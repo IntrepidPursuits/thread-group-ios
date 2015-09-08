@@ -110,7 +110,7 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     
     TGNetworkCallbackJoinerFinishedResult *result = [TGNetworkCallbackJoinerFinishedResult new];
     result.joinerIdentifier = vendorName;
-    result.state = ACCEPT;
+    result.state = credentials ? ACCEPT : REJECT;
     result.vendorModel = vendorModel;
     result.vendorName = vendorName;
     result.vendorSoftwareVersion = 0;

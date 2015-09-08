@@ -64,7 +64,7 @@
     NSAttributedString *adding = [[NSAttributedString alloc] initWithString:@"Adding " attributes:[self bookFontAttributeDictionary]];
     NSAttributedString *to = [[NSAttributedString alloc] initWithString:@" to " attributes:[self bookFontAttributeDictionary]];
     NSAttributedString *deviceName = [[NSAttributedString alloc] initWithString:device.name attributes:[self boldFontAttributeDictionary]];
-    NSAttributedString *threadNetworkName = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@...", router.networkName] attributes:[self boldFontAttributeDictionary]];
+    NSAttributedString *threadNetworkName = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@...", router.name] attributes:[self boldFontAttributeDictionary]];
 
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithAttributedString:adding];
     [attString appendAttributedString:deviceName];

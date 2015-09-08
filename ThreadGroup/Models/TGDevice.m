@@ -12,6 +12,7 @@
 
 const NSUInteger TGDeviceConnectCodeMaximumCharacters = 16;
 const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
+static NSString * const kTGDefaultDeviceName = @"Thread Device";
 
 @interface TGDevice()
 @property (nonatomic, strong) NSString *name;
@@ -25,7 +26,6 @@ const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
     self = [super init];
     if (self) {
         _connectCode = connectCode;
-        _name = @"Connect Code";
     }
     return self;
 }
@@ -45,7 +45,7 @@ const NSUInteger TGDeviceConnectCodeMinimumCharacters = 6;
 }
 
 - (NSString *)name {
-    return (self.qrCode) ? self.qrCode.vendorModel : _name;
+    return (self.qrCode && self.qrCode.vendorModel) ? self.qrCode.vendorModel : kTGDefaultDeviceName;
 }
 
 @end
