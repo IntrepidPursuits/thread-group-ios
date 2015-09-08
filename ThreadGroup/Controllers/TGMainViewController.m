@@ -517,15 +517,10 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     }];
 }
 
-- (void)TGScannerViewDidFailParsingDevice:(UIView *)scannerView {
-    [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
-}
-
 - (void)TGScannerView:(UIView *)scannerView didTapInfoButton:(id)sender {
     [self setViewState:TGMainViewStateConnectDeviceTutorial];
     [self setPopupNotificationForState:self.viewState animated:YES];
 }
-
 
 #pragma mark - TGSelectDeviceStepViewDelegate
 
