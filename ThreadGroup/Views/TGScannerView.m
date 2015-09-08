@@ -239,16 +239,9 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
             TGQRCode *qrCode = [TGQRCodeParser parseDataFromString:[metadataObj stringValue]];
             TGDevice *device = [[TGDevice alloc] initWithQRCode:qrCode];
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (device.qrCode) {
                     if ([self.delegate respondsToSelector:@selector(TGScannerView:didParseDeviceFromCode:)]) {
                         [self.delegate TGScannerView:self didParseDeviceFromCode:device];
                     }
-                } else {
-                    [self startDetection];
-                    if ([self.delegate respondsToSelector:@selector(TGScannerViewDidFailParsingDevice:)]) {
-                        [self.delegate TGScannerViewDidFailParsingDevice:self];
-                    }
-                }
             });
         }
     }
