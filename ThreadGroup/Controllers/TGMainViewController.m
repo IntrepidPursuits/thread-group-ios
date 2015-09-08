@@ -477,60 +477,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     }
 }
 
-#pragma mark - TGSelectDeviceStepViewDelegate
-
-- (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device {
-    [self.addProductVC setDevice:device andRouter:self.routerAuthVC.item];
-    [self showAddProductVC];
-
-    [[TGNetworkManager sharedManager] connectDevice:device completion:^(TGNetworkCallbackJoinerFinishedResult *result) {
-        if (self.ignoreAddProduct) {
-            return;
-        }
-        
-        if (result && result.state == ACCEPT) {
-            [self hideAddProductVC];
-            self.viewState = TGMainViewStateAddAnotherDevice;
-            [self setPopupNotificationForState:self.viewState animated:YES];
-            self.successView.device = device;
-            self.successView.router = self.cachedRouter;
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        } else {
-            NSLog(@"Adding device failed!");
-            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModePassphraseInvalid];
-            [self.selectDeviceView becomeFirstResponder];
-            [self hideAddProductVC];
-        }
-    }];
-}
-
-- (void)TGSelectDeviceStepViewKeyboardWillHide:(TGSelectDeviceStepView *)stepView withKeyboardInfo:(TGKeyboardInfo *)keyboardInfo {
-    [self setViewState:TGMainViewStateConnectDeviceScanning];
-    [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:YES];
-    [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
-    self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
-
-    [UIView animateWithDuration:[keyboardInfo.animationDuration doubleValue]
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         [self.view layoutIfNeeded];
-                     } completion:nil];
-}
-
-- (void)TGSelectDeviceStepViewKeyboardWillShow:(TGSelectDeviceStepView *)stepView withKeyboardInfo:(TGKeyboardInfo *)keyboardInfo {
-    TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
-    [self.selectDeviceView setContentMode:newMode];
-    self.selectDeviceViewHeightLayoutConstraint.constant = CGRectGetHeight(self.view.frame) - self.selectDeviceView.frame.origin.y - CGRectGetHeight(keyboardInfo.endframe);
-    
-    [UIView animateWithDuration:[keyboardInfo.animationDuration doubleValue]
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         [self.view layoutIfNeeded];
-                     } completion:nil];
-}
-
 #pragma mark - TGAddProductViewController
 
 - (void)showAddProductVC {
@@ -562,30 +508,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 #pragma mark - TGScannerView Delegate
 
 - (void)TGScannerView:(UIView *)scannerView didParseDeviceFromCode:(TGDevice *)device {
-    [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
-    [self.scannerView setContentMode:TGScannerViewContentModeInactive];
-
-    [self.addProductVC setDevice:device andRouter:self.routerAuthVC.item];
-    [self showAddProductVC];
-
-    [[TGNetworkManager sharedManager] connectDevice:device completion:^(TGNetworkCallbackJoinerFinishedResult *result) {
-        if (self.ignoreAddProduct) {
-            return;
-        }
-        
-        if (result && result.state == ACCEPT) {
-            [self hideAddProductVC];
-            self.viewState = TGMainViewStateAddAnotherDevice;
-            [self setPopupNotificationForState:self.viewState animated:YES];
-            self.successView.device = device;
-            self.successView.router = self.cachedRouter;
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        } else {
-            NSLog(@"Adding device failed!");
+    [self connectDevice:device andRouter:self.cachedRouter withFailureHandler:^(BOOL failed) {
+        if (failed) {
             self.viewState = TGMainViewStateConnectDeviceScanning;
             [self setPopupNotificationForState:self.viewState animated:YES];
             [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCodeInvalid];
-            [self hideAddProductVC];
         }
     }];
 }
@@ -597,6 +524,68 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)TGScannerView:(UIView *)scannerView didTapInfoButton:(id)sender {
     [self setViewState:TGMainViewStateConnectDeviceTutorial];
     [self setPopupNotificationForState:self.viewState animated:YES];
+}
+
+
+#pragma mark - TGSelectDeviceStepViewDelegate
+
+- (void)TGSelectDeviceStepViewDidTapConfirmButton:(TGSelectDeviceStepView *)stepView validateWithDevice:(TGDevice *)device {
+    [self connectDevice:device andRouter:self.cachedRouter withFailureHandler:^(BOOL failed) {
+        if (failed) {
+            [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModePassphraseInvalid];
+            [self.selectDeviceView becomeFirstResponder];
+        }
+    }];
+}
+
+- (void)TGSelectDeviceStepViewKeyboardWillHide:(TGSelectDeviceStepView *)stepView withKeyboardInfo:(TGKeyboardInfo *)keyboardInfo {
+    [self setViewState:TGMainViewStateConnectDeviceScanning];
+    [self setPopupNotificationForState:TGMainViewStateConnectDeviceScanning animated:YES];
+    [self.selectDeviceView setContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
+    self.selectDeviceViewHeightLayoutConstraint.constant = [TGSelectDeviceStepView heightForContentMode:TGSelectDeviceStepViewContentModeScanQRCode];
+
+    [UIView animateWithDuration:[keyboardInfo.animationDuration doubleValue]
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.view layoutIfNeeded];
+                     } completion:nil];
+}
+
+- (void)TGSelectDeviceStepViewKeyboardWillShow:(TGSelectDeviceStepView *)stepView withKeyboardInfo:(TGKeyboardInfo *)keyboardInfo {
+    TGSelectDeviceStepViewContentMode newMode = TGSelectDeviceStepViewContentModePassphrase;
+    [self.selectDeviceView setContentMode:newMode];
+    self.selectDeviceViewHeightLayoutConstraint.constant = CGRectGetHeight(self.view.frame) - self.selectDeviceView.frame.origin.y - CGRectGetHeight(keyboardInfo.endframe);
+
+    [UIView animateWithDuration:[keyboardInfo.animationDuration doubleValue]
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.view layoutIfNeeded];
+                     } completion:nil];
+}
+
+#pragma mark - Connecting to Device
+
+- (void)connectDevice:(TGDevice *)device andRouter:(TGRouter *)router withFailureHandler:(void(^)(BOOL failed))completion {
+    [self.addProductVC setDevice:device andRouter:router];
+    [self showAddProductVC];
+
+    [[TGNetworkManager sharedManager] connectDevice:device completion:^(TGNetworkCallbackJoinerFinishedResult *result) {
+        [self hideAddProductVC];
+        if (result && result.state == ACCEPT) {
+            self.viewState = TGMainViewStateAddAnotherDevice;
+            [self setPopupNotificationForState:self.viewState animated:YES];
+            self.successView.device = device;
+            self.successView.router = router;
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        } else {
+            if (completion) {
+                completion(YES);
+                [self.scannerView startDetection];
+            }
+        }
+    }];
 }
 
 #pragma mark - TGPopupParentDelegate
