@@ -10,7 +10,7 @@
 
 @interface TGQRCode : NSObject
 
-- (instancetype)initWithParameters:(NSArray *)parameters;
++ (TGQRCode *)qrCodeWithParameters:(NSArray *)parameters;
 
 @property (nonatomic, readonly) NSUInteger qrCodeVersion; //uint8
 @property (nonatomic, strong, readonly) NSString *longAddress; //ASCII Hex

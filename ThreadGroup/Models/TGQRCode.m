@@ -37,42 +37,45 @@ static NSString * const kVendorProductSerialNumberKey = @"vs";
 
 @implementation TGQRCode
 
++ (TGQRCode *)qrCodeWithParameters:(NSArray *)parameters {
+    if ([TGQRCode canParseParameters:parameters]) {
+        return [[TGQRCode alloc] initWithParameters:parameters];
+    } else {
+        return nil;
+    }
+}
+
 - (instancetype)initWithParameters:(NSArray *)parameters {
     self = [super init];
     if (self) {
-        self.parameters = parameters;
-        if ([self canParseParameters]) {
-            [self parseParameters];
-        } else {
-            NSLog(@"Could not parse QR Code");
-            return nil;
-        }
+        [self parseParameters:parameters];
     }
     return self;
 }
 
-- (void)parseParameters {
-    for (NSURLQueryItem *item in self.parameters) {
-        NSInteger index = [self.keys indexOfObject:item.name];
-        if ([[self.keys objectAtIndex:index] isEqualToString:kQRCodeVersionKey]) {
+- (void)parseParameters:(NSArray *)parameters {
+    for (NSURLQueryItem *item in parameters) {
+        NSArray *parameterKeys = [TGQRCode keys];
+        NSInteger index = [parameterKeys indexOfObject:item.name];
+        if ([[parameterKeys objectAtIndex:index] isEqualToString:kQRCodeVersionKey]) {
             _qrCodeVersion = [item.value integerValue];
         }
-        if ([[self.keys objectAtIndex:index] isEqualToString:kEUI64Key]) {
+        if ([[parameterKeys objectAtIndex:index] isEqualToString:kEUI64Key]) {
             _longAddress = item.value;
         }
-        if ([[self.keys objectAtIndex:index] isEqualToString:kConnectCodeKey]) {
+        if ([[parameterKeys objectAtIndex:index] isEqualToString:kConnectCodeKey]) {
             _connectCode = item.value;
         }
-        if ([[self.keys objectAtIndex:index] isEqualToString:kVendorNameKey]) {
+        if ([[parameterKeys objectAtIndex:index] isEqualToString:kVendorNameKey]) {
             _vendorName = item.value;;
         }
-        if ([[self.keys objectAtIndex:index] isEqualToString:kVendorModelKey]) {
+        if ([[parameterKeys objectAtIndex:index] isEqualToString:kVendorModelKey]) {
             _vendorModel = item.value;;
         }
-        if ([[self.keys objectAtIndex:index] isEqualToString:kVendorVersionKey]) {
+        if ([[parameterKeys objectAtIndex:index] isEqualToString:kVendorVersionKey]) {
             _vendorVersion = item.value;
         }
-        if ([[self.keys objectAtIndex:index] isEqualToString:kVendorProductSerialNumberKey]) {
+        if ([[parameterKeys objectAtIndex:index] isEqualToString:kVendorProductSerialNumberKey]) {
             _vendorSerialNumber = item.value;;
         }
     }
@@ -80,25 +83,27 @@ static NSString * const kVendorProductSerialNumberKey = @"vs";
 
 #pragma mark - QR Code validation
 
-- (BOOL)canParseParameters {
-    if ([self hasRequiredParameterKeys] && [self hasCorrectVerisonNumber]) {
++ (BOOL)canParseParameters:(NSArray *)parameters {
+    NSArray *parameterkeys = [TGQRCode keysFromParameters:parameters];
+    if ([TGQRCode hasCorrectVerisonNumber:parameters] && [TGQRCode hasRequiredParameterKeys:parameterkeys]) {
         return YES;
     } else {
         return NO;
     }
 }
 
-- (BOOL)hasRequiredParameterKeys {
-    for (NSString *key in self.requiredKeys) {
-        if (![self.parameterKeys containsObject:key]) {
++ (BOOL)hasRequiredParameterKeys:(NSArray *)parameterKeys {
+    for (NSString *key in [TGQRCode requiredKeys]) {
+        if (![parameterKeys containsObject:key]) {
             return NO;
         }
     }
     return YES;
+
 }
 
-- (BOOL)hasCorrectVerisonNumber {
-    for (NSURLQueryItem *item in self.parameters) {
++ (BOOL)hasCorrectVerisonNumber:(NSArray *)parameters {
+    for (NSURLQueryItem *item in parameters) {
         if ([item.name isEqualToString:kQRCodeVersionKey] && [item.value isEqualToString:kCurrentQRCodeVersion]) {
             return YES;
         }
@@ -108,36 +113,25 @@ static NSString * const kVendorProductSerialNumberKey = @"vs";
 
 #pragma mark - Helpers
 
-- (NSArray *)keysFromParameters:(NSArray *)parameters {
-    NSMutableArray *mutableArray;
++ (NSArray *)keysFromParameters:(NSArray *)parameters {
+    NSMutableArray *mutableArray = [NSMutableArray new];
     for (NSURLQueryItem *item in parameters) {
         [mutableArray addObject:item.name];
     }
     return mutableArray;
 }
 
-#pragma mark - Setters
+#pragma mark - Keys
 
-- (void)setParameters:(NSArray *)parameters {
-    _parameters = parameters;
-    _parameterKeys = [self keysFromParameters:parameters];
++ (NSArray *)keys {
+    return @[kQRCodeVersionKey, kEUI64Key, kConnectCodeKey, kVendorNameKey, kVendorModelKey, kVendorVersionKey, kVendorProductSerialNumberKey];
+}
+
++ (NSArray *)requiredKeys {
+    return @[kQRCodeVersionKey, kEUI64Key, kConnectCodeKey];
 }
 
 #pragma mark - Getters
-
-- (NSArray *)keys {
-    if (!_keys) {
-        _keys = @[kQRCodeVersionKey, kEUI64Key, kConnectCodeKey, kVendorNameKey, kVendorModelKey, kVendorVersionKey, kVendorProductSerialNumberKey];
-    }
-    return _keys;
-}
-
-- (NSArray *)requiredKeys {
-    if (!_requiredKeys) {
-        _requiredKeys = @[kQRCodeVersionKey, kEUI64Key, kConnectCodeKey];
-    }
-    return _requiredKeys;
-}
 
 - (NSUInteger)qrCodeVersion {
     if (!_qrCodeVersion) {
