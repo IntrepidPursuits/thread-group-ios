@@ -139,19 +139,15 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 - (void)setupTableViewSource {
     [self.tableView setTableViewDelegate:self];
-    [[TGNetworkManager sharedManager] findLocalThreadNetworksCompletion:^(NSArray *networks, NSError *error, BOOL stillSearching) {
-        [self.tableView setNetworkItems:networks];
-        [self reloadTableView];
-        for (TGRouter *item in networks) {
-            if ([item isEqualToRouter:self.cachedRouter] && [TGNetworkManager sharedManager].viewState == TGNetworkManagerCommissionerStateDisconnected) {
-                [self connectRouter:item];
-                [self.tableView highlightRouter:item];
-            }
-        }
+    TGRouter *testRouter1 = [[TGRouter alloc] initTestRouterWithName:@"ThreadNet_iOS" networkName:@"Thread Local Network" ipAddress:@"10.202.56.67" port:19779];
+    TGRouter *testRouter2 = [[TGRouter alloc] initTestRouterWithName:@"John's Thread Network" networkName:@"John's Local Network" ipAddress:@"10.202.50.67" port:19779];
+    TGRouter *testRouter3 = [[TGRouter alloc] initTestRouterWithName:@"Jill's Thread Network" networkName:@"Jill's Local Network" ipAddress:@"10.202.26.67" port:19779];
+    NSArray *networks = @[testRouter1, testRouter2, testRouter3];
+    [self.tableView setNetworkItems:networks];
+    [self reloadTableView];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self hideMainSpinner];
-        NSLog(@"%@ Searching (Found %d)", stillSearching ? @"Still" : @"Done", networks.count);
-    }];
-    
+    });
 }
 
 - (void)reloadTableView {
