@@ -6,12 +6,14 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+#import <PureLayout/PureLayout.h>
 #import "TGHeaderView.h"
 #import "UIFont+ThreadGroup.h"
 #import "UIColor+ThreadGroup.h"
 
 static CGFloat const kTGHeaderViewFontSize = 12.0f;
 static CGFloat const kTGHeaderLabelCenterOffset = 8.0f;
+static CGFloat const kTGHeaderLabelLeftOffset = 15.0f;
 
 @interface TGHeaderView()
 
@@ -26,22 +28,8 @@ static CGFloat const kTGHeaderLabelCenterOffset = 8.0f;
     if (self) {
         self.contentView.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.headerLabel];
-        NSMutableArray *constraints = [NSMutableArray new];
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:self.headerLabel
-                                                            attribute:NSLayoutAttributeCenterY
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self.contentView
-                                                            attribute:NSLayoutAttributeCenterY
-                                                           multiplier:1.0f
-                                                             constant:kTGHeaderLabelCenterOffset]];
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:self.headerLabel
-                                                            attribute:NSLayoutAttributeLeft
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self.contentView
-                                                            attribute:NSLayoutAttributeLeft
-                                                           multiplier:1.0f
-                                                             constant:15.0f]];
-        [self.contentView addConstraints:constraints];
+        [self.headerLabel autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.contentView withOffset:kTGHeaderLabelCenterOffset];
+        [self.headerLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.contentView withOffset:kTGHeaderLabelLeftOffset];
     }
     return self;
 }
