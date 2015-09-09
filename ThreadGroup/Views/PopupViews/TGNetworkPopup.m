@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+#import <PureLayout/PureLayout.h>
 #import "TGNetworkPopup.h"
 #import "UIView+Animations.h"
 #import "UIImage+ThreadGroup.h"
@@ -54,9 +55,7 @@ static NSString * const kFailedConnectionTitleLabelText = @"Connection failed";
 
 - (void)constrainImageViewToContainer:(UIView *)imageView {
     [self.imageViewContainer addSubview:imageView];
-    imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.imageViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : imageView}]];
-    [self.imageViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : imageView}]];
+    [imageView autoPinEdgesToSuperviewEdges];
 }
 
 - (void)resetTitleLabel:(NSString *)title {
