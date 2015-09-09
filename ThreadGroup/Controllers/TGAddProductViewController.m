@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+#import <PureLayout/PureLayout.h>
 #import "TGAddProductViewController.h"
 #import "TGSpinnerView.h"
 #import "UIFont+ThreadGroup.h"
@@ -39,9 +40,7 @@
 - (void)setupSpinnerView {
     TGSpinnerView *spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_mainSpinnerClockwise] counterClockwiseImage:[UIImage tg_mainSpinnerCounterClockwise]];
     [self.spinnerViewContainer addSubview:spinnerView];
-    spinnerView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.spinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
-    [self.spinnerViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : spinnerView}]];
+    [spinnerView autoPinEdgesToSuperviewEdges];
 }
 
 #pragma mark -
