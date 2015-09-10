@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -26,20 +26,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="RkI-eV-f2Z" userLabel="spinnerViewContainer">
-                    <rect key="frame" x="278.5" y="50" width="43.5" height="42.5"/>
+                    <rect key="frame" x="91" y="50" width="418" height="417"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="417" id="Q9i-zc-RxI"/>
                         <constraint firstAttribute="width" secondItem="RkI-eV-f2Z" secondAttribute="height" multiplier="1:1" constant="1" id="sTr-SE-J30"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="Q9i-zc-RxI"/>
-                        </mask>
-                    </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4H-gI-Maw">
-                    <rect key="frame" x="515" y="178.5" width="61" height="401.5"/>
+                    <rect key="frame" x="515" y="553" width="61" height="27"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                     <state key="normal" title="CANCEL">
                         <color key="titleColor" red="0.90588235289999997" green="0.48627450979999998" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,8 +43,8 @@
                         <action selector="cancelButtonPressed:" destination="-1" eventType="touchUpInside" id="yuh-Rx-OMQ"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tAX-Xk-uyq">
-                    <rect key="frame" x="278.5" y="132" width="43.5" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tAX-Xk-uyq">
+                    <rect key="frame" x="30" y="507" width="540" height="16"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="16"/>
                     <color key="textColor" red="0.2784313725" green="0.28235294119999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -58,34 +52,19 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="RkI-eV-f2Z" secondAttribute="trailing" constant="20" id="07z-9U-5oL"/>
                 <constraint firstAttribute="centerX" secondItem="RkI-eV-f2Z" secondAttribute="centerX" id="106-LL-t4c"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RkI-eV-f2Z" secondAttribute="trailing" constant="40" id="2rh-CT-SKV"/>
-                <constraint firstAttribute="centerX" secondItem="RkI-eV-f2Z" secondAttribute="centerX" id="9wN-Ta-Gqt"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RkI-eV-f2Z" secondAttribute="trailing" constant="50" id="2rh-CT-SKV"/>
                 <constraint firstItem="RkI-eV-f2Z" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="APd-gA-FPn"/>
                 <constraint firstItem="RkI-eV-f2Z" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="NIW-MS-5VG"/>
-                <constraint firstAttribute="trailing" secondItem="RkI-eV-f2Z" secondAttribute="trailing" constant="20" id="Pn9-qQ-S7U"/>
                 <constraint firstItem="RkI-eV-f2Z" firstAttribute="centerX" secondItem="tAX-Xk-uyq" secondAttribute="centerX" id="YNs-WP-h0S"/>
-                <constraint firstItem="RkI-eV-f2Z" firstAttribute="width" secondItem="tAX-Xk-uyq" secondAttribute="width" id="dW7-rq-bz9"/>
-                <constraint firstItem="RkI-eV-f2Z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="dv0-f4-xKl"/>
                 <constraint firstAttribute="bottom" secondItem="J4H-gI-Maw" secondAttribute="bottom" constant="20" id="eWU-WR-lVo"/>
-                <constraint firstItem="RkI-eV-f2Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="eqa-7p-HfH"/>
-                <constraint firstItem="RkI-eV-f2Z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="jYF-Af-0gl"/>
+                <constraint firstItem="RkI-eV-f2Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="eqa-7p-HfH"/>
                 <constraint firstAttribute="trailing" secondItem="J4H-gI-Maw" secondAttribute="trailing" constant="24" id="mZf-sh-Xjd"/>
                 <constraint firstItem="J4H-gI-Maw" firstAttribute="top" secondItem="tAX-Xk-uyq" secondAttribute="bottom" constant="30" id="nvx-Y3-9RR"/>
+                <constraint firstItem="tAX-Xk-uyq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="otY-M9-41p"/>
                 <constraint firstItem="tAX-Xk-uyq" firstAttribute="top" secondItem="RkI-eV-f2Z" secondAttribute="bottom" constant="40" id="pGI-N9-Uw5"/>
-                <constraint firstAttribute="centerX" secondItem="RkI-eV-f2Z" secondAttribute="centerX" id="qsF-8v-sIf"/>
+                <constraint firstAttribute="trailing" secondItem="tAX-Xk-uyq" secondAttribute="trailing" constant="30" id="uJb-hT-uV5"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="07z-9U-5oL"/>
-                    <exclude reference="9wN-Ta-Gqt"/>
-                    <exclude reference="Pn9-qQ-S7U"/>
-                    <exclude reference="dv0-f4-xKl"/>
-                    <exclude reference="jYF-Af-0gl"/>
-                    <exclude reference="qsF-8v-sIf"/>
-                </mask>
-            </variation>
         </view>
     </objects>
 </document>
