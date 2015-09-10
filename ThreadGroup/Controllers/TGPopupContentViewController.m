@@ -53,16 +53,17 @@
     for (TGButton *button in self.buttons) {
         [self.buttonsPlaceholderView addSubview:button];
         [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [button autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(1.0f, NSNotFound, 0.0f, NSNotFound)];
+        [button autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+        [button autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:1.0f];
         if (preceedingButton == nil) {
-            [button autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.buttonsPlaceholderView];
+            [button autoPinEdgeToSuperviewEdge:ALEdgeLeft];
         } else {
-            [preceedingButton autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:button withOffset:1.0f];
-            [button autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:preceedingButton];
+            [button autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:preceedingButton withOffset:1.0f];
+            [button autoConstrainAttribute:ALAttributeWidth toAttribute:ALAttributeWidth ofView:preceedingButton];
         }
         preceedingButton = button;
     }
-    [preceedingButton autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.buttonsPlaceholderView];
+    [preceedingButton autoPinEdgeToSuperviewEdge:ALEdgeRight];
 }
 
 #pragma mark - TextView
@@ -91,6 +92,15 @@
 - (void)setContentTitle:(NSString *)contentTitle andButtons:(NSArray *)buttons {
     self.name = contentTitle;
     self.buttons = buttons;
+}
+
+#pragma mark - Lazy
+
+- (NSString *)textContent {
+    if (!_textContent) {
+        _textContent = @"";
+    }
+    return _textContent;
 }
 
 @end
