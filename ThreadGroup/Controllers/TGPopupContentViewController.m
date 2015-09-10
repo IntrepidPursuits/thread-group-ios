@@ -94,4 +94,13 @@
     self.buttons = buttons;
 }
 
+#pragma mark - Lazy
+
+- (NSString *)textContent {
+    if (!_textContent) {
+        _textContent = @"";
+    }
+    return _textContent;
+}
+
 @end
