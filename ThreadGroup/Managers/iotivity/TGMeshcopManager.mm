@@ -15,6 +15,7 @@
 #import <malloc/malloc.h>
 #import "TGNetworkCallbackResult.h"
 #import "TGMeshcopManager+Logging.h"
+#include "TGLogManager.h"
 
 #define LOG_TAG "MeshCop"
 
@@ -25,7 +26,6 @@ static void* _callback(const MCCallback_t callbackId, ...) {
     va_start(argsList, callbackId);
     
     TGNetworkCallbackResult *callbackResult;
-    NSLog(@"Received response for %@ request", [[TGMeshcopManager sharedManager] logStringForCallbackIdentifier:callbackId]);
     
     switch(callbackId) {
         case COMM_PET:
@@ -80,7 +80,7 @@ static void* _callback(const MCCallback_t callbackId, ...) {
 - (instancetype)init {
     self = [super init];
     if (self) {
-        NSLog(@"Initializing Meshcop layer");
+//        NSLog(@"Initializing Meshcop layer");
         CAResult_t initializeResult;
         initializeResult = MCInitialize();
         NSAssert(initializeResult == CA_STATUS_OK, @"Failed to initialize MeshCop layer");
@@ -93,29 +93,29 @@ static void* _callback(const MCCallback_t callbackId, ...) {
 
 - (void)setMeshCopEnabled:(BOOL)enabled {
     if (enabled) {
-        NSLog(@"Starting Meshcop Layer");
+//        NSLog(@"Starting Meshcop Layer");
         MCStart();
     } else {
-        NSLog(@"Stopping Meshcop Layer");
+//        NSLog(@"Stopping Meshcop Layer");
         MCStop();
     }
 }
 
 - (void)addAnyJoinerCredentials:(NSString *)joinerCredentials {
-    NSLog(@"Adding joiner credentials <%@>" , joinerCredentials);
+//    NSLog(@"Adding joiner credentials <%@>" , joinerCredentials);
     MCAddAnyJoinerCredentials([joinerCredentials UTF8String]);
 }
 
 - (void)addJoinerWithIdentifier:(NSString *)identifier credentials:(NSString *)credentials {
-    NSLog(@"Adding joiner credentials with identifier <%@> and passphrase <%@>", identifier, credentials);
+//    NSLog(@"Adding joiner credentials with identifier <%@> and passphrase <%@>", identifier, credentials);
     MCAddJoinerCredentials([identifier UTF8String], [credentials UTF8String]);
 }
 
 - (BOOL)changeToHostAtAddress:(NSString *)address commissionerPort:(NSInteger)port networkType:(CATransportAdapter_t)networkType networkName:(NSString *)name secured:(BOOL)secured {
-    NSLog(@"Selecting network at address <%@:%ld> named <%@>", address, port, name);
+//    NSLog(@"Selecting network at address <%@:%ld> named <%@>", address, port, name);
     CAResult_t res = CASelectNetwork(networkType);
     if (res == CA_STATUS_OK) {
-        NSLog(@"Changing host to address <%@:%ld> named <%@>", address, port, name);
+//        NSLog(@"Changing host to address <%@:%ld> named <%@>", address, port, name);
         CAResult_t result = MCChangeHost((uint8_t)secured, [address UTF8String], (uint8_t)port, networkType, [name UTF8String]);
         return (result == CA_STATUS_OK);
     }
@@ -123,20 +123,20 @@ static void* _callback(const MCCallback_t callbackId, ...) {
 }
 
 - (NSData *)petitionAsCommissioner:(NSString *)commissionerIdentifier {
-    NSLog(@"Petitioning as commissioner with identifier <%@>", commissionerIdentifier);
+//    NSLog(@"Petitioning as commissioner with identifier <%@>", commissionerIdentifier);
     CAToken_t token = COMM_PET_request([commissionerIdentifier UTF8String]);
     size_t tokenLength = strlen(token);
     return [NSData dataWithBytes:(const void *)token length:tokenLength];
 }
 
 - (BOOL)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK {
-    NSLog(@"Setting credentials with name <%@> and key <%@>", name, clientPSK);
+//    NSLog(@"Setting credentials with name <%@> and key <%@>", name, clientPSK);
     CAResult_t result = MCSetCredentials([name UTF8String], [clientPSK UTF8String]);
     return (result == CA_STATUS_OK);
 }
 
 - (void)setPassphrase:(NSString *)passphrase {
-    NSLog(@"Setting passphrase to <%@>", passphrase);
+//    NSLog(@"Setting passphrase to <%@>", passphrase);
     MCSetPassphrase([passphrase UTF8String]);
 }
 
@@ -154,7 +154,7 @@ static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) 
 #pragma mark - Management
 
 - (NSString *)sendJoinersSteeringDataWithShortForm:(BOOL)shortForm {
-    NSLog(@"Sending joiner steering data. Using short form '%@'", shortForm ? @"Y" : @"N");
+//    NSLog(@"Sending joiner steering data. Using short form '%@'", shortForm ? @"Y" : @"N");
     CAToken_t token = MCSendJoinersSteeringData((uint8_t)shortForm);
     return [NSString stringWithUTF8String:token];
 }
@@ -163,18 +163,18 @@ static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) 
     NSMutableData *params = [NSMutableData new];
     for (NSNumber *num in paramsArray) {
         MCMgmtParamID_t param = (MCMgmtParamID_t)[num intValue];
-        NSLog(@"Preparing to fetch management parameter <%@>", [self logStringForManagementParameter:param]);
+//        NSLog(@"Preparing to fetch management parameter <%@>", [self logStringForManagementParameter:param]);
         Byte tlvByte = (Byte)param;
         [params appendBytes:&tlvByte length:1];
     }
     
-    NSLog(@"Executing fetch request for %ld parameters", paramsArray.count);
+//    NSLog(@"Executing fetch request for %ld parameters", paramsArray.count);
     CAToken_t token = MGMT_GET_request((uint8_t *)[params bytes], (uint8_t)paramsArray.count, (uint8_t)peek);
     return [NSString stringWithUTF8String:token];
 }
 
 - (NSString *)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value {
-    NSLog(@"Setting management parameter <%@> to value <%@>", [self logStringForManagementParameter:parameter], [value description]);
+//    NSLog(@"Setting management parameter <%@> to value <%@>", [self logStringForManagementParameter:parameter], [value description]);
     
     CAToken_t token;
     if ([value isKindOfClass:[NSNumber class]]) {
@@ -187,7 +187,7 @@ static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) 
 }
 
 - (NSString *)setManagementSecurityPolicy:(MCMgmtSecurityPolicy_t *)securityPolicy {
-    NSLog(@"Setting new security policy");
+//    NSLog(@"Setting new security policy");
     CAToken_t token = MGMT_SET(MGMT_SECURITY_POLICY, securityPolicy);
     return [NSString stringWithUTF8String:token];
 }
