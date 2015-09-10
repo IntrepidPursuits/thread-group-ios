@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+#import <PureLayout/PureLayout.h>
 #import "TGPopupContentViewController.h"
 #import "TGButton.h"
 #import "UIColor+ThreadGroup.h"
@@ -51,25 +52,17 @@
     TGButton *preceedingButton;
     for (TGButton *button in self.buttons) {
         [self.buttonsPlaceholderView addSubview:button];
-        button.translatesAutoresizingMaskIntoConstraints = NO;
         [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
-        [self.buttonsPlaceholderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-1-[bar]|" options:0 metrics:nil views:@{@"bar" : button}]];
+        [button autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(1.0f, NSNotFound, 0.0f, NSNotFound)];
         if (preceedingButton == nil) {
-            [self.buttonsPlaceholderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bar]" options:0 metrics:nil views:@{@"bar" : button}]];
+            [button autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.buttonsPlaceholderView];
         } else {
-            [self.buttonsPlaceholderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[preceeding]-1-[bar]" options:0 metrics:nil views:@{@"preceeding" : preceedingButton, @"bar" : button}]];
-            [self.buttonsPlaceholderView addConstraint:[NSLayoutConstraint constraintWithItem:button
-                                                                                    attribute:NSLayoutAttributeWidth
-                                                                                    relatedBy:NSLayoutRelationEqual
-                                                                                       toItem:preceedingButton
-                                                                                    attribute:NSLayoutAttributeWidth
-                                                                                   multiplier:1
-                                                                                     constant:0]];
+            [preceedingButton autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:button withOffset:1.0f];
+            [button autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:preceedingButton];
         }
         preceedingButton = button;
     }
-    [self.buttonsPlaceholderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[preceeding]|" options:0 metrics:nil views:@{@"preceeding" : preceedingButton}]];
+    [preceedingButton autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.buttonsPlaceholderView];
 }
 
 #pragma mark - TextView

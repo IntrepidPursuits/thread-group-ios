@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+#import <PureLayout/PureLayout.h>
 #import "TGSelectDeviceStepView.h"
 #import "UIColor+ThreadGroup.h"
 #import "UIImage+ThreadGroup.h"
@@ -45,9 +46,7 @@ static CGFloat TGSelectDeviceStepViewMaximumHeight = 163.0f;
                                                       owner:self
                                                     options:nil] lastObject];
         [self addSubview:self.nibView];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.nibView autoPinEdgesToSuperviewEdges];
         [self commonInit];
     }
     [self registerForKeyboardNotifications];

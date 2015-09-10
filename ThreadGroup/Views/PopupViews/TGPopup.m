@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+#import <PureLayout/PureLayout.h>
 #import "TGPopup.h"
 
 @interface TGPopup()
@@ -23,9 +24,7 @@
                                                       owner:self
                                                     options:nil] lastObject];
         [self addSubview:self.nibView];
-        self.nibView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bar]-0-|" options:0 metrics:nil views:@{@"bar" : self.nibView}]];
+        [self.nibView autoPinEdgesToSuperviewEdges];
     }
     return self;
 }

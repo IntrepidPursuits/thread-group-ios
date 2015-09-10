@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+#import <PureLayout/PureLayout.h>
 #import "TGScannerView.h"
 #import "TGDevice.h"
 #import <AVFoundation/AVFoundation.h>
@@ -85,70 +86,57 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
 
 - (void)configureContainer {
     [self addSubview:self.cameraContainer];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[container]-0-|" options:0 metrics:nil views:@{@"container" : self.cameraContainer}]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[container]-0-|" options:0 metrics:nil views:@{@"container" : self.cameraContainer}]];
-    
+    [self.cameraContainer autoPinEdgesToSuperviewEdges];
+
     self.tutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.tutorialButton addTarget:self action:@selector(tutorialButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.tutorialButton setImage:[UIImage imageNamed:@"action_qr_tutorial"] forState:UIControlStateNormal];
-    [self.tutorialButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+
     [self.cameraContainer addSubview:self.tutorialButton];
-    
-    [self.cameraContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-Inset-[Button]" options:0 metrics:@{@"Inset" : @(TGScannerTutorialButtonInset)} views:@{@"Button" : self.tutorialButton}]];
-    [self.cameraContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.tutorialButton attribute:NSLayoutAttributeRightMargin relatedBy:NSLayoutRelationEqual toItem:self.cameraContainer attribute:NSLayoutAttributeRightMargin multiplier:1.0f constant:-TGScannerTutorialButtonInset]];
+    [self.tutorialButton autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.cameraContainer withOffset:TGScannerTutorialButtonInset];
+    [self.tutorialButton autoConstrainAttribute:ALAttributeMarginRight toAttribute:ALAttributeMarginRight ofView:self.cameraContainer withOffset:-TGScannerTutorialButtonInset];
 }
 
 - (void)configureOverlay {
     self.cameraOverlay = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_overlay"]];
-    [self.cameraOverlay setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.cameraContainer addSubview:self.cameraOverlay];
-    
-    [self.cameraContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.cameraContainer attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0]];
-    [self.cameraContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.cameraOverlay attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.cameraContainer attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
+    [self.cameraOverlay autoCenterInSuperview];
 }
 
 - (void)configureMask {
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     self.maskView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    [self.maskView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:self.maskView];
-    [self.maskView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSDictionary *views = @{@"maskView" : self.maskView};
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[maskView]-0-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[maskView]-0-|" options:0 metrics:nil views:views]];
+    [self.maskView autoPinEdgesToSuperviewEdges];
 }
 
 - (void)configureTutorialView {
     self.tutorialView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tutorialView setBackgroundColor:[UIColor clearColor]];
-    [self.tutorialView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:self.tutorialView];
-    
+    [self.tutorialView autoPinEdgesToSuperviewEdges];
+
+
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage tg_tutorialView]];
+    [imageView setBackgroundColor:[UIColor clearColor]];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.tutorialView addSubview:imageView];
+    [imageView autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeHorizontal ofView:self.tutorialView withOffset:16.0f];
+    [imageView autoConstrainAttribute:ALAttributeVertical toAttribute:ALAttributeVertical ofView:self.tutorialView];
+    [imageView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.tutorialView withOffset:32.0f relation:NSLayoutRelationGreaterThanOrEqual];
+
+
     UILabel *tutorialMessageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [tutorialMessageLabel setBackgroundColor:[UIColor clearColor]];
     [tutorialMessageLabel setFont:[UIFont threadGroup_bookFontWithSize:14.0f]];
     [tutorialMessageLabel setNumberOfLines:0];
     [tutorialMessageLabel setText:@"Point your camera at the device Connect QR Code to scan it"];
     [tutorialMessageLabel setTextColor:[UIColor whiteColor]];
-    [tutorialMessageLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.tutorialView addSubview:tutorialMessageLabel];
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage tg_tutorialView]];
-    [imageView setBackgroundColor:[UIColor clearColor]];
-    [imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.tutorialView addSubview:imageView];
-    
-    NSDictionary *metrics = @{@"TextInset" : @16, @"VerticalInset" : @32};
-    NSDictionary *views = @{@"ImageView" : imageView, @"MessageLabel" : tutorialMessageLabel, @"Container" : self.tutorialView};
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[Container]-0-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[Container]-0-|" options:0 metrics:nil views:views]];
-    [self.tutorialView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.tutorialView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
-    [self.tutorialView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.tutorialView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:16.0f]];
-    [self.tutorialView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-TextInset-[MessageLabel]-TextInset-|" options:0 metrics:metrics views:views]];
-    [self.tutorialView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=VerticalInset-[ImageView]-VerticalInset-[MessageLabel]->=VerticalInset-|" options:0 metrics:metrics views:views]];
+    [tutorialMessageLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.tutorialView withOffset:16.0f];
+    [tutorialMessageLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.tutorialView withOffset:16.0f];
+    [tutorialMessageLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:imageView withOffset:32.0f];
+    [tutorialMessageLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.tutorialView withOffset:32.0f relation:NSLayoutRelationGreaterThanOrEqual];
 }
 
 - (void)configureNoCameraAccessView {
@@ -156,13 +144,8 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusDenied) {
         self.noCameraAccessView = [[TGNoCameraAccessView alloc] init];
-        [self.noCameraAccessView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:self.noCameraAccessView];
-        
-        NSDictionary *views = @{@"View" : self.noCameraAccessView};
-        
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[View]-0-|" options:0 metrics:nil views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[View]-0-|" options:0 metrics:nil views:views]];
+        [self.noCameraAccessView autoPinEdgesToSuperviewEdges];
         self.hasCameraAccess = NO;
     }
 }
@@ -263,7 +246,6 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     if (_cameraContainer == nil) {
         _cameraContainer = [[UIView alloc] initWithFrame:CGRectZero];
         [self.cameraContainer setBackgroundColor:[UIColor clearColor]];
-        [self.cameraContainer setTranslatesAutoresizingMaskIntoConstraints:NO];
     }
     return _cameraContainer;
 }
