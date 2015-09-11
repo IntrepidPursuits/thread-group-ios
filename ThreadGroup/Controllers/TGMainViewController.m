@@ -101,6 +101,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self configureMainViewForViewState:self.viewState];
     [self setPopupNotificationForState:NSNotFound animated:NO];
     [self.routerSearchView setUserInteractionEnabled:NO];
+    [self configure];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -108,11 +110,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     if (self.viewState == TGMainViewStateConnectDevicePassphrase) {
         [self.selectDeviceView becomeFirstResponder];
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self configure];
 }
 
 - (void)configure {
