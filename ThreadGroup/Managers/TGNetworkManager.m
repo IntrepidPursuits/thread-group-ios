@@ -85,7 +85,7 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     TGNetworkCallbackComissionerPetitionResult *result = [[TGNetworkCallbackComissionerPetitionResult alloc] init];
     result.commissionerIdentifer = @"Debug-Identifier";
     result.commissionerSessionIdentifier = 1000;
-    result.hasAuthorizationFailed = (BOOL)(arc4random() % 2);
+    result.hasAuthorizationFailed = ![router.passphrase isEqualToString:@"TestPassword" ];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (result.hasAuthorizationFailed) {

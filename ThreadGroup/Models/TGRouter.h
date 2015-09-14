@@ -18,6 +18,7 @@
 
 - (instancetype)initWithService:(NSNetService *)service;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder;
+- (instancetype)initTestRouterWithName:(NSString *)name networkName:(NSString *)networkName ipAddress:(NSString *)ipAddress port:(NSInteger)port;
 - (BOOL)isEqualToRouter:(TGRouter *)router;
 
 @end

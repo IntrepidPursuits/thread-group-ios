@@ -37,6 +37,18 @@ typedef union {
     return self;
 }
 
+- (instancetype)initTestRouterWithName:(NSString *)name networkName:(NSString *)networkName ipAddress:(NSString *)ipAddress port:(NSInteger)port {
+    self = [super init];
+    if (self) {
+        _name = name;
+        _networkName = networkName;
+        _ipAddress = ipAddress;
+        _port = port;
+    }
+    return self;
+}
+
+
 - (NSString *)decodeIPAddressFromService:(NSNetService *)netService {
     NSArray *addresses = netService.addresses;
     char addressBuffer[INET6_ADDRSTRLEN];

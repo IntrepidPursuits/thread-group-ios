@@ -84,8 +84,7 @@
     self.popupContentVC.popupType = TGPopupTypeTOS;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Terms of Service" andButtons:self.buttons];
-    //Rather than Lorem Ipsum, I just have the log showing
-    self.popupContentVC.textContent = [[TGLogManager sharedManager] getLog];
+    self.popupContentVC.textContent = [self testContent];
     [self presentViewController:self.popupContentVC animated:YES completion:nil];
 }
 
@@ -104,8 +103,7 @@
     self.popupContentVC.popupType = TGPopupTypeAbout;
     self.buttons = [self createButtonsFor:self.popupContentVC];
     [self.popupContentVC setContentTitle:@"Help" andButtons:self.buttons];
-    //Rather than Lorem Ipsum, I just have the log showing
-    self.popupContentVC.textContent = [[TGLogManager sharedManager] getLog];
+    self.popupContentVC.textContent = [self testContent];
     [self presentViewController:self.popupContentVC animated:YES completion:nil];
 }
 
@@ -246,6 +244,10 @@
         _transitionDelegate = [TGTransitioningDelegate new];
     }
     return _transitionDelegate;
+}
+
+- (NSString *)testContent {
+    return @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
 }
 
 @end
