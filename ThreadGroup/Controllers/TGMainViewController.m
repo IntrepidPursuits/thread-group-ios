@@ -115,6 +115,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 - (void)configure {
     [self setupTableViewSource];
     self.scannerView.delegate = self;
+    self.selectDeviceView.delegate = self;
 }
 
 - (void)commonInit {
@@ -442,7 +443,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 #pragma mark - Select/Add Devices
 
 - (void)resetSelectDeviceView {
-    self.selectDeviceView.delegate = self;
     self.selectDeviceView.alpha = 0.0f;
     self.scannerView.alpha = 0.0f;
     self.successView.alpha = 0.0f;
