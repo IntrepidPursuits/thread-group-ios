@@ -1107,7 +1107,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/libMeshCop/ios/MeshCop",
-					"/Users/Patrick/Developer/iotivity-private/ios/MeshCop/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/../iotivity-private/ios/MeshCop/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1130,7 +1130,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/libMeshCop/ios/MeshCop",
-					"/Users/Patrick/Developer/iotivity-private/ios/MeshCop/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/../iotivity-private/ios/MeshCop/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
