@@ -116,7 +116,7 @@ static void* _callback(const MCCallback_t callbackId, ...) {
     CAResult_t res = CASelectNetwork(networkType);
     if (res == CA_STATUS_OK) {
 //        NSLog(@"Changing host to address <%@:%ld> named <%@>", address, port, name);
-        CAResult_t result = MCChangeHost((uint8_t)secured, [address UTF8String], (uint8_t)port, networkType, [name UTF8String]);
+        CAResult_t result = MCChangeHost((uint8_t)secured, [address UTF8String], (uint16_t)port, networkType, [name UTF8String]);
         return (result == CA_STATUS_OK);
     }
     return NO;
