@@ -143,8 +143,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         [self reloadTableView];
         for (TGRouter *item in networks) {
             if ([item isEqualToRouter:self.cachedRouter] && [TGNetworkManager sharedManager].viewState == TGNetworkManagerCommissionerStateDisconnected) {
-                [self connectRouter:item];
-                [self.tableView highlightRouter:item];
+                [self connectRouter:self.cachedRouter];
+                [self.tableView highlightRouter:self.cachedRouter];
             }
         }
         [self hideMainSpinner];
@@ -380,6 +380,11 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 - (void)connectRouter:(TGRouter *)item {
+    if (item.passphrase == nil) {
+        [self presentAuthorizationViewControllerForRouter:item];
+        return;
+    }
+    
     [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
@@ -389,12 +394,7 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             return;
         }
         if (result.hasAuthorizationFailed) {
-            if (![self routerViewIsBeingPresented] && [self mainViewControllerIsBeingPresented]) {
-                self.routerAuthVC.item = item;
-                [self presentViewController:self.routerAuthVC animated:YES completion:nil];
-            } else {
-                [self.routerAuthVC updateUIForFailedAuthentication];
-            }
+            [self presentAuthorizationViewControllerForRouter:item];
         } else {
             if ([self routerViewIsBeingPresented]) {
                 [self dismissViewControllerAnimated:YES completion:nil];
@@ -421,6 +421,15 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self.routerSearchView setBottomBarHidden:NO];
     [self.routerSearchView setThreadConfigHidden:NO];
     self.routerSearchView.topSeperatorView.hidden = NO;
+}
+
+- (void)presentAuthorizationViewControllerForRouter:(TGRouter *)router {
+    if (![self routerViewIsBeingPresented] && [self mainViewControllerIsBeingPresented]) {
+        self.routerAuthVC.item = router;
+        [self presentViewController:self.routerAuthVC animated:YES completion:nil];
+    } else {
+        [self.routerAuthVC updateUIForFailedAuthentication];
+    }
 }
 
 #pragma mark - Presented View Controllers

@@ -86,6 +86,9 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     NSLog(@"Petitioning as commissioner to host <%@>", router.name);
 
     self.petitionCompletionBlock = completion;
+    if (router.passphrase) {
+        [self.meshcopManager setPassphrase:router.passphrase];
+    }
     [self.meshcopManager petitionAsCommissioner:kTGNetworkManagerRouterCommissionerIdentifier];
 }
 
