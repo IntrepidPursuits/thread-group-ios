@@ -11,7 +11,7 @@
 #import "cacommon.h"
 #import "logger.h"
 #import "exception"
-#import "MCSecStorage.h"
+#import "MeshCop.h"
 #import <malloc/malloc.h>
 #import "TGNetworkCallbackResult.h"
 #import "TGMeshcopManager+Logging.h"
@@ -64,6 +64,21 @@ static void* _callback(const MCCallback_t callbackId, ...) {
     return NULL;
 }
 
+#pragma mark - Get/Set Storage
+
+static NSData *tempStorage = nil;
+static uint32_t tempStorageSize = 0;
+
+static const MCSecStorage_t* _getStorageData(f_readStorageFromData fReadStorageFromData) {
+    const MCSecStorage_t *retVal = fReadStorageFromData((const uint8_t *)[tempStorage bytes], tempStorageSize);
+    return retVal;
+}
+
+static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) {
+    tempStorage = [NSData dataWithBytes:data length:dataLen];
+    tempStorageSize = dataLen;
+}
+
 #pragma mark - Implementation
 
 @implementation TGMeshcopManager
@@ -85,6 +100,7 @@ static void* _callback(const MCCallback_t callbackId, ...) {
         initializeResult = MCInitialize();
         NSAssert(initializeResult == CA_STATUS_OK, @"Failed to initialize MeshCop layer");
         MCSetCallback(_callback);
+        setStorageDataCallback(_getStorageData, _setStorageData);
     }
     return self;
 }
@@ -138,17 +154,6 @@ static void* _callback(const MCCallback_t callbackId, ...) {
 - (void)setPassphrase:(NSString *)passphrase {
 //    NSLog(@"Setting passphrase to <%@>", passphrase);
     MCSetPassphrase([passphrase UTF8String]);
-}
-
-#pragma mark - Get/Set Storage
-
-static const MCSecStorage_t* _getStorageData(f_readStorageFromData fReadStorageFromData) {
-    // TODO: Get secure storage from meshcop layer
-    return nil;
-}
-
-static void _setStorageData(const uint8_t * const data, uint32_t const dataLen) {
-    // TODO: Set secure storage in meshcop layer
 }
 
 #pragma mark - Management
