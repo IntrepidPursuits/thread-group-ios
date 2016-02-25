@@ -22,6 +22,7 @@ typedef void (^TGNetworkManagerFindRoutersCompletionBlock)(NSArray *networks, NS
 typedef void (^TGNetworkManagerCommissionerPetitionCompletionBlock)(TGNetworkCallbackComissionerPetitionResult *result);
 typedef void (^TGNetworkManagerJoinDeviceCompletionBlock)(TGNetworkCallbackJoinerFinishedResult *result);
 typedef void (^TGNetworkManagerManagementSetCompletionBlock)(TGNetworkCallbackSetSettingResult *result);
+typedef void (^TGNetworkManagerManagementGetCompletionBlock)(TGNetworkCallbackFetchSettingResult *result);
 
 @interface TGNetworkManager : NSObject <TGMeshcopManagerDelegate>
 

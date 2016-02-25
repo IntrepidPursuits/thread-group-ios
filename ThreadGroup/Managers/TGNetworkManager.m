@@ -28,6 +28,7 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 @property (nonatomic, strong) TGMeshcopManager *meshcopManager;
 
 @property (nonatomic, strong) NSMutableDictionary *managementSetCompletionBlocks;
+@property (nonatomic, strong) NSMutableDictionary *managementGetCompletionBlocks;
 
 @end
 
@@ -52,9 +53,13 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     self.routerServiceBrowser.delegate = self;
     
     self.threadServices = [NSMutableArray new];
+    self.managementGetCompletionBlocks = [NSMutableDictionary new];
+    self.managementSetCompletionBlocks = [NSMutableDictionary new];
     
     _viewState = TGNetworkManagerCommissionerStateDisconnected;
 }
+
+#pragma mark - Networking Calls
 
 - (void)findLocalThreadNetworksCompletion:(TGNetworkManagerFindRoutersCompletionBlock)completion {
     NSLog(@"Searching For Border Routers");
@@ -64,6 +69,8 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 
 - (void)connectToRouter:(TGRouter *)router completion:(TGNetworkManagerCommissionerPetitionCompletionBlock)completion {
     _viewState = TGNetworkManagerCommissionerStateConnecting;
+    self.petitionCompletionBlock = completion;
+    
     BOOL didChangeHost = [self.meshcopManager changeToHostAtAddress:router.ipAddress
                                                    commissionerPort:router.port
                                                         networkType:CA_ADAPTER_IP
@@ -78,23 +85,11 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     NSLog(@"Changed to host <%@> at IP <%@> on port <%ld>", router.name, router.ipAddress, router.port);
     NSLog(@"Petitioning as commissioner to host <%@>", router.name);
 
-    NSData *data = [self.meshcopManager petitionAsCommissioner:kTGNetworkManagerRouterCommissionerIdentifier];
-    NSLog(@"Data: %@", data);
-    
-    NSLog(@"Debug -- Constructing a commissioner petition result");
-    TGNetworkCallbackComissionerPetitionResult *result = [[TGNetworkCallbackComissionerPetitionResult alloc] init];
-    result.commissionerIdentifer = @"Debug-Identifier";
-    result.commissionerSessionIdentifier = 1000;
-    result.hasAuthorizationFailed = (BOOL)(arc4random() % 2);
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (result.hasAuthorizationFailed) {
-            _viewState = TGNetworkManagerCommissionerStateDisconnected;
-        } else {
-            _viewState = TGNetworkManagerCommissionerStateConnected;
-        }
-        completion(result);
-    });
+    self.petitionCompletionBlock = completion;
+    if (router.passphrase) {
+        [self.meshcopManager setPassphrase:router.passphrase];
+    }
+    [self.meshcopManager petitionAsCommissioner:kTGNetworkManagerRouterCommissionerIdentifier];
 }
 
 - (void)connectDevice:(TGDevice *)device completion:(TGNetworkManagerJoinDeviceCompletionBlock)completion {
@@ -120,14 +115,40 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     });
 }
 
+#pragma mark - Management Settings Get/Set
+
 - (void)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value completion:(TGNetworkManagerManagementSetCompletionBlock)completion {
     NSString *token = [[TGMeshcopManager sharedManager] setManagementParameter:parameter withValue:value];
-    [self.managementSetCompletionBlocks setObject:completion forKey:token];
+    
+    if (token) {
+        [self.managementSetCompletionBlocks setObject:completion forKey:token];
+    } else if (completion) {
+        completion(nil);
+    }
 }
 
 - (void)setManagementSecurityPolicy:(MCMgmtSecurityPolicy_t *)policy completion:(TGNetworkManagerManagementSetCompletionBlock)completion {
     NSString *token = [[TGMeshcopManager sharedManager] setManagementSecurityPolicy:policy];
-    [self.managementSetCompletionBlocks setObject:completion forKey:token];
+    if (token) {
+        [self.managementSetCompletionBlocks setObject:completion forKey:token];
+    } else if (completion) {
+        completion(nil);
+    }
+}
+
+- (void)fetchManagementParameter:(MCMgmtParamID_t)parameter completion:(TGNetworkManagerManagementGetCompletionBlock)completion {
+    NSString *token = [[TGMeshcopManager sharedManager] fetchManagementParameters:@[@(parameter)] peekOnly:NO];
+    
+    if (token) {
+        NSString *key = [self fetchManagementParameterCompletionKeyForParameter:parameter];
+        [self.managementGetCompletionBlocks setObject:completion forKey:key];
+    } else if (completion) {
+        completion(nil);
+    }
+}
+
+- (NSString *)fetchManagementParameterCompletionKeyForParameter:(MCMgmtParamID_t)parameter {
+    return [@(parameter) stringValue];
 }
 
 #pragma mark - Wifi SSID
@@ -159,34 +180,48 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
 #pragma mark - Meshcop Manager Delegate
 
 - (void)meshcopManagerDidReceiveCallbackResponse:(MCCallback_t)responseType responseResult:(TGNetworkCallbackResult *)callbackResult {
+
     NSLog(@"Received Callback Response");
     
-    switch (responseType) {
-        case COMM_PET:
-            self.petitionCompletionBlock((TGNetworkCallbackComissionerPetitionResult *)callbackResult);
-            break;
-        case JOIN_URL:
-            break;
-        case JOIN_FIN:
-            self.joinFinishedCompletionBlock((TGNetworkCallbackJoinerFinishedResult *)callbackResult);
-            break;
-        case ERROR_RESPONSE:
-            break;
-        case MGMT_PARAM_GET:
-            break;
-        case MGMT_PARAM_SET: {
-            TGNetworkCallbackSetSettingResult *callback = (TGNetworkCallbackSetSettingResult *)callbackResult;
-            NSString *token = [callback token];
-            TGNetworkManagerManagementSetCompletionBlock completionBlock = [self.managementSetCompletionBlocks objectForKey:token];
-            if (completionBlock) {
-                completionBlock(callback);
-                [self.managementSetCompletionBlocks removeObjectForKey:token];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        switch (responseType) {
+            case COMM_PET: {
+                TGNetworkCallbackComissionerPetitionResult *callback = (TGNetworkCallbackComissionerPetitionResult *)callbackResult;
+                _viewState = (callback.hasAuthorizationFailed) ? TGNetworkManagerCommissionerStateDisconnected : TGNetworkManagerCommissionerStateConnected;
+                self.petitionCompletionBlock(callback);
+                break;
             }
-            break;
+            case JOIN_URL:
+                break;
+            case JOIN_FIN:
+                self.joinFinishedCompletionBlock((TGNetworkCallbackJoinerFinishedResult *)callbackResult);
+                break;
+            case ERROR_RESPONSE:
+                break;
+            case MGMT_PARAM_GET: {
+                TGNetworkCallbackFetchSettingResult *callback = (TGNetworkCallbackFetchSettingResult *)callbackResult;
+                NSString *key = [self fetchManagementParameterCompletionKeyForParameter:callback.parameterIdentifier];
+                TGNetworkManagerManagementGetCompletionBlock completionBlock = [self.managementGetCompletionBlocks objectForKey:key];
+                if (completionBlock) {
+                    completionBlock(callback);
+                    [self.managementGetCompletionBlocks removeObjectForKey:key];
+                }
+                break;
+            }
+            case MGMT_PARAM_SET: {
+                TGNetworkCallbackSetSettingResult *callback = (TGNetworkCallbackSetSettingResult *)callbackResult;
+                NSString *key = [callback token];
+                TGNetworkManagerManagementSetCompletionBlock completionBlock = [self.managementSetCompletionBlocks objectForKey:key];
+                if (completionBlock) {
+                    completionBlock(callback);
+                    [self.managementSetCompletionBlocks removeObjectForKey:key];
+                }
+                break;
+            }
+            default:
+                break;
         }
-        default:
-            break;
-    }
+    });
 }
 
 #pragma mark - Lazy

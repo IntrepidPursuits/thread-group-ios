@@ -22,7 +22,8 @@
 - (instancetype)initWithArguments:(va_list)args {
     self = [super init];
     if (self) {
-        NSString *commissionerIdentifier = [NSString stringWithUTF8String:va_arg(args, char *)];
+        char * commissionerIdentifierCString = va_arg(args, char *);
+        NSString *commissionerIdentifier = [NSString stringWithUTF8String:(commissionerIdentifierCString == NULL) ? "" : commissionerIdentifierCString];
         NSInteger commissionerSessionIdentifier = (NSInteger)va_arg(args, int);
         BOOL authorizationFailed = (BOOL)va_arg(args, int);
         
@@ -40,12 +41,17 @@
 - (instancetype)initWithArguments:(va_list)args {
     self = [super init];
     if (self) {
-        NSString *joinerIdentifier = [NSString stringWithUTF8String:va_arg(args, char *)];
+        char * joinerIdentifierCString = va_arg(args, char *);
+        NSString *joinerIdentifier = [NSString stringWithUTF8String:(joinerIdentifierCString == NULL) ? "" : joinerIdentifierCString];
         MCState_t state = (MCState_t)va_arg(args, int);
-        NSString *provisioningURL = [NSString stringWithUTF8String:va_arg(args, char *)];
-        NSString *vendorName = [NSString stringWithUTF8String:va_arg(args, char *)];
-        NSString *vendorModel = [NSString stringWithUTF8String:va_arg(args, char *)];
-        NSString *vendorSoftwareVersion = [NSString stringWithUTF8String:va_arg(args, char *)];
+        char * provisioningURLCString = va_arg(args, char *);
+        NSString *provisioningURL = [NSString stringWithUTF8String:(provisioningURLCString == NULL) ? "" : provisioningURLCString];
+        char *vendorNameCString = va_arg(args, char *);
+        NSString *vendorName = [NSString stringWithUTF8String:(vendorNameCString == NULL) ? "" : vendorNameCString];
+        char *vendorModelCString = va_arg(args, char *);
+        NSString *vendorModel = [NSString stringWithUTF8String:(vendorModelCString == NULL) ? "" : vendorModelCString];
+        char * vendorSoftwareVersionCString = va_arg(args, char *);
+        NSString *vendorSoftwareVersion = [NSString stringWithUTF8String:(vendorSoftwareVersionCString == NULL) ? "" : vendorSoftwareVersionCString];
         
         [self setJoinerIdentifier:joinerIdentifier];
         [self setState:state];
@@ -64,7 +70,8 @@
 - (instancetype)initWithArguments:(va_list)args {
     self = [super init];
     if (self) {
-        NSString *provisioningURL = [NSString stringWithUTF8String:va_arg(args, char *)];
+        char * provisioningURLCString = va_arg(args, char *);
+        NSString *provisioningURL = [NSString stringWithUTF8String:(provisioningURLCString == NULL) ? "" : provisioningURLCString];
         [self setProvisioningURL:provisioningURL];
     }
     return self;
@@ -79,7 +86,8 @@
     if (self) {
         NSInteger mcResult = (NSInteger)va_arg(args, int);
         NSInteger caResponseResult = (NSInteger)va_arg(args, int);
-        NSString *token = [NSString stringWithUTF8String:va_arg(args, char *)];
+        char *tokenCString = va_arg(args, char *);
+        NSString *token = [NSString stringWithUTF8String:(tokenCString == NULL) ? "" : tokenCString];
         self.mcResult = mcResult;
         self.caResult = caResponseResult;
         self.token = token;
@@ -113,7 +121,8 @@
             case MGMT_COMMISSIONER_CREDENTIAL:
             case MGMT_COMMISSIONER_ID: {
                 // String values.
-                returnValue = [NSString stringWithUTF8String:va_arg(args, char *)];
+                char * cString = va_arg(args, char *);
+                returnValue = [NSString stringWithUTF8String:(cString == NULL) ? "" : cString];
                 break;
             }
             case MGMT_SECURITY_POLICY: {
@@ -127,7 +136,7 @@
             default: {
                 // Raw values.
                 char *rawCharVal = va_arg(args, char *);
-                returnValue = [NSString stringWithUTF8String:rawCharVal];
+                returnValue = [NSString stringWithUTF8String:(rawCharVal == NULL) ? "" : rawCharVal];
                 break;
             }
         }
@@ -145,7 +154,8 @@
     self = [super init];
     if (self) {
         self.success = (BOOL)va_arg(args, int);
-        self.token = [NSString stringWithUTF8String:va_arg(args, char *)];
+        char * tokenCString = va_arg(args, char *);
+        self.token = [NSString stringWithUTF8String:(tokenCString == NULL) ? "" : tokenCString];
     }
     return self;
 }

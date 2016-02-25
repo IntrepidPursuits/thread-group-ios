@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MeshCop.h>
+#import "MeshCop.h"
 
 @interface TGNetworkCallbackResult : NSObject
 

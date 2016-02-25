@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MeshCop.h>
+#import "MeshCop.h"
 
 @class TGNetworkCallbackResult;
 @class TGNetworkCallback;
@@ -25,6 +25,7 @@
 - (BOOL)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK;
 - (void)setPassphrase:(NSString *)passphrase;
 - (NSString *)sendJoinersSteeringDataWithShortForm:(BOOL)shortForm;
+- (NSString *)fetchManagementParameters:(NSArray *)paramsArray peekOnly:(BOOL)peek;
 - (NSString *)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value;
 - (NSString *)setManagementSecurityPolicy:(MCMgmtSecurityPolicy_t *)securityPolicy;
 

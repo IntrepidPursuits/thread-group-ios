@@ -34,7 +34,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.titleLabel.text = self.name;
-    [self setupButtons];
     [self resetTextView];
 }
 
@@ -46,18 +45,31 @@
     [self resetTextAlignment];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self setupButtons];
+}
+
 #pragma mark - Buttons
 
 - (void)setupButtons {
     TGButton *preceedingButton;
+    NSUInteger buttonsCount = [self.buttons count];
+    CGFloat buttonWidth = self.buttonsPlaceholderView.frame.size.width / buttonsCount - 1.0f;
+    CGFloat buttonHeight = self.buttonsPlaceholderView.frame.size.height - 1.0f;
     for (TGButton *button in self.buttons) {
         [self.buttonsPlaceholderView addSubview:button];
+        
         [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [button autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(1.0f, NSNotFound, 0.0f, NSNotFound)];
+        
+        [button autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.buttonsPlaceholderView];
+        [button autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.buttonsPlaceholderView withOffset:1.0f];
+        
         if (preceedingButton == nil) {
+            [button setFrame: CGRectMake(0.0f, 0.0f, buttonWidth, buttonHeight)];
             [button autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.buttonsPlaceholderView];
         } else {
-            [preceedingButton autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:button withOffset:1.0f];
+            [button autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:preceedingButton withOffset:1.0f];
             [button autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:preceedingButton];
         }
         preceedingButton = button;
@@ -91,6 +103,15 @@
 - (void)setContentTitle:(NSString *)contentTitle andButtons:(NSArray *)buttons {
     self.name = contentTitle;
     self.buttons = buttons;
+}
+
+#pragma mark - Lazy
+
+- (NSString *)textContent {
+    if (!_textContent) {
+        _textContent = @"";
+    }
+    return _textContent;
 }
 
 @end
