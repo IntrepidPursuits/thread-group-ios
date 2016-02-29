@@ -402,7 +402,12 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             }
             [self resetCachedRouterWithRouter:item];
             [self animateConnectedToRouterWithItem:item];
-            self.viewState = TGMainViewStateConnectDeviceScanning;
+            if ([TGNetworkManager sharedManager].viewState == TGNetworkManagerCommissionerStateDisconnected) {
+                self.viewState = TGMainViewStateConnectDeviceTutorial;
+            } else {
+                self.viewState = TGMainViewStateConnectDeviceScanning;
+            }
+            [self setPopupNotificationForState:self.viewState animated:YES];
         }
     }];
 }
