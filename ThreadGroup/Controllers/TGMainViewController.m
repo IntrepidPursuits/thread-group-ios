@@ -387,7 +387,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
         return;
     }
     
-    [self.tableView setUserInteractionEnabled:NO];
     [self animateConnectingToRouterWithItem:item];
     [[TGNetworkManager sharedManager] connectToRouter:item completion:^(TGNetworkCallbackComissionerPetitionResult *result) {
         if (!result) {
@@ -405,7 +404,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
             [self animateConnectedToRouterWithItem:item];
             self.viewState = TGMainViewStateConnectDeviceScanning;
         }
-        [self.tableView setUserInteractionEnabled:YES];
     }];
 }
 
