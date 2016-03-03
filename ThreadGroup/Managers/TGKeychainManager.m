@@ -8,16 +8,13 @@
 
 #import <UICKeychainStore/UICKeyChainStore.h>
 #import "TGKeychainManager.h"
+#import "TGKeychainManager_private.h"
 #import "TGRouter.h"
 
 static NSString * const kTGKeychainStoreIdentifier = @"io.intrepid.thread-group-ios";
 static NSString * const KTGRouterObjectKey = @"kTGRouterObjectKey";
 
-@interface TGKeychainManager()
-@property (strong, nonatomic) UICKeyChainStore *keychain;
-@property (strong, nonatomic) NSKeyedArchiver *archiver;
-@property (strong, nonatomic) NSKeyedUnarchiver *unArchiver;
-@end
+
 
 @implementation TGKeychainManager
 

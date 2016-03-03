@@ -96,6 +96,8 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 
 @implementation TGMainViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self commonInit];
@@ -128,12 +130,6 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
     [self setupMainSpinner];
 }
 
-- (void)setupMainSpinner {
-    TGSpinnerView *spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_mainSpinnerClockwise] counterClockwiseImage:[UIImage tg_mainSpinnerCounterClockwise]];
-    [self.findingNetworksSpinnerViewContainer addSubview:spinnerView];
-    [spinnerView autoPinEdgesToSuperviewEdges];
-}
-
 #pragma mark - Table View
 
 - (void)setupTableViewSource {
@@ -160,6 +156,12 @@ static CGFloat const kTGScannerViewAnimationDuration = 0.8f;
 }
 
 #pragma mark - Main spinner
+
+- (void)setupMainSpinner {
+    TGSpinnerView *spinnerView = [[TGSpinnerView alloc] initWithClockwiseImage:[UIImage tg_mainSpinnerClockwise] counterClockwiseImage:[UIImage tg_mainSpinnerCounterClockwise]];
+    [self.findingNetworksSpinnerViewContainer addSubview:spinnerView];
+    [spinnerView autoPinEdgesToSuperviewEdges];
+}
 
 - (void)hideMainSpinner {
     [self.routerSearchView setUserInteractionEnabled:YES];
