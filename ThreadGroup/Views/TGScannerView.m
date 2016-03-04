@@ -131,10 +131,11 @@ static CGFloat const TGScannerViewOverlayOffset = -65.0f;
     [tutorialMessageLabel setFont:[UIFont threadGroup_bookFontWithSize:14.0f]];
     [tutorialMessageLabel setNumberOfLines:0];
     [tutorialMessageLabel setText:@"Point your camera at the device Connect QR Code to scan it"];
+    [tutorialMessageLabel setTextAlignment:NSTextAlignmentCenter];
     [tutorialMessageLabel setTextColor:[UIColor whiteColor]];
     [self.tutorialView addSubview:tutorialMessageLabel];
     [tutorialMessageLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.tutorialView withOffset:16.0f];
-    [tutorialMessageLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.tutorialView withOffset:16.0f];
+    [tutorialMessageLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.tutorialView withOffset:-16.0f];
     [tutorialMessageLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:imageView withOffset:32.0f];
     [tutorialMessageLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.tutorialView withOffset:32.0f relation:NSLayoutRelationGreaterThanOrEqual];
 }
