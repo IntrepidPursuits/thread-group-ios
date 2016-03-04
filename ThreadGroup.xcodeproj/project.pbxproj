@@ -16,6 +16,11 @@
 		0946F4061B500DF300EDB5DE /* TGSelectableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0946F4041B500DF300EDB5DE /* TGSelectableCell.m */; };
 		0946F4071B500DF300EDB5DE /* TGSelectableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */; };
 		0A7AD34DC5A3297901411D32 /* libPods-ThreadGroup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */; };
+		0C034E031C8634AA001C567C /* TGKeychainManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C034E021C8634AA001C567C /* TGKeychainManagerTest.m */; };
+		0C034E041C863532001C567C /* TGKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D937177C1B62831200BE55DD /* TGKeychainManager.m */; };
+		0C034E061C8768BB001C567C /* TGMeshcopManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C034E051C8768BB001C567C /* TGMeshcopManagerTest.m */; };
+		0C034E121C889DCC001C567C /* TGRouterForTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C034E111C889DCC001C567C /* TGRouterForTesting.m */; };
+		0C034E151C88CB7B001C567C /* TGNetworkManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C034E141C88CB7B001C567C /* TGNetworkManagerTest.m */; };
 		CC5BA3E11B6BE9E300898505 /* TGNoCameraAccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */; };
 		CC5BA3E31B6BE9FA00898505 /* TGNoCameraAccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5BA3E21B6BE9FA00898505 /* TGNoCameraAccessView.xib */; };
 		CCC2EC921B8BA38E00399E35 /* TGSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC2EC911B8BA38E00399E35 /* TGSpinnerView.m */; };
@@ -30,7 +35,6 @@
 		CD7B60471B1F5469007FF820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B60461B1F5469007FF820 /* AppDelegate.m */; };
 		CD7B604F1B1F5469007FF820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7B604E1B1F5469007FF820 /* Images.xcassets */; };
 		CD7B60521B1F5469007FF820 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7B60501B1F5469007FF820 /* LaunchScreen.xib */; };
-		CD7B605E1B1F5469007FF820 /* ThreadGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B605D1B1F5469007FF820 /* ThreadGroupTests.m */; };
 		CD86393B1B4183300044B2BE /* TGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8639391B4183300044B2BE /* TGMainViewController.m */; };
 		CD86393C1B4183300044B2BE /* TGMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD86393A1B4183300044B2BE /* TGMainViewController.xib */; };
 		CD8C681D1B272A290091B548 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD8C68191B272A290091B548 /* Gotham-Bold.otf */; };
@@ -57,6 +61,7 @@
 		CDFFFF051B5E8AEA0011EA4B /* TGRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFFFF041B5E8AEA0011EA4B /* TGRouter.m */; };
 		CDFFFF0E1B5EC6130011EA4B /* TGMeshcopManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDFFFF0B1B5EC6130011EA4B /* TGMeshcopManager.mm */; };
 		CDFFFF0F1B5EC6130011EA4B /* TGRouterServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFFFF0D1B5EC6130011EA4B /* TGRouterServiceBrowser.m */; };
+		D287F23B55C0C57240661F2D /* libPods-ThreadGroupTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D626DB2E6975BD0F4B841EC1 /* libPods-ThreadGroupTests.a */; };
 		D90B7B311B9742ED00DCE48A /* TGSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = D90B7B301B9742ED00DCE48A /* TGSuccessView.m */; };
 		D90B7B331B97498E00DCE48A /* TGSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90B7B321B97498E00DCE48A /* TGSuccessView.xib */; };
 		D917C4D91B558CF5000A5BE2 /* TGNetworkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D917C4D71B558CF5000A5BE2 /* TGNetworkNameViewController.m */; };
@@ -135,6 +140,13 @@
 		0946F4031B500DF300EDB5DE /* TGSelectableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGSelectableCell.h; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.h; sourceTree = "<group>"; };
 		0946F4041B500DF300EDB5DE /* TGSelectableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGSelectableCell.m; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.m; sourceTree = "<group>"; };
 		0946F4051B500DF300EDB5DE /* TGSelectableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TGSelectableCell.xib; path = TableViewCell/ThreadNetworkConfig/TGSelectableCell.xib; sourceTree = "<group>"; };
+		0C034E021C8634AA001C567C /* TGKeychainManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGKeychainManagerTest.m; sourceTree = "<group>"; };
+		0C034E051C8768BB001C567C /* TGMeshcopManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMeshcopManagerTest.m; sourceTree = "<group>"; };
+		0C034E071C8770BC001C567C /* TGKeychainManager_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGKeychainManager_private.h; sourceTree = "<group>"; };
+		0C034E111C889DCC001C567C /* TGRouterForTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterForTesting.m; sourceTree = "<group>"; };
+		0C034E131C889E2A001C567C /* TGRouterForTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterForTesting.h; sourceTree = "<group>"; };
+		0C034E141C88CB7B001C567C /* TGNetworkManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNetworkManagerTest.m; sourceTree = "<group>"; };
+		1D5F83BE991ACA7AEE311EFD /* Pods-ThreadGroupTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroupTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroupTests/Pods-ThreadGroupTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroup.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup.release.xcconfig"; sourceTree = "<group>"; };
 		CC5BA3DF1B6BE9E300898505 /* TGNoCameraAccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGNoCameraAccessView.h; sourceTree = "<group>"; };
 		CC5BA3E01B6BE9E300898505 /* TGNoCameraAccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGNoCameraAccessView.m; sourceTree = "<group>"; };
@@ -185,7 +197,6 @@
 		CD7B60511B1F5469007FF820 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CD7B60571B1F5469007FF820 /* ThreadGroupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadGroupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7B605C1B1F5469007FF820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CD7B605D1B1F5469007FF820 /* ThreadGroupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadGroupTests.m; sourceTree = "<group>"; };
 		CD8639381B4183300044B2BE /* TGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGMainViewController.h; sourceTree = "<group>"; };
 		CD8639391B4183300044B2BE /* TGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGMainViewController.m; sourceTree = "<group>"; };
 		CD86393A1B4183300044B2BE /* TGMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGMainViewController.xib; sourceTree = "<group>"; };
@@ -229,6 +240,7 @@
 		CDFFFF0B1B5EC6130011EA4B /* TGMeshcopManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TGMeshcopManager.mm; sourceTree = "<group>"; };
 		CDFFFF0C1B5EC6130011EA4B /* TGRouterServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGRouterServiceBrowser.h; sourceTree = "<group>"; };
 		CDFFFF0D1B5EC6130011EA4B /* TGRouterServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGRouterServiceBrowser.m; sourceTree = "<group>"; };
+		D626DB2E6975BD0F4B841EC1 /* libPods-ThreadGroupTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroupTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D90B7B2F1B9742ED00DCE48A /* TGSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGSuccessView.h; sourceTree = "<group>"; };
 		D90B7B301B9742ED00DCE48A /* TGSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGSuccessView.m; sourceTree = "<group>"; };
 		D90B7B321B97498E00DCE48A /* TGSuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TGSuccessView.xib; sourceTree = "<group>"; };
@@ -320,6 +332,7 @@
 		D9EA94FA1B55647E00A419D4 /* TGNetworkConfigHeaderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGNetworkConfigHeaderModel.m; path = Models/ThreadNetworkConfig/TGNetworkConfigHeaderModel.m; sourceTree = "<group>"; };
 		D9FB30211B398C8D002B6ED4 /* TGDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGDevice.h; path = Models/TGDevice.h; sourceTree = "<group>"; };
 		D9FB30221B398C8D002B6ED4 /* TGDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGDevice.m; path = Models/TGDevice.m; sourceTree = "<group>"; };
+		E518485FBE59947BD685EE72 /* Pods-ThreadGroupTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadGroupTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadGroupTests/Pods-ThreadGroupTests.release.xcconfig"; sourceTree = "<group>"; };
 		FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThreadGroup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -344,6 +357,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D287F23B55C0C57240661F2D /* libPods-ThreadGroupTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +413,7 @@
 				CD8FFD731B39DCEA00481DE7 /* AVFoundation.framework */,
 				CDDB18EF1B2B27B9008A84FD /* SystemConfiguration.framework */,
 				FD38CF5C00FEEAAB86BA63C1 /* libPods-ThreadGroup.a */,
+				D626DB2E6975BD0F4B841EC1 /* libPods-ThreadGroupTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -408,6 +423,8 @@
 			children = (
 				003FB1823A20615E43F8CCC8 /* Pods-ThreadGroup.debug.xcconfig */,
 				4A1B142BF92274A68665906C /* Pods-ThreadGroup.release.xcconfig */,
+				1D5F83BE991ACA7AEE311EFD /* Pods-ThreadGroupTests.debug.xcconfig */,
+				E518485FBE59947BD685EE72 /* Pods-ThreadGroupTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -492,7 +509,11 @@
 		CD7B605A1B1F5469007FF820 /* ThreadGroupTests */ = {
 			isa = PBXGroup;
 			children = (
-				CD7B605D1B1F5469007FF820 /* ThreadGroupTests.m */,
+				0C034E021C8634AA001C567C /* TGKeychainManagerTest.m */,
+				0C034E051C8768BB001C567C /* TGMeshcopManagerTest.m */,
+				0C034E141C88CB7B001C567C /* TGNetworkManagerTest.m */,
+				0C034E131C889E2A001C567C /* TGRouterForTesting.h */,
+				0C034E111C889DCC001C567C /* TGRouterForTesting.m */,
 				CD7B605B1B1F5469007FF820 /* Supporting Files */,
 			);
 			path = ThreadGroupTests;
@@ -605,6 +626,7 @@
 				D95BC6911B45992400271ED7 /* TGLogManager.m */,
 				D937177B1B62831200BE55DD /* TGKeychainManager.h */,
 				D937177C1B62831200BE55DD /* TGKeychainManager.m */,
+				0C034E071C8770BC001C567C /* TGKeychainManager_private.h */,
 				D96AF2BD1B67F9C0005F66E4 /* TGQRCodeParser.h */,
 				D96AF2BE1B67F9C0005F66E4 /* TGQRCodeParser.m */,
 			);
@@ -769,6 +791,7 @@
 				CD7B603B1B1F5469007FF820 /* Frameworks */,
 				CD7B603C1B1F5469007FF820 /* Resources */,
 				EEF870396A2E8C9E1578BA9D /* Copy Pods Resources */,
+				C1FD0A1D950920796AFAC382 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -783,9 +806,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD7B60641B1F546A007FF820 /* Build configuration list for PBXNativeTarget "ThreadGroupTests" */;
 			buildPhases = (
+				B51DC6E120694AD570C51CFE /* Check Pods Manifest.lock */,
 				CD7B60531B1F5469007FF820 /* Sources */,
 				CD7B60541B1F5469007FF820 /* Frameworks */,
 				CD7B60551B1F5469007FF820 /* Resources */,
+				F15F1012CCEF680CE1FB1352 /* Embed Pods Frameworks */,
+				FA84F8509A471984BF21B152 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -883,6 +909,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B51DC6E120694AD570C51CFE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C1FD0A1D950920796AFAC382 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		EEF870396A2E8C9E1578BA9D /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -898,6 +954,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThreadGroup/Pods-ThreadGroup-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F15F1012CCEF680CE1FB1352 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThreadGroupTests/Pods-ThreadGroupTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F5C16084EDA501BC22CFA8B0 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -911,6 +982,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FA84F8509A471984BF21B152 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThreadGroupTests/Pods-ThreadGroupTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -989,7 +1075,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD7B605E1B1F5469007FF820 /* ThreadGroupTests.m in Sources */,
+				0C034E031C8634AA001C567C /* TGKeychainManagerTest.m in Sources */,
+				0C034E121C889DCC001C567C /* TGRouterForTesting.m in Sources */,
+				0C034E061C8768BB001C567C /* TGMeshcopManagerTest.m in Sources */,
+				0C034E151C88CB7B001C567C /* TGNetworkManagerTest.m in Sources */,
+				0C034E041C863532001C567C /* TGKeychainManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,6 +1235,7 @@
 		};
 		CD7B60651B1F546A007FF820 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D5F83BE991ACA7AEE311EFD /* Pods-ThreadGroupTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1164,6 +1255,7 @@
 		};
 		CD7B60661B1F546A007FF820 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E518485FBE59947BD685EE72 /* Pods-ThreadGroupTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
