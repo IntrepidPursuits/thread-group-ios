@@ -26,10 +26,9 @@ You will need to clone the iOS commissioning app and the IoTivity/MeshCop code.
 Running
 -------
 
-Using Xcode, run the application in the simulator or a connected iOS device. Be sure to run a device or emulator that runs iOS 8.3 or higher. Be sure to be connected to the correct WiFi network that can route traffice to the Border Router.
+Using Xcode, run the application in the simulator or a connected iOS device. Be sure to run a device or emulator that runs iOS 8.3 or higher. Be sure to be connected to the correct WiFi network that can route traffic to the Border Router.
 
-// TODO: Is this Android specific language
-When the app starts up, an mDNS discovery service is started. It listens for `_thread-net._udp` type
+When the app starts up, the iOS mDNS discovery service is started. It listens for `_thread-net._udp` type
 entries on the `.local` domain. Be sure that the service has a `<TXT>` record containing the
 attributes `net_name` and `xpanid`.
 
@@ -54,44 +53,16 @@ future joiner-device with the same passphrase. Alternatively, the user can scan 
 QR-code. In this case, both the future joiner-device's ID and passphrase must match to be successfully
 joined to the network.
 
-// TODO: Update everything below for iOS
-Testing
--------
-
-**On an Emulator**
-
-1. Use **Genymotion**. Install it and create a virtual device. Start the virtual device.
-2. Start Oracle’s **VirtualBox**.
-3. You’ll see VM with the name of your virtual device. Open its settings.
-4. Go to “Network —> Adapter 2”.
-5. Select “Attached to: = Bridged Adapter”
-6. Make sure that the “Name:” is the interface of the WiFi of your Mac.
-7. OK and close.
-8. Restart your virtual device on Genymotion.
-
-From now on, you’ll be able to use the WiFi that is associated with your Mac’s or PC’s WiFi and you’ll be able to see mDNS services and connect to them.
-
 MeshCop
 -------
 
   MeshCop is a protocol extension on top of CoAP (MeshCop is the delivery of TLVs in CoAP-messages' payloads).
-  It is implemented by the `thread-comm-iotivity` sub-module.
+  It is implemented by the `meshcop` sub-project.
 
-  The Android app interface to the MeshCop protocol is implemented through the swig-generated class `org.threadgroup.ca.jni.MCInterface`.
-  The access to this interface is implemented by the Android Library project `:libraries:ca`.
+  The iOS app interface to the MeshCop protocol is simply an objective-C wrapper around the MeshCop C API and is implemented in the file `TGMeshcopManager.m`
 
-  The Android reference Commissioner App `:app` is using the `:libraries:ca`'s access through its
-  java-class `org.threadgroup.ca.jni.MeshCop` and java-interface `org.threadgroup.ca.jni.MeshCopIfc`.
 
-  Callbacks from the MeshCop are handled by the `org.threadgroup.ca.jni.CallbackBase` in `:libraries:ca`
-
-Android MeshCop SDK
+iOS MeshCop SDK
 -----
 
-  The documentation of the Android MeshCop SDK can be found in the Java-Doc of the following classes:
-
-  `org.threadgroup.ca.jni.MeshCopIfc` for info about issuing requests to the Border Router.
-
-  `org.threadgroup.ca.jni.ACallbackBase` for info about receiving callbacks/responses from the Border Router.
-
-  `org.threadgroup.ca.jni.MeshCopFactory.CallbackBaseWrapper` for info about handling secure storage for the native MeshCop layer.
+  Not yet available.
