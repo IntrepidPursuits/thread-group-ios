@@ -19,7 +19,8 @@ You will need to clone the iOS commissioning app and the IoTivity/MeshCop code.
 ##### Compiling and Building the app.
 
   - Make sure the IoTivity repository shares the same base directory as the iOS commissioning app
-    - this ensures that the MeshCop framework can reference the correct files
+  - Make sure you've checked out the `intrepid-develop-ios` branch of the `thread-comm-iotivity` repository
+    - this ensures that the MeshCop framework can reference the correct files before the branches are correctly merged
   - Run `pod install`
   - The iOS commissioning app should now build. It may take some time because of the dependency on IoTivity.
 
