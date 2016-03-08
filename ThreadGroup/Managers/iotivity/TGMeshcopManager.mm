@@ -7,7 +7,7 @@
 //
 
 #import "TGMeshcopManager.h"
-#import <iotivity-csdk-thread/cainterface.h>
+#import <thread-csdk/cainterface.h>
 #import "TGNetworkCallbackResult.h"
 #import "TGMeshcopManager+Logging.h"
 #import "TGLogManager.h"

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <iotivity-csdk-thread/MeshCop.h>
+#import <thread-csdk/MeshCop.h>
 
 @class TGNetworkCallbackResult;
 @class TGNetworkCallback;
