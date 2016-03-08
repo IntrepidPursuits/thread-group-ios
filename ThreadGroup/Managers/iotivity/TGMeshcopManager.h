@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MeshCop.h"
+#import <iotivity-csdk-thread/MeshCop.h>
 
 @class TGNetworkCallbackResult;
 @class TGNetworkCallback;
@@ -22,7 +22,7 @@
 - (void)addJoinerWithIdentifier:(NSString *)identifier credentials:(NSString *)credentials;
 - (BOOL)changeToHostAtAddress:(NSString *)address commissionerPort:(NSInteger)port networkType:(CATransportAdapter_t)networkType networkName:(NSString *)name secured:(BOOL)secured;
 - (NSData *)petitionAsCommissioner:(NSString *)commissionerIdentifier;
-- (BOOL)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK;
+- (void)setCredentialsWithName:(NSString *)name andKey:(NSString *)clientPSK;
 - (void)setPassphrase:(NSString *)passphrase;
 - (NSString *)sendJoinersSteeringDataWithShortForm:(BOOL)shortForm;
 - (NSString *)fetchManagementParameters:(NSArray *)paramsArray peekOnly:(BOOL)peek;

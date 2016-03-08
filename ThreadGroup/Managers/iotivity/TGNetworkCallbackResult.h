@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MeshCop.h"
+#import <iotivity-csdk-thread/MeshCop.h>
 
 @interface TGNetworkCallbackResult : NSObject
 

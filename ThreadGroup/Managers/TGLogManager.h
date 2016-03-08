@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define NSLog(args...) _Log(@"DEBUG ", __FILE__,__LINE__,__PRETTY_FUNCTION__,args);
-
 @interface TGLogManager : NSObject
 
 + (instancetype)sharedManager;
