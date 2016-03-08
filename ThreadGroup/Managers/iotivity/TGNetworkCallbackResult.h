@@ -22,6 +22,11 @@
 @property (nonatomic) BOOL hasAuthorizationFailed;
 @end
 
+// Callback Result Keep Alive
+@interface TGNetworkCallbackComissionerKeepAliveResult : TGNetworkCallbackResult
+@property (nonatomic) BOOL alive;
+@end
+
 // Callback Result Joiner Finished
 @interface TGNetworkCallbackJoinerFinishedResult : TGNetworkCallbackResult
 @property (nonatomic, strong) NSString *joinerIdentifier;

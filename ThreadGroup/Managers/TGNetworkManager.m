@@ -115,6 +115,10 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
     });
 }
 
+- (void)handleKeepAlive:(BOOL)alive {
+    NSLog(@"Received Keep-Alive: %@", alive ? @"YES" : @"NO");
+}
+
 #pragma mark - Management Settings Get/Set
 
 - (void)setManagementParameter:(MCMgmtParamID_t)parameter withValue:(id)value completion:(TGNetworkManagerManagementSetCompletionBlock)completion {
@@ -189,6 +193,11 @@ static NSString * const kTGNetworkManagerDefaultJoinerIdentifier = @"threadgroup
                 TGNetworkCallbackComissionerPetitionResult *callback = (TGNetworkCallbackComissionerPetitionResult *)callbackResult;
                 _viewState = (callback.hasAuthorizationFailed) ? TGNetworkManagerCommissionerStateDisconnected : TGNetworkManagerCommissionerStateConnected;
                 self.petitionCompletionBlock(callback);
+                break;
+            }
+            case COMM_KA: {
+                TGNetworkCallbackComissionerKeepAliveResult *callback = (TGNetworkCallbackComissionerKeepAliveResult *)callbackResult;
+                [self handleKeepAlive:callback.alive];
                 break;
             }
             case JOIN_URL:

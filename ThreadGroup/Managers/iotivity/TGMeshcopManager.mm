@@ -26,6 +26,9 @@ static void* _callback(const MCCallback_t callbackId, ...) {
         case COMM_PET:
             callbackResult = [[TGNetworkCallbackComissionerPetitionResult alloc] initWithArguments:argsList];
             break;
+        case COMM_KA:
+            callbackResult = [[TGNetworkCallbackComissionerKeepAliveResult alloc] initWithArguments:argsList];
+            break;
         case JOIN_URL:
             callbackResult = [[TGNetworkCallbackJoinResult alloc] initWithArguments:argsList];
             break;

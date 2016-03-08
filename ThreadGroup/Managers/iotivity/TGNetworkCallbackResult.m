@@ -36,6 +36,18 @@
 
 @end
 
+@implementation TGNetworkCallbackComissionerKeepAliveResult
+
+- (instancetype)initWithArguments:(va_list)args {
+    if (self) {
+        BOOL isAlive = (BOOL)va_arg(args, int);
+        [self setAlive:isAlive];
+    }
+    return self;
+}
+
+@end
+
 @implementation TGNetworkCallbackJoinerFinishedResult
 
 - (instancetype)initWithArguments:(va_list)args {
